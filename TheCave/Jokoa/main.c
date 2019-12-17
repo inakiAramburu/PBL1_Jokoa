@@ -34,5 +34,9 @@ int main(int argc, char* argv[]) {
 	// Clean up
 	SDL_Quit();
 	return 0;
+<<<<<<< HEAD
 	//hola que tla puto
+=======
+	// me cago en to
+>>>>>>> ba1a29a5ac308d298898a346593cf31a273c5336
 }
