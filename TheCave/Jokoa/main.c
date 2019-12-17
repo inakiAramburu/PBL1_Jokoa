@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include <stdio.h>
-
+//kaixo
 int main(int argc, char* argv[]) {
 
 	SDL_Window* window;                    // Declare a pointer
