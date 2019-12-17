@@ -1,42 +1,18 @@
 #include "SDL.h"
-#include <stdio.h>
 
 int main(int argc, char* argv[]) {
 
-	SDL_Window* window;                    // Declare a pointer
+	SDL_Init(SDL_INIT_EVERYTHING);              // Initialize SDL2
+	SDL_Window* window = SDL_CreateWindow("title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
+	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 
-	SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
+	SDL_SetRenderDrawColor(renderer, 124, 255, 78, 125);
 
-	// Create an application window with the following settings:
-	window = SDL_CreateWindow(
-		"An SDL2 window",                  // window title
-		SDL_WINDOWPOS_UNDEFINED,           // initial x position
-		SDL_WINDOWPOS_UNDEFINED,           // initial y position
-		640,                               // width, in pixels
-		480,                               // height, in pixels
-		SDL_WINDOW_OPENGL                  // flags - see below
-	);
-	//ss
-	// Check that the window was successfully created
-	if (window == NULL) {
-		// In the case that the window could not be made...
-		printf("Could not create window: %s\n", SDL_GetError());
-		return 1;
-	}
+	SDL_RenderClear(renderer);
 
-	// The window is open: could enter program loop here (see SDL_PollEvent())
+	SDL_RenderPresent(renderer);
 
-	SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+	SDL_Delay(5000);
 
-	// Close and destroy the window
-	SDL_DestroyWindow(window);
-
-	// Clean up
-	SDL_Quit();
 	return 0;
-<<<<<<< HEAD
-	//hola que tla puto
-=======
-	// me cago en to
->>>>>>> ba1a29a5ac308d298898a346593cf31a273c5336
 }
