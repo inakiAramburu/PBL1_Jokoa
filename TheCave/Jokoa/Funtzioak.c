@@ -32,11 +32,15 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
 
 	SDL_Renderer* renderer;
-	SDL_Renderer* renderer2;
+	
+
 	SDL_Surface* surface;
 	SDL_Surface* surface2;
+	SDL_Surface* surface3;
+
 	SDL_Texture* texture;
 	SDL_Texture* texture2;
+	SDL_Texture* texture3;
 	SDL_Event event;
 
 
@@ -44,7 +48,7 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
-	surface2 = SDL_LoadBMP(".\\img\\Nivel3.bmp");
+	surface2 = SDL_LoadBMP(".\\img\\pergamino.bmp");
 
 	
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -52,23 +56,30 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 
 
-	SDL_FreeSurface(surface2);		//Aurrekoa garbitzeko
-	SDL_Rect hola;
 
-	hola.x = 374; 
-	hola.y = 112;
-	hola.w = 412;
-	hola.h = 460;
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_FreeSurface(surface2);
+
+
+	SDL_Rect neurriak;
+
+	neurriak.x = 354; 
+	neurriak.y = 112;
+	neurriak.w = 600;
+	neurriak.h = 460;
+
+
+
 	while (1) {
 		SDL_PollEvent(&event);
 		if (event.type == SDL_QUIT) {
 			break;
 		}
 		SDL_RenderClear(renderer);
+		
 
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderCopy(renderer, texture2, NULL, &hola);
-
+		SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
 		SDL_RenderPresent(renderer);
 
 
@@ -77,11 +88,3 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 	return 0;
 
 }
-/*
-SDL_Rect hola;
-
-hola.x = 0;
-hola.y = 155;
-hola.w = 555;
-hola.h = 100;
-*/
