@@ -49,18 +49,20 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
-	surface2 = SDL_LoadBMP(".\\img\\pergamino.bmp");
+	surface2 = SDL_LoadBMP(".\\img\\kiss.bmp");
+	surface3 = SDL_LoadBMP(".\\img\\kiss2.bmp");
 
 	
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	texture2 = SDL_CreateTextureFromSurface(renderer, surface2);
+	texture3 = SDL_CreateTextureFromSurface(renderer, surface3);
 
 
 
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 	SDL_FreeSurface(surface2);
-
+	SDL_FreeSurface(surface3);
 
 	SDL_Rect neurriak;
 
@@ -70,20 +72,66 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 	neurriak.h = 460;
 
 
-
-	while (1) {
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) {
-			break;
-		}
-		SDL_RenderClear(renderer);
+	int i=0;
+	
 		
+		
+		
+		while (i != 99999) {
+			SDL_PollEvent(&event);
+			if (event.type == SDL_QUIT) {
+				break;
+			}
+			SDL_RenderClear(renderer);
 
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
-		SDL_RenderPresent(renderer);
+			SDL_RenderCopy(renderer, texture, NULL, NULL);
+			SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
 
 
+
+
+			SDL_RenderPresent(renderer);
+
+			i++;
+		}
+		while (1) {
+		i = 0;
+		while (i!=10) {
+			SDL_PollEvent(&event);
+			if (event.type == SDL_QUIT) {
+				break;
+			}
+			SDL_RenderClear(renderer);
+
+			SDL_RenderCopy(renderer, texture, NULL, NULL);
+			SDL_RenderCopy(renderer, texture3, NULL, &neurriak);
+
+
+
+			SDL_RenderPresent(renderer);
+			i++;
+
+		}
+		i = 0;
+		while (i != 10) {
+			SDL_PollEvent(&event);
+			if (event.type == SDL_QUIT) {
+				break;
+			}
+			SDL_RenderClear(renderer);
+
+			SDL_RenderCopy(renderer, texture, NULL, NULL);
+			SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
+
+
+
+
+			SDL_RenderPresent(renderer);
+
+			i++;
+		}
+		i = 0;
+		
 	}
 
 	return 0;
@@ -106,7 +154,7 @@ void Musika(char Fitxategia[])
 	Uint8* wavBuffer;
 
 	/*  fichategia cargatu */
-	if (SDL_LoadWAV("test.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
+	if (SDL_LoadWAV("UnderTale.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
