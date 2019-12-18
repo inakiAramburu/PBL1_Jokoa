@@ -1,5 +1,6 @@
 #include "Funtzioak.h"
 #include <SDL.h>
+#include <stdio.h>
 
 SDL_Window* window;
 
@@ -87,4 +88,38 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	return 0;
 
+}
+
+
+void Musika(char Fitxategia[])
+{
+	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+
+
+	SDL_AudioSpec wavSpec;
+	Uint32 wavLength;
+	Uint8* wavBuffer;
+
+	/* Load the WAV */
+	if (SDL_LoadWAV("test.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
+		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
+		exit(-1);
+	}
+	// open audio device
+
+	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+	// play audio
+
+	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+	SDL_PauseAudioDevice(deviceId, 0);
+
+
+
+
+	// clean up
+
+	//SDL_CloseAudioDevice(deviceId);
+	//SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
 }
