@@ -1,8 +1,12 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz
+#include <SDL.h>
 
-int main(int argc, char* str[]) {
+//Mikel
+
+int main(int argc, char* str[])
+{
+	int irten = 0, ebentua = 0;
 	char Atzekoplanoa[256] = ".\\img\\Menu.bmp";		//Argazkiaren helbidea
 	char Atzekoplanoa2[256] = ".\\img\\Nivel2.bmp";
 	if (LeihoaHasi() == 1)
@@ -13,13 +17,15 @@ int main(int argc, char* str[]) {
 
 	SDL_Delay(2000);		//Txuriz 2 segundu
 
-
+	while (!irten)
+	{
 	if (AtzekoPlanoBerria(Atzekoplanoa) == 1)
 	{
 		fprintf(stderr, "Ezin izan da atzeko palnoa kargatu: %s\n", SDL_GetError());
 		return 1;
 	}
-	SDL_Delay(2000);		//Txuriz 2 segundu
+	};
+	
 	if (AtzekoPlanoBerria(Atzekoplanoa2) == 1)
 	{
 		fprintf(stderr, "Eziin izan da atzeko palnoa kargatu: %s\n", SDL_GetError());
