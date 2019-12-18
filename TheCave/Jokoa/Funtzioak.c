@@ -2,8 +2,9 @@
 #include <SDL.h>
 
 SDL_Window* window;
+SDL_Renderer* renderer;
 
-void LeihoaHasi()
+int LeihoaHasi()
 {
             // Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -19,25 +20,25 @@ void LeihoaHasi()
 		PANTAILA_ALTUERA,                 // Sortzeko leihoaren altuera
 		SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
 	);
-	// Leihoa komprobachen du.
-	if (window == NULL) {
+
+	if (window == NULL) { 		// Leihoa komprobatzen du.
 
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());
 		return 1;
 	}
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	return 0;
 }
 
 //Fondoa jartzen du.
-void AtzekoPlanoBerria(char AtzekoPlanoa[])
+int AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
-
-	SDL_Renderer* renderer;
+	
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 	SDL_Event event;
 
-
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	
 
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
@@ -53,16 +54,11 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 
-	while (1) {
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) {
-			break;
-		}
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderPresent(renderer);
-	}
-
+	SDL_PollEvent(&event);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+	
 	return 0;
 
 }
