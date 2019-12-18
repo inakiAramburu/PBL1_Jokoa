@@ -12,9 +12,7 @@ int main(int argc, char* str[]) {
 	AtzekoPlanoBerria(Atzekoplanoa);
 	AtzekoPlanoBerria2(Atzekoplanoa2);
 	
-	
-	variable();
-	
+
 
 
 
