@@ -93,9 +93,13 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 void Musika(char Fitxategia[])
 {
+
+
 	// explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
 
+	//inicia la parte de audio
+	SDL_Init(SDL_INIT_AUDIO);
 
 	SDL_AudioSpec wavSpec;
 	Uint32 wavLength;
