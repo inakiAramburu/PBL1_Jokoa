@@ -97,6 +97,7 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 		while (1) {
 		i = 0;
 		while (i!=10) {
+			//bien
 			SDL_PollEvent(&event);
 			if (event.type == SDL_QUIT) {
 				break;
