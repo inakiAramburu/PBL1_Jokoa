@@ -18,5 +18,13 @@
     <ClCompile Include="main.c">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
+    <ClCompile Include="Funtzioak.c">
+      <Filter>Archivos de recursos</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Funtzioak.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
