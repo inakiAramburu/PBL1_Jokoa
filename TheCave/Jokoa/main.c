@@ -12,6 +12,7 @@ int main(int argc, char* str[]) {
 	Musika("test.wav");
 
 
+
 		AtzekoPlanoBerria(Atzekoplanoa);
 
 

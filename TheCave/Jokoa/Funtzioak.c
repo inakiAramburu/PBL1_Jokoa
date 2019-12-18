@@ -93,6 +93,7 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 void Musika(char Fitxategia[])
 {
+	// explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
 
 
@@ -100,16 +101,16 @@ void Musika(char Fitxategia[])
 	Uint32 wavLength;
 	Uint8* wavBuffer;
 
-	/* Load the WAV */
+	/*  fichategia cargatu */
 	if (SDL_LoadWAV("test.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
-	// open audio device
+	// abrir dependencias de audio
 
 	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
 
-	// play audio
+	// iniciar el sonido
 
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
 	SDL_PauseAudioDevice(deviceId, 0);
@@ -117,9 +118,10 @@ void Musika(char Fitxategia[])
 
 
 
-	// clean up
+	// dena itxi
 
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
 	//SDL_Quit();
 }
+
