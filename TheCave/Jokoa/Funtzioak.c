@@ -38,8 +38,6 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 	SDL_Texture* texture;
 	SDL_Event event;
 
-	
-
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
 	if (!surface) {
