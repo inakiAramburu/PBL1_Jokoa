@@ -22,6 +22,7 @@ int main(int argc, char* str[]) {
 
 
 	SDL_Delay(10000);
+	SDL_Scancode
 
 
 
