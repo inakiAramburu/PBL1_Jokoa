@@ -6,7 +6,7 @@ SDL_Renderer* renderer;
 
 int LeihoaHasi()
 {
-            // Initialize SDL2
+	// Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da SDL hasieratu: %s", SDL_GetError());
 		return 1;
@@ -27,6 +27,45 @@ int LeihoaHasi()
 		return 1;
 	}
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+}
+
+//Argazkia jartzen du.
+int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
+{
+
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+	SDL_Event event;
+
+
+	//irudia kargatu
+	surface = SDL_LoadBMP(AtzekoPlanoa);
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	//irudiaren pozizioa jarri
+
+	SDL_Rect neurriak;
+
+	neurriak.x = Posx;
+	neurriak.y = Posy;
+	neurriak.w = luzeera;
+	neurriak.h = altuera;
+
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
+	SDL_RenderPresent(renderer);
+
+
+	return 0;
+
 }
 
 //Fondoa jartzen du.
@@ -55,7 +94,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
-	
+
 
 	return 0;
 
