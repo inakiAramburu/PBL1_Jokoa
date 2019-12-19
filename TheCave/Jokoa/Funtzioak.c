@@ -1,9 +1,10 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-
+#include <stdio.h>
 SDL_Window* window;
+SDL_Renderer* renderer;
 
-void LeihoaHasi()
+int LeihoaHasi()
 {
 	// Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -25,89 +26,116 @@ void LeihoaHasi()
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());
 		return 1;
 	}
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
-//Fondoa jartzen du.
-void AtzekoPlanoBerria(char AtzekoPlanoa[])
+//Argazkia jartzen du.
+int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
 {
-	int prueba = 0, prueba2 = 0;
-
-	SDL_Renderer* renderer;
-
 
 	SDL_Surface* surface;
-	SDL_Surface* surface2;
-	SDL_Surface* surface3;
-
 	SDL_Texture* texture;
-	SDL_Texture* texture2;
-	SDL_Texture* texture3;
 	SDL_Event event;
 
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
-	surface2 = SDL_LoadBMP(".\\img\\pergamino.bmp");
-	//surface3 = SDL_LoadBMP(".\\img\\pergamino2.bmp");
-
-
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return 1;
+	}
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	texture2 = SDL_CreateTextureFromSurface(renderer, surface2);
-	//texture3 = SDL_CreateTextureFromSurface(renderer, surface3);
-
-
-
-
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-	SDL_FreeSurface(surface2);
-	//SDL_FreeSurface(surface3);
-
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	//irudiaren pozizioa jarri
 
 	SDL_Rect neurriak;
-	SDL_Rect neurriak2;
-	
-	
 
-	neurriak.x = 400;
-	neurriak.y = 100;
-	neurriak.w = 480;
-	neurriak.h = 500;
+	neurriak.x = Posx;
+	neurriak.y = Posy;
+	neurriak.w = luzeera;
+	neurriak.h = altuera;
 
-	neurriak2.x = 390;
-	neurriak2.y = 90;
-	neurriak2.w = 500;
-	neurriak2.h = 520;
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
+	SDL_RenderPresent(renderer);
 
-
-
-	while (1) {
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) {
-			break;
-		}
-		SDL_RenderClear(renderer);
-		 
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderCopy(renderer, texture2, NULL, &neurriak2);
-		SDL_RenderPresent(renderer);
-
-		if (prueba2 == 0)
-		{
-			
-			SDL_RenderCopy(renderer, texture, NULL, NULL);
-			SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
-			SDL_RenderPresent(renderer);
-			SDL_Delay(2000);
-			prueba2 = 1;
-
-		}
-		
-
-
-	}
 
 	return 0;
 
+}
+
+//Fondoa jartzen du.
+int AtzekoPlanoBerria(char AtzekoPlanoa[])
+{
+
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+	SDL_Event event;
+
+
+	//irudia kargatu
+	surface = SDL_LoadBMP(AtzekoPlanoa);
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
+
+	return 0;
+
+}
+
+//musika funtzioa
+/*a medias*/
+void MusikaJarri(char Fitxategia[])
+{
+
+
+	// explicacion
+	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+
+	//inicia la parte de audio
+	SDL_Init(SDL_INIT_AUDIO);
+
+	SDL_AudioSpec wavSpec;
+	Uint32 wavLength;
+	Uint8* wavBuffer;
+
+	/*  fichategia cargatu */
+	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
+		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
+		exit(-1);
+	}
+	// abrir dependencias de audio
+
+	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+	// iniciar el sonido
+
+	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+	SDL_PauseAudioDevice(deviceId, 0);
+
+
+
+
+	// dena itxi
+
+	//SDL_CloseAudioDevice(deviceId);
+	//SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
 }
