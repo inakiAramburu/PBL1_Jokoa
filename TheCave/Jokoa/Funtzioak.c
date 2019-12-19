@@ -3,7 +3,7 @@
 
 SDL_Window* window;
 
-void LeihoaHasi()
+int LeihoaHasi()
 {
             // Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {

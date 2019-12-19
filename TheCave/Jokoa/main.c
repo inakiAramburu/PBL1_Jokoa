@@ -4,7 +4,11 @@
 
 int main(int argc, char* str[]) {
 	char Atzekoplanoa[256] = ".\\img\\Menu.bmp";		//Argazkiaren helbidea
-	LeihoaHasi();
+	if (LeihoaHasi() == 1)
+	{
+		printf("Ezin izan da 1280x720- ko bideoa ezarri: %s\n", SDL_GetError());
+		return 1;
+	}
 	
 	SDL_Delay(2000);		//Txuriz 2 segundu
 
