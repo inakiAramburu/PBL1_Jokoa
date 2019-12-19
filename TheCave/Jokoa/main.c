@@ -3,11 +3,11 @@
 //inaki
 
 int main(int argc, char* str[]) {
-	char Atzekoplanoa[256] = ".\\img\\Menu.bmp";		//Argazkiaren helbidea
-	char pergamino[256] = ".\\img\\pergamino.bmp";	//foto Argazkiaren helbidea
-	char Jolastu[256] = ".\\img\\Jolastu.bmp";
-	char Kontrolak[256] = ".\\img\\Kontrolak.bmp";
-	char Kredituak[256] = ".\\img\\Kredituak.bmp";
+	char Atzekoplanoa[256] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
+	char pergamino[256] = ".\\media\\menu\\pergamino.bmp";	//foto Argazkiaren helbidea
+	char Jolastu[256] = ".\\media\\menu\\Jolastu.bmp";
+	char Kontrolak[256] = ".\\media\\menu\\Kontrolak.bmp";
+	char Kredituak[256] = ".\\media\\menu\\Kredituak.bmp";
 
 	LeihoaHasi();
 
