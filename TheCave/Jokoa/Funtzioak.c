@@ -52,16 +52,11 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 	}
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-
-	while (1) {
-		SDL_PollEvent(&event);
-		if (event.type == SDL_QUIT) {
-			break;
-		}
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderPresent(renderer);
-	}
+	SDL_PollEvent(&event);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+	
 
 	return 0;
 
