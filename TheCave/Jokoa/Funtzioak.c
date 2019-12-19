@@ -28,7 +28,7 @@ void LeihoaHasi()
 }
 
 //Fondoa jartzen du.
-void AtzekoPlanoBerria(char AtzekoPlanoa[])
+int AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
 
 	SDL_Renderer* renderer;

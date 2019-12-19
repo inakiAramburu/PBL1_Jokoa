@@ -8,7 +8,11 @@ int main(int argc, char* str[]) {
 	
 	SDL_Delay(2000);		//Txuriz 2 segundu
 
-	AtzekoPlanoBerria(Atzekoplanoa);
+	if (AtzekoPlanoBerria(Atzekoplanoa) == 1)
+	{
+		fprintf(stderr, "Ezin izan da atzeko palnoa kargatu: %s\n", SDL_GetError());
+		return 1;
+	}
 	
 	return 0;
 }

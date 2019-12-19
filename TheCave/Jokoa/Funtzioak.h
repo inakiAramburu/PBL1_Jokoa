@@ -6,5 +6,5 @@
 #define PANTAILA_ZABALERA 1280
 
 void LeihoaHasi();
-void AtzekoPlanoBerria(char AtzekoPlano[]);
+int AtzekoPlanoBerria(char AtzekoPlano[]);
 #endif
