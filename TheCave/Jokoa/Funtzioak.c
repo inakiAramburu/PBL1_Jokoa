@@ -70,15 +70,15 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 	
 	
 
-	neurriak.x = 354;
-	neurriak.y = 112;
-	neurriak.w = 600;
-	neurriak.h = 460;
+	neurriak.x = 400;
+	neurriak.y = 100;
+	neurriak.w = 480;
+	neurriak.h = 500;
 
-	neurriak2.x = 345;
-	neurriak2.y = 100;
-	neurriak2.w = 640;
-	neurriak2.h = 500;
+	neurriak2.x = 390;
+	neurriak2.y = 90;
+	neurriak2.w = 500;
+	neurriak2.h = 520;
 
 
 
@@ -88,15 +88,14 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 			break;
 		}
 		SDL_RenderClear(renderer);
-
-
+		 
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
 		SDL_RenderCopy(renderer, texture2, NULL, &neurriak2);
 		SDL_RenderPresent(renderer);
 
 		if (prueba2 == 0)
 		{
-			SDL_RenderClear(renderer);
+			
 			SDL_RenderCopy(renderer, texture, NULL, NULL);
 			SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
 			SDL_RenderPresent(renderer);
