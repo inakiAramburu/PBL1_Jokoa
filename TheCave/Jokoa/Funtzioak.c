@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-#include <stdio.h>
+
 SDL_Window* window;
 SDL_Renderer* renderer;
 
@@ -29,10 +29,39 @@ int LeihoaHasi()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
+//Fondoa jartzen du.
+int AtzekoPlanoBerria(char AtzekoPlanoa[])
+{
+
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+	SDL_Event event;
+
+
+	//irudia kargatu
+	surface = SDL_LoadBMP(AtzekoPlanoa);
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
+	return 0;
+}
+
 //Argazkia jartzen du.
 int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
 {
-
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 	SDL_Event event;
@@ -63,39 +92,6 @@ int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int alt
 	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
 	SDL_RenderPresent(renderer);
 
-
-	return 0;
-
-}
-
-//Fondoa jartzen du.
-int AtzekoPlanoBerria(char AtzekoPlanoa[])
-{
-
-	SDL_Surface* surface;
-	SDL_Texture* texture;
-	SDL_Event event;
-
-
-	//irudia kargatu
-	surface = SDL_LoadBMP(AtzekoPlanoa);
-	if (!surface) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
-		return 1;
-	}
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (!texture) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
-		return 1;
-	}
-
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-	SDL_PollEvent(&event);
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-	SDL_RenderPresent(renderer);
-
-
 	return 0;
 
 }
@@ -104,8 +100,6 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 /*a medias*/
 void MusikaJarri(char Fitxategia[])
 {
-
-
 	// explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
 
@@ -118,7 +112,7 @@ void MusikaJarri(char Fitxategia[])
 
 	/*  fichategia cargatu */
 	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
-		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
 	// abrir dependencias de audio
