@@ -21,6 +21,9 @@ int main(int argc, char* str[]) {
 	Argazkia_Sartu(Kontrolak, 480, 300, 300, 72);
 	Argazkia_Sartu(Kredituak, 480, 400, 300, 72);
 	Argazkia_Sartu(Pertsonaia, -10, 532, 150, 100);
+	mapeoa(0, 615, 1280, 615);
+
+
 
 	SDL_Delay(10000);
 	return 0;

@@ -3,7 +3,7 @@
 
 SDL_Window* window;
 SDL_Renderer* renderer;
-
+//leihoa hasten du
 int LeihoaHasi()
 {
 	// Initialize SDL2
@@ -28,7 +28,6 @@ int LeihoaHasi()
 	}
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
-
 //Fondoa jartzen du.
 int AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
@@ -58,7 +57,6 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	return 0;
 }
-
 //Argazkia jartzen du.
 int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 {
@@ -95,7 +93,6 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 	return 0;
 
 }
-
 //musika funtzioa
 /*a medias*/
 void MusikaJarri(char Fitxategia[])
@@ -132,4 +129,30 @@ void MusikaJarri(char Fitxategia[])
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
 	//SDL_Quit();
+}
+int mapeoa(int x0, int y0, int x1, int y1) {
+	
+    int i, j, y,x;
+	y = y1 - y0;
+	x = x1 - x0;
+
+    for(i=0; i<=x; i++)
+    {
+        for (j=1; j<=x; j++)
+        {
+            printf("Kaixo");
+        }
+        printf("+\n");
+        if(i<x){
+           for (j=1; j<=x; j++)
+            {
+                printf("!   ");
+            }
+            printf("!\n");  
+        }
+
+    }
+    printf("\n");
+    return 0;
+}
 }

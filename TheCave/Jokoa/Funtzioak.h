@@ -9,6 +9,6 @@ int LeihoaHasi();
 int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera);
 int AtzekoPlanoBerria(char AtzekoPlanoa[]);
 void MusikaJarri(char Fitxategia[]);
-
+int mapeoa(int x0, int y0, int x1, int y1);
 
 #endif
