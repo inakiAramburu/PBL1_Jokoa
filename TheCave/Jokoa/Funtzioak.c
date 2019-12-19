@@ -2,6 +2,7 @@
 #include <SDL.h>
 
 SDL_Window* window;
+SDL_Renderer* renderer;
 
 int LeihoaHasi()
 {
@@ -25,19 +26,17 @@ int LeihoaHasi()
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());
 		return 1;
 	}
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 //Fondoa jartzen du.
 int AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
 
-	SDL_Renderer* renderer;
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 	SDL_Event event;
 
-
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
