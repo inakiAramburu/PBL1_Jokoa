@@ -8,7 +8,7 @@
 int LeihoaHasi();
 int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera);
 int AtzekoPlanoBerria(char AtzekoPlanoa[]);
-void Musika(char Fitxategia);
+void MusikaJarri(char Fitxategia[]);
 
 
 #endif

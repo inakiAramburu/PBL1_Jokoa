@@ -3,12 +3,13 @@
 //inaki
 
 int main(int argc, char* str[]) {
-	char Atzekoplanoa[256] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
-	char pergamino[256] = ".\\media\\menu\\pergamino.bmp";	//foto Argazkiaren helbidea
-	char Jolastu[256] = ".\\media\\menu\\Jolastu.bmp";
-	char Kontrolak[256] = ".\\media\\menu\\Kontrolak.bmp";
-	char Kredituak[256] = ".\\media\\menu\\Kredituak.bmp";
-
+	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
+	char pergamino[128] = ".\\media\\menu\\pergamino.bmp";	//foto Argazkiaren helbidea
+	char Jolastu[128] = ".\\media\\menu\\Jolastu.bmp";
+	char Kontrolak[128] = ".\\media\\menu\\Kontrolak.bmp";
+	char Kredituak[128] = ".\\media\\menu\\Kredituak.bmp";
+	//char Musika2[128] = ".\\media\\sound\\test.wav";
+	//MusikaJarri(Musika2);
 	LeihoaHasi();
 
 	SDL_Delay(2000);		//Txuriz 2 segundu
@@ -17,6 +18,9 @@ int main(int argc, char* str[]) {
 	Argazkia_Sartu(Jolastu, 500, 210, 270, 65);
 	Argazkia_Sartu(Kontrolak, 480, 300, 300, 72);
 	Argazkia_Sartu(Kredituak, 480, 400, 300, 72);
+
+	
+
 	SDL_Delay(10000);
 
 

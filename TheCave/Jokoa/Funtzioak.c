@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-
+#include <stdio.h>
 SDL_Window* window;
 SDL_Renderer* renderer;
 
@@ -102,7 +102,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 //musika funtzioa
 /*a medias*/
-void Musika(char Fitxategia[])
+void MusikaJarri(char Fitxategia[])
 {
 
 
@@ -117,7 +117,7 @@ void Musika(char Fitxategia[])
 	Uint8* wavBuffer;
 
 	/*  fichategia cargatu */
-	if (SDL_LoadWAV("UnderTale.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
+	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
