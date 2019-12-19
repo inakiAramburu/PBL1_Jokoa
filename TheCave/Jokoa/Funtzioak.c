@@ -60,3 +60,4 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 	return 0;
 
 }
+
