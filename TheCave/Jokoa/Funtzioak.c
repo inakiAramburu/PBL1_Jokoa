@@ -56,15 +56,12 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
-
 	return 0;
-
 }
 
 //Argazkia jartzen du.
 int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
 {
-
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 	SDL_Event event;
@@ -95,7 +92,44 @@ int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int alt
 	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
 	SDL_RenderPresent(renderer);
 
-
 	return 0;
 
+}
+
+//musika funtzioa
+/*a medias*/
+void MusikaJarri(char Fitxategia[])
+{
+	// explicacion
+	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+
+	//inicia la parte de audio
+	SDL_Init(SDL_INIT_AUDIO);
+
+	SDL_AudioSpec wavSpec;
+	Uint32 wavLength;
+	Uint8* wavBuffer;
+
+	/*  fichategia cargatu */
+	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
+		exit(-1);
+	}
+	// abrir dependencias de audio
+
+	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+	// iniciar el sonido
+
+	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+	SDL_PauseAudioDevice(deviceId, 0);
+
+
+
+
+	// dena itxi
+
+	//SDL_CloseAudioDevice(deviceId);
+	//SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
 }
