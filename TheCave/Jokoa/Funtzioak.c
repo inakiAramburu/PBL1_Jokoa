@@ -60,7 +60,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 }
 
 //Argazkia jartzen du.
-int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -68,7 +68,7 @@ int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int alt
 
 
 	//irudia kargatu
-	surface = SDL_LoadBMP(AtzekoPlanoa);
+	surface = SDL_LoadBMP(Irudia);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
 		return 1;
