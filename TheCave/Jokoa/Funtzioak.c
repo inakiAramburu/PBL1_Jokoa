@@ -91,7 +91,6 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 	SDL_PollEvent(&event);
-	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
