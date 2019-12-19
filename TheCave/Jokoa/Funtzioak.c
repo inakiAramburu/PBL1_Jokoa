@@ -131,28 +131,6 @@ void MusikaJarri(char Fitxategia[])
 	//SDL_Quit();
 }
 int mapeoa(int x0, int y0, int x1, int y1) {
-	
-    int i, j, y,x;
-	y = y1 - y0;
-	x = x1 - x0;
-
-    for(i=0; i<=x; i++)
-    {
-        for (j=1; j<=x; j++)
-        {
-            printf("Kaixo");
-        }
-        printf("+\n");
-        if(i<x){
-           for (j=1; j<=x; j++)
-            {
-                printf("!   ");
-            }
-            printf("!\n");  
-        }
-
-    }
-    printf("\n");
-    return 0;
+   
 }
-}
+
