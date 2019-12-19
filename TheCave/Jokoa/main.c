@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//inaki
+//Mikel
 
 int main(int argc, char* str[]) {
 	char Atzekoplanoa[256] = ".\\img\\Menu.bmp";		//Argazkiaren helbidea
