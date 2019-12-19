@@ -7,7 +7,7 @@
 
 void LeihoaHasi();
 void AtzekoPlanoBerria(char AtzekoPlano[]);
-void Musika(char Fitxategia);
+void Musika(char Fitxategia[]);
 
 
 #endif

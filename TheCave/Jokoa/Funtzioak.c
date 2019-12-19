@@ -155,7 +155,7 @@ void Musika(char Fitxategia[])
 	Uint8* wavBuffer;
 
 	/*  fichategia cargatu */
-	if (SDL_LoadWAV("UnderTale.wav", &wavSpec, &wavBuffer, &wavLength) == NULL) {
+	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		fprintf(stderr, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
@@ -166,7 +166,7 @@ void Musika(char Fitxategia[])
 	// iniciar el sonido
 
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-	SDL_PauseAudioDevice(deviceId, 0);
+	SDL_PauseAudioDevice(deviceId, 1);
 
 
 

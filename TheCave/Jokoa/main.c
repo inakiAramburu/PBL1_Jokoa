@@ -8,7 +8,7 @@ int main(int argc, char* str[]) {
 
 	SDL_Delay(2000);		//Txuriz 2 segundu
 
-	Musika("test.wav");
+	Musika("UnderTale.wav");
 
 
 
