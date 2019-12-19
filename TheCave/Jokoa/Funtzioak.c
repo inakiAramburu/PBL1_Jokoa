@@ -30,6 +30,7 @@ void LeihoaHasi()
 //Fondoa jartzen du.
 void AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
+	int prueba = 0, prueba2 = 0;
 
 	SDL_Renderer* renderer;
 
@@ -49,24 +50,35 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 	//irudia kargatu
 	surface = SDL_LoadBMP(AtzekoPlanoa);
 	surface2 = SDL_LoadBMP(".\\img\\pergamino.bmp");
+	//surface3 = SDL_LoadBMP(".\\img\\pergamino2.bmp");
 
 
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	texture2 = SDL_CreateTextureFromSurface(renderer, surface2);
+	//texture3 = SDL_CreateTextureFromSurface(renderer, surface3);
 
 
 
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 	SDL_FreeSurface(surface2);
+	//SDL_FreeSurface(surface3);
 
 
 	SDL_Rect neurriak;
+	SDL_Rect neurriak2;
+	
+	
 
 	neurriak.x = 354;
 	neurriak.y = 112;
 	neurriak.w = 600;
 	neurriak.h = 460;
+
+	neurriak2.x = 345;
+	neurriak2.y = 100;
+	neurriak2.w = 640;
+	neurriak2.h = 500;
 
 
 
@@ -79,8 +91,20 @@ void AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
-		SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
+		SDL_RenderCopy(renderer, texture2, NULL, &neurriak2);
 		SDL_RenderPresent(renderer);
+
+		if (prueba2 == 0)
+		{
+			SDL_RenderClear(renderer);
+			SDL_RenderCopy(renderer, texture, NULL, NULL);
+			SDL_RenderCopy(renderer, texture2, NULL, &neurriak);
+			SDL_RenderPresent(renderer);
+			SDL_Delay(2000);
+			prueba2 = 1;
+
+		}
+		
 
 
 	}
