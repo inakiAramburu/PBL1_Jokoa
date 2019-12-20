@@ -1,6 +1,7 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-//inaki
+#include <stdio.h>
+
 SDL_Window* window;
 SDL_Renderer* renderer;
 
@@ -79,18 +80,27 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 		return 1;
 	}
 	//irudiaren pozizioa jarri
-
 	SDL_Rect neurriak;
+	int i = 0;
 
-	neurriak.x = Posx;
-	neurriak.y = Posy;
-	neurriak.w = luzeera;
-	neurriak.h = altuera;
+	for (i = 0; i < 1000; i++)
+	{
+		neurriak.x = i;
+		neurriak.y = Posy;
+		neurriak.w = luzeera;
+		neurriak.h = altuera;
 
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-	SDL_PollEvent(&event);
-	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
-	SDL_RenderPresent(renderer);
+		SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+		SDL_PollEvent(&event);
+		SDL_RenderClear(renderer);
+
+		SDL_RenderCopy(renderer, texture, NULL, &neurriak);
+		SDL_RenderPresent(renderer);
+		SDL_Delay(1);
+	}
+
+	//neurriak.x = Posx;
+
 
 	return 0;
 
@@ -133,3 +143,63 @@ void MusikaJarri(char Fitxategia[])
 	//SDL_FreeWAV(wavBuffer);
 	//SDL_Quit();
 }
+
+void teklatua()
+{
+
+	while (1) {
+
+		SDL_Event e;
+		while (SDL_PollEvent(&e) != 0) {
+
+			if (e.type == SDL_KEYDOWN)
+			{
+
+				switch (e.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					printf("D\n");
+					break;
+
+					//izquierda
+
+				case SDL_SCANCODE_A:
+					printf("A\n");
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					printf("espacio\n");
+					break;
+
+				}
+
+
+			}
+
+
+
+		}
+
+
+
+	}
+
+
+
+}
+
