@@ -35,12 +35,8 @@ int main(int argc, char* str[]) {
 				printf("evento\n");
 				if (event.jhat.value & SDL_HAT_DOWN)
 				{
-					while (SDL_HAT_DOWN)
-					{
-						printf("baja\n");
-
-					}
-					//printf("baja\n");
+					
+					printf("baja\n");
 				}
 
 			}
