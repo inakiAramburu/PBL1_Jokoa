@@ -10,5 +10,5 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera);
 int AtzekoPlanoBerria(char AtzekoPlanoa[]);
 void MusikaJarri(char Fitxategia[]);
 
-
+void teklatua();
 #endif
