@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-
+//inaki
 SDL_Window* window;
 SDL_Renderer* renderer;
 
