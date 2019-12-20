@@ -17,36 +17,35 @@ int main(int argc, char* str[]) {
 	////////////////////////////////////MANDO//////////////////////////////////////////////
 	SDL_Init(SDL_INIT_JOYSTICK);
 	SDL_Joystick* joystick = SDL_JoystickOpen(0);
-	printf("Controler name: %s\n", SDL_JoystickName(joystick));
+	printf("nombre del mando: %s\n", SDL_JoystickName(joystick));
 
-	printf("Num Axes: %d\n", SDL_JoystickNumAxes(joystick));
+	printf("ejes: %d\n", SDL_JoystickNumAxes(joystick));
 
-	printf("Num Buttos: %d\n", SDL_JoystickNumButtons(joystick));
+	printf("Botones: %d\n", SDL_JoystickNumButtons(joystick));
 
 
 	SDL_Event event;
 	while (1)
 	{
-		while (SDL_PollEvent(&event))
+		while (SDL_PollEvent(&event) != 0)
 		{
 
-			if (event.type == SDL_JOYAXISMOTION)
+			if (event.type == SDL_JOYHATMOTION)
 			{
-				if (event.jaxis.axis == 0)
+				printf("evento\n");
+				if (event.jhat.value & SDL_HAT_DOWN)
 				{
-
-					if (event.jaxis.value > 0)
+					while (SDL_HAT_DOWN)
 					{
-						printf("derecha\n");
-					}
+						printf("baja\n");
 
-					if (event.jaxis.value < 0)
-					{
-						printf("izquierda\n");
 					}
-					printf("%d:\n", event.jaxis.value);
+					//printf("baja\n");
 				}
+
 			}
+
+
 
 		}
 
@@ -58,3 +57,6 @@ int main(int argc, char* str[]) {
 	SDL_Delay(10000);
 	return 0;
 }
+
+
+
