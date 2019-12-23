@@ -4,6 +4,15 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 
+typedef struct S_IMG
+{
+	SDL_Texture* textura;
+}IMG;
+
+IMG Irudiak[100];		//Irudiak, dagozkien datuekin
+
+int IrudiZnbk = 0;		//Irudi kopurua, hasieran 0
+
 int LeihoaEtaRenderHasi()
 {
             // Initialize SDL2
@@ -21,43 +30,72 @@ int LeihoaEtaRenderHasi()
 		SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
 	);
 
-	if (leihoa == NULL) { 		// Leihoa komprobatzen du.
+	if (leihoa == NULL) { 		// Leihoa sortu dela konprobatzen du
 
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());		//Errorea
 		return 1;
 	}
-	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);		//Renderizatua hasi
+
 	return 0;
 }
 
-//Fondoa jartzen du.
-int AtzekoPlanoBerria(char AtzekoPlanoa[])
+void KargatuIrudiak(PANTAILAK Pantaila)
 {
-	
+	switch (Pantaila)		
+	{
+		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
+		jokalaria puntu horretara heltzen ez bada*/
+
+		case MENUA:
+			ImgKargatu(".\\img\\Menu.bmp");
+			break;
+		case LEHEN:
+			ImgKargatu(".\\img\\Nivel2.bmp");
+			break;
+	}
+}
+
+void ImgKargatu(char src[])
+{
 	SDL_Surface* surface;
 	SDL_Texture* texture;
-	SDL_Event event;
-
-	//irudia kargatu
-	surface = SDL_LoadBMP(AtzekoPlanoa);
+	
+	surface = SDL_LoadBMP(src);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
-		return 1;
+		return;
 	}
+
 	texture = SDL_CreateTextureFromSurface(render, surface);
 	if (!texture) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
-		return 1;
+		return;
 	}
 
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	Irudiak[IrudiZnbk].textura = texture;
+	SDL_FreeSurface(surface);
 
+	IrudiZnbk++;
+}
+
+void RenderPrestatu()
+{
+	int i;
+
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 	SDL_RenderClear(render);
-	SDL_RenderCopy(render, texture, NULL, NULL);
-	SDL_RenderPresent(render);
-	
-	return 0;
 
+	for (i = 0; i < IrudiZnbk; i++)
+	{
+		SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+	}
+}
+
+void Irudikatu()
+{
+	SDL_RenderPresent(render);
 }
 
 void Amaitu()

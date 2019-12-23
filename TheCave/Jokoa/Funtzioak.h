@@ -5,7 +5,13 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 
+typedef enum {MENUA, LEHEN, BIGARREN}PANTAILAK;
+
 int LeihoaEtaRenderHasi();
-int AtzekoPlanoBerria(char AtzekoPlano[]);
+void KargatuIrudiak(PANTAILAK Pantaila);
+void ImgKargatu(char src[]);
+void RenderPrestatu();
+void Irudikatu();
+
 void Amaitu();
 #endif

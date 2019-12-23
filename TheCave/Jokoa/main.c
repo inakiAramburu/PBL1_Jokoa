@@ -1,31 +1,31 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz\\
+//Ekaitz, argazkien eta atzekoplanoen egitura (bukatu gabe, oraindik irudien posizioak falta eta nola irudiak kargatu eta deskargatuko diren)
 
 int main(int argc, char* str[]) {
-	char Atzekoplanoa[128] = ".\\img\\Menu.bmp";		//Argazkiaren helbidea
-	char Atzekoplanoa2[128] = ".\\img\\Nivel2.bmp";
 
-	if (LeihoaEtaRenderHasi() == 1)
+	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
+
+	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	int KargaLehen = 0;		//""
+	int KargaBigarren = 0;		//""
+
+	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
+
+	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
-		printf("Ezin izan da 1280x720- ko bideoa ezarri: %s\n", SDL_GetError());
+		printf("Ezin izan da 1280x720- ko bideoa ezarri: %s\n", SDL_GetError());		//Erroreak
 		return 1;
 	}
-			//Txuriz 2 segundu
-
 	
-	if (AtzekoPlanoBerria(Atzekoplanoa) == 1)
+	if (!KargaMenua)
 	{
-		fprintf(stderr, "Ezin izan da atzeko palnoa kargatu: %s\n", SDL_GetError());
-		return 1;
-	}/*
+		KargatuIrudiak(Pantaila);
+	}
+
+	RenderPrestatu();
+	Irudikatu();
 	SDL_Delay(2000);		//Txuriz 2 segundu
-	if (AtzekoPlanoBerria(Atzekoplanoa2) == 1)
-	{
-		fprintf(stderr, "Ezin izan da atzeko palnoa kargatu: %s\n", SDL_GetError());
-		return 1;
-	}*/
-	SDL_Delay(10000);		//Txuriz 2 segundu
 	Amaitu();
 	return 0;
 }
