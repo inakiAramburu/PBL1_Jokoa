@@ -32,16 +32,12 @@ int main(int argc, char* str[]) {
 			RenderPrestatu();
 			Irudikatu();
 			SDL_Delay(50);
-			EbentuakKonprobatu();
+			EbentuakKonprobatu(Jokoa, Pantaila);
 		}
 		while (Pantaila == LEHEN)
 		{
 
 		}
 	}
-
-	
-	SDL_Delay(2000);		//Txuriz 2 segundu
-	Amaitu();
 	return 0;
 }
