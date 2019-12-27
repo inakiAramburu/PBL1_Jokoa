@@ -7,6 +7,7 @@ SDL_Window* leihoa;
 typedef struct S_IMG
 {
 	SDL_Texture* textura;
+	int x;
 }IMG;
 
 IMG Irudiak[100];		//Irudiak, dagozkien datuekin
@@ -74,7 +75,6 @@ void ImgKargatu(char src[])
 		return;
 	}
 
-	Irudiak[IrudiZnbk].textura = texture;
 	SDL_FreeSurface(surface);
 
 	IrudiZnbk++;
