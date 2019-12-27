@@ -12,10 +12,10 @@ typedef enum{EZJOKATZEN, JOKATZEN}JOKOA;
 
 int LeihoaEtaRenderHasi();
 void KargatuIrudiak(PANTAILAK Pantaila);
-void ImgKargatu(char src[]);
+void ImgKargatu(char src[], int zabalera, int altuera, int x, int y);
 void RenderPrestatu();
 void Irudikatu();
-void EbentuakKonprobatu(JOKOA Jokoa, PANTAILAK Pantaila);
+void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila);
 
-void Amaitu(JOKOA Jokoa, PANTAILAK Pantaila);
+void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);
 #endif
