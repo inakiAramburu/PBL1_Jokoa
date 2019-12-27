@@ -13,15 +13,7 @@ int main(int argc, char* str[]) {
 
 	SDL_Delay(2000);		//Txuriz 2 segundu
 	AtzekoPlanoBerria(Atzekoplanoa);
-	while (1)
-	{
-		for (i = 0; i < 10; i++)
-		{
-			AtzekoPlanoBerria(Atzekoplanoa);
-			Argazkia_Sartu(Irudia, (128 * i), 0);
-			SDL_Delay(90);
-		}
-	}
+	
 	Argazkia_Sartu(Pertsonaia, -10, 532, 150, 100);
 	teklatua();
 	SDL_Delay(10000);

@@ -245,6 +245,9 @@ void teklatua()
 		Posy -= abiaduray;
 		Argazkia_Sartu(Pertsonaia, Posx, Posy, 150, 100);
 		SDL_Delay(50);
+
+
+
 	}
 }
 
