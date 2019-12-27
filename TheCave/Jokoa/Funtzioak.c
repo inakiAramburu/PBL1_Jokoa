@@ -59,7 +59,8 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		jokalaria puntu horretara heltzen ez bada*/
 
 		case MENUA:
-			ImgKargatu(".\\img\\Menu.bmp");
+			ImgKargatu(".\\media\\fondos\\Menu.bmp");
+			//ImgKargatu(".\\media\\menu\\pergamino.bmp");
 			break;
 		case LEHEN:
 			ImgKargatu(".\\img\\Nivel2.bmp");
@@ -107,15 +108,16 @@ void Irudikatu()
 	SDL_RenderPresent(render);
 }
 
-void Amaitu()
+void Amaitu(JOKOA Jokoa, PANTAILAK Pantaila)
 {
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
-
+	Jokoa = EZJOKATZEN;
+	Pantaila = ATERA;
 	return;
 }
 
-void EbentuakKonprobatu()
+void EbentuakKonprobatu(JOKOA Jokoa, PANTAILAK Pantaila)
 {
 	SDL_Event ebentua;
 	while (SDL_PollEvent(&ebentua))
@@ -123,7 +125,7 @@ void EbentuakKonprobatu()
 		switch (ebentua.type)
 		{
 		case SDL_QUIT:
-			Amaitu();
+			Amaitu(Jokoa, Pantaila);
 			break;
 		}
 	}

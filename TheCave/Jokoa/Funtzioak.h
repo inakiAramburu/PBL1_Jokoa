@@ -5,7 +5,7 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 
-typedef enum {MENUA, LEHEN, BIGARREN}PANTAILAK;
+typedef enum {MENUA, LEHEN, BIGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERASO, HIL }SPRITE;
 typedef enum{HILDA, BIZIRIK}EGOERA;
 typedef enum{EZJOKATZEN, JOKATZEN}JOKOA;
@@ -15,7 +15,7 @@ void KargatuIrudiak(PANTAILAK Pantaila);
 void ImgKargatu(char src[]);
 void RenderPrestatu();
 void Irudikatu();
-void EbentuakKonprobatu();
+void EbentuakKonprobatu(JOKOA Jokoa, PANTAILAK Pantaila);
 
-void Amaitu();
+void Amaitu(JOKOA Jokoa, PANTAILAK Pantaila);
 #endif
