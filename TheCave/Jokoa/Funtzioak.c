@@ -11,8 +11,17 @@ typedef struct S_IMG
 }IMG;
 
 IMG Irudiak[100];		//Irudiak, dagozkien datuekin
-
 int IrudiZnbk = 0;		//Irudi kopurua, hasieran 0
+
+typedef struct S_PERTSONAIA
+{
+	int x;
+	int y;
+	EGOERA egoera;
+	SPRITE sprite;
+}PERTSONAIA;
+
+PERTSONAIA pertsonaia;
 
 int LeihoaEtaRenderHasi()
 {
@@ -76,7 +85,7 @@ void ImgKargatu(char src[])
 	}
 
 	SDL_FreeSurface(surface);
-
+	Irudiak[IrudiZnbk].textura = texture;
 	IrudiZnbk++;
 }
 
@@ -104,4 +113,19 @@ void Amaitu()
 	SDL_DestroyRenderer(render);
 
 	return;
+}
+
+void EbentuakKonprobatu()
+{
+	SDL_Event ebentua;
+	while (SDL_PollEvent(&ebentua))
+	{
+		switch (ebentua.type)
+		{
+		case SDL_QUIT:
+			Amaitu();
+			break;
+		}
+	}
+	
 }
