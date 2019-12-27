@@ -83,9 +83,8 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 	SDL_Rect neurriak;
 	int i = 0;
 
-	for (i = 0; i < 1000; i++)
-	{
-		neurriak.x = i;
+	
+		neurriak.x = Posx;
 		neurriak.y = Posy;
 		neurriak.w = luzeera;
 		neurriak.h = altuera;
@@ -97,7 +96,7 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 		SDL_RenderCopy(renderer, texture, NULL, &neurriak);
 		SDL_RenderPresent(renderer);
 		SDL_Delay(1);
-	}
+	
 
 	//neurriak.x = Posx;
 
@@ -146,7 +145,14 @@ void MusikaJarri(char Fitxategia[])
 
 void teklatua()
 {
+	char Pertsonaia[128] = ".\\media\\player\\Player\\run\\run1.bmp";
 
+	
+	int Posx = -10;
+	int Posy = 532;
+	int D = 0, SPACE = 0,A=0;
+	int abiadura = 0;
+	int abiaduray = 0;
 	while (1) {
 
 		SDL_Event e;
@@ -154,18 +160,22 @@ void teklatua()
 
 			if (e.type == SDL_KEYDOWN)
 			{
-
 				switch (e.key.keysym.scancode)
 				{
 					//derecha
 				case SDL_SCANCODE_D:
-					printf("D\n");
+					D = 1;
+					abiadura = 7;
+
+
 					break;
 
 					//izquierda
 
 				case SDL_SCANCODE_A:
-					printf("A\n");
+					A = 1;
+					abiadura = -7;
+
 					break;
 
 					//abajo
@@ -183,23 +193,58 @@ void teklatua()
 					//saltar
 
 				case SDL_SCANCODE_SPACE:
-					printf("espacio\n");
+					SPACE = 1;
+					abiaduray = 7;
 					break;
 
 				}
-
-
 			}
+			if (e.type == SDL_KEYUP)
+			{
 
+				switch (e.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					D = 0;
+					abiadura = 0;
+					break;
 
+					//izquierda
 
+				case SDL_SCANCODE_A:
+					A = 0;
+					abiadura = 0;
+
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					SPACE = 0;
+					abiaduray = 0;
+					break;
+
+				}
+			}
 		}
-
-
-
+		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
+		Posx += abiadura;
+		Posy -= abiaduray;
+		Argazkia_Sartu(Pertsonaia, Posx, Posy, 150, 100);
+		SDL_Delay(50);
 	}
-
-
-
 }
 
