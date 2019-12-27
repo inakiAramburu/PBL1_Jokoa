@@ -32,7 +32,7 @@ int main(int argc, char* str[]) {
 			RenderPrestatu();
 			Irudikatu();
 			SDL_Delay(50);
-			EbentuakKonprobatu(Jokoa, Pantaila);
+			EbentuakKonprobatu(&Jokoa, &Pantaila);
 		}
 		while (Pantaila == LEHEN)
 		{

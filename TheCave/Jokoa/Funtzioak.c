@@ -8,6 +8,7 @@ typedef struct S_IMG
 {
 	SDL_Texture* textura;
 	int x;
+	SDL_Rect Dimentsioak;
 }IMG;
 
 IMG Irudiak[100];		//Irudiak, dagozkien datuekin
@@ -59,16 +60,16 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		jokalaria puntu horretara heltzen ez bada*/
 
 		case MENUA:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp");
-			//ImgKargatu(".\\media\\menu\\pergamino.bmp");
+			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 300, 150);
 			break;
 		case LEHEN:
-			ImgKargatu(".\\img\\Nivel2.bmp");
+			ImgKargatu(".\\img\\Nivel2.bmp", NULL, NULL, 0, 0);
 			break;
 	}
 }
 
-void ImgKargatu(char src[])
+void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -87,6 +88,10 @@ void ImgKargatu(char src[])
 
 	SDL_FreeSurface(surface);
 	Irudiak[IrudiZnbk].textura = texture;
+	Irudiak[IrudiZnbk].Dimentsioak.h = altuera;
+	Irudiak[IrudiZnbk].Dimentsioak.w = zabalera;
+	Irudiak[IrudiZnbk].Dimentsioak.x = x;
+	Irudiak[IrudiZnbk].Dimentsioak.y = y;
 	IrudiZnbk++;
 }
 
@@ -99,7 +104,14 @@ void RenderPrestatu()
 
 	for (i = 0; i < IrudiZnbk; i++)
 	{
-		SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		if (Irudiak[i].Dimentsioak.h == NULL)
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		}
+		else
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+		}
 	}
 }
 
@@ -108,16 +120,16 @@ void Irudikatu()
 	SDL_RenderPresent(render);
 }
 
-void Amaitu(JOKOA Jokoa, PANTAILAK Pantaila)
+void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 {
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
-	Jokoa = EZJOKATZEN;
-	Pantaila = ATERA;
+	*Jokoa = EZJOKATZEN;
+	*Pantaila = ATERA;
 	return;
 }
 
-void EbentuakKonprobatu(JOKOA Jokoa, PANTAILAK Pantaila)
+void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 {
 	SDL_Event ebentua;
 	while (SDL_PollEvent(&ebentua))
@@ -125,7 +137,7 @@ void EbentuakKonprobatu(JOKOA Jokoa, PANTAILAK Pantaila)
 		switch (ebentua.type)
 		{
 		case SDL_QUIT:
-			Amaitu(Jokoa, Pantaila);
+			Amaitu(&*Jokoa, &*Pantaila);
 			break;
 		}
 	}
