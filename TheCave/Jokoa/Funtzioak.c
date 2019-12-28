@@ -60,8 +60,12 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		jokalaria puntu horretara heltzen ez bada*/
 
 		case MENUA:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);
-			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 300, 150);
+			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 515, 300);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 515, 425);		//Zabalera, altuera, x, y
 			break;
 		case LEHEN:
 			ImgKargatu(".\\img\\Nivel2.bmp", NULL, NULL, 0, 0);
@@ -95,22 +99,28 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
-void RenderPrestatu()
+void RenderPrestatu(PANTAILAK Pantaila)
 {
 	int i;
 
 	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 	SDL_RenderClear(render);
-
-	for (i = 0; i < IrudiZnbk; i++)
+	if (Pantaila == MENUA) 
 	{
-		if (Irudiak[i].Dimentsioak.h == NULL)
+
+	}
+	else
+	{
+		for (i = 0; i < IrudiZnbk; i++)
 		{
-			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
-		}
-		else
-		{
-			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+			if (Irudiak[i].Dimentsioak.h == NULL)
+			{
+				SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+			}
+			else
+			{
+				SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+			}
 		}
 	}
 }

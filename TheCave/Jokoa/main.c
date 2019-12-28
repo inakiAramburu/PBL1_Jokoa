@@ -29,10 +29,11 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaMenua = 1;
 			}
-			RenderPrestatu();
+			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			RenderPrestatu(Pantaila);
 			Irudikatu();
 			SDL_Delay(50);
-			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			
 		}
 		while (Pantaila == LEHEN)
 		{
