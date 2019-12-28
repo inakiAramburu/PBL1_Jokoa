@@ -54,6 +54,7 @@ int LeihoaEtaRenderHasi()
 
 void KargatuIrudiak(PANTAILAK Pantaila)
 {
+	IrudiZnbk = 0;
 	switch (Pantaila)		
 	{
 		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
@@ -63,9 +64,11 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 515, 300);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 515, 425);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
+			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
+			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			break;
 		case LEHEN:
 			ImgKargatu(".\\img\\Nivel2.bmp", NULL, NULL, 0, 0);
@@ -99,29 +102,59 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
-void RenderPrestatu(PANTAILAK Pantaila)
+void RenderPrestatu()
 {
 	int i;
 
 	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 	SDL_RenderClear(render);
-	if (Pantaila == MENUA) 
+	
+	for (i = 0; i < IrudiZnbk; i++)
 	{
+		if (Irudiak[i].Dimentsioak.h == NULL)
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		}
+		else
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+		}
+	}
+}
 
+void RenderMenu()
+{
+	int i = 0, x, y;
+
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+	SDL_RenderClear(render);
+	SDL_GetMouseState(&x, &y);
+
+	SDL_RenderCopy(render, Irudiak[0].textura, NULL, NULL);
+	SDL_RenderCopy(render, Irudiak[1].textura, NULL, &Irudiak[1].Dimentsioak);
+	if ((x > 515 && y > 175) && (x < 765 && y < 275))
+	{
+		SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);
 	}
 	else
 	{
-		for (i = 0; i < IrudiZnbk; i++)
-		{
-			if (Irudiak[i].Dimentsioak.h == NULL)
-			{
-				SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
-			}
-			else
-			{
-				SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
-			}
-		}
+		SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
+	}
+	if ((x > 510 && y > 300) && (x < 760 && y < 400))
+	{
+		SDL_RenderCopy(render, Irudiak[5].textura, NULL, &Irudiak[5].Dimentsioak);
+	}
+	else
+	{
+		SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
+	}
+	if ((x > 512 && y > 425) && (x < 762 && y < 525))
+	{
+		SDL_RenderCopy(render, Irudiak[7].textura, NULL, &Irudiak[7].Dimentsioak);
+	}
+	else
+	{
+		SDL_RenderCopy(render, Irudiak[6].textura, NULL, &Irudiak[6].Dimentsioak);
 	}
 }
 
