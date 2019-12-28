@@ -30,7 +30,7 @@ int main(int argc, char* str[]) {
 				KargaMenua = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila);
-			RenderPrestatu(Pantaila);
+			RenderMenu();
 			Irudikatu();
 			SDL_Delay(50);
 			
