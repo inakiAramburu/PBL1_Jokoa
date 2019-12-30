@@ -61,7 +61,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 }
 
 //Argazkia jartzen du.
-int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -80,22 +80,25 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 		return 1;
 	}
 	//irudiaren pozizioa jarri
-	SDL_Rect neurriak;
-	int i = 0;
 
-	
-		neurriak.x = Posx;
-		neurriak.y = Posy;
-		neurriak.w = luzeera;
-		neurriak.h = altuera;
+	SDL_Rect DestNeurriak;
 
-		SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-		SDL_PollEvent(&event);
-		SDL_RenderClear(renderer);
+	DestNeurriak.x = Posx;
+	DestNeurriak.y = Posy;
+	DestNeurriak.w = 128;
+	DestNeurriak.h = 60;
 
-		SDL_RenderCopy(renderer, texture, NULL, &neurriak);
-		SDL_RenderPresent(renderer);
-		SDL_Delay(1);
+	SDL_Rect SrcNeurriak;
+
+	SrcNeurriak.x = EPosx;
+	SrcNeurriak.y = EPosy;
+	SrcNeurriak.w = 128;
+	SrcNeurriak.h = 60;
+
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderCopy(renderer, texture, &SrcNeurriak, &DestNeurriak);
+	SDL_RenderPresent(renderer);
 	
 
 	//neurriak.x = Posx;
@@ -145,7 +148,8 @@ void MusikaJarri(char Fitxategia[])
 
 void teklatua()
 {
-	char Pertsonaia[128] = ".\\media\\player\\Player\\run\\run1.bmp";
+	char Pertsonaia[128] = ".\\media\\player\\Run.bmp";
+	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
 
 	
 	int Posx = -10;
@@ -153,14 +157,17 @@ void teklatua()
 	int D = 0, SPACE = 0,A=0;
 	int abiadura = 0;
 	int abiaduray = 0;
+	int i = 0;
+	int EPosx = 0;
+	int EPosy = 0;
 	while (1) {
 
-		SDL_Event e;
-		while (SDL_PollEvent(&e) != 0) {
+		SDL_Event evento;
+		while (SDL_PollEvent(&evento) != 0) {
 
-			if (e.type == SDL_KEYDOWN)
+			if (evento.type == SDL_KEYDOWN)
 			{
-				switch (e.key.keysym.scancode)
+				switch (evento.key.keysym.scancode)
 				{
 					//derecha
 				case SDL_SCANCODE_D:
@@ -199,14 +206,17 @@ void teklatua()
 
 				}
 			}
-			if (e.type == SDL_KEYUP)
+			if (evento.type == SDL_KEYUP)
 			{
 
-				switch (e.key.keysym.scancode)
+				switch (evento.key.keysym.scancode)
 				{
 					//derecha
 				case SDL_SCANCODE_D:
 					D = 0;
+					i = 0;
+					EPosx = 0;
+					EPosy = 0;
 					abiadura = 0;
 					break;
 
@@ -243,7 +253,24 @@ void teklatua()
 		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
 		Posx += abiadura;
 		Posy -= abiaduray;
-		Argazkia_Sartu(Pertsonaia, Posx, Posy, 150, 100);
+		
+		EPosy = 0;
+		if (D==1 || A==1)
+		{
+			
+			if (i>10)
+			{
+				i = 0;
+			}
+				AtzekoPlanoBerria(Atzekoplanoa);
+
+
+				//SDL_Delay(90);
+				EPosx = (128 * i);
+
+				i++;
+		}
+		Argazkia_Sartu(Pertsonaia, Posx, Posy, EPosx, EPosy);
 		SDL_Delay(50);
 
 
