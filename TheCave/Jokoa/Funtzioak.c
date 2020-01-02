@@ -71,7 +71,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			break;
 		case LEHEN:
-			ImgKargatu(".\\img\\Nivel2.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
 			break;
 	}
 }
@@ -174,15 +174,60 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 
 void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 {
+	SAGUA klika;
 	SDL_Event ebentua;
 	while (SDL_PollEvent(&ebentua))
 	{
 		switch (ebentua.type)
 		{
-		case SDL_QUIT:
-			Amaitu(&*Jokoa, &*Pantaila);
-			break;
+			case SDL_QUIT:
+				Amaitu(&*Jokoa, &*Pantaila);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				ZeinKlikatuDa(ebentua.button, &klika);
+				if (* Pantaila == MENUA)
+					KonprobatuKlika(&*Pantaila, klika);
+				break;
 		}
 	}
 	
+}
+
+void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
+{
+	switch (ebentua.button)
+	{
+		case SDL_BUTTON_LEFT:
+			*klika = EZKER;
+			break;
+
+		case SDL_BUTTON_RIGHT:
+			*klika = ESKUIN;
+			break;
+
+		case SDL_BUTTON_MIDDLE:
+			*klika = ERDIA;
+			break;
+	}
+}
+
+void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
+{
+	int x, y;
+	if (klika == EZKER)
+	{
+		SDL_GetMouseState(&x, &y);
+		if ((x > 515 && y > 175) && (x < 765 && y < 275))
+		{
+			*Pantaila = LEHEN;
+		}
+		else if ((x > 510 && y > 300) && (x < 760 && y < 400))
+		{
+			*Pantaila = KONTROLAK;
+		}
+		else if ((x > 512 && y > 425) && (x < 762 && y < 525))
+		{
+			*Pantaila = KREDITUAK;
+		}
+	}
 }

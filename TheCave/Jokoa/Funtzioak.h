@@ -5,10 +5,11 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 
-typedef enum {MENUA, LEHEN, BIGARREN, ATERA}PANTAILAK;
+typedef enum { MENUA, LEHEN, BIGARREN, KREDITUAK, KONTROLAK, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERASO, HIL }SPRITE;
-typedef enum{HILDA, BIZIRIK}EGOERA;
-typedef enum{EZJOKATZEN, JOKATZEN}JOKOA;
+typedef enum {HILDA, BIZIRIK}EGOERA;
+typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
+typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
 
 int LeihoaEtaRenderHasi();
 void KargatuIrudiak(PANTAILAK Pantaila);
@@ -17,6 +18,8 @@ void RenderPrestatu();
 void RenderMenu();
 void Irudikatu();
 void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila);
+void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua);
+void KonprobatuKlika(PANTAILAK* Pantaila);
 
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);
 #endif
