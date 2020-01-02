@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="Funtzioak.c">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
-    <ClCompile Include="Funtzioak.c">
+    <ClCompile Include="main.c">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
   </ItemGroup>

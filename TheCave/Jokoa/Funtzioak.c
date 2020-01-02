@@ -1,5 +1,6 @@
 #include "Funtzioak.h"
 #include <SDL.h>
+#include <stdio.h>
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -60,7 +61,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 }
 
 //Argazkia jartzen du.
-int Argazkia_Sartu(char Irudia[], int Posx, int Posy)
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -82,29 +83,33 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy)
 
 	SDL_Rect DestNeurriak;
 
-	DestNeurriak.x = 640;
-	DestNeurriak.y = 360;
+	DestNeurriak.x = Posx;
+	DestNeurriak.y = Posy;
 	DestNeurriak.w = 128;
 	DestNeurriak.h = 60;
 
 	SDL_Rect SrcNeurriak;
 
-	SrcNeurriak.x = Posx;
-	SrcNeurriak.y = Posy;
+	SrcNeurriak.x = EPosx;
+	SrcNeurriak.y = EPosy;
 	SrcNeurriak.w = 128;
 	SrcNeurriak.h = 60;
 
-	SDL_FreeSurface(surface); //Aurrekoa garbitzeko
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 	SDL_PollEvent(&event);
 	SDL_RenderCopy(renderer, texture, &SrcNeurriak, &DestNeurriak);
 	SDL_RenderPresent(renderer);
+
+
+	//neurriak.x = Posx;
+
 
 	return 0;
 
 }
 
-void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) {
-	
+void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
+
 	int i;
 
 	for (i = 0; i < spritekopurua; i++)
@@ -112,5 +117,175 @@ void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int sprite
 		AtzekoPlanoBerria(Atzekoplanoa);
 		Argazkia_Sartu(Argazkia, (128 * i), 0);
 		SDL_Delay(100);
+	}
+}
+
+//musika funtzioa
+/*a medias*/
+void MusikaJarri(char Fitxategia[])
+{
+	// explicacion
+	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+
+	//inicia la parte de audio
+	SDL_Init(SDL_INIT_AUDIO);
+
+	SDL_AudioSpec wavSpec;
+	Uint32 wavLength;
+	Uint8* wavBuffer;
+
+	/*  fichategia cargatu */
+	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
+		exit(-1);
+	}
+	// abrir dependencias de audio
+
+	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+	// iniciar el sonido
+
+	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+	SDL_PauseAudioDevice(deviceId, 0);
+
+
+
+
+	// dena itxi
+
+	//SDL_CloseAudioDevice(deviceId);
+	//SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
+}
+
+void teklatua()
+{
+	char Pertsonaia[128] = ".\\media\\player\\Run.bmp";
+	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
+
+
+	int Posx = -10;
+	int Posy = 532;
+	int D = 0, SPACE = 0, A = 0;
+	int abiadura = 0;
+	int abiaduray = 0;
+	int i = 0;
+	int EPosx = 0;
+	int EPosy = 0;
+	while (1) {
+
+		SDL_Event evento;
+		while (SDL_PollEvent(&evento) != 0) {
+
+			if (evento.type == SDL_KEYDOWN)
+			{
+				switch (evento.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					D = 1;
+					abiadura = 7;
+
+
+					break;
+
+					//izquierda
+
+				case SDL_SCANCODE_A:
+					A = 1;
+					abiadura = -7;
+
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					SPACE = 1;
+					abiaduray = 7;
+					break;
+
+				}
+			}
+			if (evento.type == SDL_KEYUP)
+			{
+
+				switch (evento.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					D = 0;
+					i = 0;
+					EPosx = 0;
+					EPosy = 0;
+					abiadura = 0;
+					break;
+
+					//izquierda
+
+				case SDL_SCANCODE_A:
+					A = 0;
+					abiadura = 0;
+
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					SPACE = 0;
+					abiaduray = 0;
+					break;
+
+				}
+			}
+		}
+		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
+		Posx += abiadura;
+		Posy -= abiaduray;
+
+		EPosy = 0;
+		if (D == 1 || A == 1)
+		{
+
+			if (i > 10)
+			{
+				i = 0;
+			}
+			AtzekoPlanoBerria(Atzekoplanoa);
+
+
+			//SDL_Delay(90);
+			EPosx = (128 * i);
+
+			i++;
+		}
+		Argazkia_Sartu(Pertsonaia, Posx, Posy, EPosx, EPosy);
+		SDL_Delay(50);
+
+
+
 	}
 }
