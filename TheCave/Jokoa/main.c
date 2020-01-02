@@ -19,10 +19,9 @@ int main(int argc, char* str[]) {
 	//Sprite(Eraso, Atzekoplanoa, 300, 300, 8);
 
 	//////////////////////////////////////////////////////////////////
-	for ( i = 0; i < 10; i++)
-	{
-		Sprite(Kea, Atzekoplanoa, 200, 560, 4);
-	}
+
+	Sprite(Kea, Atzekoplanoa, 100, 560, 4);
+
 	
 
 	while (1) {
@@ -38,7 +37,7 @@ int main(int argc, char* str[]) {
 				case SDL_SCANCODE_X:
 					printf("X\n");
 					abiadura = 0;
-					Sprite(Eraso, Atzekoplanoa, 200, 560, 8);
+					Sprite(Eraso, Atzekoplanoa, 100, 560, 8);
 
 				}
 			}
@@ -55,7 +54,7 @@ int main(int argc, char* str[]) {
 				}
 			}
 		}
-		Sprite(Idle, Atzekoplanoa, 200, 560, 6);
+		Sprite(Idle, Atzekoplanoa, 100, 560, 6);
 
 	}
 	
