@@ -7,7 +7,7 @@ int main(int argc, char* str[]) {
 	char Irudia[128] = ".\\img\\sprites\\Run.bmp";	//foto Argazkiaren 
 	char Eraso[128] = ".\\img\\sprites\\Attack.bmp"; //8
 	char Idle[128] = ".\\img\\sprites\\Idle.bmp"; //6
-	char Kea[128] = "\\img\\sprites\\Humo.bmp"; //4
+	char Kea[128] = ".\\img\\sprites\\Humo.bmp"; //4
 
 	int i = 0;
 	int abiadura = 0;
