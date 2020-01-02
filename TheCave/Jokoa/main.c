@@ -37,7 +37,16 @@ int main(int argc, char* str[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
-
+			KargaMenua = 0;
+			if (!KargaLehen)
+			{
+				KargatuIrudiak(Pantaila);
+				KargaLehen = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(50);
 		}
 	}
 	return 0;
