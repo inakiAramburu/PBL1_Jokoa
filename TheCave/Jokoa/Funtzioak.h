@@ -7,4 +7,6 @@
 
 int LeihoaHasi();
 int AtzekoPlanoBerria(char AtzekoPlano[]);
+int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy);
+void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua);
 #endif

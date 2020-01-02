@@ -60,7 +60,7 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 }
 
 //Argazkia jartzen du.
-int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -68,7 +68,7 @@ int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int alt
 
 
 	//irudia kargatu
-	surface = SDL_LoadBMP(AtzekoPlanoa);
+	surface = SDL_LoadBMP(Irudia);
 	if (!surface) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
 		return 1;
@@ -80,56 +80,37 @@ int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int alt
 	}
 	//irudiaren pozizioa jarri
 
-	SDL_Rect neurriak;
+	SDL_Rect DestNeurriak;
 
-	neurriak.x = Posx;
-	neurriak.y = Posy;
-	neurriak.w = luzeera;
-	neurriak.h = altuera;
+	DestNeurriak.x = 640;
+	DestNeurriak.y = 360;
+	DestNeurriak.w = 128;
+	DestNeurriak.h = 60;
 
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_Rect SrcNeurriak;
+
+	SrcNeurriak.x = Posx;
+	SrcNeurriak.y = Posy;
+	SrcNeurriak.w = 128;
+	SrcNeurriak.h = 60;
+
+	SDL_FreeSurface(surface); //Aurrekoa garbitzeko
 	SDL_PollEvent(&event);
-	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
+	SDL_RenderCopy(renderer, texture, &SrcNeurriak, &DestNeurriak);
 	SDL_RenderPresent(renderer);
 
 	return 0;
 
 }
 
-//musika funtzioa
-/*a medias*/
-void MusikaJarri(char Fitxategia[])
-{
-	// explicacion
-	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) {
+	
+	int i;
 
-	//inicia la parte de audio
-	SDL_Init(SDL_INIT_AUDIO);
-
-	SDL_AudioSpec wavSpec;
-	Uint32 wavLength;
-	Uint8* wavBuffer;
-
-	/*  fichategia cargatu */
-	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
-		exit(-1);
+	for (i = 0; i < spritekopurua; i++)
+	{
+		AtzekoPlanoBerria(Atzekoplanoa);
+		Argazkia_Sartu(Argazkia, (128 * i), 0);
+		SDL_Delay(100);
 	}
-	// abrir dependencias de audio
-
-	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
-
-	// iniciar el sonido
-
-	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-	SDL_PauseAudioDevice(deviceId, 0);
-
-
-
-
-	// dena itxi
-
-	//SDL_CloseAudioDevice(deviceId);
-	//SDL_FreeWAV(wavBuffer);
-	//SDL_Quit();
 }
