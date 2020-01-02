@@ -1,9 +1,10 @@
 #include "Funtzioak.h"
 #include <SDL.h>
+#include <stdio.h>
 
 SDL_Window* window;
 SDL_Renderer* renderer;
-//leihoa hasten du
+
 int LeihoaHasi()
 {
 	// Initialize SDL2
@@ -28,6 +29,7 @@ int LeihoaHasi()
 	}
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
+
 //Fondoa jartzen du.
 int AtzekoPlanoBerria(char AtzekoPlanoa[])
 {
@@ -57,8 +59,9 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 	return 0;
 }
+
 //Argazkia jartzen du.
-int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -78,21 +81,33 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera)
 	}
 	//irudiaren pozizioa jarri
 
-	SDL_Rect neurriak;
+	SDL_Rect DestNeurriak;
 
-	neurriak.x = Posx;
-	neurriak.y = Posy;
-	neurriak.w = luzeera;
-	neurriak.h = altuera;
+	DestNeurriak.x = Posx;
+	DestNeurriak.y = Posy;
+	DestNeurriak.w = 128;
+	DestNeurriak.h = 60;
+
+	SDL_Rect SrcNeurriak;
+
+	SrcNeurriak.x = EPosx;
+	SrcNeurriak.y = EPosy;
+	SrcNeurriak.w = 128;
+	SrcNeurriak.h = 60;
 
 	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
 	SDL_PollEvent(&event);
-	SDL_RenderCopy(renderer, texture, NULL, &neurriak);
+	SDL_RenderCopy(renderer, texture, &SrcNeurriak, &DestNeurriak);
 	SDL_RenderPresent(renderer);
+
+
+	//neurriak.x = Posx;
+
 
 	return 0;
 
 }
+
 //musika funtzioa
 /*a medias*/
 void MusikaJarri(char Fitxategia[])
@@ -130,7 +145,150 @@ void MusikaJarri(char Fitxategia[])
 	//SDL_FreeWAV(wavBuffer);
 	//SDL_Quit();
 }
-int mapeoa(int x0, int y0, int x1, int y1) {
-   
-}
 
+void teklatua()
+{
+	char PertsonaiaDerecha[128] = ".\\media\\player\\Run.bmp";
+	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";	//Argazkiaren helbidea
+
+
+	int Posx = -10;
+	int Posy = 542;
+	int D = 0, SPACE = 0, A = 0;
+	int abiadura = 0;
+	int abiaduray = 0;
+	int i = 0;
+	int EPosx = 0;
+	int EPosy = 0;
+	while (1) {
+
+		SDL_Event evento;
+		while (SDL_PollEvent(&evento) != 0) {
+
+			if (evento.type == SDL_KEYDOWN)
+			{
+				switch (evento.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					D = 1;
+					abiadura = 7;
+
+
+					break;
+
+					//izquierda
+
+				case SDL_SCANCODE_A:
+					A = 1;
+					abiadura = -7;
+
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					SPACE = 1;
+					abiaduray = 7;
+					break;
+
+				}
+			}
+			if (evento.type == SDL_KEYUP)
+			{
+
+				switch (evento.key.keysym.scancode)
+				{
+					//derecha
+				case SDL_SCANCODE_D:
+					D = 0;
+					i = 0;
+					EPosx=0;
+					EPosy=0;
+					abiadura = 0;
+					break;
+
+					//izquierda
+
+				case SDL_SCANCODE_A:
+					A = 0;
+					abiadura = 0;
+
+					break;
+
+					//abajo
+
+				case SDL_SCANCODE_S:
+					printf("S\n");
+					break;
+
+					//arriba
+
+				case SDL_SCANCODE_W:
+					printf("W\n");
+					break;
+
+					//saltar
+
+				case SDL_SCANCODE_SPACE:
+					SPACE = 0;
+					abiaduray = 0;
+					break;
+
+				}
+			}
+		}
+		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
+		Posx += abiadura;
+		Posy -= abiaduray;
+
+		EPosy = 0;
+		Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+		if (D == 1||A==1)
+		{
+			if (D == 1, D != i,i++) {
+				
+				if (i > 10)
+				{
+					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+					i = 1;
+					
+				}
+				AtzekoPlanoBerria(Atzekoplanoa);
+				//SDL_Delay(90);
+				
+				EPosx = (128 * i);
+				i++;
+				
+				
+			}
+			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+			SDL_Delay(50);
+			if (A == 1) {
+				if (i > 10)
+				{
+					i = 0;
+					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+				}
+				AtzekoPlanoBerria(Atzekoplanoa);
+				//SDL_Delay(90);
+				EPosx = (128 * i);
+				i++;
+			}
+
+		}
+		
+	}
+}

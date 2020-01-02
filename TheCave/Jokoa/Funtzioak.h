@@ -6,9 +6,10 @@
 #define PANTAILA_ZABALERA 1280
 //
 int LeihoaHasi();
-int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int luzeera, int altuera);
+int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy);
 int AtzekoPlanoBerria(char AtzekoPlanoa[]);
 void MusikaJarri(char Fitxategia[]);
-int mapeoa(int x0, int y0, int x1, int y1);
 
+void teklatua();
 #endif
+
