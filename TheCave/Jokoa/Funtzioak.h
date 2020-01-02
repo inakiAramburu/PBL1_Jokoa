@@ -8,7 +8,7 @@
 int LeihoaHasi();
 int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy);
 int AtzekoPlanoBerria(char AtzekoPlanoa[]);
+void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua);
 void MusikaJarri(char Fitxategia[]);
-
 void teklatua();
 #endif

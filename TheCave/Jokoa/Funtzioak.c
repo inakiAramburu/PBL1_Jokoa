@@ -108,6 +108,7 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 
 }
 
+
 void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
 
 	int i;
@@ -115,7 +116,7 @@ void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int sprite
 	for (i = 0; i < spritekopurua; i++)
 	{
 		AtzekoPlanoBerria(Atzekoplanoa);
-		Argazkia_Sartu(Argazkia, (128 * i), 0);
+		Argazkia_Sartu(Argazkia, PosX, PosY, (128 * i), 0);
 		SDL_Delay(100);
 	}
 }
@@ -258,7 +259,6 @@ void teklatua()
 					SPACE = 0;
 					abiaduray = 0;
 					break;
-
 				}
 			}
 		}
