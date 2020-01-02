@@ -149,6 +149,7 @@ void MusikaJarri(char Fitxategia[])
 void teklatua()
 {
 	char PertsonaiaDerecha[128] = ".\\media\\player\\Run.bmp";
+	char PertsonaiaIzquierda[128] = ".\\media\\player\\Run2.bmp";
 	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";	//Argazkiaren helbidea
 
 
@@ -255,40 +256,53 @@ void teklatua()
 		Posy -= abiaduray;
 
 		EPosy = 0;
-		Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
-		if (D == 1||A==1)
-		{
-			if (D == 1, D != i,i++) {
-				
-				if (i > 10)
+		if (D == 0) {
+			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+		}
+
+		else if (A == 0 && D == 0) {
+			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+		}
+		if (A==0){ Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy); }
+		else if (D == 0 && A == 0) {
+			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+		}
+		
+		 if (D == 1||A==0) {
+				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+				if (i >= 10)
 				{
-					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
 					i = 1;
+					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
 					
 				}
 				AtzekoPlanoBerria(Atzekoplanoa);
-				//SDL_Delay(90);
+				
 				
 				EPosx = (128 * i);
 				i++;
-				
-				
+				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, (128 * i), EPosy);
+				SDL_Delay(50);
+		}	
+		
+		else if (A == 1||D==0) {
+			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+			if (i > 10)
+			{
+				i = 0;
+				Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, (128 * i), EPosy);
 			}
-			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+			AtzekoPlanoBerria(Atzekoplanoa);
+			//SDL_Delay(90);
+			EPosx = (128 * i);
+			i++;
+			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, (128 * i), EPosy);
 			SDL_Delay(50);
-			if (A == 1) {
-				if (i > 10)
-				{
-					i = 0;
-					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
-				}
-				AtzekoPlanoBerria(Atzekoplanoa);
-				//SDL_Delay(90);
-				EPosx = (128 * i);
-				i++;
-			}
-
 		}
+		
+			
+	
+
 		
 	}
 }
