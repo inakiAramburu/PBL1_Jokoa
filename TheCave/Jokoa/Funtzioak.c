@@ -29,6 +29,7 @@ int LeihoaHasi()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
+
 //Argazkia jartzen du.
 int Argazkia_Sartu(char AtzekoPlanoa[], int Posx, int Posy, int luzeera, int altuera)
 {
@@ -99,6 +100,38 @@ int AtzekoPlanoBerria(char AtzekoPlanoa[])
 
 }
 
+int AtzekoPlanoBerria2(char AtzekoPlanoa[])
+{
+
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+	SDL_Event event;
+
+
+	//irudia kargatu
+	surface = SDL_LoadBMP(AtzekoPlanoa);
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
+	SDL_PollEvent(&event);
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
+	SDL_Delay(1000);
+
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+	return 0;
+
+}
 //musika funtzioa
 /*a medias*/
 void MusikaJarri(char Fitxategia[])
