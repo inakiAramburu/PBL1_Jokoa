@@ -47,7 +47,7 @@ int LeihoaEtaRenderHasi()
 		return 1;
 	}
 
-	SDL_Surface* ikonoa = SDL_LoadBMP(".\\media\\ekaputo.bmp");
+	SDL_Surface* ikonoa = SDL_LoadBMP(".\\media\\Ikonoa.bmp");
 	SDL_SetWindowIcon(leihoa, ikonoa);
 	SDL_FreeSurface(ikonoa);
 
