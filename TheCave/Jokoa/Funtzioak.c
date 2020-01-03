@@ -278,3 +278,24 @@ void teklatua()
 	}
 }
 
+void saltoa()
+{
+	char Pertsonaia[128] = ".\\media\\player\\Run2.bmp";
+
+	float t = 0, v = 8, g = 20;
+	int Posx = -10;
+	int Posy = 532;
+	int i;
+
+
+	for (i = 0; i < 1000; i++)
+	{
+		t += 0.05;
+
+		Posx = Posx + (v * cos(-1, 5)) * t;
+		Posy = Posy + (v * sin(-1, 5) * t + g * pow(t, 2) / 2);
+
+		Argazkia_Sartu(Pertsonaia, Posx, Posy, 0, 0);
+
+	}
+}
