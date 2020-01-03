@@ -150,12 +150,13 @@ void teklatua()
 {
 	char PertsonaiaDerecha[128] = ".\\media\\player\\Run.bmp";
 	char PertsonaiaIzquierda[128] = ".\\media\\player\\Run2.bmp";
+	char PertsonaiaAtaque [128]= ".\\media\\player\\Attack.bmp";
 	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";	//Argazkiaren helbidea
 
 
 	int Posx = -10;
-	int Posy = 542;
-	int D = 0, SPACE = 0, A = 0;
+	int Posy = 545;
+	int D = 0, SPACE = 0, A = 0, X=0;
 	int abiadura = 0;
 	int abiaduray = 0;
 	int i = 0;
@@ -174,10 +175,12 @@ void teklatua()
 				case SDL_SCANCODE_D:
 					D = 1;
 					abiadura = 7;
-
-
 					break;
-
+					//ataque
+				case SDL_SCANCODE_X:
+					X = 1;
+					abiadura = 0;
+					break;
 					//izquierda
 
 				case SDL_SCANCODE_A:
@@ -220,11 +223,19 @@ void teklatua()
 					EPosy=0;
 					abiadura = 0;
 					break;
+					//ataque
+				case SDL_SCANCODE_X:
+					X = 0;
+					abiadura = 0;
+					break;
 
 					//izquierda
 
 				case SDL_SCANCODE_A:
 					A = 0;
+					i = 0;
+					EPosx = 0;
+					EPosy = 0;
 					abiadura = 0;
 
 					break;
@@ -251,58 +262,54 @@ void teklatua()
 				}
 			}
 		}
-		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
+		printf("D %d SPACE %d A: %d X: %d\n", D, SPACE, A, X);
 		Posx += abiadura;
 		Posy -= abiaduray;
 
 		EPosy = 0;
-		if (D == 0) {
-			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
-		}
-
-		else if (A == 0 && D == 0) {
-			Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
-		}
-		if (A==0){ Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy); }
-		else if (D == 0 && A == 0) {
-			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
-		}
 		
-		 if (D == 1||A==0) {
+		if (D == 0) {
+			if (A == 1) {
+				Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+			}
+			else if(D==1) {
+				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
+			}
+		}
+		 if (D == 1|| A==0) {
+			 
 				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
 				if (i >= 10)
-				{
-					i = 1;
+				{	i = 0;
 					Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
-					
 				}
-				AtzekoPlanoBerria(Atzekoplanoa);
-				
-				
+				AtzekoPlanoBerria(Atzekoplanoa);		
 				EPosx = (128 * i);
 				i++;
-				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, (128 * i), EPosy);
+				Argazkia_Sartu(PertsonaiaDerecha, Posx, Posy, EPosx, EPosy);
 				SDL_Delay(50);
 		}	
-		
-		else if (A == 1||D==0) {
-			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
-			if (i > 10)
-			{
-				i = 0;
-				Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, (128 * i), EPosy);
-			}
-			AtzekoPlanoBerria(Atzekoplanoa);
-			//SDL_Delay(90);
-			EPosx = (128 * i);
-			i++;
-			Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, (128 * i), EPosy);
-			SDL_Delay(50);
-		}
-		
-			
-	
-
+		else if (A== 1 || D == 0) {
+			 Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+			 if (i > 10)
+			 {
+				 i = 0;
+				 Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+			 }
+			 AtzekoPlanoBerria(Atzekoplanoa);
+			 //SDL_Delay(90);
+			 EPosx = (128 * i);
+			 i++;
+			 Argazkia_Sartu(PertsonaiaIzquierda, Posx, Posy, EPosx, EPosy);
+			 SDL_Delay(50);
+		 }
+		 if (X == 1) {
+			 
+			 Argazkia_Sartu(PertsonaiaAtaque, Posx, Posy, 128 * i, EPosy);
+			 AtzekoPlanoBerria(Atzekoplanoa);
+			 Argazkia_Sartu(PertsonaiaAtaque, Posx, Posy, 128 * i, EPosy);
+			 SDL_Delay(50);
+		 }
 		
 	}
 }
