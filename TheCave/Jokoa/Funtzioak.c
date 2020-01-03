@@ -305,24 +305,24 @@ void Animazioa()
 
 void KargatuPertsonaia()
 {
-	int i = 0;
-	JokalariaKargatu(".\\media\\player\\Idle.bmp", i);
-	spriteak[i].kop = 6;
-	i++;
-	JokalariaKargatu(".\\media\\player\\Run.bmp", i);
-	spriteak[i].kop = 6;
-	i++;
-	JokalariaKargatu(".\\media\\player\\Salto.bmp", i);
-	spriteak[i].kop = 6;
-	i++;
-	JokalariaKargatu(".\\media\\player\\Attack.bmp", i);
-	spriteak[i].kop = 6;
-	i++;
-	JokalariaKargatu(".\\media\\player\\Dead.bmp", i);
-	spriteak[i].kop = 6;
-	i++;
-	JokalariaKargatu(".\\media\\player\\Humo.bmp", i);
-	spriteak[i].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Idle.bmp", 0);
+	spriteak[0].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Run.bmp", 1);
+	spriteak[1].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
+	spriteak[2].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Attack.bmp", 3);
+	spriteak[3].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Dead.bmp", 4);
+	spriteak[4].kop = 6;
+	
+	JokalariaKargatu(".\\media\\player\\Humo.bmp", 5);
+	spriteak[5].kop = 6;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
