@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//dev, argazkien eta atzekoplanoen egitura)
+//Master, argazkien eta atzekoplanoen egitura
 
 int main(int argc, char* str[]) {
 
