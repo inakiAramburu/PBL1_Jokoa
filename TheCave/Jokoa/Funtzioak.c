@@ -255,9 +255,7 @@ void teklatua()
 		Posy -= abiaduray;
 		
 		EPosy = 0;
-		if (D==1 || A==1)
-		{
-			
+		
 			if (i>10)
 			{
 				i = 0;
@@ -269,7 +267,7 @@ void teklatua()
 				EPosx = (128 * i);
 
 				i++;
-		}
+		
 		Argazkia_Sartu(Pertsonaia, Posx, Posy, EPosx, EPosy);
 		SDL_Delay(50);
 
