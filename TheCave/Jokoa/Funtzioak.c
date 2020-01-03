@@ -301,6 +301,7 @@ void Animazioa()
 		Irudikatu();
 		SDL_Delay(100);
 	}
+
 }
 
 void KargatuPertsonaia()
