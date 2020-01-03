@@ -7,18 +7,22 @@ SDL_Window* leihoa;
 typedef struct S_IMG
 {
 	SDL_Texture* textura;
-	int x;
 	SDL_Rect Dimentsioak;
 }IMG;
+
+typedef struct S_IMGPERTSONAI
+{
+	SDL_Texture* textura;
+}IMGPERTSONAI;
+
+IMGPERTSONAI spriteak[6];
 
 IMG Irudiak[100];		//Irudiak, dagozkien datuekin
 int IrudiZnbk = 0;		//Irudi kopurua, hasieran 0
 
 typedef struct S_PERTSONAIA
 {
-	int x;
-	int y;
-	EGOERA egoera;
+	SDL_Rect SrcSprite, DestSprite;
 	SPRITE sprite;
 }PERTSONAIA;
 
@@ -234,7 +238,8 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 				SDL_GetMouseState(&x, &y);
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
-					*Pantaila = LEHEN;
+					KargatuPertsonaia();
+					Animazioa();
 				}
 				else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 				{
@@ -268,5 +273,66 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 				}
 			}
 			break;
+	}
+}
+
+void Animazioa()
+{
+	pertsonaia.sprite = KEA;
+	pertsonaia.DestSprite.x = -10;
+	pertsonaia.DestSprite.y = 532;
+	SpriteaJarri(pertsonaia.sprite);
+}
+
+void KargatuPertsonaia()
+{
+	spriteak[0].textura = JokalariaKargatu(".\\media\\player\\Idle.bmp");
+	spriteak[1].textura = JokalariaKargatu(".\\media\\player\\Run.bmp");
+	spriteak[2].textura = JokalariaKargatu(".\\media\\player\\Salto.bmp");
+	spriteak[3].textura = JokalariaKargatu(".\\media\\player\\Attack.bmp");
+	spriteak[4].textura = JokalariaKargatu(".\\media\\player\\Dead.bmp");
+	spriteak[5].textura = JokalariaKargatu(".\\media\\player\\Humo.bmp");
+}
+
+int JokalariaKargatu(char Irudia[])
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
+	surface = SDL_LoadBMP(Irudia);
+
+	if (!surface)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+	SDL_FreeSurface(surface);
+	return texture;
+}
+
+void SpriteaJarri(SPRITE sprite)
+{
+	switch (sprite)
+	{
+	case KEA:
+
+		break;
+	case IDLE:
+		break;
+	case KORRIKA:
+		break;
+	case SALTO:
+		break;
+	case ERASO:
+		break;
+	case HIL:
+		break;
 	}
 }
