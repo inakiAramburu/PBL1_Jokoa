@@ -10,6 +10,8 @@ int main(int argc, char* str[]) {
 	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int KargaLehen = 0;		//""
 	int KargaBigarren = 0;		//""
+	int KargaKredituak = 0;		//""
+	int KargaKontrolak = 0;		//""
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -24,6 +26,8 @@ int main(int argc, char* str[]) {
 	{
 		while (Pantaila == MENUA)
 		{
+			KargaKredituak = 0;
+			KargaKontrolak = 0;
 			if (!KargaMenua)
 			{
 				KargatuIrudiak(Pantaila);
@@ -34,6 +38,32 @@ int main(int argc, char* str[]) {
 			Irudikatu();
 			SDL_Delay(50);
 			
+		}
+		while (Pantaila == KREDITUAK)
+		{
+			KargaMenua = 0;
+			if (!KargaKredituak)
+			{
+				KargatuIrudiak(Pantaila);
+				KargaKredituak = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(50);
+		}
+		while (Pantaila == KONTROLAK)
+		{
+			KargaMenua = 0;
+			if (!KargaKredituak)
+			{
+				KargatuIrudiak(Pantaila);
+				KargaKontrolak = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(50);
 		}
 		while (Pantaila == LEHEN)
 		{
