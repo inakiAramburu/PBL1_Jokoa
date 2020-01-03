@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz, argazkien eta atzekoplanoen egitura (bukatu gabe, oraindik irudien posizioak falta eta nola irudiak kargatu eta deskargatuko diren)
+//dev, argazkien eta atzekoplanoen egitura)
 
 int main(int argc, char* str[]) {
 
