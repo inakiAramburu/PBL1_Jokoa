@@ -17,10 +17,10 @@ void RenderPrestatu();
 void RenderMenu();
 void Irudikatu();
 void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila);
-void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua);
-void KonprobatuKlika(PANTAILAK* Pantaila);
+void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);
+void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);
 void Animazioa();
 void KargatuPertsonaia();
-int JokalariaKargatu(char Irudia[]);
+void JokalariaKargatu(char Irudia[], int i);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);
 #endif

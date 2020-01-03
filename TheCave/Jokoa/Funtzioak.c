@@ -10,15 +10,16 @@ typedef struct S_IMG
 	SDL_Rect Dimentsioak;
 }IMG;
 
-typedef struct S_IMGPERTSONAI
+IMG Irudiak[100];		//Irudiak, dagozkien datuekin
+int IrudiZnbk;
+
+typedef struct S_IMGPERTSONAIA
 {
 	SDL_Texture* textura;
-}IMGPERTSONAI;
+	int kop;
+}IMGPERTSONAIA;
 
-IMGPERTSONAI spriteak[6];
-
-IMG Irudiak[100];		//Irudiak, dagozkien datuekin
-int IrudiZnbk = 0;		//Irudi kopurua, hasieran 0
+IMGPERTSONAIA spriteak[6];
 
 typedef struct S_PERTSONAIA
 {
@@ -137,6 +138,7 @@ void RenderPrestatu()
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
 		}
 	}
+	SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
 }
 
 void RenderMenu()
@@ -238,6 +240,9 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 				SDL_GetMouseState(&x, &y);
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
+					IrudiZnbk = 1;
+					RenderPrestatu();
+					Irudikatu();
 					KargatuPertsonaia();
 					Animazioa();
 				}
@@ -278,23 +283,49 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 
 void Animazioa()
 {
+	SDL_Delay(500);
+	int i;
+	IrudiZnbk = 1;
 	pertsonaia.sprite = KEA;
-	pertsonaia.DestSprite.x = -10;
+	pertsonaia.DestSprite.x = 10;
 	pertsonaia.DestSprite.y = 532;
-	SpriteaJarri(pertsonaia.sprite);
+	pertsonaia.DestSprite.h = 60;
+	pertsonaia.DestSprite.w = 128;
+	pertsonaia.SrcSprite.h = 60;
+	pertsonaia.SrcSprite.w = 128;
+	pertsonaia.SrcSprite.y = 0;
+	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	{
+		pertsonaia.SrcSprite.x = 128 * i;
+		RenderPrestatu();
+		Irudikatu();
+		SDL_Delay(100);
+	}
 }
 
 void KargatuPertsonaia()
 {
-	spriteak[0].textura = JokalariaKargatu(".\\media\\player\\Idle.bmp");
-	spriteak[1].textura = JokalariaKargatu(".\\media\\player\\Run.bmp");
-	spriteak[2].textura = JokalariaKargatu(".\\media\\player\\Salto.bmp");
-	spriteak[3].textura = JokalariaKargatu(".\\media\\player\\Attack.bmp");
-	spriteak[4].textura = JokalariaKargatu(".\\media\\player\\Dead.bmp");
-	spriteak[5].textura = JokalariaKargatu(".\\media\\player\\Humo.bmp");
+	int i = 0;
+	JokalariaKargatu(".\\media\\player\\Idle.bmp", i);
+	spriteak[i].kop = 6;
+	i++;
+	JokalariaKargatu(".\\media\\player\\Run.bmp", i);
+	spriteak[i].kop = 6;
+	i++;
+	JokalariaKargatu(".\\media\\player\\Salto.bmp", i);
+	spriteak[i].kop = 6;
+	i++;
+	JokalariaKargatu(".\\media\\player\\Attack.bmp", i);
+	spriteak[i].kop = 6;
+	i++;
+	JokalariaKargatu(".\\media\\player\\Dead.bmp", i);
+	spriteak[i].kop = 6;
+	i++;
+	JokalariaKargatu(".\\media\\player\\Humo.bmp", i);
+	spriteak[i].kop = 6;
 }
 
-int JokalariaKargatu(char Irudia[])
+void JokalariaKargatu(char Irudia[], int i)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
@@ -314,25 +345,5 @@ int JokalariaKargatu(char Irudia[])
 		return;
 	}
 	SDL_FreeSurface(surface);
-	return texture;
-}
-
-void SpriteaJarri(SPRITE sprite)
-{
-	switch (sprite)
-	{
-	case KEA:
-
-		break;
-	case IDLE:
-		break;
-	case KORRIKA:
-		break;
-	case SALTO:
-		break;
-	case ERASO:
-		break;
-	case HIL:
-		break;
-	}
+	spriteak[i].textura = texture;
 }

@@ -55,7 +55,7 @@ int main(int argc, char* str[]) {
 		while (Pantaila == KONTROLAK)
 		{
 			KargaMenua = 0;
-			if (!KargaKredituak)
+			if (!KargaKontrolak)
 			{
 				KargatuIrudiak(Pantaila);
 				KargaKontrolak = 1;
