@@ -289,8 +289,9 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 
 void Animazioa()
 {
-	SDL_Delay(500);
 	int i;
+
+	SDL_Delay(500);
 	IrudiZnbk = 1;
 	pertsonaia.sprite = KEA;
 	pertsonaia.DestSprite.x = 10;
