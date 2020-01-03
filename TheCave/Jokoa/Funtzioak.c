@@ -47,6 +47,11 @@ int LeihoaEtaRenderHasi()
 		return 1;
 	}
 
+	SDL_Surface* ikonoa = SDL_LoadBMP(".\\media\\ekaputo.bmp");
+	SDL_SetWindowIcon(leihoa, ikonoa);
+	SDL_FreeSurface(ikonoa);
+
+
 	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);		//Renderizatua hasi
 
 	return 0;
@@ -71,7 +76,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			break;
 		case LEHEN:
-			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);
 			break;
 	}
 }
