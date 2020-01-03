@@ -64,6 +64,12 @@ int LeihoaEtaRenderHasi()
 
 void KargatuIrudiak(PANTAILAK Pantaila)
 {
+	int i;
+	for (i = 0; i < IrudiZnbk; i++)
+	{
+		SDL_DestroyTexture(Irudiak[i].textura);
+	}
+
 	IrudiZnbk = 0;
 	switch (Pantaila)		
 	{
@@ -303,7 +309,14 @@ void Animazioa()
 		Irudikatu();
 		SDL_Delay(100);
 	}
-
+	pertsonaia.sprite = IDLE;
+	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	{
+		pertsonaia.SrcSprite.x = 128 * i;
+		RenderPrestatu();
+		Irudikatu();
+		SDL_Delay(150);
+	}
 }
 
 void KargatuPertsonaia()
