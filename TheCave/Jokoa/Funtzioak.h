@@ -23,4 +23,6 @@ void Animazioa();
 void KargatuPertsonaia();
 void JokalariaKargatu(char Irudia[], int i);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);
+void MusikaJarri(char Fitxategia[]);
+
 #endif
