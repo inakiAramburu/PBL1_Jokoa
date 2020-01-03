@@ -75,6 +75,14 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			break;
+		case KREDITUAK:
+			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\KredituakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+			break;
+		case KONTROLAK:
+			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+			break;
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);
 			break;
@@ -190,8 +198,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 				break;
 			case SDL_MOUSEBUTTONUP:
 				ZeinKlikatuDa(ebentua.button, &klika);
-				if (* Pantaila == MENUA)
-					KonprobatuKlika(&*Pantaila, klika);
+				KonprobatuKlika(&*Pantaila, klika);
 				break;
 		}
 	}
@@ -219,20 +226,47 @@ void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
 void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 {
 	int x, y;
-	if (klika == EZKER)
+	switch (*Pantaila)
 	{
-		SDL_GetMouseState(&x, &y);
-		if ((x > 515 && y > 175) && (x < 765 && y < 275))
-		{
-			*Pantaila = LEHEN;
-		}
-		else if ((x > 510 && y > 300) && (x < 760 && y < 400))
-		{
-			*Pantaila = KONTROLAK;
-		}
-		else if ((x > 512 && y > 425) && (x < 762 && y < 525))
-		{
-			*Pantaila = KREDITUAK;
-		}
+		case MENUA:
+			if (klika == EZKER)
+			{
+				SDL_GetMouseState(&x, &y);
+				if ((x > 515 && y > 175) && (x < 765 && y < 275))
+				{
+					*Pantaila = LEHEN;
+				}
+				else if ((x > 510 && y > 300) && (x < 760 && y < 400))
+				{
+					*Pantaila = KONTROLAK;
+				}
+				else if ((x > 512 && y > 425) && (x < 762 && y < 525))
+				{
+					*Pantaila = KREDITUAK;
+				}
+			}
+			break;
+
+		case KREDITUAK:
+			if (klika == EZKER)
+			{
+				SDL_GetMouseState(&x, &y);
+				if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+				{
+					*Pantaila = MENUA;
+				}
+			}
+			break;
+
+		case KONTROLAK:
+			if (klika == EZKER)
+			{
+				SDL_GetMouseState(&x, &y);
+				if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+				{
+					*Pantaila = MENUA;
+				}
+			}
+			break;
 	}
 }
