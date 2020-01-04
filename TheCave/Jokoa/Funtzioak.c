@@ -4,27 +4,28 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 
-typedef struct S_IMG
+typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
 {
 	SDL_Texture* textura;
 	SDL_Rect Dimentsioak;
 }IMG;
 
-IMG Irudiak[100];		//Irudiak, dagozkien datuekin
+IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 int IrudiZnbk;
 
-typedef struct S_IMGPERTSONAIA
+typedef struct S_IMGPERTSONAIA		//Pertsonaiaren irudiak banaturik, beti kargatuta egongo direlako Jokatu sakatzen denetik
 {
 	SDL_Texture* textura;
 	int kop;
 }IMGPERTSONAIA;
 
-IMGPERTSONAIA spriteak[6];
+IMGPERTSONAIA spriteak[6];		
 
-typedef struct S_PERTSONAIA
+typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
 	SDL_Rect SrcSprite, DestSprite;
 	SPRITE sprite;
+	EGOERA egoera;
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
@@ -56,21 +57,26 @@ int LeihoaEtaRenderHasi()
 	SDL_SetWindowIcon(leihoa, ikonoa);
 	SDL_FreeSurface(ikonoa);
 
-
 	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);		//Renderizatua hasi
 
 	return 0;
 }
 
-void KargatuIrudiak(PANTAILAK Pantaila)
+int IrudiakKendu(int ZnbtUtzi)
 {
-	int i;
-	for (i = 0; i < IrudiZnbk; i++)
+	int i = IrudiZnbk - 1;
+
+	while (i >= ZnbtUtzi)
 	{
 		SDL_DestroyTexture(Irudiak[i].textura);
+		i--;
 	}
+	return i + 1;
+}
 
-	IrudiZnbk = 0;
+void KargatuIrudiak(PANTAILAK Pantaila)
+{
+	IrudiZnbk = IrudiakKendu(0);
 	switch (Pantaila)		
 	{
 		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
@@ -85,6 +91,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
+			pertsonaia.egoera = HILDA;
 			break;
 		case KREDITUAK:
 			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
@@ -144,7 +151,11 @@ void RenderPrestatu()
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
 		}
 	}
-	SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+	if (pertsonaia.egoera == BIZIRIK)
+	{
+		SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+	}
+	
 }
 
 void RenderMenu()
@@ -181,6 +192,7 @@ void RenderMenu()
 	{
 		SDL_RenderCopy(render, Irudiak[6].textura, NULL, &Irudiak[6].Dimentsioak);
 	}
+	
 }
 
 void Irudikatu()
@@ -287,59 +299,6 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 	}
 }
 
-void Animazioa()
-{
-	int i, j;
-
-	SDL_Delay(500);
-	IrudiZnbk = 1;
-	pertsonaia.sprite = KEA;
-	pertsonaia.DestSprite.x = 10;
-	pertsonaia.DestSprite.y = 555;
-	pertsonaia.DestSprite.h = 60;
-	pertsonaia.DestSprite.w = 128;
-	pertsonaia.SrcSprite.h = 60;
-	pertsonaia.SrcSprite.w = 128;
-	pertsonaia.SrcSprite.y = 0;
-	char Fitxategia[128] = ".\\media\\sound\\Kea.wav";
-	MusikaJarri(Fitxategia);
-	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
-	{
-		SDL_Delay(100);
-		pertsonaia.SrcSprite.x = 128 * i;
-		RenderPrestatu();
-		Irudikatu();
-	}
-	pertsonaia.sprite = IDLE;
-	for (j = 0; j < 2; j++)
-	{
-		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
-		{
-			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu();
-			Irudikatu();
-			SDL_Delay(150);
-		}
-	}
-	pertsonaia.sprite = KORRIKA;
-	for (j = 0; j < 22; j++)
-	{
-		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
-		{
-			pertsonaia.SrcSprite.x = 128 * i;
-			pertsonaia.DestSprite.x += 8;
-			RenderPrestatu();
-			Irudikatu();
-			SDL_Delay(80);
-		}
-	}
-	pertsonaia.sprite = IDLE;
-	RenderPrestatu();
-	Irudikatu();
-	SDL_Delay(500);
-
-}
-
 void KargatuPertsonaia()
 {
 	
@@ -419,4 +378,62 @@ void MusikaJarri(char Fitxategia[])
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
 	//SDL_Quit();
+}
+
+void Animazioa()
+{
+	int i, j;
+
+	SDL_Delay(500);
+	IrudiZnbk = IrudiakKendu(1);
+	pertsonaia.egoera = BIZIRIK;
+	pertsonaia.sprite = KEA;
+	pertsonaia.DestSprite.x = 10;
+	pertsonaia.DestSprite.y = 555;
+	pertsonaia.DestSprite.h = 60;
+	pertsonaia.DestSprite.w = 128;
+	pertsonaia.SrcSprite.h = 60;
+	pertsonaia.SrcSprite.w = 128;
+	pertsonaia.SrcSprite.y = 0;
+	char Fitxategia[128] = ".\\media\\sound\\Kea.wav";
+	MusikaJarri(Fitxategia);
+	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	{
+		SDL_Delay(100);
+		pertsonaia.SrcSprite.x = 128 * i;
+		RenderPrestatu();
+		Irudikatu();
+	}
+	pertsonaia.sprite = IDLE;
+	for (j = 0; j < 2; j++)
+	{
+		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+		{
+			pertsonaia.SrcSprite.x = 128 * i;
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(150);
+		}
+	}
+	pertsonaia.sprite = KORRIKA;
+	for (j = 0; j < 20; j++)
+	{
+		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+		{
+			pertsonaia.SrcSprite.x = 128 * i;
+			pertsonaia.DestSprite.x += 9;
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(80);
+		}
+	}
+	pertsonaia.sprite = IDLE;
+	RenderPrestatu();
+	Irudikatu();
+
+	IrudiZnbk = IrudiakKendu(0);
+	pertsonaia.egoera = HILDA;
+	RenderPrestatu();
+	Irudikatu();
+
 }
