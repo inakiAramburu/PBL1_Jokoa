@@ -289,13 +289,13 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 
 void Animazioa()
 {
-	int i;
+	int i, j;
 
 	SDL_Delay(500);
 	IrudiZnbk = 1;
 	pertsonaia.sprite = KEA;
 	pertsonaia.DestSprite.x = 10;
-	pertsonaia.DestSprite.y = 532;
+	pertsonaia.DestSprite.y = 555;
 	pertsonaia.DestSprite.h = 60;
 	pertsonaia.DestSprite.w = 128;
 	pertsonaia.SrcSprite.h = 60;
@@ -305,19 +305,39 @@ void Animazioa()
 	MusikaJarri(Fitxategia);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
+		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
 		RenderPrestatu();
 		Irudikatu();
-		SDL_Delay(100);
 	}
 	pertsonaia.sprite = IDLE;
-	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	for (j = 0; j < 2; j++)
 	{
-		pertsonaia.SrcSprite.x = 128 * i;
-		RenderPrestatu();
-		Irudikatu();
-		SDL_Delay(150);
+		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+		{
+			pertsonaia.SrcSprite.x = 128 * i;
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(150);
+		}
 	}
+	pertsonaia.sprite = KORRIKA;
+	for (j = 0; j < 22; j++)
+	{
+		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+		{
+			pertsonaia.SrcSprite.x = 128 * i;
+			pertsonaia.DestSprite.x += 8;
+			RenderPrestatu();
+			Irudikatu();
+			SDL_Delay(80);
+		}
+	}
+	pertsonaia.sprite = IDLE;
+	RenderPrestatu();
+	Irudikatu();
+	SDL_Delay(500);
+
 }
 
 void KargatuPertsonaia()
