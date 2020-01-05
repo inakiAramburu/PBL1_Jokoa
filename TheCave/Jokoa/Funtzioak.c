@@ -108,6 +108,8 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			break;
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 527;
 			break;
 	}
 }
@@ -138,7 +140,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
-void RenderPrestatu()
+void RenderPrestatu(ZENTZUA begira)
 {
 	int i;
 
@@ -158,7 +160,16 @@ void RenderPrestatu()
 	}
 	if (pertsonaia.egoera == BIZIRIK)
 	{
-		SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+		if (begira == ATZERA)
+		{
+			SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+			SDL_RenderCopyEx(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite, 180, NULL, flip);
+		}
+		else
+		{
+			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+		}
 	}
 	
 }
@@ -214,7 +225,7 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 	return;
 }
 
-void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i)
+void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begira)
 {
 	SAGUA klika;
 	SDL_Event ebentua;
@@ -236,6 +247,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i)
 					a = SAKATUGABE;
 					if (!d)
 					{
+						*begira = AURRERA;
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
 					}
@@ -245,6 +257,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i)
 					d = SAKATUGABE;
 					if (!a)
 					{
+						*begira = ATZERA;
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
 					}
@@ -264,9 +277,19 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i)
 				{
 				case SDL_SCANCODE_D:
 					d = SAKATUGABE;
+					if (!a)
+					{
+						pertsonaia.sprite = IDLE;
+						*i = 0;
+					}
 					break;
 				case SDL_SCANCODE_A:
 					a = SAKATUGABE;
+					if (!d)
+					{
+						pertsonaia.sprite = IDLE;
+						*i = 0;
+					}
 					break;
 				case SDL_SCANCODE_SPACE:
 					espacio = SAKATUGABE;
@@ -296,9 +319,8 @@ void Ekintzak(int *i)
 		
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
-	printf("a:%d d:%d\n", a, d);
 	*i += 1;
-	if (*i > spriteak[pertsonaia.sprite].kop)
+	if (*i >= spriteak[pertsonaia.sprite].kop)
 	{
 		*i = 0;
 	}
@@ -335,7 +357,7 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
 					IrudiZnbk = 1;
-					RenderPrestatu();
+					RenderPrestatu(AURRERA);
 					Irudikatu();
 					KargatuPertsonaia();
 					Animazioa();
@@ -383,19 +405,19 @@ void KargatuPertsonaia()
 	spriteak[0].kop = 6;
 	
 	JokalariaKargatu(".\\media\\player\\Run.bmp", 1);
-	spriteak[1].kop = 6;
+	spriteak[1].kop = 10;
 	
 	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
-	spriteak[2].kop = 6;
+	spriteak[2].kop = 14;
 	
 	JokalariaKargatu(".\\media\\player\\Attack.bmp", 3);
-	spriteak[3].kop = 6;
+	spriteak[3].kop = 8;
 	
 	JokalariaKargatu(".\\media\\player\\Dead.bmp", 4);
 	spriteak[4].kop = 6;
 	
 	JokalariaKargatu(".\\media\\player\\Humo.bmp", 5);
-	spriteak[5].kop = 6;
+	spriteak[5].kop = 4;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
@@ -473,12 +495,12 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
-	MusikaJarri(Kea);
+	/*MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
-		RenderPrestatu();
+		RenderPrestatu(AURRERA);
 		Irudikatu();
 	}
 	pertsonaia.sprite = IDLE;
@@ -487,7 +509,7 @@ void Animazioa()
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu();
+			RenderPrestatu(AURRERA);
 			Irudikatu();
 			SDL_Delay(150);
 		}
@@ -499,13 +521,13 @@ void Animazioa()
 		{
 			pertsonaia.SrcSprite.x = 128 * i;
 			pertsonaia.DestSprite.x += 9;
-			RenderPrestatu();
+			RenderPrestatu(AURRERA);
 			Irudikatu();
 			SDL_Delay(80);
 		}
 	}
 	pertsonaia.sprite = IDLE;
-	RenderPrestatu();
+	RenderPrestatu(AURRERA);
 	Irudikatu();
 
 	IrudiZnbk = IrudiakKendu(0);
@@ -514,9 +536,9 @@ void Animazioa()
 	for (i = 0; i < 100; i++)
 	{
 		SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
-		RenderPrestatu();
+		RenderPrestatu(AURRERA);
 		Irudikatu();
 		SDL_Delay(100);
-	}
+	}*/
 	pertsonaia.egoera = BIZIRIK;
 }

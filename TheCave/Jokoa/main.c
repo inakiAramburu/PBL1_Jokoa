@@ -6,6 +6,7 @@ int main(int argc, char* str[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	JOKOA Jokoa = EZJOKATZEN;
+	ZENTZUA begira = AURRERA;
 
 	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int KargaLehen = 0;		//""
@@ -34,7 +35,7 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaMenua = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL, &begira);
 			RenderMenu();
 			Irudikatu();
 			SDL_Delay(50);
@@ -48,8 +49,8 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaKredituak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
-			RenderPrestatu();
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(50);
 		}
@@ -61,8 +62,8 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaKontrolak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
-			RenderPrestatu();
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(50);
 		}
@@ -74,9 +75,9 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaLehen = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
 			Ekintzak(&animazioa);
-			RenderPrestatu();
+			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(100);
 		}
