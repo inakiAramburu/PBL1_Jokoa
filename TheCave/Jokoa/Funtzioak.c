@@ -49,7 +49,7 @@ int LeihoaEtaRenderHasi()
 		SDL_WINDOWPOS_CENTERED,           // Leihoa erdian jarri
 		PANTAILA_ZABALERA,                // Sortzeko lehioaren zabalera
 		PANTAILA_ALTUERA,                 // Sortzeko leihoaren altuera
-		SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
+		SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
 	);
 
 	if (leihoa == NULL) { 		// Leihoa sortu dela konprobatzen du
@@ -269,7 +269,9 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_K:
 					k = SAKATUTA;
 					break;
-
+				case SDL_SCANCODE_ESCAPE:
+					Amaitu(&*Jokoa, &*Pantaila);
+					break;
 				}
 				break;
 			case SDL_KEYUP:
