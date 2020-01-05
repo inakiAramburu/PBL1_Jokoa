@@ -472,8 +472,8 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	/*char Fitxategia[128] = ".\\media\\sound\\Kea.wav";
-	MusikaJarri(Fitxategia);
+	char Kea[128] = ".\\media\\sound\\Kea.wav";
+	MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
@@ -517,6 +517,6 @@ void Animazioa()
 		RenderPrestatu();
 		Irudikatu();
 		SDL_Delay(100);
-	}*/
+	}
 	pertsonaia.egoera = BIZIRIK;
 }
