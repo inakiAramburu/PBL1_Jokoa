@@ -30,6 +30,11 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 
 PERTSONAIA pertsonaia;
 
+TEKLAK a = SAKATUGABE;
+TEKLAK d = SAKATUGABE;
+TEKLAK espacio = SAKATUGABE;
+TEKLAK k = SAKATUGABE;
+
 int LeihoaEtaRenderHasi()
 {
             // Initialize SDL2
@@ -102,7 +107,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 			break;
 		case LEHEN:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
 			break;
 	}
 }
@@ -209,7 +214,7 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 	return;
 }
 
-void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila)
+void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i)
 {
 	SAGUA klika;
 	SDL_Event ebentua;
@@ -224,10 +229,81 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 				ZeinKlikatuDa(ebentua.button, &klika);
 				KonprobatuKlika(&*Pantaila, klika);
 				break;
+			case SDL_KEYDOWN:
+				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
+				{
+				case SDL_SCANCODE_D:
+					a = SAKATUGABE;
+					if (!d)
+					{
+						pertsonaia.sprite = KORRIKA;
+						*i = 0;
+					}
+					d = SAKATUTA;
+					break;
+				case SDL_SCANCODE_A:
+					d = SAKATUGABE;
+					if (!a)
+					{
+						pertsonaia.sprite = KORRIKA;
+						*i = 0;
+					}
+					a = SAKATUTA;
+					break;
+				case SDL_SCANCODE_SPACE:
+					espacio = SAKATUTA;
+					break;
+				case SDL_SCANCODE_K:
+					k = SAKATUTA;
+					break;
+
+				}
+				break;
+			case SDL_KEYUP:
+				switch (ebentua.key.keysym.scancode)
+				{
+				case SDL_SCANCODE_D:
+					d = SAKATUGABE;
+					break;
+				case SDL_SCANCODE_A:
+					a = SAKATUGABE;
+					break;
+				case SDL_SCANCODE_SPACE:
+					espacio = SAKATUGABE;
+					break;
+				case SDL_SCANCODE_K:
+					k = SAKATUGABE;
+					break;
+				}
+				break;
+		}
+
 		}
 	}
-	
+
+void Ekintzak(int *i)
+{
+	if (a)
+	{	
+		pertsonaia.DestSprite.x -= 8;
+	}
+	if (d) 
+	{
+		pertsonaia.DestSprite.x += 8;
+	}
+	if (espacio) 
+	{
+		
+	}
+	pertsonaia.SrcSprite.x = 128 * (*i);
+	printf("a:%d d:%d\n", a, d);
+	*i += 1;
+	if (*i > spriteak[pertsonaia.sprite].kop)
+	{
+		*i = 0;
+	}
 }
+
 
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
 {
@@ -263,6 +339,7 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 					Irudikatu();
 					KargatuPertsonaia();
 					Animazioa();
+					*Pantaila = LEHEN;
 				}
 				else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 				{
@@ -395,7 +472,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	char Fitxategia[128] = ".\\media\\sound\\Kea.wav";
+	/*char Fitxategia[128] = ".\\media\\sound\\Kea.wav";
 	MusikaJarri(Fitxategia);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
@@ -433,7 +510,13 @@ void Animazioa()
 
 	IrudiZnbk = IrudiakKendu(0);
 	pertsonaia.egoera = HILDA;
-	RenderPrestatu();
-	Irudikatu();
-
+	ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);
+	for (i = 0; i < 100; i++)
+	{
+		SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
+		RenderPrestatu();
+		Irudikatu();
+		SDL_Delay(100);
+	}*/
+	pertsonaia.egoera = BIZIRIK;
 }

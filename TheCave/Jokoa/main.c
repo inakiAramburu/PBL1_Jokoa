@@ -12,6 +12,7 @@ int main(int argc, char* str[]) {
 	int KargaBigarren = 0;		//""
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
+	int animazioa;
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -33,7 +34,7 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaMenua = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
 			RenderMenu();
 			Irudikatu();
 			SDL_Delay(50);
@@ -47,7 +48,7 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaKredituak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
 			RenderPrestatu();
 			Irudikatu();
 			SDL_Delay(50);
@@ -60,7 +61,7 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaKontrolak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL);
 			RenderPrestatu();
 			Irudikatu();
 			SDL_Delay(50);
@@ -73,10 +74,11 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaLehen = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa);
+			Ekintzak(&animazioa);
 			RenderPrestatu();
 			Irudikatu();
-			SDL_Delay(50);
+			SDL_Delay(100);
 		}
 	}
 	return 0;
