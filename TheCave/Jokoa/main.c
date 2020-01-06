@@ -6,6 +6,12 @@ int main(int argc, char* str[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	JOKOA Jokoa = EZJOKATZEN;
+
+	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
+	{
+		printf("Ezin izan da 1280x720- ko bideoa ezarri: %s\n", SDL_GetError());		//Erroreak
+		return 1;
+	}
 	ZENTZUA begira = AURRERA;
 
 	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
@@ -15,14 +21,12 @@ int main(int argc, char* str[]) {
 	int KargaKontrolak = 0;		//""
 	int animazioa;
 
-	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
-	{
-		printf("Ezin izan da 1280x720- ko bideoa ezarri: %s\n", SDL_GetError());		//Erroreak
-		return 1;
-	}
-
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
+
+	void *pixels;
+	int pitch;
+	Uint32 bpp;
 
 	while (Jokoa)
 	{
@@ -69,22 +73,19 @@ int main(int argc, char* str[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
-			int para_que_funcione;
 			KargaMenua = 0;
 			if (!KargaLehen)
 			{
 				KargatuIrudiak(Pantaila);
+				//KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+
 			Ekintzak(&animazioa);
 			RenderPrestatu(begira);
 			Irudikatu();
-
-			para_que_funcione =colisioa_detectatu();
-
 			SDL_Delay(100);
-
 		}
 	}
 	return 0;

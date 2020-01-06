@@ -152,6 +152,15 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
+void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint32 *bpp)
+{
+	SDL_Surface* surface = SDL_LoadBMP(mapa);
+	//*pixels = surface->pixels;
+
+	*pitch = surface->pitch;
+	*bpp = surface->format->BytesPerPixel;
+}
+
 void RenderPrestatu(ZENTZUA begira)
 {
 	int i;
@@ -183,7 +192,6 @@ void RenderPrestatu(ZENTZUA begira)
 			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
 		}
 	}
-	
 }
 
 void RenderMenu()
@@ -225,7 +233,6 @@ void RenderMenu()
 
 void Irudikatu()
 {
-	
 	SDL_RenderPresent(render);
 }
 
@@ -235,7 +242,6 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 	SDL_DestroyRenderer(render);
 	*Jokoa = EZJOKATZEN;
 	*Pantaila = ATERA;
-	return;
 }
 
 void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begira)
@@ -247,11 +253,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		switch (ebentua.type)
 		{
 			case SDL_QUIT:
-				Amaitu(&*Jokoa, &*Pantaila);
+				Amaitu(Jokoa, Pantaila);
 				break;
 			case SDL_MOUSEBUTTONUP:
 				ZeinKlikatuDa(ebentua.button, &klika);
-				KonprobatuKlika(&*Pantaila, klika);
+				KonprobatuKlika(Pantaila, klika);
 				break;
 			case SDL_KEYDOWN:
 				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
@@ -283,7 +289,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					k = SAKATUTA;
 					break;
 				case SDL_SCANCODE_ESCAPE:
-					Amaitu(&*Jokoa, &*Pantaila);
+					Amaitu(Jokoa, Pantaila);
 					break;
 				}
 				break;
@@ -323,17 +329,17 @@ void Ekintzak(int *i)
 {
 	int at;
 	int abiadura = 12;
-	if(colisioa_detectatu()==1)
+/*	if(KolisioakKonprobatu()==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
 		//SDL_Delay(100);
 	}
-	else if (colisioa_detectatu()==249)
+	else if (KolisioakKonprobatu()==249)
 	{
 		printf("muerto\n");
 		exit;
 	}
-	
+	*/
 	if (a)
 	{	
 		pertsonaia.DestSprite.x -= abiadura;
@@ -583,7 +589,7 @@ void Animazioa()
 	}*/
 	pertsonaia.egoera = BIZIRIK;
 }
-
+/*
 
 void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
 
@@ -627,7 +633,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
 	}
 }
 
-int colisioa_detectatu()
+int KolisioakKonprobatu()
 {
 	int Tocas=1;
 	printf("x:%d ", pertsonaia.DestSprite.x);
@@ -657,3 +663,4 @@ int colisioa_detectatu()
 	}
 	return Tocas;
 }
+*/
