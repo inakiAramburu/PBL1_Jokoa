@@ -108,6 +108,18 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			break;
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+
+			int pitch; //el numero de pixels por fila
+			Uint32 bpp; //el numero de Byte por pixel
+			void* pixels = CargarMascara("media/nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
+
+			printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
+			printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
+			printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
+
+
+
+
 			pertsonaia.DestSprite.x = 10;
 			pertsonaia.DestSprite.y = 450;
 			break;
