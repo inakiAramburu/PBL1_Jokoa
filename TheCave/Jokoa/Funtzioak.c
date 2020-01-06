@@ -4,6 +4,11 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 
+
+int pitch; //el numero de pixels por fila
+Uint32 bpp; //el numero de Byte por pixel
+void* pixels;
+
 typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
 {
 	SDL_Texture* textura;
@@ -109,15 +114,10 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
 
-			int pitch; //el numero de pixels por fila
-			Uint32 bpp; //el numero de Byte por pixel
-			void* pixels = CargarMascara("media/nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
-
-			printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
-			printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
-			printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
+		
 
 
+			
 
 
 			pertsonaia.DestSprite.x = 10;
@@ -225,6 +225,7 @@ void RenderMenu()
 
 void Irudikatu()
 {
+	
 	SDL_RenderPresent(render);
 }
 
@@ -320,16 +321,36 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 
 void Ekintzak(int *i)
 {
+	int at;
+	int abiadura = 8;
+	if(colisioa_detectatu()==1)
+	{
+		pertsonaia.DestSprite.y += abiadura;
+		//SDL_Delay(100);
+	}
+	else if (colisioa_detectatu()==249)
+	{
+		printf("muerto\n");
+		exit;
+	}
+	
 	if (a)
 	{	
-		pertsonaia.DestSprite.x -= 8;
+		pertsonaia.DestSprite.x -= abiadura;
+		//pertsonaia.DestSprite.y += abiadura;
+
 	}
 	if (d) 
 	{
-		pertsonaia.DestSprite.x += 8;
+		pertsonaia.DestSprite.x += abiadura;
 	}
 	if (espacio) 
 	{
+	for ( at = 0; at < 2; at++)
+		{
+			pertsonaia.DestSprite.y -= abiadura;
+			
+		}
 		
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
@@ -509,6 +530,12 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
+
+	
+
+		
+	
+
 	/*MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
@@ -557,6 +584,18 @@ void Animazioa()
 	pertsonaia.egoera = BIZIRIK;
 }
 
+
+void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
+
+	SDL_Surface* surface = SDL_LoadBMP(nombre);
+	void* pixels = surface->pixels;
+
+	*pitch = surface->pitch;
+	*bpp = surface->format->BytesPerPixel;
+
+	return pixels;
+}
+
 Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
 {
 
@@ -588,13 +627,33 @@ Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
 	}
 }
 
-void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
+int colisioa_detectatu()
+{
+	int Tocas=1;
+	printf("x:%d ", pertsonaia.DestSprite.x);
+	printf("y:%d\n", pertsonaia.DestSprite.y);
 
-	SDL_Surface* surface = SDL_LoadBMP(nombre);
-	void* pixels = surface->pixels;
+	void* pixels = CargarMascara("media/Nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
 
-	*pitch = surface->pitch;
-	*bpp = surface->format->BytesPerPixel;
 
-	return pixels;
+	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
+	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
+	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
+	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
+
+	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
+	int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
+	
+	if (piernas == 0 || cabeza == 0)
+	{
+		Tocas = 0;
+		printf("SUELO");
+		
+	}
+	if (piernas == 249 || cabeza == 249)
+	{
+		Tocas = 249;
+		printf("LAVA");
+	}
+	return Tocas;
 }

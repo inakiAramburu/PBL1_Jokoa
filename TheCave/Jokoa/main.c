@@ -69,6 +69,7 @@ int main(int argc, char* str[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
+			int para_que_funcione;
 			KargaMenua = 0;
 			if (!KargaLehen)
 			{
@@ -79,7 +80,11 @@ int main(int argc, char* str[]) {
 			Ekintzak(&animazioa);
 			RenderPrestatu(begira);
 			Irudikatu();
+
+			para_que_funcione =colisioa_detectatu();
+
 			SDL_Delay(100);
+
 		}
 	}
 	return 0;

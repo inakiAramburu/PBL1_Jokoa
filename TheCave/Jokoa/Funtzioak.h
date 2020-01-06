@@ -29,5 +29,10 @@ void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzek
 void Ekintzak(int *i);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
+Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y);
+void* CargarMascara(char* nombre, int* pitch, Uint32* bpp);
+
+
+int colisioa_detectatu();
 
 #endif
