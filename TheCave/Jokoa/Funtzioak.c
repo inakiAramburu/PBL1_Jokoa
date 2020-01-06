@@ -114,12 +114,6 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
 
-		
-
-
-			
-
-
 			pertsonaia.DestSprite.x = 10;
 			pertsonaia.DestSprite.y = 450;
 			break;
@@ -155,7 +149,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint32 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
-	//*pixels = surface->pixels;
+	pixels = surface->pixels;
 
 	*pitch = surface->pitch;
 	*bpp = surface->format->BytesPerPixel;
@@ -542,7 +536,7 @@ void Animazioa()
 		
 	
 
-	/*MusikaJarri(Kea);
+	MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
@@ -586,10 +580,10 @@ void Animazioa()
 		RenderPrestatu(AURRERA);
 		Irudikatu();
 		SDL_Delay(100);
-	}*/
+	}
 	pertsonaia.egoera = BIZIRIK;
 }
-/*
+
 
 void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
 
@@ -663,4 +657,3 @@ int KolisioakKonprobatu()
 	}
 	return Tocas;
 }
-*/

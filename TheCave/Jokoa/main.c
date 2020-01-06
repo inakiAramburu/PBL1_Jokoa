@@ -77,7 +77,7 @@ int main(int argc, char* str[]) {
 			if (!KargaLehen)
 			{
 				KargatuIrudiak(Pantaila);
-				//KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
+				KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
