@@ -109,7 +109,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		case LEHEN:
 			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 527;
+			pertsonaia.DestSprite.y = 450;
 			break;
 	}
 }
