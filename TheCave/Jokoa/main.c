@@ -36,7 +36,7 @@ int main(int argc, char* str[]) {
 				KargatuIrudiak(Pantaila);
 				KargaMenua = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, NULL, &begira);
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
 			RenderMenu();
 			Irudikatu();
 			SDL_Delay(50);
