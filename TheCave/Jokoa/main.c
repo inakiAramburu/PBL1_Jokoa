@@ -23,6 +23,7 @@ int main(int argc, char* str[]) {
 
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
+	MusikaJarri("media/sound/videoplayback.wav");
 
 	while (Jokoa)
 	{
