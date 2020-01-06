@@ -630,8 +630,8 @@ Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
 int colisioa_detectatu()
 {
 	int Tocas=1;
-	printf("x:%d ", pertsonaia.DestSprite.x);
-	printf("y:%d\n", pertsonaia.DestSprite.y);
+	printf("\n x:%d ", pertsonaia.DestSprite.x + 53);
+	printf("y:%d\n", pertsonaia.DestSprite.y + 59);
 
 	void* pixels = CargarMascara("media/Nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
 

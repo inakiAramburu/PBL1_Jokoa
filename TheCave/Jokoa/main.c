@@ -2,6 +2,15 @@
 #include <stdio.h>
 //Ekaitz, egitura
 
+/*
+https://assetstore.unity.com/packages/audio/music/orchestral/endless-cave-ambience-54032
+https://downloads.khinsider.com/game-soundtracks/album/metal-gear-solid-portable-ops-psp-original-game-soundtrack/20%2520Null.mp3
+https://downloads.khinsider.com/game-soundtracks/album/daxter-psp-rip/22%2520-%2520final%2520boss.mp3
+https://downloads.khinsider.com/game-soundtracks/album/diablo-1
+https://downloads.khinsider.com/game-soundtracks/album/diablo-1/03%2520Dungeon.mp3
+*/
+
+
 int main(int argc, char* str[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
