@@ -134,7 +134,7 @@ void RenderPrestatu()
 		}
 	}
 }
-
+//
 void RenderMenu()
 {
 	int i = 0, x, y;
