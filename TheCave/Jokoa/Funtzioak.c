@@ -322,7 +322,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 void Ekintzak(int *i)
 {
 	int at;
-	int abiadura = 8;
+	int abiadura = 12;
 	if(colisioa_detectatu()==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
@@ -642,15 +642,15 @@ int colisioa_detectatu()
 	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
 
 	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
-	int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
+	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
 	
-	if (piernas == 0 || cabeza == 0)
+	if (piernas == 0 )
 	{
 		Tocas = 0;
 		printf("SUELO");
 		
 	}
-	if (piernas == 249 || cabeza == 249)
+	if (piernas == 249 )
 	{
 		Tocas = 249;
 		printf("LAVA");
