@@ -31,15 +31,10 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 	SDL_Rect SrcSprite, DestSprite;
 	SPRITE sprite;
 	EGOERA egoera;
+	BOOLEANOA erortzen;
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
-typedef struct S_MAPA
-{
-	void* pixels;
-	int pitch;
-
-};
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -264,7 +259,7 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 	*Pantaila = ATERA;
 }
 
-void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begira)
+void EbentuakKonprobatu(JOKOA* Jokoa, PANTAILAK* Pantaila, int* i, ZENTZUA* begira)
 {
 	SAGUA klika;
 	SDL_Event ebentua;
@@ -273,83 +268,82 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		switch (ebentua.type)
 		{
 			*Pantaila += 1;
-			case SDL_QUIT:
+		case SDL_QUIT:
+			Amaitu(Jokoa, Pantaila);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			ZeinKlikatuDa(ebentua.button, &klika);
+			KonprobatuKlika(Pantaila, klika);
+			break;
+		case SDL_KEYDOWN:
+			switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
+			{
+			case SDL_SCANCODE_D:
+				a = SAKATUGABE;
+				if (!d)
+				{
+					*begira = AURRERA;
+					pertsonaia.sprite = KORRIKA;
+					*i = 0;
+				}
+				d = SAKATUTA;
+				break;
+			case SDL_SCANCODE_A:
+				d = SAKATUGABE;
+				if (!a)
+				{
+					*begira = ATZERA;
+					pertsonaia.sprite = KORRIKA;
+					*i = 0;
+				}
+				a = SAKATUTA;
+				break;
+			case SDL_SCANCODE_SPACE:
+				espacio = SAKATUTA;
+				break;
+			case SDL_SCANCODE_K:
+				k = SAKATUTA;
+				break;
+			case SDL_SCANCODE_ESCAPE:
 				Amaitu(Jokoa, Pantaila);
 				break;
-			case SDL_MOUSEBUTTONUP:
-				ZeinKlikatuDa(ebentua.button, &klika);
-				KonprobatuKlika(Pantaila, klika);
-				break;
-			case SDL_KEYDOWN:
-				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
+			}
+			break;
+		case SDL_KEYUP:
+			switch (ebentua.key.keysym.scancode)
+			{
+			case SDL_SCANCODE_D:
+				d = SAKATUGABE;
+				if (!a)
 				{
-				case SDL_SCANCODE_D:
-					a = SAKATUGABE;
-					if (!d)
-					{
-						*begira = AURRERA;
-						pertsonaia.sprite = KORRIKA;
-						*i = 0;
-					}
-					d = SAKATUTA;
-					break;
-				case SDL_SCANCODE_A:
-					d = SAKATUGABE;
-					if (!a)
-					{
-						*begira = ATZERA;
-						pertsonaia.sprite = KORRIKA;
-						*i = 0;
-					}
-					a = SAKATUTA;
-					break;
-				case SDL_SCANCODE_SPACE:
-					espacio = SAKATUTA;
-					break;
-				case SDL_SCANCODE_K:
-					k = SAKATUTA;
-					break;
-				case SDL_SCANCODE_ESCAPE:
-					Amaitu(Jokoa, Pantaila);
-					break;
+					pertsonaia.sprite = IDLE;
+					*i = 0;
 				}
 				break;
-			case SDL_KEYUP:
-				switch (ebentua.key.keysym.scancode)
+			case SDL_SCANCODE_A:
+				a = SAKATUGABE;
+				if (!d)
 				{
-				case SDL_SCANCODE_D:
-					d = SAKATUGABE;
-					if (!a)
-					{
-						pertsonaia.sprite = IDLE;
-						*i = 0;
-					}
-					break;
-				case SDL_SCANCODE_A:
-					a = SAKATUGABE;
-					if (!d)
-					{
-						pertsonaia.sprite = IDLE;
-						*i = 0;
-					}
-					break;
-				case SDL_SCANCODE_SPACE:
-					espacio = SAKATUGABE;
-					break;
-				case SDL_SCANCODE_K:
-					k = SAKATUGABE;
-					break;
+					pertsonaia.sprite = IDLE;
+					*i = 0;
 				}
 				break;
-		}
-
+			case SDL_SCANCODE_SPACE:
+				espacio = SAKATUGABE;
+				break;
+			case SDL_SCANCODE_K:
+				k = SAKATUGABE;
+				break;
+			}
+			break;
 		}
 	}
+}
 
 void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
 {
 	int at;
-	int abiadura = 12;
+	int abiadura = 10;
 	if(KolisioakKonprobatu(pixels, pitch, bpp)==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
@@ -540,7 +534,7 @@ void Animazioa()
 	IrudiZnbk = IrudiakKendu(1);
 	pertsonaia.egoera = BIZIRIK;
 	pertsonaia.sprite = KEA;
-	pertsonaia.DestSprite.x = 10;
+	pertsonaia.DestSprite.x = -15;
 	pertsonaia.DestSprite.y = 555;
 	pertsonaia.DestSprite.h = 60;
 	pertsonaia.DestSprite.w = 128;
@@ -549,13 +543,8 @@ void Animazioa()
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
 
-	
-
-		
-	
-
 	MusikaJarri(Kea);
-/*	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
@@ -588,7 +577,7 @@ void Animazioa()
 	pertsonaia.sprite = IDLE;
 	RenderPrestatu(AURRERA);
 	Irudikatu();
-	SDL_Delay(300);
+	SDL_Delay(1000);
 	IrudiZnbk = IrudiakKendu(0);
 	pertsonaia.egoera = HILDA;
 	ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
@@ -599,7 +588,7 @@ void Animazioa()
 		Irudikatu();
 		SDL_Delay(100);
 	}
-	SDL_Delay(2000);*/
+	SDL_Delay(2000);
 	pertsonaia.egoera = BIZIRIK;
 }
 

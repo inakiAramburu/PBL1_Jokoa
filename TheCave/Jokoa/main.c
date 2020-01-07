@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
 			Ekintzak(&animazioa, pixels, pitch, bpp);
 			RenderPrestatu(begira);
 			Irudikatu();
-			SDL_Delay(100);
+			SDL_Delay(50);
 		}
 	}
 	return 0;
