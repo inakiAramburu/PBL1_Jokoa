@@ -368,7 +368,7 @@ void Ekintzak(int *i)
 	}
 }
 
-
+//mikel
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
 {
 	switch (ebentua.button)
