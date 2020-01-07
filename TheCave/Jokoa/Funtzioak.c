@@ -247,11 +247,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		switch (ebentua.type)
 		{
 			case SDL_QUIT:
-				Amaitu(&*Jokoa, &*Pantaila);
+				Amaitu(Jokoa, Pantaila);
 				break;
 			case SDL_MOUSEBUTTONUP:
 				ZeinKlikatuDa(ebentua.button, &klika);
-				KonprobatuKlika(&*Pantaila, klika);
+				KonprobatuKlika(Pantaila, klika);
 				break;
 			case SDL_KEYDOWN:
 				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
