@@ -31,6 +31,8 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 	SDL_Rect SrcSprite, DestSprite;
 	SPRITE sprite;
 	EGOERA egoera;
+	BOOLEANOA salto;
+	BOOLEANOA erortzen;
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
@@ -277,7 +279,13 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					a = SAKATUTA;
 					break;
 				case SDL_SCANCODE_SPACE:
+					if (!espacio)
+					{
+						*i = 0;
+					}
+					if (!pertsonaia.salto && !pertsonaia.erortzen)
 					espacio = SAKATUTA;
+
 					break;
 				case SDL_SCANCODE_K:
 					k = SAKATUTA;
@@ -332,7 +340,6 @@ void Ekintzak(int *i)
 	else if (colisioa_detectatu()==249)
 	{
 		printf("muerto\n");
-		exit;
 	}
 	
 	if (a)
@@ -450,7 +457,7 @@ void KargatuPertsonaia()
 	spriteak[1].kop = 10;
 	
 	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
-	spriteak[2].kop = 14;
+	spriteak[2].kop = 8;
 	
 	JokalariaKargatu(".\\media\\player\\Attack.bmp", 3);
 	spriteak[3].kop = 8;

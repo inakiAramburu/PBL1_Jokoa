@@ -10,8 +10,9 @@ typedef enum {IDLE, KORRIKA, SALTO, ERASO, HIL, KEA}SPRITE;
 typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
 typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
 typedef enum {HILDA, BIZIRIK}EGOERA;
-typedef enum { SAKATUGABE, SAKATUTA }TEKLAK;
+typedef enum {SAKATUGABE, SAKATUTA }TEKLAK;
 typedef enum {ATZERA, AURRERA}ZENTZUA;
+typedef enum {EZ, BAI}BOOLEANOA;
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 int IrudiakKendu(int ZnbtUtzi);		//Irudien texturak ezabatzen ditu azkenetik hasten, nahi bada atzeko planoa ezabatu gabe utz daiteke, 1 parametroa pasatzen. Zenbat argazki geratu diren pasatzen du
