@@ -5,9 +5,9 @@ SDL_Renderer* render;
 SDL_Window* leihoa;
 
 
-int pitch; //el numero de pixels por fila
-Uint32 bpp; //el numero de Byte por pixel
-void* pixels;
+extern int pitch; //el numero de pixels por fila
+extern Uint32 bpp; //el numero de Byte por pixel
+extern void* pixels;
 
 typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
 {
@@ -152,10 +152,10 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
-void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint8 *bpp)
+void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
-	pixels = surface->pixels;
+	*pixels = surface->pixels;
 
 	*pitch = surface->pitch;
 	*bpp = surface->format->BytesPerPixel;
@@ -349,7 +349,7 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
 {
 	int at;
 	int abiadura = 12;
-	/*if(KolisioakKonprobatu(pixels, pitch, bpp)==1)
+	if(KolisioakKonprobatu(pixels, pitch, bpp)==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
 		//SDL_Delay(100);
@@ -358,7 +358,7 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
 	{
 		printf("muerto\n");
 		exit;
-	}*/
+	}
 	if (a)
 	{	
 		pertsonaia.DestSprite.x -= abiadura;
