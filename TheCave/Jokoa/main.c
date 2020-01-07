@@ -2,7 +2,7 @@
 #include <stdio.h>
 //Ekaitz, egitura
 
-int main(int argc, char* str[]) {
+int main(int argc, char* argv[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	JOKOA Jokoa = EZJOKATZEN;
@@ -24,9 +24,9 @@ int main(int argc, char* str[]) {
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
-	void *pixels;
+	int pixels;
 	int pitch;
-	Uint32 bpp;
+	Uint8 bpp;
 
 	while (Jokoa)
 	{
@@ -81,8 +81,7 @@ int main(int argc, char* str[]) {
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-
-			Ekintzak(&animazioa);
+			Ekintzak(&animazioa, pixels, pitch, bpp);
 			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(100);

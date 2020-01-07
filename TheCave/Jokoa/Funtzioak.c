@@ -34,6 +34,12 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
+typedef struct S_MAPA
+{
+	void* pixels;
+	int pitch;
+
+};
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -96,11 +102,11 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
+			//ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
 			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
+			//ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
+			//ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			pertsonaia.egoera = HILDA;
 			break;
 		case KREDITUAK:
@@ -146,7 +152,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	IrudiZnbk++;
 }
 
-void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint32 *bpp)
+void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint8 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
 	pixels = surface->pixels;
@@ -200,29 +206,49 @@ void RenderMenu()
 	SDL_RenderCopy(render, Irudiak[1].textura, NULL, &Irudiak[1].Dimentsioak);
 	if ((x > 515 && y > 175) && (x < 765 && y < 275))
 	{
-		SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);
+		Irudiak[2].Dimentsioak.w = 300;
+		Irudiak[2].Dimentsioak.h = 120;
+		Irudiak[2].Dimentsioak.x = 500;
+		Irudiak[2].Dimentsioak.y = 165;
 	}
 	else
 	{
-		SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
+		Irudiak[2].Dimentsioak.w = 250;
+		Irudiak[2].Dimentsioak.h = 100;
+		Irudiak[2].Dimentsioak.x = 515;
+		Irudiak[2].Dimentsioak.y = 175;
 	}
 	if ((x > 510 && y > 300) && (x < 760 && y < 400))
 	{
-		SDL_RenderCopy(render, Irudiak[5].textura, NULL, &Irudiak[5].Dimentsioak);
+		Irudiak[3].Dimentsioak.x = 495;
+		Irudiak[3].Dimentsioak.y = 290;
+		Irudiak[3].Dimentsioak.w = 300;
+		Irudiak[3].Dimentsioak.h = 120;
 	}
 	else
 	{
-		SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
+		Irudiak[3].Dimentsioak.x = 510;
+		Irudiak[3].Dimentsioak.y = 300;
+		Irudiak[3].Dimentsioak.w = 250;
+		Irudiak[3].Dimentsioak.h = 100;
 	}
 	if ((x > 512 && y > 425) && (x < 762 && y < 525))
 	{
-		SDL_RenderCopy(render, Irudiak[7].textura, NULL, &Irudiak[7].Dimentsioak);
+		Irudiak[4].Dimentsioak.x = 497;
+		Irudiak[4].Dimentsioak.y = 415;
+		Irudiak[4].Dimentsioak.w = 300;
+		Irudiak[4].Dimentsioak.h = 120;
 	}
 	else
 	{
-		SDL_RenderCopy(render, Irudiak[6].textura, NULL, &Irudiak[6].Dimentsioak);
+		Irudiak[4].Dimentsioak.x = 512;
+		Irudiak[4].Dimentsioak.y = 425;
+		Irudiak[4].Dimentsioak.w = 250;
+		Irudiak[4].Dimentsioak.h = 100;
 	}
-	
+	SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
+	SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);
+	SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
 }
 
 void Irudikatu()
@@ -319,21 +345,20 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		}
 	}
 
-void Ekintzak(int *i)
+void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
 {
 	int at;
 	int abiadura = 12;
-/*	if(KolisioakKonprobatu()==1)
+	/*if(KolisioakKonprobatu(pixels, pitch, bpp)==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
 		//SDL_Delay(100);
 	}
-	else if (KolisioakKonprobatu()==249)
+	else if (KolisioakKonprobatu(pixels, pitch, bpp)==249)
 	{
 		printf("muerto\n");
 		exit;
-	}
-	*/
+	}*/
 	if (a)
 	{	
 		pertsonaia.DestSprite.x -= abiadura;
@@ -360,7 +385,6 @@ void Ekintzak(int *i)
 		*i = 0;
 	}
 }
-
 
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
 {
@@ -483,9 +507,6 @@ void MusikaJarri(char Fitxategia[])
 	// explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
 
-	//inicia la parte de audio
-	SDL_Init(SDL_INIT_AUDIO);
-
 	SDL_AudioSpec wavSpec;
 	Uint32 wavLength;
 	Uint8* wavBuffer;
@@ -504,14 +525,10 @@ void MusikaJarri(char Fitxategia[])
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
 	SDL_PauseAudioDevice(deviceId, 0);
 
-
-
-
 	// dena itxi
 
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
-	//SDL_Quit();
 }
 
 void Animazioa()
@@ -537,7 +554,7 @@ void Animazioa()
 	
 
 	MusikaJarri(Kea);
-	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+/*	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
@@ -556,7 +573,7 @@ void Animazioa()
 		}
 	}
 	pertsonaia.sprite = KORRIKA;
-	for (j = 0; j < 20; j++)
+	for (j = 0; j < 12; j++)
 	{
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
@@ -570,22 +587,23 @@ void Animazioa()
 	pertsonaia.sprite = IDLE;
 	RenderPrestatu(AURRERA);
 	Irudikatu();
-
+	SDL_Delay(300);
 	IrudiZnbk = IrudiakKendu(0);
 	pertsonaia.egoera = HILDA;
-	ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);
-	for (i = 0; i < 100; i++)
+	ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
+	for (i = 0; i < 80; i++)
 	{
 		SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
 		RenderPrestatu(AURRERA);
 		Irudikatu();
 		SDL_Delay(100);
 	}
+	SDL_Delay(2000);*/
 	pertsonaia.egoera = BIZIRIK;
 }
 
 
-void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
+void* CargarMascara(char* nombre, int* pitch, Uint8* bpp) {
 
 	SDL_Surface* surface = SDL_LoadBMP(nombre);
 	void* pixels = surface->pixels;
@@ -596,7 +614,7 @@ void* CargarMascara(char* nombre, int* pitch, Uint32* bpp) {
 	return pixels;
 }
 
-Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
+Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
 {
 
 
@@ -627,14 +645,11 @@ Uint32 getpixel(void* pixels, int pitch, Uint32 bpp, Uint32 x, Uint32 y)
 	}
 }
 
-int KolisioakKonprobatu()
+int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 {
 	int Tocas=1;
 	printf("x:%d ", pertsonaia.DestSprite.x);
 	printf("y:%d\n", pertsonaia.DestSprite.y);
-
-	void* pixels = CargarMascara("media/Nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
-
 
 	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
 	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
