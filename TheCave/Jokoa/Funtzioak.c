@@ -24,13 +24,15 @@ typedef struct S_IMGPERTSONAIA		//Pertsonaiaren irudiak banaturik, beti kargatut
 	int kop;
 }IMGPERTSONAIA;
 
-IMGPERTSONAIA spriteak[6];		
+IMGPERTSONAIA spriteak[7];		
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
 	SDL_Rect SrcSprite, DestSprite;
 	SPRITE sprite;
 	EGOERA egoera;
+	BOOLEANOA salto;
+	BOOLEANOA erortzen;
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
@@ -285,9 +287,8 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				{
 				case SDL_SCANCODE_D:
 					a = SAKATUGABE;
-					if (!d)
+					if (!d && !pertsonaia.erortzen && !pertsonaia.salto)
 					{
-						*begira = AURRERA;
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
 					}
@@ -295,9 +296,8 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					break;
 				case SDL_SCANCODE_A:
 					d = SAKATUGABE;
-					if (!a)
+					if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
 					{
-						*begira = ATZERA;
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
 					}
@@ -319,7 +319,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				{
 				case SDL_SCANCODE_D:
 					d = SAKATUGABE;
-					if (!a)
+					if (!a && !pertsonaia.salto && !pertsonaia.erortzen)
 					{
 						pertsonaia.sprite = IDLE;
 						*i = 0;
@@ -327,7 +327,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					break;
 				case SDL_SCANCODE_A:
 					a = SAKATUGABE;
-					if (!d)
+					if (!d && !pertsonaia.salto && !pertsonaia.erortzen)
 					{
 						pertsonaia.sprite = IDLE;
 						*i = 0;
@@ -343,46 +343,77 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				break;
 		}
 
-		}
 	}
+}
 
-void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
+void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 {
 	int at;
 	int abiadura = 12;
-	if(KolisioakKonprobatu(pixels, pitch, bpp)==1)
+
+	switch (KolisioakKonprobatu(pixels, pitch, bpp))
 	{
-		pertsonaia.DestSprite.y += abiadura;
-		//SDL_Delay(100);
-	}
-	else if (KolisioakKonprobatu(pixels, pitch, bpp)==249)
-	{
-		printf("muerto\n");
-		exit;
+	case 1:
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = BAI;
+			pertsonaia.sprite = ERORI;
+		}
+		break;
+	case 0:
+		if (pertsonaia.erortzen)
+		{
+			if (a || d)
+			{
+				pertsonaia.sprite = KORRIKA;
+			}
+			else
+			{
+				pertsonaia.sprite = IDLE;
+			}
+		}
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = EZ;
+		}
+		break;
+		break;
+
 	}
 	if (a)
 	{	
+		*begira = EZKER;
 		pertsonaia.DestSprite.x -= abiadura;
-		//pertsonaia.DestSprite.y += abiadura;
-
 	}
 	if (d) 
 	{
+		*begira = ESKUIN;
 		pertsonaia.DestSprite.x += abiadura;
 	}
-	if (espacio) 
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
 	{
-	for ( at = 0; at < 2; at++)
-		{
-			pertsonaia.DestSprite.y -= abiadura;
-			
-		}
-		
+		pertsonaia.salto = BAI;
+		pertsonaia.sprite = SALTO;
+		*i = 0;
+	}
+	if (pertsonaia.salto)
+	{
+		pertsonaia.DestSprite.y -= abiadura;
+	}
+	if (pertsonaia.erortzen)
+	{
+		pertsonaia.DestSprite.y += abiadura;
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
 	if (*i >= spriteak[pertsonaia.sprite].kop)
 	{
+		if (pertsonaia.salto)
+		{
+			pertsonaia.salto = EZ;
+			pertsonaia.erortzen = BAI;
+			pertsonaia.sprite = ERORI;
+		}
 		*i = 0;
 	}
 }
@@ -468,16 +499,19 @@ void KargatuPertsonaia()
 	spriteak[1].kop = 10;
 	
 	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
-	spriteak[2].kop = 14;
+	spriteak[2].kop = 8;
 	
-	JokalariaKargatu(".\\media\\player\\Attack.bmp", 3);
-	spriteak[3].kop = 8;
+	JokalariaKargatu(".\\media\\player\\Caida.bmp", 3);
+	spriteak[3].kop = 6;
+
+	JokalariaKargatu(".\\media\\player\\Attack.bmp", 4);
+	spriteak[4].kop = 8;
 	
-	JokalariaKargatu(".\\media\\player\\Dead.bmp", 4);
-	spriteak[4].kop = 6;
+	JokalariaKargatu(".\\media\\player\\Dead.bmp", 5);
+	spriteak[5].kop = 6;
 	
-	JokalariaKargatu(".\\media\\player\\Humo.bmp", 5);
-	spriteak[5].kop = 4;
+	JokalariaKargatu(".\\media\\player\\Humo.bmp", 6);
+	spriteak[6].kop = 4;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
@@ -505,7 +539,7 @@ void JokalariaKargatu(char Irudia[], int i)
 
 void MusikaJarri(char Fitxategia[])
 {
-	// explicacion
+	//explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
 
 	SDL_AudioSpec wavSpec;
@@ -553,9 +587,9 @@ void Animazioa()
 
 		
 	
-
+/*
 	MusikaJarri(Kea);
-/*	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
@@ -601,18 +635,6 @@ void Animazioa()
 	}
 	SDL_Delay(2000);*/
 	pertsonaia.egoera = BIZIRIK;
-}
-
-
-void* CargarMascara(char* nombre, int* pitch, Uint8* bpp) {
-
-	SDL_Surface* surface = SDL_LoadBMP(nombre);
-	void* pixels = surface->pixels;
-
-	*pitch = surface->pitch;
-	*bpp = surface->format->BytesPerPixel;
-
-	return pixels;
 }
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
