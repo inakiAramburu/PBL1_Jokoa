@@ -112,7 +112,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 			break;
 		case LEHEN:
-			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(".\\media\\fondos\\Nivel3.bmp", NULL, NULL, 0, 0);
 
 		
 
@@ -120,8 +120,8 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			
 
 
-			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 450;
+			pertsonaia.DestSprite.x = 402;
+			pertsonaia.DestSprite.y = 180;
 			break;
 	}
 }
@@ -324,8 +324,9 @@ void Ekintzak(int *i)
 {
 	int at;
 	int abiadura = 12;
-	if(colisioa_detectatu()==1)
+	if(colisioa_detectatu()==1 )
 	{
+		
 		pertsonaia.DestSprite.y += abiadura;
 		//SDL_Delay(100);
 	}
@@ -337,13 +338,21 @@ void Ekintzak(int *i)
 	
 	if (a)
 	{	
-		pertsonaia.DestSprite.x -= abiadura;
+		if (colisioa_detectatu() != 0250)
+		{
+			pertsonaia.DestSprite.x -= abiadura;
+
+		}
 		//pertsonaia.DestSprite.y += abiadura;
 
 	}
 	if (d) 
 	{
-		pertsonaia.DestSprite.x += abiadura;
+		if (colisioa_detectatu() != 1250)
+		{
+			pertsonaia.DestSprite.x += abiadura;
+
+		}
 	}
 	if (espacio && kont < 5) 
 	{
@@ -640,17 +649,21 @@ int colisioa_detectatu()
 	printf("\n x:%d ", pertsonaia.DestSprite.x + 53);
 	printf("y:%d\n", pertsonaia.DestSprite.y + 59);
 
-	void* pixels = CargarMascara("media/Nivel256.bmp", &pitch, &bpp); //comienzo de la memoria
+	void* pixels = CargarMascara("media/Nivel3mapeo.bmp", &pitch, &bpp); //comienzo de la memoria
 
 
 	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
 	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
 	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
+	printf("verde: %d\n", getpixel(pixels, pitch, bpp, 208, 222));
 	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
 
 	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
 	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
-	
+	int izquierda = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 40, pertsonaia.DestSprite.y);
+	int derecha = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 128, pertsonaia.DestSprite.y + 30);
+
+
 	if (piernas == 0 )
 	{
 		Tocas = 0;
@@ -661,6 +674,19 @@ int colisioa_detectatu()
 	{
 		Tocas = 249;
 		printf("LAVA");
+	}
+	if (piernas == 250)
+	{
+		Tocas = 250;
+		printf("verdesssss");
+	}
+	if (izquierda==250) {
+		Tocas = 0250;
+		printf("tocas izquierda ");
+	}
+	if (derecha == 250) {
+		Tocas = 1250;
+		printf("tocas izquierda ");
 	}
 	return Tocas;
 }
