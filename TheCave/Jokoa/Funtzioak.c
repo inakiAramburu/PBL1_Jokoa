@@ -227,7 +227,6 @@ void RenderMenu()
 
 void Irudikatu()
 {
-	
 	SDL_RenderPresent(render);
 }
 
