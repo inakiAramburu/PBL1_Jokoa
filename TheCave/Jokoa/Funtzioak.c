@@ -324,6 +324,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		}
 
 		}
+	switch (colisioa_detectatu())
+	{
+		case 1:
+		break;
+	}
 	}
 int kont = 0;
 
@@ -364,7 +369,7 @@ void Ekintzak(int *i)
 	}
 	if (colisioa_detectatu() == 0)
 	{
-		kont = 0;
+		pertsonaia.erortzen = EZ;
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
