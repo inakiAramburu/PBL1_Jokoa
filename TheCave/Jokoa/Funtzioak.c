@@ -318,6 +318,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 
 		}
 	}
+int kont = 0;
 
 void Ekintzak(int *i)
 {
@@ -344,14 +345,20 @@ void Ekintzak(int *i)
 	{
 		pertsonaia.DestSprite.x += abiadura;
 	}
-	if (espacio) 
+	if (espacio && kont < 5) 
 	{
-	for ( at = 0; at < 2; at++)
+		kont++;
+		printf("kont: %d", kont);
+	for ( at = 0; at < 3 ; at++)
 		{
-			pertsonaia.DestSprite.y -= abiadura;
+			pertsonaia.DestSprite.y -= abiadura; 
 			
 		}
-		
+
+	}
+	if (colisioa_detectatu() == 0)
+	{
+		kont = 0;
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
