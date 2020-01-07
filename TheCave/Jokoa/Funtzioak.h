@@ -10,7 +10,7 @@ typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
 typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
 typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
 typedef enum {HILDA, BIZIRIK}EGOERA;
-typedef enum { SAKATUGABE, SAKATUTA }TEKLAK;
+typedef enum {SAKATUGABE, SAKATUTA }TEKLAK;
 typedef enum {ATZERA, AURRERA}ZENTZUA;
 typedef enum {EZ, BAI}BOOLEANOA;
 
