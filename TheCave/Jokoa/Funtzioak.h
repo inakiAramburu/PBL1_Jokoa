@@ -5,7 +5,7 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 
-typedef enum {MENUA, LEHEN, BIGARREN, KREDITUAK, KONTROLAK, ATERA}PANTAILAK;
+typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERASO, HIL, KEA}SPRITE;
 typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
 typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
@@ -17,7 +17,7 @@ int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari iko
 int IrudiakKendu(int ZnbtUtzi);		//Irudien texturak ezabatzen ditu azkenetik hasten, nahi bada atzeko planoa ezabatu gabe utz daiteke, 1 parametroa pasatzen. Zenbat argazki geratu diren pasatzen du
 void KargatuIrudiak(PANTAILAK Pantaila); //Pantailaren arabera argazki batzuk kargatzera deituko ditu, baina lehenengo garkatuta zeuden guztiak ezabatzen ditu
 void ImgKargatu(char src[], int zabalera, int altuera, int x, int y);		//Argazki bat ordenagailutik igotzen du, eta beharrezkoak diren datuak emango di (zabalera, altuera, non kokatu...)
-void KargatuMapa(char mapa[], void *pixels, int *pitch, Uint8 *bpp);
+void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp);
 void RenderPrestatu(ZENTZUA begira);		//Texturak renderizatzeko modu orokor batean, ere pertsonaia renderizatuko du "BIZIRIK" badago
 void RenderMenu();		//MENUA pantailarako animazioak egiteko renderizatzen ditu testuaren argazkiak, eta saguaren arabera bata edo bestea erakusten du
 void Irudikatu();		//Pantailan renderra erakusten du

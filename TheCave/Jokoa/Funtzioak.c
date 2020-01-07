@@ -4,10 +4,10 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 
-
+/*
 extern int pitch; //el numero de pixels por fila
 extern Uint32 bpp; //el numero de Byte por pixel
-extern void* pixels;
+extern void* pixels;*/
 
 typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
 {
@@ -272,6 +272,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	{
 		switch (ebentua.type)
 		{
+			*Pantaila += 1;
 			case SDL_QUIT:
 				Amaitu(Jokoa, Pantaila);
 				break;

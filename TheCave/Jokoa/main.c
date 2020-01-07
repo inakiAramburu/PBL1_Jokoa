@@ -1,13 +1,14 @@
 #include "Funtzioak.h"
 #include <stdio.h>
 //Ekaitz, egitura
-void* pixels;
-int pitch;
-Uint8 bpp;
+
 int main(int argc, char* argv[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	JOKOA Jokoa = EZJOKATZEN;
+	void* pixels = NULL;
+	int pitch;
+	Uint8 bpp;
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -26,7 +27,6 @@ int main(int argc, char* argv[]) {
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
-	
 
 	while (Jokoa)
 	{
