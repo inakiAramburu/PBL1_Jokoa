@@ -338,7 +338,15 @@ void EbentuakKonprobatu(JOKOA* Jokoa, PANTAILAK* Pantaila, int* i, ZENTZUA* begi
 			break;
 		}
 	}
+
+	switch (colisioa_detectatu())
+	{
+		case 1:
+		break;
+	}
 }
+int kont = 0;
+>>>>>>> Salto
 
 void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp)
 {
