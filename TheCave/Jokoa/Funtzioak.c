@@ -86,7 +86,7 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 	DestNeurriak.x = Posx;
 	DestNeurriak.y = Posy;
 	DestNeurriak.w = 128;
-	DestNeurriak.h = 60;
+	DestNeurriak.h = 30;
 
 	SDL_Rect SrcNeurriak;
 
@@ -110,6 +110,17 @@ int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
 
 
 void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
+
+	int i;
+
+	for (i = 0; i < spritekopurua; i++)
+	{
+		AtzekoPlanoBerria(Atzekoplanoa);
+		Argazkia_Sartu(Argazkia, PosX, PosY, (128 * i), 0);
+		SDL_Delay(33.3);
+	}
+}
+void Sprite2(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
 
 	int i;
 

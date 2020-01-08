@@ -8,6 +8,10 @@ int main(int argc, char* str[]) {
 	char Eraso[128] = ".\\img\\sprites\\Attack.bmp"; //8
 	char Idle[128] = ".\\img\\sprites\\Idle.bmp"; //6
 	char Kea[128] = ".\\img\\sprites\\Humo.bmp"; //4
+	char Armiarma[128] = ".\\img\\sprites\\Armiarma.bmp"; //4
+	char Mamua[128] = ".\\img\\sprites\\Mamua.bmp"; //4
+	char Mukitxua[128] = ".\\img\\sprites\\Mukitxua.bmp"; //4
+
 
 	int i = 0;
 	int abiadura = 0;
@@ -20,9 +24,12 @@ int main(int argc, char* str[]) {
 
 	//////////////////////////////////////////////////////////////////
 
-	Sprite(Kea, Atzekoplanoa, 100, 560, 4);
-
+	while (1) {
+		Sprite(Armiarma, Atzekoplanoa, 100, 560, 4);
+	}
 	
+
+	/*
 
 	while (1) {
 
@@ -56,8 +63,8 @@ int main(int argc, char* str[]) {
 		}
 		Sprite(Idle, Atzekoplanoa, 100, 560, 6);
 
-	}
+	}*/
 	
-	SDL_Delay(10000);
+	SDL_Delay(20000);
 	return 0;
 }
