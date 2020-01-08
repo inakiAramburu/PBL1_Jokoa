@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
 			KolisioakKonprobatu(pixels, pitch, bpp);
-			Ekintzak(&animazioa, &begira);
+			Ekintzak(&animazioa, pixels, pitch, bpp, &begira);
 			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(80);

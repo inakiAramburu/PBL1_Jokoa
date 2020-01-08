@@ -417,7 +417,7 @@ void Ekintzak(int *i, ZENTZUA* begira)
 	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
 	*/
-	//AltueraZuzendu();
+	
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -445,12 +445,12 @@ void Ekintzak(int *i, ZENTZUA* begira)
 	}
 	if (a)
 	{	
-		*begira = EZKER;
+		*begira = ATZERA;
 		pertsonaia.DestSprite.x -= abiadurax;
 	}
 	if (d) 
 	{
-		*begira = ESKUIN;
+		*begira = AURRERA;
 		pertsonaia.DestSprite.x += abiadurax;
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
@@ -466,6 +466,7 @@ void Ekintzak(int *i, ZENTZUA* begira)
 	if (pertsonaia.erortzen)
 	{
 		pertsonaia.DestSprite.y += grabitatea;
+		AltueraZuzendu();
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
