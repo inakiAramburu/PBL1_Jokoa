@@ -147,8 +147,16 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		pertsonaia.DestSprite.x = 10;
 		pertsonaia.DestSprite.y = 555;
 		pertsonaia.sprite = BIZIRIK;
-		etsaia3.DestSprite.x = 460;
-		etsaia3.DestSprite.y = 220;
+		etsaia.DestSprite.x = 860;
+		etsaia.DestSprite.y = 150;
+		etsaia.DestSprite.h = 60;
+		etsaia.DestSprite.w = 128;
+		etsaia.SrcSprite.h = 60;
+		etsaia.SrcSprite.w = 128;
+		etsaia.SrcSprite.y = 0;
+		etsaia.abiadura = 9;
+		etsaia3.DestSprite.x = 660;
+		etsaia3.DestSprite.y = 570;
 		etsaia3.DestSprite.h = 60;
 		etsaia3.DestSprite.w = 128;
 		etsaia3.SrcSprite.h = 60;
@@ -403,13 +411,13 @@ void Ekintzak(int *i, int *j)
 	}
 	*/
 
-	/*etsaia.sprite = ARMIARMA;
+	etsaia.sprite = ARMIARMA;
 	
 	etsaia.SrcSprite.x = 128 * (*j);
 	etsaia.DestSprite.x += etsaia.abiadura;
 	RenderPrestatu(AURRERA);
 	Irudikatu();
-	SDL_Delay(80);*/
+	SDL_Delay(80);
 
 	/*etsaia2.sprite = MAMUA;
 
@@ -458,11 +466,11 @@ void Ekintzak(int *i, int *j)
 	{
 		*j = 0;
 	}
-	if (etsaia.DestSprite.x>=810)
+	if (etsaia.DestSprite.x>=500)
 	{
 		etsaia.abiadura *= -1;
 	}
-	if (etsaia.DestSprite.x <= 730)
+	if (etsaia.DestSprite.x <= 1200)
 	{
 		etsaia.abiadura *= -1;
 	}
@@ -470,10 +478,8 @@ void Ekintzak(int *i, int *j)
 	{
 		*j = 0;
 	}
-	if (etsaia2.DestSprite.x >= 740)
+	if (etsaia2.DestSprite.x >= 450)
 	{
-		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
-		SDL_RenderCopyEx(render, spriteak[etsaia2.sprite].textura, &etsaia2.SrcSprite, &etsaia2.DestSprite, 180, NULL, flip);
 
 		etsaia2.abiadura *= -1;
 	}
@@ -486,12 +492,12 @@ void Ekintzak(int *i, int *j)
 	{
 		*j = 0;
 	}
-	if (etsaia3.DestSprite.x >= 380)
+	if (etsaia3.DestSprite.x >= 500)
 	{
 
 		etsaia3.abiadura *= -1;
 	}
-	if (etsaia3.DestSprite.x <= 550)
+	if (etsaia3.DestSprite.x <= 1190)
 	{
 
 		etsaia3.abiadura *= -1;
