@@ -1,11 +1,54 @@
 #include "Funtzioak.h"
 #include <SDL.h>
-#include <stdio.h>
 
-SDL_Window* window;
-SDL_Renderer* renderer;
+SDL_Renderer* render;
+SDL_Window* leihoa;
 
-int LeihoaHasi()
+/*
+extern int pitch; //el numero de pixels por fila
+extern Uint32 bpp; //el numero de Byte por pixel
+extern void* pixels;*/
+
+typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
+{
+	SDL_Texture* textura;
+	SDL_Rect Dimentsioak;
+}IMG;
+
+IMG Irudiak[50];		//Irudiak, dagozkien datuekin
+int IrudiZnbk;
+
+typedef struct S_IMGPERTSONAIA		//Pertsonaiaren irudiak banaturik, beti kargatuta egongo direlako Jokatu sakatzen denetik
+{
+	SDL_Texture* textura;
+	int kop;
+}IMGPERTSONAIA;
+
+IMGPERTSONAIA spriteak[7];
+
+typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	SPRITE sprite;
+	EGOERA egoera;
+	BOOLEANOA salto;
+	BOOLEANOA erortzen;
+}PERTSONAIA;
+
+PERTSONAIA pertsonaia;
+typedef struct S_MAPA
+{
+	void* pixels;
+	int pitch;
+
+};
+
+TEKLAK a = SAKATUGABE;
+TEKLAK d = SAKATUGABE;
+TEKLAK espacio = SAKATUGABE;
+TEKLAK k = SAKATUGABE;
+
+int LeihoaEtaRenderHasi()
 {
 	// Initialize SDL2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -13,7 +56,7 @@ int LeihoaHasi()
 		return 1;
 	}
 	// Create an application window with the following settings:
-	window = SDL_CreateWindow(
+	leihoa = SDL_CreateWindow(
 		"The Cave",                  			// Izenburua
 		SDL_WINDOWPOS_CENTERED,           // Leihoa erdian jarri
 		SDL_WINDOWPOS_CENTERED,           // Leihoa erdian jarri
@@ -21,126 +64,483 @@ int LeihoaHasi()
 		PANTAILA_ALTUERA,                 // Sortzeko leihoaren altuera
 		SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
 	);
-	// Leihoa komprobachen du.
-	if (window == NULL) {
 
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());
-		return 1;
-	}
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-}
+	if (leihoa == NULL) { 		// Leihoa sortu dela konprobatzen du
 
-//Fondoa jartzen du.
-int AtzekoPlanoBerria(char AtzekoPlanoa[])
-{
-
-	SDL_Surface* surface;
-	SDL_Texture* texture;
-	SDL_Event event;
-
-
-	//irudia kargatu
-	surface = SDL_LoadBMP(AtzekoPlanoa);
-	if (!surface) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
-		return 1;
-	}
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (!texture) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin izan da leihoa sortu: %s\n", SDL_GetError());		//Errorea
 		return 1;
 	}
 
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-	SDL_PollEvent(&event);
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
-	SDL_RenderPresent(renderer);
+	SDL_Surface* ikonoa = SDL_LoadBMP(".\\media\\Ikonoa.bmp");
+	SDL_SetWindowIcon(leihoa, ikonoa);
+	SDL_FreeSurface(ikonoa);
+
+	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);		//Renderizatua hasi
 
 	return 0;
 }
 
-//Argazkia jartzen du.
-int Argazkia_Sartu(char Irudia[], int Posx, int Posy, int EPosx, int EPosy)
+int IrudiakKendu(int ZnbtUtzi)
+{
+	int i = IrudiZnbk - 1;
+
+	while (i >= ZnbtUtzi)
+	{
+		SDL_DestroyTexture(Irudiak[i].textura);
+		i--;
+	}
+	return i + 1;
+}
+
+void KargatuIrudiak(PANTAILAK Pantaila)
+{
+	IrudiZnbk = IrudiakKendu(0);
+	switch (Pantaila)
+	{
+		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
+		jokalaria puntu horretara heltzen ez bada*/
+
+	case MENUA:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
+		//ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
+		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
+		//ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
+		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
+		//ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
+		pertsonaia.egoera = HILDA;
+		break;
+	case KREDITUAK:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\KredituakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+		break;
+	case KONTROLAK:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+		break;
+	case LEHEN:
+		ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+
+		pertsonaia.DestSprite.x = 10;
+		pertsonaia.DestSprite.y = 450;
+		break;
+	}
+}
+
+void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;
-	SDL_Event event;
 
+	surface = SDL_LoadBMP(src);
+	if (!surface) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
 
-	//irudia kargatu
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture) {
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	SDL_FreeSurface(surface);
+	Irudiak[IrudiZnbk].textura = texture;
+	Irudiak[IrudiZnbk].Dimentsioak.h = altuera;
+	Irudiak[IrudiZnbk].Dimentsioak.w = zabalera;
+	Irudiak[IrudiZnbk].Dimentsioak.x = x;
+	Irudiak[IrudiZnbk].Dimentsioak.y = y;
+	IrudiZnbk++;
+}
+
+void KargatuMapa(char mapa[], void** pixels, int* pitch, Uint8* bpp)
+{
+	SDL_Surface* surface = SDL_LoadBMP(mapa);
+	*pixels = surface->pixels;
+
+	*pitch = surface->pitch;
+	*bpp = surface->format->BytesPerPixel;
+}
+
+void RenderPrestatu(ZENTZUA begira)
+{
+	int i;
+
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+	SDL_RenderClear(render);
+
+	for (i = 0; i < IrudiZnbk; i++)
+	{
+		if (Irudiak[i].Dimentsioak.h == NULL)
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		}
+		else
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+		}
+	}
+	if (pertsonaia.egoera == BIZIRIK)
+	{
+		if (begira == ATZERA)
+		{
+			SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+			SDL_RenderCopyEx(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite, 180, NULL, flip);
+		}
+		else
+		{
+			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+		}
+	}
+}
+
+void RenderMenu()
+{
+	int i = 0, x, y;
+
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+	SDL_RenderClear(render);
+	SDL_GetMouseState(&x, &y);
+
+	SDL_RenderCopy(render, Irudiak[0].textura, NULL, NULL);
+	SDL_RenderCopy(render, Irudiak[1].textura, NULL, &Irudiak[1].Dimentsioak);
+	if ((x > 515 && y > 175) && (x < 765 && y < 275))
+	{
+		Irudiak[2].Dimentsioak.w = 300;
+		Irudiak[2].Dimentsioak.h = 120;
+		Irudiak[2].Dimentsioak.x = 500;
+		Irudiak[2].Dimentsioak.y = 165;
+	}
+	else
+	{
+		Irudiak[2].Dimentsioak.w = 250;
+		Irudiak[2].Dimentsioak.h = 100;
+		Irudiak[2].Dimentsioak.x = 515;
+		Irudiak[2].Dimentsioak.y = 175;
+	}
+	if ((x > 510 && y > 300) && (x < 760 && y < 400))
+	{
+		Irudiak[3].Dimentsioak.x = 495;
+		Irudiak[3].Dimentsioak.y = 290;
+		Irudiak[3].Dimentsioak.w = 300;
+		Irudiak[3].Dimentsioak.h = 120;
+	}
+	else
+	{
+		Irudiak[3].Dimentsioak.x = 510;
+		Irudiak[3].Dimentsioak.y = 300;
+		Irudiak[3].Dimentsioak.w = 250;
+		Irudiak[3].Dimentsioak.h = 100;
+	}
+	if ((x > 512 && y > 425) && (x < 762 && y < 525))
+	{
+		Irudiak[4].Dimentsioak.x = 497;
+		Irudiak[4].Dimentsioak.y = 415;
+		Irudiak[4].Dimentsioak.w = 300;
+		Irudiak[4].Dimentsioak.h = 120;
+	}
+	else
+	{
+		Irudiak[4].Dimentsioak.x = 512;
+		Irudiak[4].Dimentsioak.y = 425;
+		Irudiak[4].Dimentsioak.w = 250;
+		Irudiak[4].Dimentsioak.h = 100;
+	}
+	SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
+	SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);
+	SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
+}
+
+void Irudikatu()
+{
+	SDL_RenderPresent(render);
+}
+
+void Amaitu(JOKOA* Jokoa, PANTAILAK* Pantaila)
+{
+	SDL_DestroyWindow(leihoa);
+	SDL_DestroyRenderer(render);
+	*Jokoa = EZJOKATZEN;
+	*Pantaila = ATERA;
+}
+
+void EbentuakKonprobatu(JOKOA* Jokoa, PANTAILAK* Pantaila, int* i, ZENTZUA* begira)
+{
+	SAGUA klika;
+	SDL_Event ebentua;
+	while (SDL_PollEvent(&ebentua))
+	{
+		switch (ebentua.type)
+		{
+			*Pantaila += 1;
+		case SDL_QUIT:
+			Amaitu(Jokoa, Pantaila);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			ZeinKlikatuDa(ebentua.button, &klika);
+			KonprobatuKlika(Pantaila, klika);
+			break;
+		case SDL_KEYDOWN:
+			switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
+			{
+			case SDL_SCANCODE_D:
+				a = SAKATUGABE;
+				if (!d && !pertsonaia.erortzen && !pertsonaia.salto)
+				{
+					pertsonaia.sprite = KORRIKA;
+					*i = 0;
+				}
+				d = SAKATUTA;
+				break;
+			case SDL_SCANCODE_A:
+				d = SAKATUGABE;
+				if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+				{
+					pertsonaia.sprite = KORRIKA;
+					*i = 0;
+				}
+				a = SAKATUTA;
+				break;
+			case SDL_SCANCODE_SPACE:
+				espacio = SAKATUTA;
+				break;
+			case SDL_SCANCODE_K:
+				k = SAKATUTA;
+				break;
+			case SDL_SCANCODE_ESCAPE:
+				Amaitu(Jokoa, Pantaila);
+				break;
+			}
+			break;
+		case SDL_KEYUP:
+			switch (ebentua.key.keysym.scancode)
+			{
+			case SDL_SCANCODE_D:
+				d = SAKATUGABE;
+				if (!a && !pertsonaia.salto && !pertsonaia.erortzen)
+				{
+					pertsonaia.sprite = IDLE;
+					*i = 0;
+				}
+				break;
+			case SDL_SCANCODE_A:
+				a = SAKATUGABE;
+				if (!d && !pertsonaia.salto && !pertsonaia.erortzen)
+				{
+					pertsonaia.sprite = IDLE;
+					*i = 0;
+				}
+				break;
+			case SDL_SCANCODE_SPACE:
+				espacio = SAKATUGABE;
+				break;
+			case SDL_SCANCODE_K:
+				k = SAKATUGABE;
+				break;
+			}
+			break;
+		}
+
+	}
+}
+
+void Ekintzak(int* i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
+{
+	int at;
+	int abiadura = 12;
+
+	switch (KolisioakKonprobatu(pixels, pitch, bpp))
+	{
+	case 1:
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = BAI;
+			pertsonaia.sprite = ERORI;
+		}
+		break;
+	case 0:
+		if (pertsonaia.erortzen)
+		{
+			if (a || d)
+			{
+				pertsonaia.sprite = KORRIKA;
+			}
+			else
+			{
+				pertsonaia.sprite = IDLE;
+			}
+		}
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = EZ;
+		}
+		break;
+		break;
+
+	}
+	if (a)
+	{
+		*begira = EZKER;
+		pertsonaia.DestSprite.x -= abiadura;
+	}
+	if (d)
+	{
+		*begira = ESKUIN;
+		pertsonaia.DestSprite.x += abiadura;
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
+	{
+		pertsonaia.salto = BAI;
+		pertsonaia.sprite = SALTO;
+		*i = 0;
+	}
+	if (pertsonaia.salto)
+	{
+		pertsonaia.DestSprite.y -= abiadura;
+	}
+	if (pertsonaia.erortzen)
+	{
+		pertsonaia.DestSprite.y += abiadura;
+	}
+	pertsonaia.SrcSprite.x = 128 * (*i);
+	*i += 1;
+	if (*i >= spriteak[pertsonaia.sprite].kop)
+	{
+		if (pertsonaia.salto)
+		{
+			pertsonaia.salto = EZ;
+			pertsonaia.erortzen = BAI;
+			pertsonaia.sprite = ERORI;
+		}
+		*i = 0;
+	}
+}
+
+void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika)
+{
+	switch (ebentua.button)
+	{
+	case SDL_BUTTON_LEFT:
+		*klika = EZKER;
+		break;
+
+	case SDL_BUTTON_RIGHT:
+		*klika = ESKUIN;
+		break;
+
+	case SDL_BUTTON_MIDDLE:
+		*klika = ERDIA;
+		break;
+	}
+}
+
+void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
+{
+	int x, y;
+	switch (*Pantaila)
+	{
+	case MENUA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 515 && y > 175) && (x < 765 && y < 275))
+			{
+				IrudiZnbk = 1;
+				RenderPrestatu(AURRERA);
+				Irudikatu();
+				KargatuPertsonaia();
+				Animazioa();
+				*Pantaila = LEHEN;
+			}
+			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
+			{
+				*Pantaila = KONTROLAK;
+			}
+			else if ((x > 512 && y > 425) && (x < 762 && y < 525))
+			{
+				*Pantaila = KREDITUAK;
+			}
+		}
+		break;
+
+	case KREDITUAK:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+			{
+				*Pantaila = MENUA;
+			}
+		}
+		break;
+
+	case KONTROLAK:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+			{
+				*Pantaila = MENUA;
+			}
+		}
+		break;
+	}
+}
+
+void KargatuPertsonaia()
+{
+
+	JokalariaKargatu(".\\media\\player\\Idle.bmp", 0);
+	spriteak[0].kop = 6;
+
+	JokalariaKargatu(".\\media\\player\\Run.bmp", 1);
+	spriteak[1].kop = 10;
+
+	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
+	spriteak[2].kop = 8;
+
+	JokalariaKargatu(".\\media\\player\\Caida.bmp", 3);
+	spriteak[3].kop = 6;
+
+	JokalariaKargatu(".\\media\\player\\Attack.bmp", 4);
+	spriteak[4].kop = 8;
+
+	JokalariaKargatu(".\\media\\player\\Dead.bmp", 5);
+	spriteak[5].kop = 6;
+
+	JokalariaKargatu(".\\media\\player\\Humo.bmp", 6);
+	spriteak[6].kop = 4;
+}
+
+void JokalariaKargatu(char Irudia[], int i)
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
 	surface = SDL_LoadBMP(Irudia);
-	if (!surface) {
+
+	if (!surface)
+	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
-		return 1;
+		return;
 	}
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	if (!texture) {
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
-		return 1;
+		return;
 	}
-	//irudiaren pozizioa jarri
-
-	SDL_Rect DestNeurriak;
-
-	DestNeurriak.x = Posx;
-	DestNeurriak.y = Posy;
-	DestNeurriak.w = 128;
-	DestNeurriak.h = 30;
-
-	SDL_Rect SrcNeurriak;
-
-	SrcNeurriak.x = EPosx;
-	SrcNeurriak.y = EPosy;
-	SrcNeurriak.w = 128;
-	SrcNeurriak.h = 60;
-
-	SDL_FreeSurface(surface);		//Aurrekoa garbitzeko
-	SDL_PollEvent(&event);
-	SDL_RenderCopy(renderer, texture, &SrcNeurriak, &DestNeurriak);
-	SDL_RenderPresent(renderer);
-
-
-	//neurriak.x = Posx;
-
-
-	return 0;
-
+	SDL_FreeSurface(surface);
+	spriteak[i].textura = texture;
 }
 
-
-void Sprite(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
-
-	int i;
-
-	for (i = 0; i < spritekopurua; i++)
-	{
-		AtzekoPlanoBerria(Atzekoplanoa);
-		Argazkia_Sartu(Argazkia, PosX, PosY, (128 * i), 0);
-		SDL_Delay(33.3);
-	}
-}
-void Sprite2(char Argazkia[], char Atzekoplanoa[], int PosX, int PosY, int spritekopurua) { //Sprite funtzioa
-
-	int i;
-
-	for (i = 0; i < spritekopurua; i++)
-	{
-		AtzekoPlanoBerria(Atzekoplanoa);
-		Argazkia_Sartu(Argazkia, PosX, PosY, (128 * i), 0);
-		SDL_Delay(100);
-	}
-}
-
-//musika funtzioa
-/*a medias*/
 void MusikaJarri(char Fitxategia[])
 {
-	// explicacion
+	//explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
-
-	//inicia la parte de audio
-	SDL_Init(SDL_INIT_AUDIO);
 
 	SDL_AudioSpec wavSpec;
 	Uint32 wavLength;
@@ -160,143 +560,138 @@ void MusikaJarri(char Fitxategia[])
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
 	SDL_PauseAudioDevice(deviceId, 0);
 
-
-
-
 	// dena itxi
 
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
-	//SDL_Quit();
 }
 
-void teklatua()
+void Animazioa()
 {
-	char Pertsonaia[128] = ".\\media\\player\\Run.bmp";
-	char Atzekoplanoa[128] = ".\\media\\fondos\\Menu.bmp";		//Argazkiaren helbidea
+	int i, j;
+
+	SDL_Delay(500);
+	IrudiZnbk = IrudiakKendu(1);
+	pertsonaia.egoera = BIZIRIK;
+	pertsonaia.sprite = KEA;
+	pertsonaia.DestSprite.x = 10;
+	pertsonaia.DestSprite.y = 555;
+	pertsonaia.DestSprite.h = 60;
+	pertsonaia.DestSprite.w = 128;
+	pertsonaia.SrcSprite.h = 60;
+	pertsonaia.SrcSprite.w = 128;
+	pertsonaia.SrcSprite.y = 0;
+	char Kea[128] = ".\\media\\sound\\Kea.wav";
 
 
-	int Posx = -10;
-	int Posy = 532;
-	int D = 0, SPACE = 0, A = 0;
-	int abiadura = 0;
-	int abiaduray = 0;
-	int i = 0;
-	int EPosx = 0;
-	int EPosy = 0;
-	while (1) {
-
-		SDL_Event evento;
-		while (SDL_PollEvent(&evento) != 0) {
-
-			if (evento.type == SDL_KEYDOWN)
-			{
-				switch (evento.key.keysym.scancode)
-				{
-					//derecha
-				case SDL_SCANCODE_D:
-					D = 1;
-					abiadura = 7;
 
 
-					break;
 
-					//izquierda
-
-				case SDL_SCANCODE_A:
-					A = 1;
-					abiadura = -7;
-
-					break;
-
-					//abajo
-
-				case SDL_SCANCODE_S:
-					printf("S\n");
-					break;
-
-					//arriba
-
-				case SDL_SCANCODE_W:
-					printf("W\n");
-					break;
-
-					//saltar
-
-				case SDL_SCANCODE_SPACE:
-					SPACE = 1;
-					abiaduray = 7;
-					break;
-
-				}
-			}
-			if (evento.type == SDL_KEYUP)
-			{
-
-				switch (evento.key.keysym.scancode)
-				{
-					//derecha
-				case SDL_SCANCODE_D:
-					D = 0;
-					i = 0;
-					EPosx = 0;
-					EPosy = 0;
-					abiadura = 0;
-					break;
-
-					//izquierda
-
-				case SDL_SCANCODE_A:
-					A = 0;
-					abiadura = 0;
-
-					break;
-
-					//abajo
-
-				case SDL_SCANCODE_S:
-					printf("S\n");
-					break;
-
-					//arriba
-
-				case SDL_SCANCODE_W:
-					printf("W\n");
-					break;
-
-					//saltar
-
-				case SDL_SCANCODE_SPACE:
-					SPACE = 0;
-					abiaduray = 0;
-					break;
-				}
-			}
-		}
-		printf("D %d SPACE %d A: %d\n", D, SPACE, A);
-		Posx += abiadura;
-		Posy -= abiaduray;
-
-		EPosy = 0;
-		if (D == 1 || A == 1)
+	/*
+		MusikaJarri(Kea);
+		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
-
-			if (i > 10)
-			{
-				i = 0;
-			}
-			AtzekoPlanoBerria(Atzekoplanoa);
-
-
-			//SDL_Delay(90);
-			EPosx = (128 * i);
-
-			i++;
+			SDL_Delay(100);
+			pertsonaia.SrcSprite.x = 128 * i;
+			RenderPrestatu(AURRERA);
+			Irudikatu();
 		}
-		Argazkia_Sartu(Pertsonaia, Posx, Posy, EPosx, EPosy);
-		SDL_Delay(50);
+		pertsonaia.sprite = IDLE;
+		for (j = 0; j < 2; j++)
+		{
+			for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+			{
+				pertsonaia.SrcSprite.x = 128 * i;
+				RenderPrestatu(AURRERA);
+				Irudikatu();
+				SDL_Delay(150);
+			}
+		}
+		pertsonaia.sprite = KORRIKA;
+		for (j = 0; j < 12; j++)
+		{
+			for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
+			{
+				pertsonaia.SrcSprite.x = 128 * i;
+				pertsonaia.DestSprite.x += 9;
+				RenderPrestatu(AURRERA);
+				Irudikatu();
+				SDL_Delay(80);
+			}
+		}
+		pertsonaia.sprite = IDLE;
+		RenderPrestatu(AURRERA);
+		Irudikatu();
+		SDL_Delay(300);
+		IrudiZnbk = IrudiakKendu(0);
+		pertsonaia.egoera = HILDA;
+		ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
+		for (i = 0; i < 80; i++)
+		{
+			SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
+			RenderPrestatu(AURRERA);
+			Irudikatu();
+			SDL_Delay(100);
+		}
+		SDL_Delay(2000);*/
+	pertsonaia.egoera = BIZIRIK;
+}
+
+Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
+{
 
 
+	Uint8* p = (Uint8*)pixels + (y * (Uint32)(pitch)+x) * bpp;
+
+	switch (bpp) {
+	case 1:
+		return *p;
+		break;
+
+	case 2:
+		return *(Uint16*)p;
+		break;
+
+	case 3:
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+			return p[0] << 16 | p[1] << 8 | p[2];
+		else
+			return p[0] | p[1] << 8 | p[2] << 16;
+		break;
+
+	case 4:
+		return *(Uint32*)p;
+		break;
+
+	default:
+		return 0;
+	}
+}
+
+int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
+{
+	int Tocas = 1;
+	printf("x:%d ", pertsonaia.DestSprite.x);
+	printf("y:%d\n", pertsonaia.DestSprite.y);
+
+	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
+	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
+	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
+	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
+
+	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
+	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
+
+	if (piernas == 0)
+	{
+		Tocas = 0;
+		printf("SUELO");
 
 	}
+	if (piernas == 249)
+	{
+		Tocas = 249;
+		printf("LAVA");
+	}
+	return Tocas;
 }
