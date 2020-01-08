@@ -117,6 +117,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 			break;
 		case LEHEN:
+	
 			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 
 			pertsonaia.DestSprite.x = 10;
@@ -557,19 +558,35 @@ void MusikaJarri(char Fitxategia[])
 
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
 	SDL_PauseAudioDevice(deviceId, 0);
+	
+	// dena itxi
+	
+	//SDL_CloseAudioDevice(deviceId);
+	SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
+}
+void MusikaKendu(char Fitxategia[]){
+	SDL_Init(SDL_INIT_AUDIO);
 
+	SDL_AudioSpec wavSpec;
+	Uint32 wavLength;
+	Uint8* wavBuffer;
 
+	// abrir dependencias de audio
 
+	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+	SDL_PauseAudioDevice(deviceId, 0);
 
 	// dena itxi
 
-	//SDL_CloseAudioDevice(deviceId);
-	//SDL_FreeWAV(wavBuffer);
-	//SDL_Quit();
+	SDL_CloseAudioDevice(deviceId);
+	SDL_FreeWAV(wavBuffer);
+	
 }
 
 void Animazioa()
 {
+	
 	int i, j;
 
 	SDL_Delay(500);
@@ -583,14 +600,8 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	char Kea[128] = ".\\media\\sound\\Kea.wav";
-
 	
-
-		
-	
-/*
-	MusikaJarri(Kea);
+	MusikaJarri(EFEKTUA_KEA);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
@@ -598,6 +609,9 @@ void Animazioa()
 		RenderPrestatu(AURRERA);
 		Irudikatu();
 	}
+	
+
+	
 	pertsonaia.sprite = IDLE;
 	for (j = 0; j < 2; j++)
 	{
@@ -609,6 +623,7 @@ void Animazioa()
 			SDL_Delay(150);
 		}
 	}
+	MusikaJarri(EFEKTUA_KORRIKA);
 	pertsonaia.sprite = KORRIKA;
 	for (j = 0; j < 12; j++)
 	{
@@ -621,6 +636,9 @@ void Animazioa()
 			SDL_Delay(80);
 		}
 	}
+	MusikaKendu(EFEKTUA_KORRIKA);
+	
+	
 	pertsonaia.sprite = IDLE;
 	RenderPrestatu(AURRERA);
 	Irudikatu();
@@ -635,7 +653,7 @@ void Animazioa()
 		Irudikatu();
 		SDL_Delay(100);
 	}
-	SDL_Delay(2000);*/
+	SDL_Delay(2000);
 }
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)

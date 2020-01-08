@@ -4,7 +4,9 @@
 
 int main(int argc, char* argv[]) {
 
-	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
+	PANTAILAK Pantaila;	
+	//Zein pantailan dagoen jokalaria
+	
 	JOKOA Jokoa = EZJOKATZEN;
 	void* pixels = NULL;
 	int pitch;
@@ -24,20 +26,21 @@ int main(int argc, char* argv[]) {
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
 	int animazioa;
-	char musika[128] = ".\\media\\sound\\test.wav";
+	
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
-
-	MusikaJarri(musika);
+	
 	while (Jokoa)
 	{
+		
 		
 		while (Pantaila == MENUA)
 		{
 			KargaKredituak = 0;
 			KargaKontrolak = 0;
 			if (!KargaMenua)
-			{
+			{ 
+				
 				KargatuIrudiak(Pantaila);
 				KargaMenua = 1;
 			}
@@ -52,6 +55,7 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaKredituak)
 			{
+				
 				KargatuIrudiak(Pantaila);
 				KargaKredituak = 1;
 			}
@@ -65,6 +69,7 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaKontrolak)
 			{
+				
 				KargatuIrudiak(Pantaila);
 				KargaKontrolak = 1;
 			}
@@ -76,8 +81,10 @@ int main(int argc, char* argv[]) {
 		while (Pantaila == LEHEN)
 		{
 			KargaMenua = 0;
+			
 			if (!KargaLehen)
 			{
+				
 				KargatuIrudiak(Pantaila);
 				KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
 				KargaLehen = 1;
@@ -86,7 +93,8 @@ int main(int argc, char* argv[]) {
 			Ekintzak(&animazioa, pixels, pitch, bpp, &begira);
 			RenderPrestatu(begira);
 			Irudikatu();
-			SDL_Delay(80);
+			SDL_Delay(50);
+			
 		}
 	}
 	return 0;

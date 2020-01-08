@@ -7,6 +7,9 @@
 #define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
 #define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
 #define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
+#define MUSIKA_MENU ".\\media\\sound\\test.wav"
+#define EFEKTUA_KEA ".\\media\\sound\\Kea.wav"
+#define EFEKTUA_KORRIKA ".\\media\\sound\\Korrika.wav"
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
@@ -16,6 +19,7 @@ typedef enum {HILDA, BIZIRIK}EGOERA;
 typedef enum {SAKATUGABE, SAKATUTA }TEKLAK;
 typedef enum {ATZERA, AURRERA}ZENTZUA;
 typedef enum {EZ, BAI}BOOLEANOA;
+
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 int IrudiakKendu(int ZnbtUtzi);		//Irudien texturak ezabatzen ditu azkenetik hasten, nahi bada atzeko planoa ezabatu gabe utz daiteke, 1 parametroa pasatzen. Zenbat argazki geratu diren pasatzen du
@@ -34,6 +38,7 @@ void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzek
 void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
+void MusikaKendu(char Fitxategia[]);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
 int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
 
