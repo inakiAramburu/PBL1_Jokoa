@@ -377,7 +377,6 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 			pertsonaia.erortzen = EZ;
 		}
 		break;
-		break;
 
 	}
 	if (a)
