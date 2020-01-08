@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz, egitura
+//dev
 
 int main(int argc, char* argv[]) {
 
