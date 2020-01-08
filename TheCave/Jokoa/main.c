@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz, egitura
+//Itxaso musika
 
 int main(int argc, char* argv[]) {
 
@@ -8,6 +8,7 @@ int main(int argc, char* argv[]) {
 	JOKOA Jokoa = EZJOKATZEN;
 	void* pixels = NULL;
 	int pitch;
+	
 	Uint8 bpp;
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
@@ -23,13 +24,14 @@ int main(int argc, char* argv[]) {
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
 	int animazioa;
-
+	char musika[128] = ".\\media\\sound\\test.wav";
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
-
+	MusikaJarri(musika);
 	while (Jokoa)
 	{
+		
 		while (Pantaila == MENUA)
 		{
 			KargaKredituak = 0;
