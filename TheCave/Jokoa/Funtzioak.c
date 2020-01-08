@@ -24,7 +24,7 @@ typedef struct S_IMGPERTSONAIA		//Pertsonaiaren irudiak banaturik, beti kargatut
 	int kop;
 }IMGPERTSONAIA;
 
-IMGPERTSONAIA spriteak[8];		
+IMGPERTSONAIA spriteak[9];		
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
@@ -54,6 +54,16 @@ typedef struct S_ETSAIA2		//Pertsonaiaren datuak
 }ETSAIA2;
 
 ETSAIA etsaia2;
+
+typedef struct S_ETSAIA3		//Pertsonaiaren datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	SPRITE sprite;
+	EGOERA egoera;
+	int abiadura;
+}ETSAIA3;
+
+ETSAIA etsaia3;
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -132,19 +142,19 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
-		ImgKargatu(".\\media\\fondos\\Nivel3.bmp", NULL, NULL, 0, 0);
+		
 		
 		pertsonaia.DestSprite.x = 10;
 		pertsonaia.DestSprite.y = 555;
-		pertsonaia.sprite = IDLE;
-		etsaia.DestSprite.x = 730;
-		etsaia.DestSprite.y = 285;
-		etsaia.DestSprite.h = 60;
-		etsaia.DestSprite.w = 128;
-		etsaia.SrcSprite.h = 60;
-		etsaia.SrcSprite.w = 128;
-		etsaia.SrcSprite.y = 0;
-		etsaia.abiadura = 9;
+		pertsonaia.sprite = BIZIRIK;
+		etsaia3.DestSprite.x = 460;
+		etsaia3.DestSprite.y = 220;
+		etsaia3.DestSprite.h = 60;
+		etsaia3.DestSprite.w = 128;
+		etsaia3.SrcSprite.h = 60;
+		etsaia3.SrcSprite.w = 128;
+		etsaia3.SrcSprite.y = 0;
+		etsaia3.abiadura = 9;
 		
 		break;
 	}
@@ -230,6 +240,17 @@ void RenderPrestatu(ZENTZUA begira)
 		else
 		{
 			SDL_RenderCopy(render, spriteak[etsaia2.sprite].textura, &etsaia2.SrcSprite, &etsaia2.DestSprite);
+		}
+
+		if (etsaia3.abiadura > 0)
+		{
+			SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+			SDL_RenderCopyEx(render, spriteak[etsaia3.sprite].textura, &etsaia3.SrcSprite, &etsaia3.DestSprite, 180, NULL, flip);
+		}
+		else
+		{
+			SDL_RenderCopy(render, spriteak[etsaia3.sprite].textura, &etsaia3.SrcSprite, &etsaia3.DestSprite);
 		}
 	}
 }
@@ -382,13 +403,13 @@ void Ekintzak(int *i, int *j)
 	}
 	*/
 
-	etsaia.sprite = ARMIARMA;
+	/*etsaia.sprite = ARMIARMA;
 	
 	etsaia.SrcSprite.x = 128 * (*j);
 	etsaia.DestSprite.x += etsaia.abiadura;
 	RenderPrestatu(AURRERA);
 	Irudikatu();
-	SDL_Delay(80);
+	SDL_Delay(80);*/
 
 	/*etsaia2.sprite = MAMUA;
 
@@ -397,7 +418,14 @@ void Ekintzak(int *i, int *j)
 	RenderPrestatu(AURRERA);
 	Irudikatu();
 	SDL_Delay(80);*/
-		 
+	
+	etsaia3.sprite = MUKITXUA;
+
+	etsaia3.SrcSprite.x = 128 * (*j);
+	etsaia3.DestSprite.x += etsaia3.abiadura;
+	RenderPrestatu(AURRERA);
+	Irudikatu();
+	SDL_Delay(80); 
 	
 	
 	if (a)
@@ -453,6 +481,20 @@ void Ekintzak(int *i, int *j)
 	{
 		
 		etsaia2.abiadura *= -1;
+	}
+	if (*j >= spriteak[etsaia3.sprite].kop)
+	{
+		*j = 0;
+	}
+	if (etsaia3.DestSprite.x >= 380)
+	{
+
+		etsaia3.abiadura *= -1;
+	}
+	if (etsaia3.DestSprite.x <= 550)
+	{
+
+		etsaia3.abiadura *= -1;
 	}
 }
 
@@ -554,6 +596,9 @@ void KargatuPertsonaia()
 
 	EtsaiaKargatu(".\\media\\enemigos\\Mamua.bmp", 7);
 	spriteak[7].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Mukitxua.bmp", 8);
+	spriteak[8].kop = 4;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
