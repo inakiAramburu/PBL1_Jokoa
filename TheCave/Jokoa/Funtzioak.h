@@ -5,8 +5,9 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 #define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
-#define LEHENENGO_PANTAILA ".\\media\\Nivel256.bmp"
+#define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
 #define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
+#define GRABITATEA 17
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
@@ -32,11 +33,11 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);		//Klika non egin den et
 void Animazioa();		//Jokatu sakatzen denean aniamzio labur bat egiten du
 void KargatuPertsonaia();		//Jokatu sakatzean lehenengo aldiz pertsonaia kargatzera deitzen du
 void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartzu eta gordetzen ditu
-void Ekintzak(int *i, ZENTZUA* begira);
+void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
-void AltueraZuzendu();
+void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp);
 
 #endif

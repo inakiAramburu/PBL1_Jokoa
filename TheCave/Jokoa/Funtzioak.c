@@ -371,11 +371,10 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int *i, ZENTZUA* begira)
+void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
-	int grabitatea = 16;
 /*
 	switch (KolisioakKonprobatu(pixels, pitch, bpp))
 	{
@@ -408,16 +407,16 @@ void Ekintzak(int *i, ZENTZUA* begira)
 		break;
 
 	}*/
-	/*		Debbug de pies
+	//	Debbug de pies
 	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
 	printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
 
 	printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
 	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
-	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
-	*/
+	printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	
+	KolisioakKonprobatu(pixels, pitch, bpp);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -441,6 +440,7 @@ void Ekintzak(int *i, ZENTZUA* begira)
 		{
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
+			//AltueraZuzendu(pixels, pitch, bpp);
 		}
 	}
 	if (a)
@@ -465,8 +465,8 @@ void Ekintzak(int *i, ZENTZUA* begira)
 	}
 	if (pertsonaia.erortzen)
 	{
-		pertsonaia.DestSprite.y += grabitatea;
-		AltueraZuzendu();
+		pertsonaia.DestSprite.y += GRABITATEA;
+		AltueraZuzendu(pixels, pitch, bpp);
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
@@ -773,7 +773,19 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 	
 }
 
-void AltueraZuzendu()
+void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
 {
-	
+	int i = 1;
+	KOLOREAK tmp, tmp2;
+	do
+	{
+		tmp = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59 + i);
+		tmp2 = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59 + i);
+		i ++;
+	} while (i < GRABITATEA && (tmp == TXURIA || tmp2 == TXURIA));
+	if (i >= GRABITATEA)
+	{
+		return;
+	}
+	pertsonaia.DestSprite.y += i;
 }
