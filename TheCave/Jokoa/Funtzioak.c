@@ -9,6 +9,30 @@ extern int pitch; //el numero de pixels por fila
 extern Uint32 bpp; //el numero de Byte por pixel
 extern void* pixels;*/
 
+typedef struct S_BEHEKOPIXEL
+{
+	KOLOREAK ezker;
+	KOLOREAK eskuin;
+}BEHEKOPIXEL;
+
+typedef struct S_ALBOKOPIXEL
+{
+	KOLOREAK goikoa;
+	KOLOREAK erdikoa;
+	KOLOREAK behekoa;
+}ALBOKOPIXEL;
+
+typedef struct S_HITBOX
+{
+	ALBOKOPIXEL ezker;
+	ALBOKOPIXEL eskuin;
+	BEHEKOPIXEL behekoa;
+	KOLOREAK goikoa;
+
+}HITBOX;
+
+HITBOX hitbox;
+
 typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak
 {
 	SDL_Texture* textura;
@@ -36,11 +60,11 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
+
 typedef struct S_MAPA
 {
 	void* pixels;
 	int pitch;
-
 };
 
 TEKLAK a = SAKATUGABE;
@@ -120,7 +144,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 500;
+			pertsonaia.DestSprite.y = 100;
 			pertsonaia.egoera = BIZIRIK;
 			pertsonaia.SrcSprite.x = 0;
 			break;
@@ -173,7 +197,14 @@ void RenderPrestatu(ZENTZUA begira)
 	
 	for (i = 0; i < IrudiZnbk; i++)
 	{
-		SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		if (Irudiak[i].Dimentsioak.h == NULL)
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
+		}
+		else
+		{
+			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+		}
 	}
 	if (pertsonaia.egoera == BIZIRIK)
 	{
@@ -340,11 +371,12 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
+void Ekintzak(int *i, ZENTZUA* begira)
 {
-	int at;
-	int abiadura = 12;
-
+	int abiadurax = 12;
+	int abiaduray = 12;
+	int grabitatea = 16;
+/*
 	switch (KolisioakKonprobatu(pixels, pitch, bpp))
 	{
 	case 1:
@@ -375,16 +407,51 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 		}
 		break;
 
+	}*/
+	/*		Debbug de pies
+	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
+	printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
+	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
+
+	printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
+	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
+	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
+	*/
+	//AltueraZuzendu();
+	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
+	{
+		if (pertsonaia.erortzen)
+		{
+			if (a || d)
+			{
+				pertsonaia.sprite = KORRIKA;
+				*i = 0;
+			}
+			else
+			{
+				pertsonaia.sprite = IDLE;
+				*i = 0;
+			}
+		}
+		pertsonaia.erortzen = EZ;
+	}
+	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
+	{
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = BAI;
+			pertsonaia.sprite = ERORI;
+		}
 	}
 	if (a)
 	{	
 		*begira = EZKER;
-		pertsonaia.DestSprite.x -= abiadura;
+		pertsonaia.DestSprite.x -= abiadurax;
 	}
 	if (d) 
 	{
 		*begira = ESKUIN;
-		pertsonaia.DestSprite.x += abiadura;
+		pertsonaia.DestSprite.x += abiadurax;
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
 	{
@@ -394,11 +461,11 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 	}
 	if (pertsonaia.salto)
 	{
-		pertsonaia.DestSprite.y -= abiadura;
+		pertsonaia.DestSprite.y -= abiaduray;
 	}
 	if (pertsonaia.erortzen)
 	{
-		pertsonaia.DestSprite.y += abiadura;
+		pertsonaia.DestSprite.y += grabitatea;
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
@@ -662,8 +729,9 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
 	}
 }
 
-int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
-{
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
+{/*
+	//getpixel(pixels, pitch, bpp, 0, 0));
 	int Tocas=1;
 	printf("x:%d ", pertsonaia.DestSprite.x);
 	printf("y:%d\n", pertsonaia.DestSprite.y);
@@ -672,7 +740,7 @@ int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
 	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
 	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
-
+	
 	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
 	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
 	
@@ -688,4 +756,23 @@ int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 		printf("LAVA");
 	}
 	return Tocas;
+	*/
+	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
+	//Ezkerreko aldea
+	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);		
+	hitbox.ezker.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 32);
+	hitbox.ezker.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 52);
+	//Eskuineko aldea
+	hitbox.eskuin.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 11);
+	hitbox.eskuin.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 32);
+	hitbox.eskuin.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 52);
+	//Behekoa
+	hitbox.behekoa.ezker = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59);
+	hitbox.behekoa.eskuin = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59);
+	
+}
+
+void AltueraZuzendu()
+{
+	
 }

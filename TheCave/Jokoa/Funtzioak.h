@@ -5,7 +5,7 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 #define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
-#define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
+#define LEHENENGO_PANTAILA ".\\media\\Nivel256.bmp"
 #define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;
@@ -16,6 +16,7 @@ typedef enum {HILDA, BIZIRIK}EGOERA;
 typedef enum {SAKATUGABE, SAKATUTA }TEKLAK;
 typedef enum {ATZERA, AURRERA}ZENTZUA;
 typedef enum {EZ, BAI}BOOLEANOA;
+typedef enum {GORRIA = 249, BELTZA = 0, TXURIA = 255, BERDEA = 250, HORIA}KOLOREAK;
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 int IrudiakKendu(int ZnbtUtzi);		//Irudien texturak ezabatzen ditu azkenetik hasten, nahi bada atzeko planoa ezabatu gabe utz daiteke, 1 parametroa pasatzen. Zenbat argazki geratu diren pasatzen du
@@ -31,10 +32,11 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);		//Klika non egin den et
 void Animazioa();		//Jokatu sakatzen denean aniamzio labur bat egiten du
 void KargatuPertsonaia();		//Jokatu sakatzean lehenengo aldiz pertsonaia kargatzera deitzen du
 void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartzu eta gordetzen ditu
-void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira);
+void Ekintzak(int *i, ZENTZUA* begira);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
-int KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
+void AltueraZuzendu();
 
 #endif
