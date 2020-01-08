@@ -101,30 +101,31 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		jokalaria puntu horretara heltzen ez bada*/
 
 		case MENUA:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
-			//ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
 			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
-			//ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
 			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
-			//ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
 			pertsonaia.egoera = HILDA;
 			break;
 		case KREDITUAK:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\KredituakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 			break;
 		case KONTROLAK:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+			ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
 			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 			break;
 		case LEHEN:
-			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
+			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 450;
+			pertsonaia.DestSprite.y = 500;
+			pertsonaia.egoera = BIZIRIK;
+			pertsonaia.SrcSprite.x = 0;
 			break;
+		case BIGARREN:
+			ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
 	}
 }
 
@@ -172,14 +173,7 @@ void RenderPrestatu(ZENTZUA begira)
 	
 	for (i = 0; i < IrudiZnbk; i++)
 	{
-		if (Irudiak[i].Dimentsioak.h == NULL)
-		{
-			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
-		}
-		else
-		{
-			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
-		}
+		SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
 	}
 	if (pertsonaia.egoera == BIZIRIK)
 	{
@@ -358,6 +352,7 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 		{
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
+			*i = 0;
 		}
 		break;
 	case 0:
@@ -366,10 +361,12 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 			if (a || d)
 			{
 				pertsonaia.sprite = KORRIKA;
+				*i = 0;
 			}
 			else
 			{
 				pertsonaia.sprite = IDLE;
+				*i = 0;
 			}
 		}
 		if (!pertsonaia.salto)
@@ -411,7 +408,6 @@ void Ekintzak(int *i, void* pixels, int pitch, Uint8 bpp, ZENTZUA* begira)
 		{
 			pertsonaia.salto = EZ;
 			pertsonaia.erortzen = BAI;
-			pertsonaia.sprite = ERORI;
 		}
 		*i = 0;
 	}
@@ -633,7 +629,6 @@ void Animazioa()
 		SDL_Delay(100);
 	}
 	SDL_Delay(2000);*/
-	pertsonaia.egoera = BIZIRIK;
 }
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
