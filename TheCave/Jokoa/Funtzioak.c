@@ -24,7 +24,7 @@ typedef struct S_IMGPERTSONAIA		//Pertsonaiaren irudiak banaturik, beti kargatut
 	int kop;
 }IMGPERTSONAIA;
 
-IMGPERTSONAIA spriteak[6];		
+IMGPERTSONAIA spriteak[8];		
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
@@ -34,6 +34,26 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
+
+typedef struct S_ETSAIA		//Pertsonaiaren datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	SPRITE sprite;
+	EGOERA egoera;
+	int abiadura;
+}ETSAIA;
+
+ETSAIA etsaia;
+
+typedef struct S_ETSAIA2		//Pertsonaiaren datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	SPRITE sprite;
+	EGOERA egoera;
+	int abiadura;
+}ETSAIA2;
+
+ETSAIA etsaia2;
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -87,38 +107,50 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila)
 {
 	IrudiZnbk = IrudiakKendu(0);
-	switch (Pantaila)		
+	switch (Pantaila)
 	{
 		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
 		jokalaria puntu horretara heltzen ez bada*/
 
-		case MENUA:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
-			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
-			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
-			pertsonaia.egoera = HILDA;
-			break;
-		case KREDITUAK:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\KredituakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
-			break;
-		case KONTROLAK:
-			ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
-			ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
-			break;
-		case LEHEN:
-			ImgKargatu(".\\media\\fondos\\Nivel2.bmp", NULL, NULL, 0, 0);
-
-			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 450;
-			break;
+	case MENUA:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 300, 120, 500, 165);		//Aniamzioa egiteko
+		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 300, 120, 495, 290);		//Animazioa egiteko
+		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 300, 120, 497, 415);		//Animazioa egiteko
+		pertsonaia.egoera = HILDA;
+		break;
+	case KREDITUAK:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\KredituakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+		break;
+	case KONTROLAK:
+		ImgKargatu(".\\media\\fondos\\Menu.bmp", NULL, NULL, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
+		break;
+	case LEHEN:
+		ImgKargatu(".\\media\\fondos\\Nivel3.bmp", NULL, NULL, 0, 0);
+		
+		pertsonaia.DestSprite.x = 10;
+		pertsonaia.DestSprite.y = 555;
+		pertsonaia.sprite = IDLE;
+		etsaia.DestSprite.x = 730;
+		etsaia.DestSprite.y = 285;
+		etsaia.DestSprite.h = 60;
+		etsaia.DestSprite.w = 128;
+		etsaia.SrcSprite.h = 60;
+		etsaia.SrcSprite.w = 128;
+		etsaia.SrcSprite.y = 0;
+		etsaia.abiadura = 9;
+		
+		break;
 	}
 }
+
+
 
 void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
@@ -181,9 +213,23 @@ void RenderPrestatu(ZENTZUA begira)
 
 			SDL_RenderCopyEx(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite, 180, NULL, flip);
 		}
+		
 		else
 		{
 			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
+		}
+		
+		SDL_RenderCopy(render, spriteak[etsaia.sprite].textura, &etsaia.SrcSprite, &etsaia.DestSprite);
+		
+		if (etsaia2.abiadura>0)
+		{
+			SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+			SDL_RenderCopyEx(render, spriteak[etsaia2.sprite].textura, &etsaia2.SrcSprite, &etsaia2.DestSprite, 180, NULL, flip);
+		}
+		else
+		{
+			SDL_RenderCopy(render, spriteak[etsaia2.sprite].textura, &etsaia2.SrcSprite, &etsaia2.DestSprite);
 		}
 	}
 }
@@ -319,10 +365,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 		}
 	}
 
-void Ekintzak(int *i)
+void Ekintzak(int *i, int *j)
 {
 	int at;
 	int abiadura = 12;
+	
 /*	if(KolisioakKonprobatu()==1)
 	{
 		pertsonaia.DestSprite.y += abiadura;
@@ -334,6 +381,25 @@ void Ekintzak(int *i)
 		exit;
 	}
 	*/
+
+	etsaia.sprite = ARMIARMA;
+	
+	etsaia.SrcSprite.x = 128 * (*j);
+	etsaia.DestSprite.x += etsaia.abiadura;
+	RenderPrestatu(AURRERA);
+	Irudikatu();
+	SDL_Delay(80);
+
+	/*etsaia2.sprite = MAMUA;
+
+	etsaia2.SrcSprite.x = 128 * (*j);
+	etsaia2.DestSprite.x += etsaia2.abiadura;
+	RenderPrestatu(AURRERA);
+	Irudikatu();
+	SDL_Delay(80);*/
+		 
+	
+	
 	if (a)
 	{	
 		pertsonaia.DestSprite.x -= abiadura;
@@ -358,6 +424,35 @@ void Ekintzak(int *i)
 	if (*i >= spriteak[pertsonaia.sprite].kop)
 	{
 		*i = 0;
+	}
+	*j += 1;
+	if (*j >= spriteak[etsaia.sprite].kop)
+	{
+		*j = 0;
+	}
+	if (etsaia.DestSprite.x>=810)
+	{
+		etsaia.abiadura *= -1;
+	}
+	if (etsaia.DestSprite.x <= 730)
+	{
+		etsaia.abiadura *= -1;
+	}
+	if (*j >= spriteak[etsaia2.sprite].kop)
+	{
+		*j = 0;
+	}
+	if (etsaia2.DestSprite.x >= 740)
+	{
+		SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+		SDL_RenderCopyEx(render, spriteak[etsaia2.sprite].textura, &etsaia2.SrcSprite, &etsaia2.DestSprite, 180, NULL, flip);
+
+		etsaia2.abiadura *= -1;
+	}
+	if (etsaia2.DestSprite.x <= 870)
+	{
+		
+		etsaia2.abiadura *= -1;
 	}
 }
 
@@ -453,6 +548,12 @@ void KargatuPertsonaia()
 	
 	JokalariaKargatu(".\\media\\player\\Humo.bmp", 5);
 	spriteak[5].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Armiarma.bmp", 6);
+	spriteak[6].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Mamua.bmp", 7);
+	spriteak[7].kop = 4;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
@@ -477,6 +578,30 @@ void JokalariaKargatu(char Irudia[], int i)
 	SDL_FreeSurface(surface);
 	spriteak[i].textura = texture;
 }
+
+void EtsaiaKargatu(char Irudia[], int i)
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
+	surface = SDL_LoadBMP(Irudia);
+
+	if (!surface)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+	SDL_FreeSurface(surface);
+	spriteak[i].textura = texture;
+}
+
 
 void MusikaJarri(char Fitxategia[])
 {
@@ -520,8 +645,7 @@ void Animazioa()
 
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
-	pertsonaia.egoera = BIZIRIK;
-	pertsonaia.sprite = KEA;
+	
 	pertsonaia.DestSprite.x = 10;
 	pertsonaia.DestSprite.y = 555;
 	pertsonaia.DestSprite.h = 60;
@@ -529,13 +653,17 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
+	
+	
+
+	
+/*
+	pertsonaia.egoera = BIZIRIK;
+	pertsonaia.sprite = KEA;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
-
-	
-
 		
-	
 
+	
 	MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
@@ -581,7 +709,9 @@ void Animazioa()
 		Irudikatu();
 		SDL_Delay(100);
 	}
+	*/
 	pertsonaia.egoera = BIZIRIK;
+	
 }
 
 

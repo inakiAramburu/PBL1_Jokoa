@@ -20,7 +20,7 @@ int main(int argc, char* str[]) {
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
 	int animazioa;
-
+	int animazioe = 0;
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
@@ -82,7 +82,7 @@ int main(int argc, char* str[]) {
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
 
-			Ekintzak(&animazioa);
+			Ekintzak(&animazioa, &animazioe);
 			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(100);
