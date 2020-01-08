@@ -7,7 +7,7 @@
 #define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
 #define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
 #define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
-#define GRABITATEA 17
+#define GRABITATEA 18
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
@@ -39,5 +39,6 @@ void MusikaJarri(char Fitxategia[]);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp);
+
 
 #endif

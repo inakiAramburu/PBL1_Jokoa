@@ -440,7 +440,11 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 		{
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
-			//AltueraZuzendu(pixels, pitch, bpp);
+		}
+		if (pertsonaia.erortzen)
+		{
+			pertsonaia.DestSprite.y += GRABITATEA;
+			AltueraZuzendu(pixels, pitch, bpp);
 		}
 	}
 	if (a)
@@ -462,11 +466,6 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 	if (pertsonaia.salto)
 	{
 		pertsonaia.DestSprite.y -= abiaduray;
-	}
-	if (pertsonaia.erortzen)
-	{
-		pertsonaia.DestSprite.y += GRABITATEA;
-		AltueraZuzendu(pixels, pitch, bpp);
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
@@ -645,11 +644,6 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
-
-	
-
-		
-	
 /*
 	MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
@@ -782,10 +776,11 @@ void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
 		tmp = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59 + i);
 		tmp2 = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59 + i);
 		i ++;
-	} while (i < GRABITATEA && (tmp == TXURIA || tmp2 == TXURIA));
+	} while (i < GRABITATEA && (tmp == TXURIA && tmp2 == TXURIA));
 	if (i >= GRABITATEA)
 	{
 		return;
 	}
+	i--;
 	pertsonaia.DestSprite.y += i;
 }
