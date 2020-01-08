@@ -534,31 +534,38 @@ void JokalariaKargatu(char Irudia[], int i)
 
 void MusikaJarri(char Fitxategia[])
 {
-	//explicacion
+	// explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
+
+	//inicia la parte de audio
+	SDL_Init(SDL_INIT_AUDIO);
 
 	SDL_AudioSpec wavSpec;
 	Uint32 wavLength;
 	Uint8* wavBuffer;
 
-	/*  fitxategia kargatu */
+	/*  fichategia cargatu */
 	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
 	}
-    // abrir dependencias de audio
-	
+	// abrir dependencias de audio
+
 	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
 
 	// iniciar el sonido
 
 	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
 	SDL_PauseAudioDevice(deviceId, 0);
-	
+
+
+
+
 	// dena itxi
 
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
+	//SDL_Quit();
 }
 
 void Animazioa()
