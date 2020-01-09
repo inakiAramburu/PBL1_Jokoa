@@ -201,7 +201,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	Irudiak[IrudiZnbk].Dimentsioak.y = y;
 	IrudiZnbk++;
 }
-
+//
 void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
