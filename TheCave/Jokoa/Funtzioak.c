@@ -143,7 +143,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		case LEHEN:
 			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 
-			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.x = 300;
 			pertsonaia.DestSprite.y = 100;
 			pertsonaia.egoera = BIZIRIK;
 			pertsonaia.SrcSprite.x = 0;
@@ -411,7 +411,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 
 	}*/
 	//	Debbug de pies
-	/*
+	
 	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
 	printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
@@ -419,7 +419,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
 	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y);
-	*/
+	
 	KolisioakKonprobatu(pixels, pitch, bpp);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
@@ -791,7 +791,7 @@ void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
 		tmp = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59 + i);
 		tmp2 = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59 + i);
 		i ++;
-	} while (i < GRABITATEA && (tmp == TXURIA && tmp2 == TXURIA));
+	} while (i < GRABITATEA && (tmp != BELTZA && tmp2 != BELTZA));
 	if (i >= GRABITATEA)
 	{
 		return;

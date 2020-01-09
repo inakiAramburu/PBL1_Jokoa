@@ -20,6 +20,9 @@ int main(int argc, char* argv[]) {
 	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int KargaLehen = 0;		//""
 	int KargaBigarren = 0;		//""
+	int KargaHirugarren = 0;		//""
+	int KargaLaugarren = 0;		//""
+	int KargaBostgarren = 0;		//""
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
 	int animazioa;
@@ -77,7 +80,7 @@ int main(int argc, char* argv[]) {
 			if (!KargaLehen)
 			{
 				KargatuIrudiak(Pantaila);
-				KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
+				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
@@ -89,11 +92,56 @@ int main(int argc, char* argv[]) {
 		while (Pantaila == BIGARREN)
 		{
 			KargaLehen = 0;
-			if (!KargaLehen)
+			if (!KargaBigarren)
 			{
 				KargatuIrudiak(Pantaila);
-				KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
+				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaBigarren = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
+			RenderPrestatu(begira);
+			Irudikatu();
+			SDL_Delay(80);
+		}
+		while (Pantaila == HIRUGARREN)
+		{
+			KargaBigarren = 0;
+			if (!KargaHirugarren)
+			{
+				KargatuIrudiak(Pantaila);
+				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
+				KargaHirugarren = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
+			RenderPrestatu(begira);
+			Irudikatu();
+			SDL_Delay(80);
+		}
+		while (Pantaila == LAUGARREN)
+		{
+			KargaHirugarren = 0;
+			if (!KargaLaugarren)
+			{
+				KargatuIrudiak(Pantaila);
+				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
+				KargaLaugarren = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
+			RenderPrestatu(begira);
+			Irudikatu();
+			SDL_Delay(80);
+		}
+		while (Pantaila == BOSTGARREN)
+		{
+			KargaLaugarren = 0;
+			if (!KargaBostgarren)
+			{
+				KargatuIrudiak(Pantaila);
+				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
+				KargaBostgarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
 			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);

@@ -4,12 +4,20 @@
 
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
-#define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
-#define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
-#define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
+#define MENU_PANTAILA ".\\media\\nibelak\\Menu.bmp"
+#define LEHENENGO_PANTAILA ".\\media\\levels\\Nivel1.bmp"
+#define LEHENENGO_MASKARA ".\\media\\levels\\maskarak\\Nivel1M.bmp"
+#define BIGARREN_PANTAILA ".\\media\\levels\\Nivel2.bmp"
+#define BIGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel2M.bmp"
+#define HIRUGARREN_PANTAILA ".\\media\\levels\\Nivel3.bmp"
+#define HIRUGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel3M.bmp"
+#define LAUGARREN_PANTAILA ".\\media\\levels\\Nivel4.bmp"
+#define LAUGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel4M.bmp"
+#define BOSTGARREN_PANTAILA ".\\media\\levels\\Nivel5.bmp"
+#define BOSTGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel5M.bmp"
 #define GRABITATEA 18
 
-typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;
+typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
 typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
 typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
