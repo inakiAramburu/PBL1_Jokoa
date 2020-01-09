@@ -71,7 +71,7 @@ TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
 TEKLAK espacio = SAKATUGABE;
 TEKLAK k = SAKATUGABE;
-TEKLAK f = SAKATUGABE;
+TEKLAK w = SAKATUGABE;
 TEKLAK f3 = SAKATUGABE;
 
 int LeihoaEtaRenderHasi()
@@ -360,12 +360,12 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_ESCAPE:
 					Amaitu(Jokoa, Pantaila);
 					break;
-				case SDL_SCANCODE_F:
+				case SDL_SCANCODE_W:
 					a = SAKATUGABE;
 					d = SAKATUGABE;
 					espacio = SAKATUGABE;
 					k = SAKATUGABE;
-					f = SAKATUTA;
+					w = SAKATUTA;
 					break;
 				case SDL_SCANCODE_F3:
 					f3 = !f3;	
@@ -397,8 +397,8 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_K:
 					k = SAKATUGABE;
 					break;
-				case SDL_SCANCODE_F:
-					f = SAKATUGABE;
+				case SDL_SCANCODE_W:
+					w = SAKATUGABE;
 					break;
 				case SDL_SCANCODE_F3:
 					
@@ -453,7 +453,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			*i = 0;
 		}
 	}
-	if (f)
+	if (w)
 	{
 		if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
 		{
