@@ -61,6 +61,16 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 
 PERTSONAIA pertsonaia;
 
+typedef struct S_ETSAIA		//Etsaien datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	EGOERA egoera;
+	int abiadura, kop;
+	SDL_Texture* textura;
+}ETSAIA;
+
+ETSAIA etsaia[ETSAI_KOPURUA];
+
 typedef struct S_MAPA
 {
 	void* pixels;
@@ -71,7 +81,7 @@ TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
 TEKLAK espacio = SAKATUGABE;
 TEKLAK k = SAKATUGABE;
-TEKLAK f = SAKATUGABE;
+TEKLAK w = SAKATUGABE;
 TEKLAK f3 = SAKATUGABE;
 
 int LeihoaEtaRenderHasi()
@@ -118,9 +128,10 @@ int IrudiakKendu(int ZnbtUtzi)
 	return i + 1;
 }
 
-void KargatuIrudiak(PANTAILAK Pantaila)
+void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
 {
 	IrudiZnbk = IrudiakKendu(0);
+	*BizirikKopurua = 0;
 	switch (Pantaila)		
 	{
 		/*Jokolariak pantaila berri batera pasatzean behar izango diren irudi guztiak kargatzen dira. Horrela ez irudiak ez dira kargatuko
@@ -147,6 +158,10 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
+			EtsaiaKokatu(0, 10, 10, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(1, 10, 10, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+
+
 			break;
 		case BIGARREN:
 			ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
@@ -201,7 +216,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 	Irudiak[IrudiZnbk].Dimentsioak.y = y;
 	IrudiZnbk++;
 }
-//
+
 void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
@@ -211,7 +226,7 @@ void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp)
 	*bpp = surface->format->BytesPerPixel;
 }
 
-void RenderPrestatu(ZENTZUA begira)
+void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
 	int i;
 
@@ -227,6 +242,22 @@ void RenderPrestatu(ZENTZUA begira)
 		else
 		{
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
+		}
+	}
+	for (i = 0; i < BizirikKopurua; i++)
+	{
+		if (etsaia[BizirikDaudenEtsaiak[i]].egoera == BIZIRIK)
+		{
+			if (etsaia[BizirikDaudenEtsaiak[i]].abiadura > 0)
+			{
+				SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
+
+				SDL_RenderCopyEx(render, etsaia[BizirikDaudenEtsaiak[i]].textura, &etsaia[BizirikDaudenEtsaiak[i]].SrcSprite, &etsaia[BizirikDaudenEtsaiak[i]].DestSprite, 180, NULL, flip);
+			}
+			else
+			{
+				SDL_RenderCopy(render, etsaia[BizirikDaudenEtsaiak[i]].textura, &etsaia[BizirikDaudenEtsaiak[i]].SrcSprite, &etsaia[BizirikDaudenEtsaiak[i]].DestSprite);
+			}
 		}
 	}
 	if (pertsonaia.egoera == BIZIRIK)
@@ -360,12 +391,12 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_ESCAPE:
 					Amaitu(Jokoa, Pantaila);
 					break;
-				case SDL_SCANCODE_F:
+				case SDL_SCANCODE_W:
 					a = SAKATUGABE;
 					d = SAKATUGABE;
 					espacio = SAKATUGABE;
 					k = SAKATUGABE;
-					f = SAKATUTA;
+					w = SAKATUTA;
 					break;
 				case SDL_SCANCODE_F3:
 					f3 = !f3;	
@@ -397,8 +428,8 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_K:
 					k = SAKATUGABE;
 					break;
-				case SDL_SCANCODE_F:
-					f = SAKATUGABE;
+				case SDL_SCANCODE_W:
+					w = SAKATUGABE;
 					break;
 				case SDL_SCANCODE_F3:
 					
@@ -410,7 +441,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila)
+void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak, int BizirikKopurua)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -453,11 +484,12 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			*i = 0;
 		}
 	}
-	if (f)
+	if (w)
 	{
 		if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
 		{
 			*pantaila += 1;
+			GuztiakHil();
 			return;
 		}
 	}
@@ -503,6 +535,13 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 		}
 		*i = 0;
 	}
+	for (int j = 0; j < BizirikKopurua; j++)
+	{
+		if (etsaia[j].egoera == BIZIRIK)
+		{
+			etsaia[j].DestSprite.x += etsaia[j].abiadura;
+		}
+	}
 }
 
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA *klika)
@@ -534,10 +573,13 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 				SDL_GetMouseState(&x, &y);
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
+					int relleno[1];
+					int rellenodim = 0;
 					IrudiZnbk = 1;
-					RenderPrestatu(AURRERA);
+					RenderPrestatu(AURRERA, relleno, rellenodim);
 					Irudikatu();
-					KargatuPertsonaia();
+					PertsonaiaHasieratu();
+					EtsaiakHasieratu();
 					Animazioa();
 					*Pantaila = LEHEN;
 				}
@@ -576,9 +618,8 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 	}
 }
 
-void KargatuPertsonaia()
-{
-	
+void PertsonaiaHasieratu()
+{	
 	JokalariaKargatu(".\\media\\player\\Idle.bmp", 0);
 	spriteak[0].kop = 6;
 	
@@ -624,6 +665,65 @@ void JokalariaKargatu(char Irudia[], int i)
 	spriteak[i].textura = texture;
 }
 
+void EtsaiakHasieratu()
+{
+	int j, tmp = 0, kopurua=5;
+	for (j = 0; j < kopurua; j++)
+	{
+		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", j);
+		etsaia[j].kop = 4;
+		etsaia[j].SrcSprite.h = 41;
+		etsaia[j].SrcSprite.w = 33;
+		etsaia[j].SrcSprite.x = 0;
+		etsaia[j].SrcSprite.y = 0;
+		etsaia[j].DestSprite.w = 33;
+		etsaia[j].DestSprite.h = 41;
+	}
+	tmp = j;
+	for (j = tmp; j < tmp + kopurua; j++)
+	{
+		EtsaiaKargatu(".\\media\\enemies\\Mukitxua.bmp", j);
+		etsaia[j].kop = 4;
+		etsaia[j].SrcSprite.h = 41;
+		etsaia[j].SrcSprite.w = 33;
+		etsaia[j].SrcSprite.x = 0;
+		etsaia[j].SrcSprite.y = 0;
+		etsaia[j].DestSprite.w = 33;
+		etsaia[j].DestSprite.h = 41;
+	}
+	tmp = j;
+	/*
+	for (j = tmp; j < tmp + kopurua; j++)
+	{
+		EtsaiaKargatu(".\\media\\enemies\\MOKOS.bmp", j);
+		etsaia[j].kop = 4;
+	}
+	ARAÑA*/
+}
+
+void EtsaiaKargatu(char Irudia[], int i)
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
+	surface = SDL_LoadBMP(Irudia);
+
+	if (!surface)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+	SDL_FreeSurface(surface);
+	etsaia[i].textura = texture;
+}
+
 void MusikaJarri(char Fitxategia[])
 {
 	//explicacion
@@ -651,6 +751,17 @@ void MusikaJarri(char Fitxategia[])
 
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
+}
+
+void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
+{
+
+	etsaia[znbk_etsaia].DestSprite.x = x;
+	etsaia[znbk_etsaia].DestSprite.y = y;
+	etsaia[znbk_etsaia].egoera = BIZIRIK;
+	etsaia[znbk_etsaia].abiadura = 10;
+	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
+	*BizirikKopurua += 1;
 }
 
 void Animazioa()
@@ -807,4 +918,12 @@ void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
 	}
 	i--;
 	pertsonaia.DestSprite.y += i;
+}
+
+void GuztiakHil()
+{
+	for (int i = 0; i < ETSAI_KOPURUA; i++)
+	{
+		etsaia[i].egoera = HILDA;
+	}
 }

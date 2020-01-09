@@ -27,6 +27,9 @@ int main(int argc, char* argv[]) {
 	int KargaKontrolak = 0;		//""
 	int animazioa;
 
+	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
+	int BizirikKopurua;
+
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
@@ -39,7 +42,7 @@ int main(int argc, char* argv[]) {
 			KargaKontrolak = 0;
 			if (!KargaMenua)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaMenua = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
@@ -53,11 +56,11 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaKredituak)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaKredituak = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			RenderPrestatu(begira);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(50);
 		}
@@ -66,11 +69,11 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaKontrolak)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaKontrolak = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			RenderPrestatu(begira);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(50);
 		}
@@ -79,13 +82,13 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaLehen)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
-			RenderPrestatu(begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
 		}
@@ -94,13 +97,13 @@ int main(int argc, char* argv[]) {
 			KargaLehen = 0;
 			if (!KargaBigarren)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaBigarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
-			RenderPrestatu(begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
 		}
@@ -109,13 +112,13 @@ int main(int argc, char* argv[]) {
 			KargaBigarren = 0;
 			if (!KargaHirugarren)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaHirugarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
-			RenderPrestatu(begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
 		}
@@ -124,13 +127,13 @@ int main(int argc, char* argv[]) {
 			KargaHirugarren = 0;
 			if (!KargaLaugarren)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaLaugarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
-			RenderPrestatu(begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
 		}
@@ -139,13 +142,13 @@ int main(int argc, char* argv[]) {
 			KargaLaugarren = 0;
 			if (!KargaBostgarren)
 			{
-				KargatuIrudiak(Pantaila);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaBostgarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
-			RenderPrestatu(begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
 		}
