@@ -386,8 +386,6 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					espacio = SAKATUTA;
 					break;
 				case SDL_SCANCODE_K:
-					a = SAKATUGABE;
-					d = SAKATUGABE;
 					if (!pertsonaia.erasotzen)
 					{
 						k = SAKATUTA;
