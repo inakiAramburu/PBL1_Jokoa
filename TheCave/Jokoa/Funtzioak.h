@@ -17,7 +17,7 @@ typedef enum {HILDA, BIZIRIK}EGOERA;
 typedef enum {SAKATUGABE, SAKATUTA }TEKLAK;
 typedef enum {ATZERA, AURRERA}ZENTZUA;
 typedef enum {EZ, BAI}BOOLEANOA;
-typedef enum {GORRIA = 249, BELTZA = 0, TXURIA = 255, BERDEA = 250, HORIA}KOLOREAK;
+typedef enum {GORRIA = 249, BELTZA = 0, TXURIA = 255, BERDEA = 250, HORIA = 251, MORADO = 253, AZUL = 252}KOLOREAK;
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 int IrudiakKendu(int ZnbtUtzi);		//Irudien texturak ezabatzen ditu azkenetik hasten, nahi bada atzeko planoa ezabatu gabe utz daiteke, 1 parametroa pasatzen. Zenbat argazki geratu diren pasatzen du

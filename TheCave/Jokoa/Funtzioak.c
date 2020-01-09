@@ -408,6 +408,7 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 
 	}*/
 	//	Debbug de pies
+	/*
 	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
 	printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
@@ -415,7 +416,7 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 	printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
 	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 	printf("y: %d \n\n", pertsonaia.DestSprite.y);
-	
+	*/
 	KolisioakKonprobatu(pixels, pitch, bpp);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
@@ -440,17 +441,24 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 		{
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
+			*i = 0;
 		}
 	}
 	if (a)
 	{	
 		*begira = ATZERA;
-		pertsonaia.DestSprite.x -= abiadurax;
+		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39)
+		{
+			pertsonaia.DestSprite.x -= abiadurax;
+		}
 	}
 	if (d) 
 	{
 		*begira = AURRERA;
-		pertsonaia.DestSprite.x += abiadurax;
+		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190)
+		{
+			pertsonaia.DestSprite.x += abiadurax;
+		}
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
 	{
@@ -764,7 +772,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 	//Behekoa
 	hitbox.behekoa.ezker = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59);
 	hitbox.behekoa.eskuin = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59);
-	
 }
 
 void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
