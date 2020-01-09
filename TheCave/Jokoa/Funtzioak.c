@@ -142,17 +142,29 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			break;
 		case LEHEN:
 			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
-
+			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
-			pertsonaia.egoera = BIZIRIK;
-			pertsonaia.SrcSprite.x = 0;
 			break;
 		case BIGARREN:
 			ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 400;
+			pertsonaia.DestSprite.y = 510;
 			break;
+		case HIRUGARREN:
+			ImgKargatu(HIRUGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.SrcSprite.x = 0;
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 100;
+			break;
+		case LAUGARREN:
+			ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.SrcSprite.x = 0;
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 100;
+			break;
+			
 	}
 }
 
@@ -530,7 +542,7 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 					Irudikatu();
 					KargatuPertsonaia();
 					Animazioa();
-					*Pantaila = LEHEN;
+					*Pantaila = BIGARREN;
 				}
 				else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 				{
