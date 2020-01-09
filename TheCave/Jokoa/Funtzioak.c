@@ -5,7 +5,7 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 Uint32 time=0;
-Uint32 abiadura[7] = {80,60,80,80,10,80,80};
+Uint32 abiadura[7] = {150,60,80,80,10,80,80};
 //IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA
 /*
 extern int pitch; //el numero de pixels por fila
@@ -399,9 +399,9 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					Amaitu(Jokoa, Pantaila);
 					break;
 				case SDL_SCANCODE_W:
-					a = SAKATUGABE;
-					d = SAKATUGABE;
-					espacio = SAKATUGABE;
+					//a = SAKATUGABE;
+					//d = SAKATUGABE;
+					//espacio = SAKATUGABE;
 					k = SAKATUGABE;
 					w = SAKATUTA;
 					break;
