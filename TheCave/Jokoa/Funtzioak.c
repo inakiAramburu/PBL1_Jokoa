@@ -366,7 +366,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				{
 				case SDL_SCANCODE_D:
 					a = SAKATUGABE;
-					if (!d && !pertsonaia.erortzen && !pertsonaia.salto)
+					if (!d && !pertsonaia.erortzen && !pertsonaia.salto && !pertsonaia.erasotzen)
 					{
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
@@ -375,7 +375,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					break;
 				case SDL_SCANCODE_A:
 					d = SAKATUGABE;
-					if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+					if (!a && !pertsonaia.erortzen && !pertsonaia.salto && !pertsonaia.erasotzen)
 					{
 						pertsonaia.sprite = KORRIKA;
 						*i = 0;
@@ -388,7 +388,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_K:
 					a = SAKATUGABE;
 					d = SAKATUGABE;
-					k = SAKATUTA;
+					if (!pertsonaia.erasotzen)
+					{
+						k = SAKATUTA;
+					}
+					
 					break;
 				case SDL_SCANCODE_ESCAPE:
 					Amaitu(Jokoa, Pantaila);
@@ -488,7 +492,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	if (a)
 	{	
 		*begira = ATZERA;
-		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39)
+		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO)
 		{
 			pertsonaia.DestSprite.x -= abiadurax;
 		}
@@ -496,7 +500,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	if (d) 
 	{
 		*begira = AURRERA;
-		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190)
+		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO)
 		{
 			pertsonaia.DestSprite.x += abiadurax;
 		}
@@ -543,7 +547,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 		if (pertsonaia.erasotzen)
 			{
 			pertsonaia.erasotzen = EZ;
-			
+			k = SAKATUGABE;
 
 			}
 		*i = 0;
