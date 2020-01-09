@@ -1,9 +1,12 @@
 #include "Funtzioak.h"
 #include <SDL.h>
+#include <stdio.h>
 
 SDL_Renderer* render;
 SDL_Window* leihoa;
-
+Uint32 time=0;
+Uint32 abiadura[7] = {80,60,80,80,10,80,80};
+//IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA
 /*
 extern int pitch; //el numero de pixels por fila
 extern Uint32 bpp; //el numero de Byte por pixel
@@ -72,11 +75,11 @@ typedef struct S_ETSAIA		//Etsaien datuak
 
 ETSAIA etsaia[ETSAI_KOPURUA];
 
-typedef struct S_MAPA
+typedef struct 
 {
 	void* pixels;
 	int pitch;
-};
+}S_MAPA;
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -235,7 +238,7 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	
 	for (i = 0; i < IrudiZnbk; i++)
 	{
-		if (Irudiak[i].Dimentsioak.h == NULL)
+		if (Irudiak[i].Dimentsioak.h == 0)
 		{
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
 		}
@@ -435,7 +438,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak, int BizirikKopurua)
+void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -534,7 +537,16 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			AltueraZuzendu(pixels, pitch, bpp);
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
-	*i += 1;
+
+
+	
+	
+		if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+		{
+			++* i;
+			time = SDL_GetTicks();
+		}
+	
 	if (*i >= spriteak[pertsonaia.sprite].kop)
 	{
 		if (pertsonaia.salto)
@@ -784,7 +796,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 
 void Animazioa()
 {
-	int i, j;
+	//int i, j;
 
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
@@ -847,11 +859,11 @@ void Animazioa()
 	SDL_Delay(2000);*/
 }
 
-Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
+Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 {
 
 
-	Uint8* p = (Uint8*)pixels + (y * (Uint32)(pitch)+x) * bpp;
+	Uint8* p = (Uint8*)pixels + ((Uint64)(y)* pitch+x) * bpp;
 
 	switch (bpp) {
 	case 1:
@@ -906,6 +918,20 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 	}
 	return Tocas;
 	*/
+
+	int Ix = pertsonaia.DestSprite.x + 46;
+	int Dx = pertsonaia.DestSprite.x + 82;
+	int YGoikoa = pertsonaia.DestSprite.y + 11;
+	int YErdikoa = pertsonaia.DestSprite.y + 32;
+	int YBekoa = pertsonaia.DestSprite.y + 52;
+
+
+	// && (YGoikoa > 246 && YErdikoa > 246 && YBekoa > 246) && (YGoikoa < 380 &&YErdikoa < 380 && YBekoa < 380)
+	if ((Dx > 207 && Dx < 291))
+	{
+		printf("muerto");
+	}
+
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
 	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);		
