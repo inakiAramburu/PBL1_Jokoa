@@ -164,6 +164,12 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			pertsonaia.DestSprite.x = 10;
 			pertsonaia.DestSprite.y = 100;
 			break;
+		case BOSTGARREN:
+			ImgKargatu(BOSTGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.SrcSprite.x = 0;
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 100;
+			break;
 			
 	}
 }
@@ -390,38 +396,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
-/*
-	switch (KolisioakKonprobatu(pixels, pitch, bpp))
-	{
-	case 1:
-		if (!pertsonaia.salto)
-		{
-			pertsonaia.erortzen = BAI;
-			pertsonaia.sprite = ERORI;
-			*i = 0;
-		}
-		break;
-	case 0:
-		if (pertsonaia.erortzen)
-		{
-			if (a || d)
-			{
-				pertsonaia.sprite = KORRIKA;
-				*i = 0;
-			}
-			else
-			{
-				pertsonaia.sprite = IDLE;
-				*i = 0;
-			}
-		}
-		if (!pertsonaia.salto)
-		{
-			pertsonaia.erortzen = EZ;
-		}
-		break;
 
-	}*/
 	//	Debbug de pies
 	
 	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
@@ -542,7 +517,7 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 					Irudikatu();
 					KargatuPertsonaia();
 					Animazioa();
-					*Pantaila = BIGARREN;
+					*Pantaila = LEHEN;
 				}
 				else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 				{
