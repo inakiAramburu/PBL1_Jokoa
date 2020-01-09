@@ -147,7 +147,7 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		pertsonaia.DestSprite.x = 10;
 		pertsonaia.DestSprite.y = 555;
 		pertsonaia.sprite = BIZIRIK;
-		etsaia.DestSprite.x = 860;
+		etsaia.DestSprite.x = 250;
 		etsaia.DestSprite.y = 150;
 		etsaia.DestSprite.h = 60;
 		etsaia.DestSprite.w = 128;
@@ -466,11 +466,11 @@ void Ekintzak(int *i, int *j)
 	{
 		*j = 0;
 	}
-	if (etsaia.DestSprite.x>=500)
+	if (etsaia.DestSprite.x>=0)
 	{
 		etsaia.abiadura *= -1;
 	}
-	if (etsaia.DestSprite.x <= 1200)
+	if (etsaia.DestSprite.x <= 400)
 	{
 		etsaia.abiadura *= -1;
 	}
@@ -492,12 +492,12 @@ void Ekintzak(int *i, int *j)
 	{
 		*j = 0;
 	}
-	if (etsaia3.DestSprite.x >= 500)
+	if (etsaia3.DestSprite.x >= 0)
 	{
 
 		etsaia3.abiadura *= -1;
 	}
-	if (etsaia3.DestSprite.x <= 1190)
+	if (etsaia3.DestSprite.x <= 750)
 	{
 
 		etsaia3.abiadura *= -1;
