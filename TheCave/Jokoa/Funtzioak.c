@@ -57,6 +57,7 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 	EGOERA egoera;
 	BOOLEANOA salto;
 	BOOLEANOA erortzen;
+	BOOLEANOA erasotzen;
 }PERTSONAIA;
 
 PERTSONAIA pertsonaia;
@@ -385,6 +386,8 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					espacio = SAKATUTA;
 					break;
 				case SDL_SCANCODE_K:
+					a = SAKATUGABE;
+					d = SAKATUGABE;
 					k = SAKATUTA;
 					break;
 				case SDL_SCANCODE_ESCAPE:
@@ -407,19 +410,9 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				{
 				case SDL_SCANCODE_D:
 					d = SAKATUGABE;
-					if (!a && !pertsonaia.salto && !pertsonaia.erortzen)
-					{
-						pertsonaia.sprite = IDLE;
-						*i = 0;
-					}
 					break;
 				case SDL_SCANCODE_A:
 					a = SAKATUGABE;
-					if (!d && !pertsonaia.salto && !pertsonaia.erortzen)
-					{
-						pertsonaia.sprite = IDLE;
-						*i = 0;
-					}
 					break;
 				case SDL_SCANCODE_SPACE:
 					espacio = SAKATUGABE;
@@ -508,10 +501,25 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			pertsonaia.DestSprite.x += abiadurax;
 		}
 	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && !w)
+	{
+		if (pertsonaia.sprite != IDLE)
+		{
+			*i = 0;
+		}
+		pertsonaia.sprite = IDLE;
+		
+	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
 	{
 		pertsonaia.salto = BAI;
 		pertsonaia.sprite = SALTO;
+		*i = 0;
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !espacio && !pertsonaia.erasotzen && !d && !a && !w)
+	{
+		pertsonaia.erasotzen = BAI;
+		pertsonaia.sprite = ERASO;
 		*i = 0;
 	}
 	if (pertsonaia.salto)
@@ -532,7 +540,14 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			pertsonaia.salto = EZ;
 			pertsonaia.erortzen = BAI;
 		}
+		if (pertsonaia.erasotzen)
+			{
+			pertsonaia.erasotzen = EZ;
+			
+
+			}
 		*i = 0;
+	
 	}
 	for (int j = 0; j < BizirikKopurua; j++)
 	{
