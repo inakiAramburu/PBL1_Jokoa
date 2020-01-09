@@ -143,8 +143,8 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 		case LEHEN:
 			ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 
-			pertsonaia.DestSprite.x = 300;
-			pertsonaia.DestSprite.y = 100;
+			pertsonaia.DestSprite.x = 0;
+			pertsonaia.DestSprite.y = 300;
 			pertsonaia.egoera = BIZIRIK;
 			pertsonaia.SrcSprite.x = 0;
 			break;

@@ -4,7 +4,7 @@
 
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
-#define MENU_PANTAILA ".\\media\\nibelak\\Menu.bmp"
+#define MENU_PANTAILA ".\\media\\levels\\Menu.bmp"
 #define LEHENENGO_PANTAILA ".\\media\\levels\\Nivel1.bmp"
 #define LEHENENGO_MASKARA ".\\media\\levels\\maskarak\\Nivel1M.bmp"
 #define BIGARREN_PANTAILA ".\\media\\levels\\Nivel2.bmp"
