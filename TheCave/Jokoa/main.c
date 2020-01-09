@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//dev, saltoa eta nivel aldaketa
+//dev, saltoa eta nivel aldaketa//
 
 int main(int argc, char* argv[]) {
 
