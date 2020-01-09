@@ -71,6 +71,8 @@ TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
 TEKLAK espacio = SAKATUGABE;
 TEKLAK k = SAKATUGABE;
+TEKLAK f = SAKATUGABE;
+TEKLAK f3 = SAKATUGABE;
 
 int LeihoaEtaRenderHasi()
 {
@@ -340,6 +342,16 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_ESCAPE:
 					Amaitu(Jokoa, Pantaila);
 					break;
+				case SDL_SCANCODE_F:
+					a = SAKATUGABE;
+					d = SAKATUGABE;
+					espacio = SAKATUGABE;
+					k = SAKATUGABE;
+					f = SAKATUTA;
+					break;
+				case SDL_SCANCODE_F3:
+					f3 = !f3;	
+					break;
 				}
 				break;
 			case SDL_KEYUP:
@@ -366,6 +378,12 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					break;
 				case SDL_SCANCODE_K:
 					k = SAKATUGABE;
+					break;
+				case SDL_SCANCODE_F:
+					f = SAKATUGABE;
+					break;
+				case SDL_SCANCODE_F3:
+					
 					break;
 				}
 				break;
@@ -411,15 +429,16 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 
 	}*/
 	//	Debbug de pies
-	
-	printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
-	printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
-	printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
+	if (f3) 
+	{
+		printf("Pierna Izquierda: %d\n", hitbox.behekoa.ezker);
+		printf("Izquierda x: %d  ", pertsonaia.DestSprite.x + 54);
+		printf("y: %d \n\n", pertsonaia.DestSprite.y + 59);
 
-	printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
-	printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
-	printf("y: %d \n\n", pertsonaia.DestSprite.y);
-	
+		printf("Pierna derecha: %d\n", hitbox.behekoa.eskuin);
+		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
+		printf("y: %d \n\n", pertsonaia.DestSprite.y);
+	}
 	KolisioakKonprobatu(pixels, pitch, bpp);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
@@ -447,10 +466,13 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			*i = 0;
 		}
 	}
-	if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
+	if (f)
 	{
-		*pantaila += 1;
-		return;
+		if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
+		{
+			*pantaila += 1;
+			return;
+		}
 	}
 	if (a)
 	{	
