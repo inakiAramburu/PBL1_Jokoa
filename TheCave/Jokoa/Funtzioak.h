@@ -17,6 +17,7 @@
 #define BOSTGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel5M.bmp"
 #define GRABITATEA 18
 #define ETSAI_KOPURUA 15
+#define ETSAIA_ABIADURA 5
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
@@ -52,5 +53,5 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp);
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp);
 void GuztiakHil();
-
+void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp);// sigue lineas IA
 #endif

@@ -158,8 +158,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
-			EtsaiaKokatu(0, 10, 10, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(1, 10, 10, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 
 			break;
@@ -537,8 +536,10 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	}
 	for (int j = 0; j < BizirikKopurua; j++)
 	{
+
 		if (etsaia[j].egoera == BIZIRIK)
 		{
+			EtsaienAdimena(j, pixels, pitch, bpp);
 			etsaia[j].DestSprite.x += etsaia[j].abiadura;
 		}
 	}
@@ -759,7 +760,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 	etsaia[znbk_etsaia].DestSprite.x = x;
 	etsaia[znbk_etsaia].DestSprite.y = y;
 	etsaia[znbk_etsaia].egoera = BIZIRIK;
-	etsaia[znbk_etsaia].abiadura = 10;
+	etsaia[znbk_etsaia].abiadura = ETSAIA_ABIADURA;
 	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
 	*BizirikKopurua += 1;
 }
@@ -926,4 +927,12 @@ void GuztiakHil()
 	{
 		etsaia[i].egoera = HILDA;
 	}
+}
+void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp)
+{
+	if ((getpixel(pixels, pitch, bpp, etsaia[znbk_etsaia].DestSprite.x + 32, etsaia[znbk_etsaia].DestSprite.y + 44) != BELTZA)|| (getpixel(pixels, pitch, bpp, etsaia[znbk_etsaia].DestSprite.x, etsaia[znbk_etsaia].DestSprite.y + 44) != BELTZA))
+	{
+		etsaia[znbk_etsaia].abiadura *= -1;
+	}
+
 }
