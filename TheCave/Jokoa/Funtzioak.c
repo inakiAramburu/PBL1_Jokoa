@@ -441,11 +441,6 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
 		}
-		if (pertsonaia.erortzen)
-		{
-			pertsonaia.DestSprite.y += GRABITATEA;
-			AltueraZuzendu(pixels, pitch, bpp);
-		}
 	}
 	if (a)
 	{	
@@ -466,6 +461,11 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 	if (pertsonaia.salto)
 	{
 		pertsonaia.DestSprite.y -= abiaduray;
+	}
+	if (pertsonaia.erortzen)
+	{
+			pertsonaia.DestSprite.y += GRABITATEA;
+			AltueraZuzendu(pixels, pitch, bpp);
 	}
 	pertsonaia.SrcSprite.x = 128 * (*i);
 	*i += 1;
