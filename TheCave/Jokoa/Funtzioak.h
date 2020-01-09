@@ -5,7 +5,7 @@
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 #define MENU_PANTAILA ".\\media\\fondos\\Menu.bmp"
-#define LEHENENGO_PANTAILA ".\\media\\Nivel256.bmp"
+#define LEHENENGO_PANTAILA ".\\media\\fondos\\Nivel2.bmp"
 #define BIGARREN_PANTAILA ".\\media\\fondos\\Nivel3.bmp"
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, ATERA}PANTAILAK;

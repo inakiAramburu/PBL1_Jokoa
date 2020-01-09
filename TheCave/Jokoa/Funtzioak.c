@@ -150,6 +150,11 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			break;
 		case BIGARREN:
 			ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 100;
+			pertsonaia.egoera = BIZIRIK;
+			pertsonaia.SrcSprite.x = 0;
+			break;
 	}
 }
 
@@ -337,7 +342,12 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 				case SDL_SCANCODE_ESCAPE:
 					Amaitu(Jokoa, Pantaila);
 					break;
+
+				case SDL_SCANCODE_2:
+						* Pantaila = BIGARREN;
+					break;
 				}
+				
 				break;
 			case SDL_KEYUP:
 				switch (ebentua.key.keysym.scancode)
@@ -447,6 +457,7 @@ void Ekintzak(int *i, ZENTZUA* begira)
 	{	
 		*begira = EZKER;
 		pertsonaia.DestSprite.x -= abiadurax;
+		
 	}
 	if (d) 
 	{
