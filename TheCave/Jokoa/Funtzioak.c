@@ -150,6 +150,9 @@ void KargatuIrudiak(PANTAILAK Pantaila)
 			break;
 		case BIGARREN:
 			ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
+			pertsonaia.DestSprite.x = 10;
+			pertsonaia.DestSprite.y = 400;
+			break;
 	}
 }
 
@@ -371,7 +374,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
+void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -443,6 +446,11 @@ void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp)
 			pertsonaia.sprite = ERORI;
 			*i = 0;
 		}
+	}
+	if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
+	{
+		*pantaila += 1;
+		return;
 	}
 	if (a)
 	{	

@@ -81,7 +81,22 @@ int main(int argc, char* argv[]) {
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
-			Ekintzak(&animazioa, &begira, pixels, pitch, bpp);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
+			RenderPrestatu(begira);
+			Irudikatu();
+			SDL_Delay(80);
+		}
+		while (Pantaila == BIGARREN)
+		{
+			KargaLehen = 0;
+			if (!KargaLehen)
+			{
+				KargatuIrudiak(Pantaila);
+				KargatuMapa("media/Nivel256.bmp", &pixels, &pitch, &bpp);
+				KargaBigarren = 1;
+			}
+			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			Ekintzak(&animazioa, &begira, pixels, pitch, bpp, &Pantaila);
 			RenderPrestatu(begira);
 			Irudikatu();
 			SDL_Delay(80);
