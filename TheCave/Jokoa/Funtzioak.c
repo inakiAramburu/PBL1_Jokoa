@@ -67,6 +67,17 @@ typedef struct S_MAPA
 	int pitch;
 };
 
+typedef struct S_ETSAIA		//Pertsonaiaren datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	SPRITE sprite;
+	EGOERA egoera;
+	int abiadura;
+}ETSAIA;
+
+ETSAIA etsaia[3];
+
+
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
 TEKLAK espacio = SAKATUGABE;
