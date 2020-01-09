@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Ekaitz, egitura
+//dev, saltoa eta nivel aldaketa
 
 int main(int argc, char* argv[]) {
 
