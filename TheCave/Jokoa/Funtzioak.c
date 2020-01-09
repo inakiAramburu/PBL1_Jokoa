@@ -567,27 +567,56 @@ void KargatuPertsonaia()
 	
 	JokalariaKargatu(".\\media\\player\\Idle.bmp", 0);
 	spriteak[0].kop = 6;
-	
+
 	JokalariaKargatu(".\\media\\player\\Run.bmp", 1);
 	spriteak[1].kop = 10;
-	
-	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
-	spriteak[2].kop = 8;
-	
-	JokalariaKargatu(".\\media\\player\\Caida.bmp", 3);
-	spriteak[3].kop = 6;
 
-	JokalariaKargatu(".\\media\\player\\Attack.bmp", 4);
-	spriteak[4].kop = 8;
-	
-	JokalariaKargatu(".\\media\\player\\Dead.bmp", 5);
-	spriteak[5].kop = 6;
-	
-	JokalariaKargatu(".\\media\\player\\Humo.bmp", 6);
+	JokalariaKargatu(".\\media\\player\\Salto.bmp", 2);
+	spriteak[2].kop = 14;
+
+	JokalariaKargatu(".\\media\\player\\Attack.bmp", 3);
+	spriteak[3].kop = 8;
+
+	JokalariaKargatu(".\\media\\player\\Dead.bmp", 4);
+	spriteak[4].kop = 6;
+
+	JokalariaKargatu(".\\media\\player\\Humo.bmp", 5);
+	spriteak[5].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Armiarma.bmp", 6);
 	spriteak[6].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Mamua.bmp", 7);
+	spriteak[7].kop = 4;
+
+	EtsaiaKargatu(".\\media\\enemigos\\Mukitxua.bmp", 8);
+	spriteak[8].kop = 4;
 }
 
 void JokalariaKargatu(char Irudia[], int i)
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
+	surface = SDL_LoadBMP(Irudia);
+
+	if (!surface)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+	SDL_FreeSurface(surface);
+	spriteak[i].textura = texture;
+}
+
+void EtsaiaKargatu(char Irudia[], int i)
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;

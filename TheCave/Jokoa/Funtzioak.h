@@ -32,7 +32,8 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);		//Klika non egin den et
 void Animazioa();		//Jokatu sakatzen denean aniamzio labur bat egiten du
 void KargatuPertsonaia();		//Jokatu sakatzean lehenengo aldiz pertsonaia kargatzera deitzen du
 void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartzu eta gordetzen ditu
-void Ekintzak(int *i, ZENTZUA* begira);
+void EtsaiaKargatu(char Irudia[], int i);			//Etsaiak spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartu eta gordetzen ditu
+void Ekintzak(int* i, ZENTZUA* begira);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y);
