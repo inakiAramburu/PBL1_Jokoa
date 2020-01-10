@@ -165,10 +165,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
 			
-			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(2, 75, 319, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);
 
 			break;
 		case BIGARREN:
