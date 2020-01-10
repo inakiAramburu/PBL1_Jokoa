@@ -942,18 +942,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 				altuera = 7;
 			}
 	//DETECTAR A QUE LADO MIRA EL PERSONAGE
-			if (pertsonaia.sprite == ERASO)
-			{
-				if (begira == AURRERA)
-				{
-					PertzonaiaEskuinMuga += 33;
-
-				}
-				else
-				{
-					PertzonaiaEzkerMuga -= 33;
-				}
-			}
 		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
 
 		int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
@@ -966,53 +954,32 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		printf("etsaiayGoikoa: %d\n", etsaiayGoikoa);
 		printf("etsaiayBehekoa: %d\n", etsaiayBehekoa);
 		*/
+
+		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen == BAI)
+		{
+			if (begira == AURRERA)
+			{
+				if (etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33)
+				{
+					numero++;
+					printf("VIVO %d\n", numero);
+				}
+			}
+			else
+			{
+				if (etsaiaxEskuin >= PertzonaiaEzkerMuga -33 && etsaiaxEskuin <= PertzonaiaEzkerMuga)
+				{
+					numero++;
+					printf("VIVO %d\n", numero);
+				}
+			}
+		}
 		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 		{
-			if(pertsonaia.sprite != ERASO)
-			{
-			
-				numero++;
-				printf("muerto %d\n", numero);
-				//pertsonaia.sprite = HIL;
-			}
-			else if(pertsonaia.sprite == ERASO)
-			{
-				//hitbox espada
-				//DETECTAR A QUE LADO MIRA EL PERSONAGE
-				if (pertsonaia.sprite == ERASO)
-				{
-					if (begira == AURRERA)
-					{
-						if (etsaiaxEzker >= PertzonaiaEskuinMuga  && etsaiaxEzker<= PertzonaiaEskuinMuga+33)
-						{
-							printf("VIVO %d\n", numero);
-						}
-
-					}
-					else
-					{
-						PertzonaiaEzkerMuga -= 33;
-					}
-				}
-				numero++;
-				//printf("VIVO %d\n", numero);
-			
-			}
-			
+			printf("muerto");
 		}
 	}
 	
-
-	
-
-
-
-
-
-	
-
-	
-
 	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
