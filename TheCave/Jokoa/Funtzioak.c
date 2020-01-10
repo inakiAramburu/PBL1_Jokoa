@@ -163,8 +163,11 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
+			
+			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(2, 200, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-
+			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 			break;
 		case BIGARREN:
@@ -545,7 +548,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			pertsonaia.DestSprite.y += GRABITATEA;
 			AltueraZuzendu(pixels, pitch, bpp);
 	}
-	pertsonaia.SrcSprite.x = 128 * (*i);
+	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
 
 	
@@ -919,7 +922,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 
 	
-	for (i = 0; i < BizirikKopurua; i++)
+	for (i = 0; i <= BizirikKopurua; i++)
 	{
 
 	//detecta el tipo de enemigo
@@ -929,25 +932,26 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			}
 			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
 			{
-
 				altuera = 7;
 			}
 
 		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
+
 		int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
 
 		int	etsaiayGoikoa = etsaia[i].DestSprite.y + altuera;
 		int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
-
-
+/*
+		printf("etsaiaxEzker: %d\n", etsaiaxEzker);
+		printf("etsaiaxEskuin: %d\n", etsaiaxEskuin);
+		printf("etsaiayGoikoa: %d\n", etsaiayGoikoa);
+		printf("etsaiayBehekoa: %d\n", etsaiayBehekoa);
+		*/
 		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 		{
 			numero++;
 			printf("muerto %d\n", numero);
 		}
-
-
-
 	}
 	
 
