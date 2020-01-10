@@ -20,11 +20,11 @@
 #define ETSAIA_ABIADURA 5
 #define EFEKTUA_KEA ".\\media\\sound\\Kea.wav"
 #define EFEKTUA_KORRIKA ".\\media\\sound\\Korrika.wav"
-#define MUSIKA_MENUA 
-#define MUSIKA_JOLASA
-#define EFEKTUA_KLIKA
-#define EFEKTUA_IRABAZI
-#define EFEKTUA_GALDU
+#define MUSIKA_MENUA ".\\media\\sound\\menua.wav"
+#define MUSIKA_JOLASA ".\\media\\sound\\juego.wav"
+#define EFEKTUA_KLIKA ".\\media\\sound\\Klika.wav"
+#define EFEKTUA_IRABAZI ".\\media\\sound\\Irabazi.wav"
+#define EFEKTUA_GALDU ".\\media\\sound\\GameOver.wav"
 
 
 typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, ATERA}PANTAILAK;
