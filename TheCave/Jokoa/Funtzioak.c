@@ -179,11 +179,12 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 10;
 			pertsonaia.DestSprite.y = 500;
-			EtsaiaKokatu(0, 847, 205, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(1, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(2, 690, 205, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(3, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(4, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(0, 847, 389, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(1, 506, 244, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(2, 121, 181, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(3, 360, 113, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(2, 600, 113, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(4, 810, 82, BizirikDaudenEtsaiak, BizirikKopurua);
 			break;
 		case LAUGARREN:
 			ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
@@ -394,6 +395,18 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					break;
 				case SDL_SCANCODE_SPACE:
 					espacio = SAKATUTA;
+					break;
+				case SDL_SCANCODE_2:
+					*Pantaila = BIGARREN;
+					break;
+				case SDL_SCANCODE_3:
+					*Pantaila = HIRUGARREN;
+					break;
+				case SDL_SCANCODE_4:
+					*Pantaila = LAUGARREN;
+					break;
+				case SDL_SCANCODE_5:
+					*Pantaila = BOSTGARREN;
 					break;
 				case SDL_SCANCODE_K:
 					if (!pertsonaia.erasotzen)
