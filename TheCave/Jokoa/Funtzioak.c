@@ -455,7 +455,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -891,59 +891,54 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
-{/*
-	//getpixel(pixels, pitch, bpp, 0, 0));
-	int Tocas=1;
-	printf("x:%d ", pertsonaia.DestSprite.x);
-	printf("y:%d\n", pertsonaia.DestSprite.y);
-
-	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
-	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
-	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
-	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[],int BizirikKopurua)
+{
 	
-	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
-	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
-	
-	if (piernas == 0 )
-	{
-		Tocas = 0;
-		printf("SUELO");
-		
-	}
-	if (piernas == 249 )
-	{
-		Tocas = 249;
-		printf("LAVA");
-	}
-	return Tocas;
-	*/
+	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
+	int PertzonaiaEskuinMuga = pertsonaia.DestSprite.x + 82;
 
-	int Ix = pertsonaia.DestSprite.x + 46;
-	int Dx = pertsonaia.DestSprite.x + 82;
-	int YGoikoa = pertsonaia.DestSprite.y + 11;
-	int YErdikoa = pertsonaia.DestSprite.y + 32;
+	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
+	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
+
 	int YBekoa = pertsonaia.DestSprite.y + 52;
-	
+	int i=0;
+	int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
+	int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
 
-	// && (YGoikoa > 246 && YErdikoa > 246 && YBekoa > 246) && (YGoikoa < 380 &&YErdikoa < 380 && YBekoa < 380)
-	if ((Dx > 207 && Dx < 291)||(Ix > 207 && Ix < 291))
+	int	etsaiayGoikoa = etsaia[i].DestSprite.y;
+	int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
+
+
+	if ((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 	{
 		numero++;
-		printf("muerto %d\n",numero);
-
+		printf("muerto %d\n", numero);
 	}
 
+
+
+
+/*
+	for (i = 0; i < BizirikKopurua; i++)
+	{
+		
+
+	}
+	*/
+	
+
+	
+
+	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
-	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);		
-	hitbox.ezker.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 32);
-	hitbox.ezker.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 52);
+	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 11);
+	hitbox.ezker.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 32);
+	hitbox.ezker.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 52);
 	//Eskuineko aldea
-	hitbox.eskuin.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 11);
-	hitbox.eskuin.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 32);
-	hitbox.eskuin.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 82, pertsonaia.DestSprite.y + 52);
+	hitbox.eskuin.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);
+	hitbox.eskuin.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 32);
+	hitbox.eskuin.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 52);
 	//Behekoa
 	hitbox.behekoa.ezker = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59);
 	hitbox.behekoa.eskuin = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59);
