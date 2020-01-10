@@ -452,7 +452,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* pAnimazioa, ZENT
 	}
 }
 
-void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua)
+void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -531,7 +531,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		pertsonaia.sprite = IDLE;
 		
 	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
 	{
 		pertsonaia.salto = BAI;
 		pertsonaia.sprite = SALTO;
@@ -580,7 +580,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		*pAnimazioa = 0;
 	
 	}
-	for (int j = 0; j < BizirikKopurua; j++)
+	for (int j = 0; j < *BizirikKopurua; j++)
 	{
 		if (etsaia[BizirikDaudenEtsaiak[j]].egoera == BIZIRIK)
 		{
@@ -921,7 +921,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y )
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[] ,int BizirikKopurua, ZENTZUA begira, int *pAnimazioa)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[] ,int *BizirikKopurua, ZENTZUA begira, int *pAnimazioa)
 {
 	
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -943,7 +943,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 
 	
-	for (int j = 0; j < BizirikKopurua; j++)
+	for (int j = 0; j < *BizirikKopurua; j++)
 	{
 		
 
@@ -977,6 +977,8 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 				{
 					numero++;
 					printf("VIVO %d\n", numero);
+					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
+					--* BizirikKopurua;
 				}
 			}
 			else
@@ -985,6 +987,8 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 				{
 					numero++;
 					printf("VIVO %d\n", numero);
+					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
+					--* BizirikKopurua;
 				}
 			}
 		}
@@ -1017,6 +1021,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 		pertsonaia.sprite = HIL;
 		pertsonaia.erortzen = EZ;
+		pertsonaia.salto = EZ;
 	}
 }
 
@@ -1056,4 +1061,13 @@ void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp)
 void PertsonaiaHil()
 {
 	pertsonaia.egoera = HILDA;
+}
+
+void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua)
+{
+	etsaia[BizirikDaudenEtsaiak[pos]].egoera = HILDA;
+	for (int j = pos; j < BizirikKopurua - 1; j++)
+	{
+		BizirikDaudenEtsaiak[j] = BizirikDaudenEtsaiak[j + 1];
+	}
 }

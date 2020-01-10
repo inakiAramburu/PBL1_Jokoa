@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
 				KargaLehen = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
 				KargaBigarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
 				KargaHirugarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
 				KargaLaugarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
@@ -150,7 +150,7 @@ int main(int argc, char* argv[]) {
 				KargaBostgarren = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, BizirikKopurua);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
