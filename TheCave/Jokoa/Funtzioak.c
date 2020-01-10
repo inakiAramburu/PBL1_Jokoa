@@ -66,17 +66,11 @@ typedef struct S_ETSAIA		//Etsaien datuak
 {
 	SDL_Rect SrcSprite, DestSprite;
 	EGOERA egoera;
-	int abiadura, kop;
+	int abiadura;
 	SDL_Texture* textura;
 }ETSAIA;
 
 ETSAIA etsaia[ETSAI_KOPURUA];
-
-typedef struct S_MAPA
-{
-	void* pixels;
-	int pitch;
-};
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -160,7 +154,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
 			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(5, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 
 			break;
@@ -346,7 +339,7 @@ void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila)
 	*Pantaila = ATERA;
 }
 
-void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begira)
+void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* pAnimazioa, ZENTZUA *begira)
 {
 	SAGUA klika;
 	SDL_Event ebentua;
@@ -371,7 +364,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					{
 						pertsonaia.sprite = KORRIKA;
 						pertsonaia.erasotzen = EZ;
-						*i = 0;
+						*pAnimazioa = 0;
 					}
 					d = SAKATUTA;
 					break;
@@ -381,7 +374,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					{
 						pertsonaia.sprite = KORRIKA;
 						pertsonaia.erasotzen = EZ;
-						*i = 0;
+						*pAnimazioa = 0;
 					}
 					a = SAKATUTA;
 					break;
@@ -443,10 +436,11 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua)
+void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
+	static int eAnimazioa;
 
 	//	Debbug de pies
 	if (f3) 
@@ -467,12 +461,12 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			if (a || d)
 			{
 				pertsonaia.sprite = KORRIKA;
-				*i = 0;
+				*pAnimazioa = 0;
 			}
 			else
 			{
 				pertsonaia.sprite = IDLE;
-				*i = 0;
+				*pAnimazioa = 0;
 			}
 		}
 		pertsonaia.erortzen = EZ;
@@ -483,7 +477,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 		{
 			pertsonaia.erortzen = BAI;
 			pertsonaia.sprite = ERORI;
-			*i = 0;
+			*pAnimazioa = 0;
 		}
 	}
 	if (w)
@@ -515,7 +509,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	{
 		if (pertsonaia.sprite != IDLE)
 		{
-			*i = 0;
+			*pAnimazioa = 0;
 		}
 		pertsonaia.sprite = IDLE;
 		
@@ -524,13 +518,13 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	{
 		pertsonaia.salto = BAI;
 		pertsonaia.sprite = SALTO;
-		*i = 0;
+		*pAnimazioa = 0;
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
 	{
 		pertsonaia.erasotzen = BAI;
 		pertsonaia.sprite = ERASO;
-		*i = 0;
+		*pAnimazioa = 0;
 	}
 	if (pertsonaia.salto)
 	{
@@ -541,9 +535,9 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			pertsonaia.DestSprite.y += GRABITATEA;
 			AltueraZuzendu(pixels, pitch, bpp);
 	}
-	pertsonaia.SrcSprite.x = 128 * (*i);
-	*i += 1;
-	if (*i >= spriteak[pertsonaia.sprite].kop)
+	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
+	*pAnimazioa += 1;
+	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)
 	{
 		if (pertsonaia.salto)
 		{
@@ -556,7 +550,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			k = SAKATUGABE;
 
 			}
-		*i = 0;
+		*pAnimazioa = 0;
 	
 	}
 	for (int j = 0; j < BizirikKopurua; j++)
@@ -565,7 +559,13 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 		{
 			EtsaienAdimena(BizirikDaudenEtsaiak[j], pixels, pitch, bpp);
 			etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x += etsaia[BizirikDaudenEtsaiak[j]].abiadura;
+			etsaia[BizirikDaudenEtsaiak[j]].SrcSprite.x = 32 * eAnimazioa;
 		}
+	}
+	eAnimazioa += 1;
+	if (eAnimazioa >= ETSAIA_SPRITE_KOPURUA)
+	{
+		eAnimazioa = 0;
 	}
 }
 
@@ -696,7 +696,6 @@ void EtsaiakHasieratu()
 	for (j = 0; j < kopurua; j++)
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", j);
-		etsaia[j].kop = 4;
 		etsaia[j].SrcSprite.h = 44;
 		etsaia[j].SrcSprite.w = 33;
 		etsaia[j].SrcSprite.x = 0;
@@ -708,7 +707,6 @@ void EtsaiakHasieratu()
 	for (j = tmp; j < tmp + kopurua; j++)
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mukitxua.bmp", j);
-		etsaia[j].kop = 4;
 		etsaia[j].SrcSprite.h = 44;
 		etsaia[j].SrcSprite.w = 33;
 		etsaia[j].SrcSprite.x = 0;
@@ -958,5 +956,4 @@ void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp)
 	{
 		etsaia[znbk_etsaia].abiadura *= -1;
 	}
-
 }
