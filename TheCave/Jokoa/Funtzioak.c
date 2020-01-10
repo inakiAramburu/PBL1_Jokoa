@@ -171,12 +171,19 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 10;
 			pertsonaia.DestSprite.y = 510;
+			EtsaiaKokatu(0, 690, 205, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(6, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
 			break;
 		case HIRUGARREN:
 			ImgKargatu(HIRUGARREN_PANTAILA, 0, 0, 0, 0);
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 100;
+			pertsonaia.DestSprite.y = 500;
+			EtsaiaKokatu(0, 847, 205, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(1, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(2, 690, 205, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(3, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(4, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
 			break;
 		case LAUGARREN:
 			ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
@@ -223,7 +230,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 void KargatuMapa(char mapa[], void **pixels, int *pitch, Uint8 *bpp)
 {
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
-	*pixels = surface->pixels;
+	*pixels = surface->pixels;  
 
 	*pitch = surface->pitch;
 	*bpp = surface->format->BytesPerPixel;
@@ -558,6 +565,10 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			{
 			pertsonaia.erasotzen = EZ;
 			k = SAKATUGABE;
+			d = SAKATUGABE;
+			w = SAKATUGABE;
+			a = SAKATUGABE;
+			
 
 			}
 		*i = 0;
@@ -926,11 +937,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 
 
-	// && (YGoikoa > 246 && YErdikoa > 246 && YBekoa > 246) && (YGoikoa < 380 &&YErdikoa < 380 && YBekoa < 380)
-	if ((Dx > 207 && Dx < 291))
-	{
-		printf("muerto");
-	}
+
 
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
