@@ -45,7 +45,7 @@ void PertsonaiaHasieratu();		//Jokatu sakatzean lehenengo aldiz pertsonaia karga
 void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartzu eta gordetzen ditu
 void EtsaiakHasieratu();
 void EtsaiaKargatu(char Irudia[], int i);
-void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak, int BizirikKopurua);
+void Ekintzak(int *i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua);
 void Amaitu(JOKOA *Jokoa, PANTAILAK *Pantaila);			//Jokoa amaitzen du
 void MusikaJarri(char Fitxategia[]);
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua);		//Etsaia nibel hasieran kokatu, etsaiaren zenbakia, x eta y posizioa emanez

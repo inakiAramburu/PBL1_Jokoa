@@ -160,6 +160,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
 			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(5, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 
 			break;
@@ -442,7 +443,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 	}
 }
 
-void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak, int BizirikKopurua)
+void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -560,11 +561,10 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	}
 	for (int j = 0; j < BizirikKopurua; j++)
 	{
-
-		if (etsaia[j].egoera == BIZIRIK)
+		if (etsaia[BizirikDaudenEtsaiak[j]].egoera == BIZIRIK)
 		{
-			EtsaienAdimena(j, pixels, pitch, bpp);
-			etsaia[j].DestSprite.x += etsaia[j].abiadura;
+			EtsaienAdimena(BizirikDaudenEtsaiak[j], pixels, pitch, bpp);
+			etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x += etsaia[BizirikDaudenEtsaiak[j]].abiadura;
 		}
 	}
 }
@@ -697,24 +697,24 @@ void EtsaiakHasieratu()
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", j);
 		etsaia[j].kop = 4;
-		etsaia[j].SrcSprite.h = 41;
+		etsaia[j].SrcSprite.h = 44;
 		etsaia[j].SrcSprite.w = 33;
 		etsaia[j].SrcSprite.x = 0;
 		etsaia[j].SrcSprite.y = 0;
 		etsaia[j].DestSprite.w = 33;
-		etsaia[j].DestSprite.h = 41;
+		etsaia[j].DestSprite.h = 44;
 	}
 	tmp = j;
 	for (j = tmp; j < tmp + kopurua; j++)
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mukitxua.bmp", j);
 		etsaia[j].kop = 4;
-		etsaia[j].SrcSprite.h = 41;
+		etsaia[j].SrcSprite.h = 44;
 		etsaia[j].SrcSprite.w = 33;
 		etsaia[j].SrcSprite.x = 0;
 		etsaia[j].SrcSprite.y = 0;
 		etsaia[j].DestSprite.w = 33;
-		etsaia[j].DestSprite.h = 41;
+		etsaia[j].DestSprite.h = 44;
 	}
 	tmp = j;
 	/*
