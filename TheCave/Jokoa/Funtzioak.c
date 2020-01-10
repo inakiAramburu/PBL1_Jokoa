@@ -6,7 +6,7 @@ SDL_Renderer* render;
 SDL_Window* leihoa;
 Uint32 time=0;
 Uint32 time2 = 0;
-Uint32 abiadura[8] = {150,60,80,80,10,80,80};
+Uint32 abiadura[8] = {150,60,80,80,10,100,80};
 int numero = 0;
 //IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA
 /*
@@ -166,7 +166,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.y = 300;
 			
 			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(2, 75, 319, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
@@ -420,6 +419,9 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* pAnimazioa, ZENT
 				case SDL_SCANCODE_F3:
 					f3 = !f3;	
 					break;
+				case SDL_SCANCODE_9:
+					
+					break;
 				}
 				break;
 			case SDL_KEYUP:
@@ -467,7 +469,8 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
+
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -496,7 +499,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	if (w)
 	{
-		if (hitbox.goikoa == HORIA)
+		if (hitbox.ezker.goikoa == HORIA)
 		{
 			*pantaila += 1;
 			GuztiakHil();
@@ -519,7 +522,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			pertsonaia.DestSprite.x += abiadurax;
 		}
 	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a)
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
 		if (pertsonaia.sprite != IDLE)
 		{
@@ -559,6 +562,10 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	
 	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)
 	{
+		if (pertsonaia.sprite == HIL)
+		{
+			PertsonaiaHil();
+		}
 		if (pertsonaia.salto)
 		{
 			pertsonaia.salto = EZ;
@@ -582,7 +589,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			etsaia[BizirikDaudenEtsaiak[j]].SrcSprite.x = 32 * eAnimazioa;
 		}
 	}
-	if (SDL_GetTicks() - time2 > 150)
+	if (SDL_GetTicks() - time2 > 180)
 	{
 		eAnimazioa++;
 		time2 = SDL_GetTicks();
@@ -914,7 +921,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y )
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[] ,int BizirikKopurua, ZENTZUA begira)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[] ,int BizirikKopurua, ZENTZUA begira, int *pAnimazioa)
 {
 	
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -962,7 +969,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		printf("etsaiayBehekoa: %d\n", etsaiayBehekoa);
 		*/
 
-		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen == BAI)
+		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen == BAI && *pAnimazioa > 4)
 		{
 			if (begira == AURRERA)
 			{
@@ -983,7 +990,8 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 		{
-			printf("muerto");
+			pertsonaia.sprite = HIL;
+			*pAnimazioa = 0;
 		}
 	}
 	
@@ -1001,6 +1009,15 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	//Behekoa
 	hitbox.behekoa.ezker = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 54, pertsonaia.DestSprite.y + 59);
 	hitbox.behekoa.eskuin = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 75, pertsonaia.DestSprite.y + 59);
+	if (hitbox.behekoa.eskuin == GORRIA || hitbox.behekoa.ezker == GORRIA || hitbox.eskuin.behekoa == GORRIA || hitbox.ezker.behekoa == GORRIA)
+	{
+		if (pertsonaia.sprite != HIL)
+		{
+			*pAnimazioa = 0;
+		}
+		pertsonaia.sprite = HIL;
+		pertsonaia.erortzen = EZ;
+	}
 }
 
 void AltueraZuzendu(void *pixels, int pitch, Uint8 bpp)
@@ -1034,4 +1051,9 @@ void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp)
 	{
 		etsaia[znbk_etsaia].abiadura *= -1;
 	}
+}
+
+void PertsonaiaHil()
+{
+	pertsonaia.egoera = HILDA;
 }
