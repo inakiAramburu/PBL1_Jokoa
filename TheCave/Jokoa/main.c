@@ -46,10 +46,13 @@ int main(int argc, char* argv[]) {
 				KargaMenua = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &animazioa, &begira);
+			if (Pantaila != MENUA)
+			{
+				break;
+			}
 			RenderMenu();
 			Irudikatu();
 			SDL_Delay(50);
-			
 		}
 		while (Pantaila == KREDITUAK)
 		{
