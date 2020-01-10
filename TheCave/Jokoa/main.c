@@ -1,6 +1,6 @@
 #include "Funtzioak.h"
 #include <stdio.h>
-//Fusion, saltoa eta nivel aldaketa//
+//MASTER//
 
 int main(int argc, char* argv[]) {
 
