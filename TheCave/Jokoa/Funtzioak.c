@@ -190,7 +190,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
 			pertsonaia.SrcSprite.x = 0;
 			pertsonaia.DestSprite.x = 10;
-			pertsonaia.DestSprite.y = 100;
+			pertsonaia.DestSprite.y = 500;
 			break;
 		case BOSTGARREN:
 			ImgKargatu(BOSTGARREN_PANTAILA, 0, 0, 0, 0);
