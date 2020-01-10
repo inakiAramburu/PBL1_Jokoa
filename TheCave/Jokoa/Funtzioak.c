@@ -819,8 +819,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 
 void Animazioa()
 {
-	//int i, j;
-
+	int i, j;
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
 	pertsonaia.egoera = BIZIRIK;
@@ -833,13 +832,13 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
-/*
+
 	MusikaJarri(Kea);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
 		pertsonaia.SrcSprite.x = 128 * i;
-		RenderPrestatu(AURRERA);
+		RenderPrestatu(AURRERA, NULL, NULL);
 		Irudikatu();
 	}
 	pertsonaia.sprite = IDLE;
@@ -848,7 +847,7 @@ void Animazioa()
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu(AURRERA);
+			RenderPrestatu(AURRERA, NULL, NULL);
 			Irudikatu();
 			SDL_Delay(150);
 		}
@@ -860,26 +859,26 @@ void Animazioa()
 		{
 			pertsonaia.SrcSprite.x = 128 * i;
 			pertsonaia.DestSprite.x += 9;
-			RenderPrestatu(AURRERA);
+			RenderPrestatu(AURRERA, NULL, NULL);
 			Irudikatu();
 			SDL_Delay(80);
 		}
 	}
 	pertsonaia.sprite = IDLE;
-	RenderPrestatu(AURRERA);
+	RenderPrestatu(AURRERA, NULL, NULL);
 	Irudikatu();
 	SDL_Delay(300);
 	IrudiZnbk = IrudiakKendu(0);
-	pertsonaia.egoera = HILDA;
+	
 	ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
 	for (i = 0; i < 80; i++)
 	{
 		SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
-		RenderPrestatu(AURRERA);
+		RenderPrestatu(AURRERA,NULL,NULL);
 		Irudikatu();
 		SDL_Delay(100);
 	}
-	SDL_Delay(2000);*/
+	SDL_Delay(2000);
 }
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
