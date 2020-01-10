@@ -2,6 +2,8 @@
 #include <SDL.h>
 #include <stdio.h>
 
+
+//Mikel
 SDL_Renderer* render;
 SDL_Window* leihoa;
 Uint32 time=0;
