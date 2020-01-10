@@ -403,6 +403,10 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 					Amaitu(Jokoa, Pantaila);
 					break;
 				case SDL_SCANCODE_W:
+					if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+					{
+						pertsonaia.erasotzen = EZ;
+					}
 					w = SAKATUTA;
 					break;
 				case SDL_SCANCODE_F3:
@@ -506,7 +510,7 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			pertsonaia.DestSprite.x += abiadurax;
 		}
 	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && !w)
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a)
 	{
 		if (pertsonaia.sprite != IDLE)
 		{
