@@ -496,7 +496,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	if (w)
 	{
-		if ((hitbox.eskuin.behekoa == URDINA && hitbox.eskuin.erdikoa == URDINA && hitbox.eskuin.goikoa == URDINA) || (hitbox.ezker.behekoa == URDINA && hitbox.ezker.erdikoa == URDINA && hitbox.ezker.goikoa == URDINA))
+		if (hitbox.goikoa == HORIA)
 		{
 			*pantaila += 1;
 			GuztiakHil();
