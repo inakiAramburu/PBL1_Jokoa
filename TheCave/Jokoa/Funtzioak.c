@@ -914,7 +914,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y )
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[],int BizirikKopurua, ZENTZUA begira)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[] ,int BizirikKopurua, ZENTZUA begira)
 {
 	
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -926,7 +926,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 
 	int YBekoa = pertsonaia.DestSprite.y + 52;
-	int i=0;
 	int altuera=0;
 
 	int etsaiaxEzker;
@@ -937,26 +936,25 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 
 	
-	for (i = 0; i <= BizirikKopurua; i++)
+	for (int j = 0; j < BizirikKopurua; j++)
 	{
 		
 
 	//detecta el tipo de enemigo
-			if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
+			if (BizirikDaudenEtsaiak[j] >= 0 && BizirikDaudenEtsaiak[j] <= 4)
 			{
 				altuera = 0;
 			}
-			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
+			else if (BizirikDaudenEtsaiak[j] >= 5 && BizirikDaudenEtsaiak[j] <= 9)
 			{
 				altuera = 7;
 			}
 	//DETECTAR A QUE LADO MIRA EL PERSONAGE
-		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
-
-		int etsaiaxEskuin = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.x + 29;
-
-		int	etsaiayGoikoa = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.y + altuera;
-		int	etsaiayBehekoa = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.y + 43;
+	
+		etsaiaxEzker = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x + 5;
+		etsaiaxEskuin = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x + 29;
+		etsaiayGoikoa = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.y + altuera;
+		etsaiayBehekoa = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.y + 43;
 /*
 		printf("etsaiaxEzker: %d\n", etsaiaxEzker);
 		printf("etsaiaxEskuin: %d\n", etsaiaxEskuin);
