@@ -165,12 +165,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
 			
-		//	EtsaiaKokatu(1, 400, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-		//	EtsaiaKokatu(2, 200, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-		//	EtsaiaKokatu(3, 400, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-		//	EtsaiaKokatu(4, 200, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			//EtsaiaKokatu(0, 800, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(5, 900, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(2, 75, 319, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 			break;
 		case BIGARREN:
@@ -469,7 +467,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -885,7 +883,7 @@ void Animazioa()
 	SDL_Delay(2000);*/
 }
 
-Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
+Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y )
 {
 
 
@@ -916,7 +914,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[],int BizirikKopurua)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[],int BizirikKopurua, ZENTZUA begira)
 {
 	
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -925,23 +923,35 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
 	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
 
+
+
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 	int i=0;
 	int altuera=0;
-	
-	for (i = 0; i < BizirikKopurua; i++)
-	{
-	//detecta el tipo de enemigo
-		if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
-		{
-			altuera = 0;
-		}
-		else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
-		{
-			altuera = 7;
-		}
 
-		int etsaiaxEzker = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.x + 5;
+	int etsaiaxEzker;
+	int etsaiaxEskuin;
+
+	int	etsaiayGoikoa;
+	int	etsaiayBehekoa;
+
+
+	
+	for (i = 0; i <= BizirikKopurua; i++)
+	{
+		
+
+	//detecta el tipo de enemigo
+			if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
+			{
+				altuera = 0;
+			}
+			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
+			{
+				altuera = 7;
+			}
+	//DETECTAR A QUE LADO MIRA EL PERSONAGE
+		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
 
 		int etsaiaxEskuin = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.x + 29;
 
@@ -953,10 +963,29 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		printf("etsaiayGoikoa: %d\n", etsaiayGoikoa);
 		printf("etsaiayBehekoa: %d\n", etsaiayBehekoa);
 		*/
+
+		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen == BAI)
+		{
+			if (begira == AURRERA)
+			{
+				if (etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33)
+				{
+					numero++;
+					printf("VIVO %d\n", numero);
+				}
+			}
+			else
+			{
+				if (etsaiaxEskuin >= PertzonaiaEzkerMuga -33 && etsaiaxEskuin <= PertzonaiaEzkerMuga)
+				{
+					numero++;
+					printf("VIVO %d\n", numero);
+				}
+			}
+		}
 		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 		{
-			numero++;
-			printf("muerto %d\n", numero);
+			printf("muerto");
 		}
 	}
 	
