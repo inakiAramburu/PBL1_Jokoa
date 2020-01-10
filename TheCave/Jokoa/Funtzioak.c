@@ -373,6 +373,7 @@ void EbentuakKonprobatu(JOKOA *Jokoa, PANTAILAK *Pantaila, int* i, ZENTZUA *begi
 			case SDL_MOUSEBUTTONUP:
 				ZeinKlikatuDa(ebentua.button, &klika);
 				KonprobatuKlika(Pantaila, klika);
+				MusikaJarri(EFEKTUA_KLIKA);
 				break;
 			case SDL_KEYDOWN:
 				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
@@ -622,12 +623,15 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 	int x, y;
 	switch (*Pantaila)
 	{
+		
 		case MENUA:
 			if (klika == EZKER)
 			{
 				SDL_GetMouseState(&x, &y);
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
+					MusikaJarri(EFEKTUA_KLIKA);
+					SDL_Delay(600);
 					int relleno[1];
 					int rellenodim = 0;
 					IrudiZnbk = 1;
@@ -643,7 +647,7 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 					*Pantaila = KONTROLAK;
 				}
 				else if ((x > 512 && y > 425) && (x < 762 && y < 525))
-				{
+				{					
 					*Pantaila = KREDITUAK;
 				}
 			}
@@ -838,7 +842,7 @@ void Animazioa()
 	MusikaJarri(EFEKTUA_KEA);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
-		SDL_Delay(100);
+		SDL_Delay(200);
 		pertsonaia.SrcSprite.x = 128 * i;
 		RenderPrestatu(AURRERA, NULL, NULL);
 		Irudikatu();
@@ -854,6 +858,7 @@ void Animazioa()
 			SDL_Delay(150);
 		}
 	}
+	MusikaJarri(EFEKTUA_KORRIKA);
 	pertsonaia.sprite = KORRIKA;
 	for (j = 0; j < 12; j++)
 	{
@@ -870,8 +875,9 @@ void Animazioa()
 	RenderPrestatu(AURRERA, NULL, NULL);
 	Irudikatu();
 	SDL_Delay(300);
+
 	IrudiZnbk = IrudiakKendu(0);
-	
+	MusikaJarri(MUSIKA_JOLASA);
 	ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
 	for (i = 0; i < 80; i++)
 	{

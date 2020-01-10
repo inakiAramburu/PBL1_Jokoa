@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokoa = JOKATZEN;
 
-
+	MusikaJarri(MUSIKA_MENUA);
 	while (Jokoa)
 	{
 		while (Pantaila == MENUA)
@@ -57,6 +57,7 @@ int main(int argc, char* argv[]) {
 			KargaMenua = 0;
 			if (!KargaKredituak)
 			{
+				
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaKredituak = 1;
 			}
