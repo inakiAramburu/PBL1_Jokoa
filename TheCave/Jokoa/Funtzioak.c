@@ -181,9 +181,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.y = 500;
 			EtsaiaKokatu(0, 847, 389, BizirikDaudenEtsaiak, BizirikKopurua);
 			EtsaiaKokatu(1, 506, 244, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(2, 121, 181, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(5, 121, 181, BizirikDaudenEtsaiak, BizirikKopurua);
 			EtsaiaKokatu(3, 360, 113, BizirikDaudenEtsaiak, BizirikKopurua);
-			EtsaiaKokatu(2, 600, 113, BizirikDaudenEtsaiak, BizirikKopurua);
+			EtsaiaKokatu(6, 600, 113, BizirikDaudenEtsaiak, BizirikKopurua);
 			EtsaiaKokatu(4, 810, 82, BizirikDaudenEtsaiak, BizirikKopurua);
 			break;
 		case LAUGARREN:
@@ -589,11 +589,10 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 	}
 	for (int j = 0; j < BizirikKopurua; j++)
 	{
-
-		if (etsaia[j].egoera == BIZIRIK)
+		if (etsaia[BizirikDaudenEtsaiak[j]].egoera == BIZIRIK)
 		{
-			EtsaienAdimena(j, pixels, pitch, bpp);
-			etsaia[j].DestSprite.x += etsaia[j].abiadura;
+			EtsaienAdimena(BizirikDaudenEtsaiak[j], pixels, pitch, bpp);
+			etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x += etsaia[BizirikDaudenEtsaiak[j]].abiadura;
 		}
 	}
 }
