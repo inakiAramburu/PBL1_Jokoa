@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
 			KargaKontrolak = 0;
 			if (!KargaMenua)
 			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, BizirikDaudenEtsaiak, &BizirikKopurua);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaMenua = 1;
 			}
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);

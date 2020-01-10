@@ -1,9 +1,13 @@
 #include "Funtzioak.h"
 #include <SDL.h>
+#include <stdio.h>
 
 SDL_Renderer* render;
 SDL_Window* leihoa;
-
+Uint32 time=0;
+Uint32 abiadura[7] = {150,60,80,80,10,80,80};
+int numero = 0;
+//IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA
 /*
 extern int pitch; //el numero de pixels por fila
 extern Uint32 bpp; //el numero de Byte por pixel
@@ -71,6 +75,12 @@ typedef struct S_ETSAIA		//Etsaien datuak
 }ETSAIA;
 
 ETSAIA etsaia[ETSAI_KOPURUA];
+
+typedef struct 
+{
+	void* pixels;
+	int pitch;
+}S_MAPA;
 
 TEKLAK a = SAKATUGABE;
 TEKLAK d = SAKATUGABE;
@@ -229,7 +239,7 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	
 	for (i = 0; i < IrudiZnbk; i++)
 	{
-		if (Irudiak[i].Dimentsioak.h == NULL)
+		if (Irudiak[i].Dimentsioak.h == 0)
 		{
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
 		}
@@ -453,7 +463,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua);
 	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
 	{
 		if (pertsonaia.erortzen)
@@ -535,8 +545,17 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			pertsonaia.DestSprite.y += GRABITATEA;
 			AltueraZuzendu(pixels, pitch, bpp);
 	}
-	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
-	*pAnimazioa += 1;
+	pertsonaia.SrcSprite.x = 128 * (*i);
+
+
+	
+	
+		if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+		{
+			++*pAnimazioa ;
+			time = SDL_GetTicks();
+		}
+	
 	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)
 	{
 		if (pertsonaia.salto)
@@ -789,7 +808,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 
 void Animazioa()
 {
-	int i, j;
+	//int i, j;
 
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
@@ -852,11 +871,11 @@ void Animazioa()
 	SDL_Delay(2000);*/
 }
 
-Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
+Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 {
 
 
-	Uint8* p = (Uint8*)pixels + (y * (Uint32)(pitch)+x) * bpp;
+	Uint8* p = (Uint8*)pixels + ((Uint64)(y)* pitch+x) * bpp;
 
 	switch (bpp) {
 	case 1:
@@ -883,37 +902,70 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, Uint32 x, Uint32 y)
 	}
 }
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp)
-{/*
-	//getpixel(pixels, pitch, bpp, 0, 0));
-	int Tocas=1;
-	printf("x:%d ", pertsonaia.DestSprite.x);
-	printf("y:%d\n", pertsonaia.DestSprite.y);
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[],int BizirikKopurua)
+{
+	
+	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
+	int PertzonaiaEskuinMuga = pertsonaia.DestSprite.x + 82;
 
-	printf("Blanco: %d\n", getpixel(pixels, pitch, bpp, 0, 0));
-	printf("Negro: %d\n", getpixel(pixels, pitch, bpp, 0, 717));
-	printf("Rojo: %d\n", getpixel(pixels, pitch, bpp, 350, 700));
-	printf("pies: %d\n", getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59));
+	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
+	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
+
+	int YBekoa = pertsonaia.DestSprite.y + 52;
+	int i=0;
+	int altuera=0;
+
+
+
+
 	
-	int piernas = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 53, pertsonaia.DestSprite.y + 59);
-	//int cabeza = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 65, pertsonaia.DestSprite.y);
+	for (i = 0; i < BizirikKopurua; i++)
+	{
+
+	//detecta el tipo de enemigo
+			if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
+			{
+				altuera = 0;
+			}
+			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
+			{
+
+				altuera = 7;
+			}
+
+		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
+		int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
+
+		int	etsaiayGoikoa = etsaia[i].DestSprite.y + altuera;
+		int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
+
+
+		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
+		{
+			numero++;
+			printf("muerto %d\n", numero);
+		}
+
+
+
+	}
 	
-	if (piernas == 0 )
-	{
-		Tocas = 0;
-		printf("SUELO");
-		
-	}
-	if (piernas == 249 )
-	{
-		Tocas = 249;
-		printf("LAVA");
-	}
-	return Tocas;
-	*/
+
+	
+
+
+
+
+
+	
+
+	
+
+	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
-	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);		
+	hitbox.ezker.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 11);
+
 	hitbox.ezker.erdikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 32);
 	hitbox.ezker.behekoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 46, pertsonaia.DestSprite.y + 52);
 	//Eskuineko aldea
