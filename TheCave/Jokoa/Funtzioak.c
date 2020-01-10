@@ -783,7 +783,7 @@ void MusikaJarri(char Fitxategia[])
 {
 	//explicacion
 	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
-
+	SDL_Init(SDL_INIT_AUDIO);
 	SDL_AudioSpec wavSpec;
 	Uint32 wavLength;
 	Uint8* wavBuffer;
@@ -833,9 +833,9 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	char Kea[128] = ".\\media\\sound\\Kea.wav";
+	
 
-	MusikaJarri(Kea);
+	MusikaJarri(EFEKTUA_KEA);
 	for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 	{
 		SDL_Delay(100);
