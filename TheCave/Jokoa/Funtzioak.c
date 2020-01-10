@@ -5,7 +5,8 @@
 SDL_Renderer* render;
 SDL_Window* leihoa;
 Uint32 time=0;
-Uint32 abiadura[7] = {150,60,80,80,10,80,80};
+Uint32 time2 = 0;
+Uint32 abiadura[8] = {150,60,80,80,10,80,80};
 int numero = 0;
 //IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA
 /*
@@ -164,10 +165,12 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 			pertsonaia.DestSprite.x = 0;
 			pertsonaia.DestSprite.y = 300;
 			
-			EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(2, 200, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-			EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+		//	EtsaiaKokatu(1, 400, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+		//	EtsaiaKokatu(2, 200, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+		//	EtsaiaKokatu(3, 400, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+		//	EtsaiaKokatu(4, 200, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			//EtsaiaKokatu(0, 800, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+			EtsaiaKokatu(5, 900, 470, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 			break;
 		case BIGARREN:
@@ -550,14 +553,11 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
-
-	
-	
-		if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
-		{
+	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+	{
 			++*pAnimazioa ;
 			time = SDL_GetTicks();
-		}
+	}
 	
 	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)
 	{
@@ -584,7 +584,11 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			etsaia[BizirikDaudenEtsaiak[j]].SrcSprite.x = 32 * eAnimazioa;
 		}
 	}
-	eAnimazioa += 1;
+	if (SDL_GetTicks() - time2 > 150)
+	{
+		eAnimazioa++;
+		time2 = SDL_GetTicks();
+	}
 	if (eAnimazioa >= ETSAIA_SPRITE_KOPURUA)
 	{
 		eAnimazioa = 0;
@@ -804,7 +808,14 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 	etsaia[znbk_etsaia].DestSprite.x = x;
 	etsaia[znbk_etsaia].DestSprite.y = y;
 	etsaia[znbk_etsaia].egoera = BIZIRIK;
-	etsaia[znbk_etsaia].abiadura = ETSAIA_ABIADURA;
+	if (znbk_etsaia >= 0 && znbk_etsaia <= 4)
+	{
+		etsaia[znbk_etsaia].abiadura = ABIADURA_MAMUA;
+	}
+	else if (znbk_etsaia >= 5 && znbk_etsaia <= 9)
+	{
+		etsaia[znbk_etsaia].abiadura = ABIADURA_MUKITXUA;
+	}
 	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
 	*BizirikKopurua += 1;
 }
@@ -917,30 +928,25 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 	int i=0;
 	int altuera=0;
-
-
-
-
 	
-	for (i = 0; i <= BizirikKopurua; i++)
+	for (i = 0; i < BizirikKopurua; i++)
 	{
-
 	//detecta el tipo de enemigo
-			if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
-			{
-				altuera = 0;
-			}
-			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
-			{
-				altuera = 7;
-			}
+		if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
+		{
+			altuera = 0;
+		}
+		else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
+		{
+			altuera = 7;
+		}
 
-		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
+		int etsaiaxEzker = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.x + 5;
 
-		int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
+		int etsaiaxEskuin = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.x + 29;
 
-		int	etsaiayGoikoa = etsaia[i].DestSprite.y + altuera;
-		int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
+		int	etsaiayGoikoa = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.y + altuera;
+		int	etsaiayBehekoa = etsaia[BizirikDaudenEtsaiak[i]].DestSprite.y + 43;
 /*
 		printf("etsaiaxEzker: %d\n", etsaiaxEzker);
 		printf("etsaiaxEskuin: %d\n", etsaiaxEskuin);
@@ -954,17 +960,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 	}
 	
-
-	
-
-
-
-
-
-	
-
-	
-
 	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
