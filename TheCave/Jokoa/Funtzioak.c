@@ -904,44 +904,48 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int i=0;
 	int altuera=0;
 
-	//detecta el tipo de enemigo
-	if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
-	{	
-		altuera = 0;
-	}
-	else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
-	{
+
+
+
 	
-		altuera = 7;
-	}
-
-	int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
-	int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
-
-	int	etsaiayGoikoa = etsaia[i].DestSprite.y + altuera;
-	int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
-	
-
-	if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin)|| (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
-	{
-
-		
-
-		
-		numero++;
-		printf("muerto %d\n", numero);
-	}
-
-
-
-
-/*
 	for (i = 0; i < BizirikKopurua; i++)
 	{
-		
+
+	//detecta el tipo de enemigo
+			if (BizirikDaudenEtsaiak[i] >= 0 && BizirikDaudenEtsaiak[i] <= 4)
+			{
+				altuera = 0;
+			}
+			else if (BizirikDaudenEtsaiak[i] >= 5 && BizirikDaudenEtsaiak[i] <= 9)
+			{
+
+				altuera = 7;
+			}
+
+		int etsaiaxEzker = etsaia[i].DestSprite.x + 5;
+		int etsaiaxEskuin = etsaia[i].DestSprite.x + 29;
+
+		int	etsaiayGoikoa = etsaia[i].DestSprite.y + altuera;
+		int	etsaiayBehekoa = etsaia[i].DestSprite.y + 43;
+
+
+		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
+		{
+			numero++;
+			printf("muerto %d\n", numero);
+		}
+
+
 
 	}
-	*/
+	
+
+	
+
+
+
+
+
 	
 
 	
