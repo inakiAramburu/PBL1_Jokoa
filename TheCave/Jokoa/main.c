@@ -1,5 +1,8 @@
 #include "Funtzioak.h"
 #include <stdio.h>
+
+#include <SDL_net.h>
+
 //Fusion, saltoa eta nivel aldaketa//
 
 int main(int argc, char* argv[]) {
@@ -34,6 +37,27 @@ int main(int argc, char* argv[]) {
 	Jokoa = JOKATZEN;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	while (Jokoa)
 	{
 		while (Pantaila == MENUA)
@@ -65,6 +89,37 @@ int main(int argc, char* argv[]) {
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
+
+
+			//////////////////////////server///////////////////////////////////////
+			SDL_Init(SDL_INIT_EVERYTHING);
+			SDLNet_Init();
+			IPaddress ip;
+
+			SDLNet_ResolveHost(&ip, NULL, 1234);
+
+			TCPsocket server = SDLNet_TCP_Open(&ip);
+			TCPsocket client;
+			char* enviado = "hola";
+
+			while (1)
+			{
+				client = SDLNet_TCP_Accept(server);
+				if (client)
+				{
+					//aqui se puede comunicar
+					SDLNet_TCP_Send(client, enviado,100);
+					SDLNet_TCP_Close(client);
+					break;
+				}
+			}
+			SDLNet_TCP_Close(server);
+
+
+
+			////////////////////////////////////////////////////////////
+
+
 			SDL_Delay(50);
 		}
 		while (Pantaila == KONTROLAK)
@@ -78,6 +133,27 @@ int main(int argc, char* argv[]) {
 			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
+
+			/////////////////////////cliente////////////////////////////////////////
+			SDL_Init(SDL_INIT_EVERYTHING);
+			SDLNet_Init();
+			IPaddress ip;
+
+			SDLNet_ResolveHost(&ip, "127.0.0.1", 1234);
+
+			
+			TCPsocket client=SDLNet_TCP_Open(&ip);
+			char numerorecvido[100];
+			SDLNet_TCP_Recv(client, numerorecvido, 100);
+			
+
+			printf("lrecivido: %s", numerorecvido);
+
+			SDLNet_TCP_Close(client);
+
+
+
+			////////////////////////////////////////////////////////////
 			SDL_Delay(50);
 		}
 		while (Pantaila == LEHEN)

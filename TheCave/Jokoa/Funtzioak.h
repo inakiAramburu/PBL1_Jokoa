@@ -1,6 +1,7 @@
 #ifndef FUNTZIOAK_H
 #define FUNTZIOAK_H
 #include <SDL.h>
+#include <SDL_net.h>
 
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280

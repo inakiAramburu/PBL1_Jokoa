@@ -1,6 +1,9 @@
 #include "Funtzioak.h"
 #include <SDL.h>
 #include <stdio.h>
+#include <SDL_net.h>
+
+
 
 SDL_Renderer* render;
 SDL_Window* leihoa;
