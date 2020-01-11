@@ -21,7 +21,7 @@
 #define ABIADURA_MAMUA 4
 #define ETSAIA_SPRITE_KOPURUA 4
 
-typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, ATERA}PANTAILAK;
+typedef enum {MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, MINIJOKOA, ATERA}PANTAILAK;
 typedef enum {IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA}SPRITE;
 typedef enum {EZJOKATZEN, JOKATZEN}JOKOA;
 typedef enum {EZKER, ERDIA, ESKUIN}SAGUA;
@@ -58,4 +58,5 @@ void GuztiakHil();
 void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp);// sigue lineas IA
 void PertsonaiaHil();
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua);
+void Eraikitzaile(SDL_Rect *dest, int x, int y, int h, int w);
 #endif
