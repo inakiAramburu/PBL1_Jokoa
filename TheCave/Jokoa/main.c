@@ -2,16 +2,21 @@
 #include <stdio.h>
 
 #include <SDL_net.h>
+void Send(const void* Data, const size_t Size);
 
 //Fusion, saltoa eta nivel aldaketa//
 
 int main(int argc, char* argv[]) {
 
+
+	
+
+
+
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	JOKOA Jokoa = EZJOKATZEN;
 	void* pixels = NULL;
-	int pitch;
-	Uint8 bpp;
+	
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -51,12 +56,14 @@ int main(int argc, char* argv[]) {
 
 
 
+	int arr[4] = { 1, 2, 3, 4 };
+	void* intPtr = arr;
 
 
 
 
-
-
+	
+	 
 
 	while (Jokoa)
 	{
@@ -100,7 +107,8 @@ int main(int argc, char* argv[]) {
 
 			TCPsocket server = SDLNet_TCP_Open(&ip);
 			TCPsocket client;
-			char* enviado = "hola";
+			
+			
 
 			while (1)
 			{
@@ -108,7 +116,7 @@ int main(int argc, char* argv[]) {
 				if (client)
 				{
 					//aqui se puede comunicar
-					SDLNet_TCP_Send(client, enviado,100);
+					SDLNet_TCP_Send(client, intPtr,100);
 					SDLNet_TCP_Close(client);
 					break;
 				}
@@ -143,11 +151,13 @@ int main(int argc, char* argv[]) {
 
 			
 			TCPsocket client=SDLNet_TCP_Open(&ip);
-			char numerorecvido[100];
-			SDLNet_TCP_Recv(client, numerorecvido, 100);
+			int pako[4];
+			void* intPtr2 =pako;
+
+			SDLNet_TCP_Recv(client, intPtr2, 100);
 			
 
-			printf("lrecivido: %s", numerorecvido);
+			printf("lrecivido: %d \n", pako[2]);
 
 			SDLNet_TCP_Close(client);
 
@@ -156,81 +166,11 @@ int main(int argc, char* argv[]) {
 			////////////////////////////////////////////////////////////
 			SDL_Delay(50);
 		}
-		while (Pantaila == LEHEN)
-		{
-			KargaMenua = 0;
-			if (!KargaLehen)
-			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
-				KargaLehen = 1;
-			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(80);
-		}
-		while (Pantaila == BIGARREN)
-		{
-			KargaLehen = 0;
-			if (!KargaBigarren)
-			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaBigarren = 1;
-			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(80);
-		}
-		while (Pantaila == HIRUGARREN)
-		{
-			KargaBigarren = 0;
-			if (!KargaHirugarren)
-			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaHirugarren = 1;
-			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(80);
-		}
-		while (Pantaila == LAUGARREN)
-		{
-			KargaHirugarren = 0;
-			if (!KargaLaugarren)
-			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaLaugarren = 1;
-			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(80);
-		}
-		while (Pantaila == BOSTGARREN)
-		{
-			KargaLaugarren = 0;
-			if (!KargaBostgarren)
-			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaBostgarren = 1;
-			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
-			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(80);
-		}
+		
+		
+		
+		
+		
 	}
 	return 0;
 }
