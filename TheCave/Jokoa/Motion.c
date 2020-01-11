@@ -278,12 +278,13 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 
 void PongExekutatu()
 {
+	int abiadura = 9;
 	if (w && easteregg.Player1.y > 0)
 	{
-		easteregg.Player1.y -= 9;
+		easteregg.Player1.y -= abiadura;
 	}
 	else if (s && easteregg.Player1.y < 720 - easteregg.Player1.h)
 	{
-		easteregg.Player1.y += 9;
+		easteregg.Player1.y += abiadura;
 	}
 }
