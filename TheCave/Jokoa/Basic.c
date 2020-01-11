@@ -1,13 +1,12 @@
 #include "Basic.h"
 #include "Image.h"
 #include "Event.h"
-#include "Motion.h"
-#include "Sound.h"
-#include <SDL.h>
 #include <stdio.h>
-#include "Funtzioak.h"
 
 PERTSONAIA pertsonaia;
+ETSAIA etsaia[ETSAI_KOPURUA];
+
+extern IMGPERTSONAIA spriteak[7];
 
 SDL_Window* leihoa;
 extern SDL_Renderer* render;
@@ -114,18 +113,18 @@ void GuztiakHil()
 {
 	for (int i = 0; i < ETSAI_KOPURUA; i++)
 	{
-		etsaia[i].egoera = HILDA;
+		etsaia[i].bizirik = FALSE;
 	}
 }
 
 void PertsonaiaHil()
 {
-	pertsonaia.egoera = HILDA;
+	pertsonaia.bizirik = FALSE;
 }
 
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
-	etsaia[BizirikDaudenEtsaiak[pos]].egoera = HILDA;
+	etsaia[BizirikDaudenEtsaiak[pos]].bizirik = FALSE;
 	for (int j = pos; j < BizirikKopurua - 1; j++)
 	{
 		BizirikDaudenEtsaiak[j] = BizirikDaudenEtsaiak[j + 1];

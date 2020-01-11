@@ -1,4 +1,3 @@
-#include "Funtzioak.h"
 #include "Basic.h"
 #include "Image.h"
 #include "Event.h"

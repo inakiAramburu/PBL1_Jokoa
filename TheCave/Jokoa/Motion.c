@@ -6,13 +6,16 @@
 
 extern HITBOX hitbox;
 
+extern IMGPERTSONAIA spriteak[7];
+extern int IrudiZnbk;
+
+Uint32 time = 0;
+Uint32 time2 = 0;
+Uint32 abiadura[8] = { 150,60,80,80,10,100,80 };
+
 extern PERTSONAIA pertsonaia;
-extern BOOLEANOA a;
-extern BOOLEANOA d;
-extern BOOLEANOA espacio;
-extern BOOLEANOA k;
-extern BOOLEANOA w;
-extern BOOLEANOA f3;
+extern ETSAIA etsaia[ETSAI_KOPURUA];
+
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp)
 {

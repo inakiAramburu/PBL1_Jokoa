@@ -1,11 +1,11 @@
 #include "Basic.h"
 #include "Image.h"
-#include "Event.h"
-#include "Motion.h"
-#include "Sound.h"
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
+extern ETSAIA etsaia[ETSAI_KOPURUA];
+
+IMGPERTSONAIA spriteak[7];
 
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 int IrudiZnbk;
@@ -49,6 +49,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	case LEHEN:
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
+		pertsonaia.bizirik = TRUE;
 		pertsonaia.SrcSprite.x = 0;
 		pertsonaia.DestSprite.x = 0;
 		pertsonaia.DestSprite.y = 300;

@@ -1,12 +1,11 @@
 #include "Basic.h"
-#include "Image.h"
 #include "Event.h"
-#include "Motion.h"
-#include "Sound.h"
 
 HITBOX hitbox;
 
 extern PERTSONAIA pertsonaia;
+extern ETSAIA etsaia[ETSAI_KOPURUA];
+
 
 BOOLEANOA a = FALSE;
 BOOLEANOA d = FALSE;
@@ -146,7 +145,6 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 			{
 				int relleno[1];
 				int rellenodim = 0;
-				IrudiZnbk = 1;
 				RenderPrestatu(AURRERA, relleno, rellenodim);
 				Irudikatu();
 				PertsonaiaHasieratu();
@@ -243,8 +241,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			{
 				if (etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33)
 				{
-					numero++;
-					printf("VIVO %d\n", numero);
 					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
 					--* BizirikKopurua;
 				}
@@ -253,8 +249,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			{
 				if (etsaiaxEskuin >= PertzonaiaEzkerMuga - 33 && etsaiaxEskuin <= PertzonaiaEzkerMuga)
 				{
-					numero++;
-					printf("VIVO %d\n", numero);
 					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
 					--* BizirikKopurua;
 				}

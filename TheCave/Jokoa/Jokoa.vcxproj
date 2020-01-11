@@ -128,7 +128,6 @@
   <ItemGroup>
     <ClCompile Include="Basic.c" />
     <ClCompile Include="Event.c" />
-    <ClCompile Include="Funtzioak.c" />
     <ClCompile Include="Image.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Motion.c" />
@@ -137,7 +136,6 @@
   <ItemGroup>
     <ClInclude Include="Basic.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="Funtzioak.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Motion.h" />
     <ClInclude Include="Sound.h" />

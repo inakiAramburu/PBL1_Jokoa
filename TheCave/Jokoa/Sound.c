@@ -1,8 +1,4 @@
 #include "Basic.h"
-#include "Image.h"
-#include "Event.h"
-#include "Motion.h"
-#include "Sound.h"
 
 void MusikaJarri(char Fitxategia[])
 {
@@ -28,7 +24,8 @@ void MusikaJarri(char Fitxategia[])
 	SDL_PauseAudioDevice(deviceId, 0);
 
 	// dena itxi
-
+	
 	//SDL_CloseAudioDevice(deviceId);
 	//SDL_FreeWAV(wavBuffer);
+
 }

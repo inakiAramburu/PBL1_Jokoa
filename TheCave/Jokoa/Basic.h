@@ -1,6 +1,7 @@
 #ifndef BASIC_H
 #define BASIC_H
 #include <SDL.h>
+#include "Motion.h"
 
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
@@ -17,6 +18,15 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 	BOOLEANOA erortzen;
 	BOOLEANOA erasotzen;
 }PERTSONAIA;
+
+typedef struct S_ETSAIA		//Etsaien datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	BOOLEANOA bizirik;
+	int abiadura;
+	SDL_Texture* textura;
+}ETSAIA;
+
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila);			//Jokoa amaitzen du

@@ -24,6 +24,13 @@ typedef struct S_HITBOX
 
 }HITBOX;
 
+extern BOOLEANOA a;
+extern BOOLEANOA d;
+extern BOOLEANOA espacio;
+extern BOOLEANOA k;
+extern BOOLEANOA w;
+extern BOOLEANOA f3;
+
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* i, ZENTZUA* begira);		//Gertazten diren ebentu guztiak konprobatu eta behar bada ekintzak hasi
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);		//Saguarekin klikatu denean zer botoi erabili den ikusten eta gordetzen du
 void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);		//Klika non egin den eta botoiaren arabera ekintzak hasten dira
