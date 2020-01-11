@@ -5,6 +5,8 @@ SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
 
+extern PONG easteregg;
+
 IMGPERTSONAIA spriteak[7];
 
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
@@ -49,11 +51,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	case LEHEN:
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
-		pertsonaia.bizirik = TRUE;
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.DestSprite.x = 0;
-		pertsonaia.DestSprite.y = 300;
-
+		pertsonaia.bizirik = TRUE;
+		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
@@ -62,28 +62,32 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 	case BIGARREN:
 		ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.DestSprite.x = 10;
-		pertsonaia.DestSprite.y = 510;
+		RectEraikitzailea(&pertsonaia.DestSprite,  10,  510,  60,  128);
 		break;
 	case HIRUGARREN:
 		ImgKargatu(HIRUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.DestSprite.x = 10;
-		pertsonaia.DestSprite.y = 100;
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
 	case LAUGARREN:
 		ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.DestSprite.x = 10;
-		pertsonaia.DestSprite.y = 100;
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
 	case BOSTGARREN:
 		ImgKargatu(BOSTGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.DestSprite.x = 10;
-		pertsonaia.DestSprite.y = 100;
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
-
+	case MINIJOKOA:
+		pertsonaia.bizirik = FALSE;
+		GuztiakHil();
+		easteregg.piztuta = TRUE;
+		RectEraikitzailea(&easteregg.pilota, 360, 360, 25, 25);
+		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
+		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
+		break;
+		
 	}
 }
 
@@ -106,10 +110,7 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 
 	SDL_FreeSurface(surface);
 	Irudiak[IrudiZnbk].textura = texture;
-	Irudiak[IrudiZnbk].Dimentsioak.h = altuera;
-	Irudiak[IrudiZnbk].Dimentsioak.w = zabalera;
-	Irudiak[IrudiZnbk].Dimentsioak.x = x;
-	Irudiak[IrudiZnbk].Dimentsioak.y = y;
+	RectEraikitzailea(&Irudiak[IrudiZnbk].Dimentsioak, x, y, altuera, zabalera);
 	IrudiZnbk++;
 }
 
@@ -169,6 +170,13 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
 		}
 	}
+	if (easteregg.piztuta)
+	{
+		SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+		SDL_RenderFillRect(render, &easteregg.pilota);
+		SDL_RenderFillRect(render, &easteregg.Player1);
+		SDL_RenderFillRect(render, &easteregg.Player2);
+	}
 }
 
 void RenderMenu()
@@ -183,45 +191,27 @@ void RenderMenu()
 	SDL_RenderCopy(render, Irudiak[1].textura, NULL, &Irudiak[1].Dimentsioak);
 	if ((x > 515 && y > 175) && (x < 765 && y < 275))
 	{
-		Irudiak[2].Dimentsioak.w = 300;
-		Irudiak[2].Dimentsioak.h = 120;
-		Irudiak[2].Dimentsioak.x = 500;
-		Irudiak[2].Dimentsioak.y = 165;
+		RectEraikitzailea(&Irudiak[2].Dimentsioak, 500, 165, 120, 300);
 	}
 	else
 	{
-		Irudiak[2].Dimentsioak.w = 250;
-		Irudiak[2].Dimentsioak.h = 100;
-		Irudiak[2].Dimentsioak.x = 515;
-		Irudiak[2].Dimentsioak.y = 175;
+		RectEraikitzailea(&Irudiak[2].Dimentsioak, 515, 175, 100, 250);
 	}
 	if ((x > 510 && y > 300) && (x < 760 && y < 400))
 	{
-		Irudiak[3].Dimentsioak.x = 495;
-		Irudiak[3].Dimentsioak.y = 290;
-		Irudiak[3].Dimentsioak.w = 300;
-		Irudiak[3].Dimentsioak.h = 120;
+		RectEraikitzailea(&Irudiak[3].Dimentsioak, 495, 290, 120, 300);
 	}
 	else
 	{
-		Irudiak[3].Dimentsioak.x = 510;
-		Irudiak[3].Dimentsioak.y = 300;
-		Irudiak[3].Dimentsioak.w = 250;
-		Irudiak[3].Dimentsioak.h = 100;
+		RectEraikitzailea(&Irudiak[3].Dimentsioak, 510, 300, 100, 250);
 	}
 	if ((x > 512 && y > 425) && (x < 762 && y < 525))
 	{
-		Irudiak[4].Dimentsioak.x = 497;
-		Irudiak[4].Dimentsioak.y = 415;
-		Irudiak[4].Dimentsioak.w = 300;
-		Irudiak[4].Dimentsioak.h = 120;
+		RectEraikitzailea(&Irudiak[4].Dimentsioak, 497, 415, 120, 300);
 	}
 	else
 	{
-		Irudiak[4].Dimentsioak.x = 512;
-		Irudiak[4].Dimentsioak.y = 425;
-		Irudiak[4].Dimentsioak.w = 250;
-		Irudiak[4].Dimentsioak.h = 100;
+		RectEraikitzailea(&Irudiak[4].Dimentsioak, 512, 425, 100, 250);
 	}
 	SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
 	SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);

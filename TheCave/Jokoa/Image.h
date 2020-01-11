@@ -1,6 +1,8 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include "Motion.h"
+
 #define MENU_PANTAILA ".\\media\\levels\\Menu.bmp"
 #define LEHENENGO_PANTAILA ".\\media\\levels\\Nivel1.bmp"
 #define LEHENENGO_MASKARA ".\\media\\levels\\maskarak\\Nivel1M.bmp"

@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
 	int KargaBostgarren = 0;		//""
 	int KargaKredituak = 0;		//""
 	int KargaKontrolak = 0;		//""
+	int KargaPong = 0;
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -158,6 +159,20 @@ int main(int argc, char* argv[]) {
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
+		}
+		while (Pantaila == MINIJOKOA)
+		{
+			KargaMenua = 0;
+			if (!KargaPong)
+			{
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				KargaPong = 1;
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			PongExekutatu();
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+			Irudikatu();
+			SDL_Delay(50);
 		}
 	}
 	return 0;

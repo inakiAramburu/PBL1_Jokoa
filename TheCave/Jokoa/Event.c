@@ -1,5 +1,9 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Basic.h"
+#include "Motion.h"
 #include "Event.h"
+#include "Image.h"
+#include <string.h>
 
 HITBOX hitbox;
 
@@ -13,9 +17,12 @@ BOOLEANOA espacio = FALSE;
 BOOLEANOA k = FALSE;
 BOOLEANOA w = FALSE;
 BOOLEANOA f3 = FALSE;
+BOOLEANOA s = FALSE;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
 {
+	static char sekuentzia[16] = "";
+
 	SAGUA klika;
 	SDL_Event ebentua;
 	while (SDL_PollEvent(&ebentua))
@@ -81,8 +88,8 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_F3:
 				f3 = !f3;
 				break;
-			case SDL_SCANCODE_9:
-
+			case SDL_SCANCODE_S:
+				s = TRUE;
 				break;
 			}
 			break;
@@ -104,13 +111,29 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_W:
 				w = FALSE;
 				break;
-			case SDL_SCANCODE_F3:
-
+			case SDL_SCANCODE_S:
+				s = FALSE;
+				break;
+			case SDL_SCANCODE_P:
+				strcpy(sekuentzia, "");
+				strcat(sekuentzia, "P");
+				break;
+			case SDL_SCANCODE_O:
+				strcat(sekuentzia, "O");
+				break;
+			case SDL_SCANCODE_N:
+				strcat(sekuentzia, "N");
+				break;
+			case SDL_SCANCODE_G:
+				strcat(sekuentzia, "G");
 				break;
 			}
 			break;
 		}
-
+		if (strcmp(sekuentzia, "PONG") == 0)
+		{
+			*Pantaila = MINIJOKOA;
+		}
 	}
 }
 
@@ -167,7 +190,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 		if (klika == EZKER)
 		{
 			SDL_GetMouseState(&x, &y);
-			if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+			if ((x > 1063 && y > 99) && (x < 1109 && y < 142))
 			{
 				*Pantaila = MENUA;
 			}
@@ -178,7 +201,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 		if (klika == EZKER)
 		{
 			SDL_GetMouseState(&x, &y);
-			if ((x > 1055 && y > 89) && (x < 1120 && y < 151))
+			if ((x > 1063 && y > 99) && (x < 1109 && y < 142))
 			{
 				*Pantaila = MENUA;
 			}

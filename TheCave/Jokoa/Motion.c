@@ -3,6 +3,7 @@
 #include "Event.h"
 #include "Motion.h"
 #include "Sound.h"
+#include <stdio.h>
 
 extern HITBOX hitbox;
 
@@ -16,6 +17,7 @@ Uint32 abiadura[8] = { 150,60,80,80,10,100,80 };
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
 
+extern PONG easteregg;
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp)
 {
@@ -272,4 +274,16 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 	}
 	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
 	*BizirikKopurua += 1;
+}
+
+void PongExekutatu()
+{
+	if (w && easteregg.Player1.y > 0)
+	{
+		easteregg.Player1.y -= 9;
+	}
+	else if (s && easteregg.Player1.y < 720 - easteregg.Player1.h)
+	{
+		easteregg.Player1.y += 9;
+	}
 }

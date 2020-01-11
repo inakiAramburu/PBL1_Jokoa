@@ -1,6 +1,8 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+#include "Motion.h"
+
 typedef enum { EZKER, ERDIA, ESKUIN }SAGUA;
 typedef enum { GORRIA = 249, BELTZA = 0, TXURIA = 255, BERDEA = 250, HORIA = 251, MOREA = 253, URDINA = 252 }KOLOREAK;
 
@@ -30,6 +32,7 @@ extern BOOLEANOA espacio;
 extern BOOLEANOA k;
 extern BOOLEANOA w;
 extern BOOLEANOA f3;
+extern BOOLEANOA s;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* i, ZENTZUA* begira);		//Gertazten diren ebentu guztiak konprobatu eta behar bada ekintzak hasi
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);		//Saguarekin klikatu denean zer botoi erabili den ikusten eta gordetzen du

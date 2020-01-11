@@ -1,13 +1,13 @@
 #ifndef BASIC_H
 #define BASIC_H
 #include <SDL.h>
-#include "Motion.h"
 
 #define PANTAILA_ALTUERA 720
 #define PANTAILA_ZABALERA 1280
 
 typedef enum { FALSE, TRUE }BOOLEANOA;
-typedef enum { MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, ATERA }PANTAILAK;
+typedef enum { MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, MINIJOKOA, ATERA }PANTAILAK;
+typedef enum { IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA }SPRITE;
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
@@ -27,6 +27,11 @@ typedef struct S_ETSAIA		//Etsaien datuak
 	SDL_Texture* textura;
 }ETSAIA;
 
+typedef struct S_PONG
+{
+	BOOLEANOA piztuta;
+	SDL_Rect pilota, Player1, Player2;
+}PONG;
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila);			//Jokoa amaitzen du
@@ -35,5 +40,6 @@ void EtsaiakHasieratu();
 void GuztiakHil();
 void PertsonaiaHil();
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua);
+void RectEraikitzailea(SDL_Rect* dest, int x, int y, int h, int w);
 
 #endif

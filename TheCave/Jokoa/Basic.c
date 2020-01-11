@@ -1,10 +1,13 @@
 #include "Basic.h"
 #include "Image.h"
 #include "Event.h"
+#include "Motion.h"
 #include <stdio.h>
 
 PERTSONAIA pertsonaia;
 ETSAIA etsaia[ETSAI_KOPURUA];
+
+PONG easteregg;
 
 extern IMGPERTSONAIA spriteak[7];
 
@@ -81,10 +84,7 @@ void EtsaiakHasieratu()
 	for (j = 0; j < kopurua; j++)
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", j);
-		etsaia[j].SrcSprite.h = 44;
-		etsaia[j].SrcSprite.w = 33;
-		etsaia[j].SrcSprite.x = 0;
-		etsaia[j].SrcSprite.y = 0;
+		RectEraikitzailea(&etsaia[j].SrcSprite, 0,0,44,33);
 		etsaia[j].DestSprite.w = 33;
 		etsaia[j].DestSprite.h = 44;
 	}
@@ -92,10 +92,7 @@ void EtsaiakHasieratu()
 	for (j = tmp; j < tmp + kopurua; j++)
 	{
 		EtsaiaKargatu(".\\media\\enemies\\Mukitxua.bmp", j);
-		etsaia[j].SrcSprite.h = 44;
-		etsaia[j].SrcSprite.w = 33;
-		etsaia[j].SrcSprite.x = 0;
-		etsaia[j].SrcSprite.y = 0;
+		RectEraikitzailea(&etsaia[j].SrcSprite, 0, 0, 44, 33);
 		etsaia[j].DestSprite.w = 33;
 		etsaia[j].DestSprite.h = 44;
 	}
@@ -129,4 +126,12 @@ void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 	{
 		BizirikDaudenEtsaiak[j] = BizirikDaudenEtsaiak[j + 1];
 	}
+}
+
+void RectEraikitzailea(SDL_Rect* dest, int x, int y, int h, int w)
+{
+	dest->w = w;
+	dest->h = h;
+	dest->x = x;
+	dest->y = y;
 }
