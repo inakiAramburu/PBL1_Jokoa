@@ -818,7 +818,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
 	*BizirikKopurua += 1;
 }
-
+//MIKEL
 void Animazioa()
 {
 	int i, j;
