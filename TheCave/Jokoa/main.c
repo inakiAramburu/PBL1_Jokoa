@@ -1,11 +1,16 @@
 #include "Funtzioak.h"
+#include "Basic.h"
+#include "Image.h"
+#include "Event.h"
+#include "Motion.h"
+#include "Sound.h"
 #include <stdio.h>
 //Fusion, saltoa eta nivel aldaketa//
 
 int main(int argc, char* argv[]) {
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
-	JOKOA Jokoa = EZJOKATZEN;
+	BOOLEANOA Jokatzen = FALSE;
 	void* pixels = NULL;
 	int pitch;
 	Uint8 bpp;
@@ -31,10 +36,10 @@ int main(int argc, char* argv[]) {
 	int BizirikKopurua;
 
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
-	Jokoa = JOKATZEN;
+	Jokatzen = TRUE;
 
 
-	while (Jokoa)
+	while (Jokatzen)
 	{
 		while (Pantaila == MENUA)
 		{
@@ -45,7 +50,7 @@ int main(int argc, char* argv[]) {
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaMenua = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			if (Pantaila != MENUA)
 			{
 				break;
@@ -62,7 +67,7 @@ int main(int argc, char* argv[]) {
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaKredituak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(50);
@@ -75,7 +80,7 @@ int main(int argc, char* argv[]) {
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargaKontrolak = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(50);
@@ -89,7 +94,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
 				KargaLehen = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -104,7 +109,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaBigarren = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -119,7 +124,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaHirugarren = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -134,7 +139,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaLaugarren = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -149,7 +154,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
 				KargaBostgarren = 1;
 			}
-			EbentuakKonprobatu(&Jokoa, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();

@@ -126,11 +126,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Basic.c" />
+    <ClCompile Include="Event.c" />
     <ClCompile Include="Funtzioak.c" />
+    <ClCompile Include="Image.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Motion.c" />
+    <ClCompile Include="Sound.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Basic.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="Funtzioak.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Motion.h" />
+    <ClInclude Include="Sound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
