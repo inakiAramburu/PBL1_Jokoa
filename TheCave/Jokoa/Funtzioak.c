@@ -194,9 +194,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int *Bizirik
 		break;
 	case MINIJOKOA:
 		easteregg.piztuta = BAI;
-		Eraikitzaile(&easteregg.pilota, 360, 640, 25, 25);
-		Eraikitzaile(&easteregg.Player1, 50, 640, 200, 20);
-		Eraikitzaile(&easteregg.Player2, 620, 640, 200, 20);
+		Eraikitzaile(&easteregg.pilota, 360, 360, 25, 25);
+		Eraikitzaile(&easteregg.Player1, 50, 360, 150, 20);
+		Eraikitzaile(&easteregg.Player2, 1210, 360, 150, 20);
 		break;
 			
 	}
@@ -625,7 +625,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		{
 			easteregg.Player1.y -= 9;
 		}
-		else if (s)
+		else if (s && easteregg.Player1.y < 720 - easteregg.Player1.h)
 		{
 			easteregg.Player1.y += 9;
 		}
