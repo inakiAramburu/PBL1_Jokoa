@@ -628,9 +628,10 @@ void KonprobatuKlika(PANTAILAK *Pantaila, SAGUA klika)
 			if (klika == EZKER)
 			{
 				SDL_GetMouseState(&x, &y);
+				MusikaJarri(EFEKTUA_KLIKA);
 				if ((x > 515 && y > 175) && (x < 765 && y < 275))
 				{
-					MusikaJarri(EFEKTUA_KLIKA);
+					
 					SDL_Delay(600);
 					int relleno[1];
 					int rellenodim = 0;
