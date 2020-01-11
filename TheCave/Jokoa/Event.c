@@ -115,8 +115,8 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				s = FALSE;
 				break;
 			case SDL_SCANCODE_P:
-				strcpy(sekuentzia, "");
-				strcat(sekuentzia, "P");
+				strcpy(sekuentzia, "P");
+				
 				break;
 			case SDL_SCANCODE_O:
 				strcat(sekuentzia, "O");
