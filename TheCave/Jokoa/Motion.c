@@ -204,6 +204,10 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	if (pertsonaia.salto)
 	{
 		pertsonaia.DestSprite.y -= abiaduray;
+		while (pertsonaia.DestSprite.y < 0)
+		{
+			pertsonaia.DestSprite.y++;
+		}
 	}
 	if (pertsonaia.erortzen)
 	{
