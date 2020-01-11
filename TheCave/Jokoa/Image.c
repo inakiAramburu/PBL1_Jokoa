@@ -1,5 +1,7 @@
 #include "Basic.h"
 #include "Image.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
@@ -11,6 +13,7 @@ IMGPERTSONAIA spriteak[7];
 
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 int IrudiZnbk;
+
 
 int IrudiakKendu(int ZnbtUtzi)
 {
@@ -83,6 +86,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
 		easteregg.piztuta = TRUE;
+		srand(SDL_GetTicks());
+		easteregg.angelua = rand() % 259;
+
 		RectEraikitzailea(&easteregg.pilota, 360, 360, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);

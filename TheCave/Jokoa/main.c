@@ -21,15 +21,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int KargaMenua = 0;		//Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
-	int KargaLehen = 0;		//""
-	int KargaBigarren = 0;		//""
-	int KargaHirugarren = 0;		//""
-	int KargaLaugarren = 0;		//""
-	int KargaBostgarren = 0;		//""
-	int KargaKredituak = 0;		//""
-	int KargaKontrolak = 0;		//""
-	int KargaPong = 0;
+	int Karga[9] = {0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -43,12 +35,12 @@ int main(int argc, char* argv[]) {
 	{
 		while (Pantaila == MENUA)
 		{
-			KargaKredituak = 0;
-			KargaKontrolak = 0;
-			if (!KargaMenua)
+			Karga[KONTROLAK] = 0;
+			Karga[KREDITUAK] = 0;
+			if (!Karga[MENUA])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargaMenua = 1;
+				Karga[MENUA] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			if (Pantaila != MENUA)
@@ -61,11 +53,11 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == KREDITUAK)
 		{
-			KargaMenua = 0;
-			if (!KargaKredituak)
+			Karga[MENUA] = 0;
+			if (!Karga[KREDITUAK])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargaKredituak = 1;
+				Karga[KREDITUAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
@@ -74,11 +66,11 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == KONTROLAK)
 		{
-			KargaMenua = 0;
-			if (!KargaKontrolak)
+			Karga[MENUA] = 0;
+			if (!Karga[KONTROLAK])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargaKontrolak = 1;
+				Karga[KONTROLAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
@@ -87,12 +79,12 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
-			KargaMenua = 0;
-			if (!KargaLehen)
+			Karga[MENUA] = 0;
+			if (!Karga[LEHEN])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
-				KargaLehen = 1;
+				Karga[LEHEN] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
@@ -102,12 +94,12 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == BIGARREN)
 		{
-			KargaLehen = 0;
-			if (!KargaBigarren)
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaBigarren = 1;
+				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
@@ -117,12 +109,12 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == HIRUGARREN)
 		{
-			KargaBigarren = 0;
-			if (!KargaHirugarren)
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaHirugarren = 1;
+				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
@@ -132,12 +124,12 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LAUGARREN)
 		{
-			KargaHirugarren = 0;
-			if (!KargaLaugarren)
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaLaugarren = 1;
+				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
@@ -147,12 +139,12 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == BOSTGARREN)
 		{
-			KargaLaugarren = 0;
-			if (!KargaBostgarren)
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
-				KargaBostgarren = 1;
+				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
@@ -162,11 +154,14 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == MINIJOKOA)
 		{
-			KargaMenua = 0;
-			if (!KargaPong)
+			if (!Karga[Pantaila])
 			{
+				for (int i = 0; i < 8; i++)
+				{
+					Karga[i] = 0;
+				}
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargaPong = 1;
+				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			PongExekutatu();

@@ -4,6 +4,7 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
+#include <math.h>
 
 extern HITBOX hitbox;
 
@@ -12,7 +13,7 @@ extern int IrudiZnbk;
 
 Uint32 time = 0;
 Uint32 time2 = 0;
-Uint32 abiadura[8] = { 150,60,80,80,10,100,80 };
+Uint32 abiadura[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
@@ -291,4 +292,6 @@ void PongExekutatu()
 	{
 		easteregg.Player1.y += abiadura;
 	}
+	easteregg.pilota.x += abiadura * cos(easteregg.angelua * M_PI/180);
+	easteregg.pilota.y -= abiadura * sin(easteregg.angelua * M_PI / 180);
 }
