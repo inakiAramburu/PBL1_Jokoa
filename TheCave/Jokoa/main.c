@@ -13,6 +13,9 @@ int main(int argc, char* argv[]) {
 	void* pixels = NULL;
 	int pitch;
 	Uint8 bpp;
+	Uint32 refreshrate = 0;
+	Uint32 moverate = 0;
+
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -164,10 +167,18 @@ int main(int argc, char* argv[]) {
 				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
-			PongExekutatu();
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
-			SDL_Delay(50);
+			if (SDL_TICKS_PASSED(SDL_GetTicks(), moverate))
+			{
+				PongExekutatu();
+				moverate = SDL_GetTicks() + 20;
+			}
+			if (SDL_TICKS_PASSED(SDL_GetTicks(), refreshrate))
+			{
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				refreshrate = SDL_GetTicks() + 50;
+				Irudikatu();
+			}
+			SDL_Delay(10);
 		}
 	}
 	return 0;

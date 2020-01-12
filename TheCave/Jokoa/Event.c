@@ -9,7 +9,7 @@ HITBOX hitbox;
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
-
+extern PONG easteregg;
 
 BOOLEANOA a = FALSE;
 BOOLEANOA d = FALSE;
@@ -18,6 +18,8 @@ BOOLEANOA k = FALSE;
 BOOLEANOA w = FALSE;
 BOOLEANOA f3 = FALSE;
 BOOLEANOA s = FALSE;
+BOOLEANOA gora = FALSE;
+BOOLEANOA behera = FALSE;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
 {
@@ -91,6 +93,12 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_S:
 				s = TRUE;
 				break;
+			case SDL_SCANCODE_UP:
+				gora = TRUE;
+				break;
+			case SDL_SCANCODE_DOWN:
+				behera = TRUE;
+				break;
 			}
 			break;
 		case SDL_KEYUP:
@@ -113,6 +121,12 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				break;
 			case SDL_SCANCODE_S:
 				s = FALSE;
+				break;
+			case SDL_SCANCODE_UP:
+				gora = FALSE;
+				break;
+			case SDL_SCANCODE_DOWN:
+				behera = FALSE;
 				break;
 			case SDL_SCANCODE_P:
 				strcpy(sekuentzia, "P");
@@ -308,4 +322,19 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		pertsonaia.erortzen = FALSE;
 		pertsonaia.salto = FALSE;
 	}
+}
+
+void PongKolisioa()
+{
+	if ((easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 <= easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y >= easteregg.Player1.y)))
+	{
+		easteregg.abiadurax *= -1;
+		easteregg.pilota.x = easteregg.Player1.x + easteregg.Player1.w + 1;
+	}
+	else if( easteregg.pilota.x <=0)
+	{
+		easteregg.P2puntuazioa++;
+	}
+	//elseif((easteregg.pilota.x < easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 > easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h < easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 < easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y > easteregg.Player1.y)))
+
 }

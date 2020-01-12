@@ -31,7 +31,7 @@ typedef struct S_PONG
 {
 	BOOLEANOA piztuta;
 	SDL_Rect pilota, Player1, Player2;
-	int angelua;
+	int angelua, abiadurax, abiaduray, P1puntuazioa, P2puntuazioa;
 }PONG;
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 

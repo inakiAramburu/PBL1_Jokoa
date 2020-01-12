@@ -33,12 +33,14 @@ extern BOOLEANOA k;
 extern BOOLEANOA w;
 extern BOOLEANOA f3;
 extern BOOLEANOA s;
+extern BOOLEANOA gora;
+extern BOOLEANOA behera;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* i, ZENTZUA* begira);		//Gertazten diren ebentu guztiak konprobatu eta behar bada ekintzak hasi
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);		//Saguarekin klikatu denean zer botoi erabili den ikusten eta gordetzen du
 void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika);		//Klika non egin den eta botoiaren arabera ekintzak hasten dira
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa);
-
+void PongKolisioa();
 
 #endif
 

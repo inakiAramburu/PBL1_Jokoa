@@ -13,6 +13,7 @@ extern int IrudiZnbk;
 
 Uint32 time = 0;
 Uint32 time2 = 0;
+Uint32 time3 = 0;
 Uint32 abiadura[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
@@ -284,6 +285,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 void PongExekutatu()
 {
 	int abiadura = 9;
+	PongKolisioa();
 	if (w && easteregg.Player1.y > 0)
 	{
 		easteregg.Player1.y -= abiadura;
@@ -292,6 +294,18 @@ void PongExekutatu()
 	{
 		easteregg.Player1.y += abiadura;
 	}
-	easteregg.pilota.x += abiadura * cos(easteregg.angelua * M_PI/180);
-	easteregg.pilota.y -= abiadura * sin(easteregg.angelua * M_PI / 180);
+	if (gora && easteregg.Player2.y > 0)
+	{
+		easteregg.Player2.y -= abiadura;
+	}
+	else if (behera && easteregg.Player2.y < 720 - easteregg.Player2.h)
+	{
+		easteregg.Player2.y += abiadura;
+	}
+	if (easteregg.pilota.y <= 0 || easteregg.pilota.y + 25 >= 720)
+	{
+		easteregg.abiaduray *= -1;
+	}
+	easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI/180);
+	easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
 }
