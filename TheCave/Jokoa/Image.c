@@ -89,7 +89,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 		srand(SDL_GetTicks());
-		easteregg.angelua = (rand() % 90) - 45;
+		do
+		{
+			easteregg.angelua = (rand() % 90) - 45;
+		} while (easteregg.angelua < 15 && easteregg.angelua > -15);
 		if (rand() % 2 == 0)
 		{
 			easteregg.abiadurax = -5;
@@ -99,7 +102,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			easteregg.abiadurax = 5;
 		}
 		easteregg.abiaduray = 5;
-		RectEraikitzailea(&easteregg.pilota, 360, 360, 25, 25);
+		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
 		break;

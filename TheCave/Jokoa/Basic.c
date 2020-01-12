@@ -135,3 +135,12 @@ void RectEraikitzailea(SDL_Rect* dest, int x, int y, int h, int w)
 	dest->x = x;
 	dest->y = y;
 }
+
+void BerrizJaurti()
+{
+	RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
+	do
+	{
+		easteregg.angelua = (rand() % 90) - 45;
+	} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+}

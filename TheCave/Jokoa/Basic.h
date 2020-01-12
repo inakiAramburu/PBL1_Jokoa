@@ -34,6 +34,13 @@ typedef struct S_PONG
 	int angelua, abiadurax, abiaduray, P1puntuazioa, P2puntuazioa;
 }PONG;
 
+//DatuakHost[4]={easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y};
+//P1x,P1y,peloX,pelotay
+
+
+//DatuakBezeroa[2]={easteregg.Player1.x,easteregg.Player1.y}
+//p2x,p2y 
+
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila);			//Jokoa amaitzen du
 void PertsonaiaHasieratu();		//Jokatu sakatzean lehenengo aldiz pertsonaia kargatzera deitzen du
@@ -42,5 +49,6 @@ void GuztiakHil();
 void PertsonaiaHil();
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua);
 void RectEraikitzailea(SDL_Rect* dest, int x, int y, int h, int w);
+void BerrizJaurti();
 
 #endif
