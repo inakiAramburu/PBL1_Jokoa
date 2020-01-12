@@ -99,14 +99,14 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 		
-		printf("Sartu 0[ZERBITZARIA],1[BEZEROA]");
+		printf("Sartu 0[ZERBITZARIA],1[BEZEROA]: ");
 		fgets(str, 128, stdin);
 		sscanf(str, "%d", &aukera);
 		if (aukera == ZERBITZARI)
 		{
 			int port;
 
-			printf("Sartu portua:\n");
+			printf("Sartu portua: ");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
 
@@ -115,6 +115,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			}
 
 			IPaddress ip;
+
 			SDLNet_ResolveHost(&ip, NULL, port);
 			server = SDLNet_TCP_Open(&ip);
 
@@ -123,13 +124,17 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 				client = SDLNet_TCP_Accept(server);
 				if (client)
 				{
-					char Mezua[64] = "Konexioa eginda";
-					SDLNet_TCP_Send(client, Mezua, 64);
-					SDLNet_TCP_Close(client);
+					char Agurra[128] = "Konexioa eginda";
+
+					SDLNet_TCP_Send(client, Agurra, 128);
+
+					char Konfirmazioa[128];
+
+					SDLNet_TCP_Recv(server, Konfirmazioa, 128);
+					printf("hola: %s", Konfirmazioa);
 					break;
 				}
 			}
-			SDLNet_TCP_Close(server);
 			srand(SDL_GetTicks());
 			do
 			{
@@ -149,24 +154,33 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		else if (aukera == BEZEROA)
 		{
 			char IPserver[15];
-			printf("Serbitzariaren ipa jarri:\n");
-			fgets(IPserver, 128, stdin);
+
+			printf("Serbitzariaren ipa jarri: ");
+			fgets(IPserver, 15, stdin);
+
 			int port;
-			printf("portua sartu:\n");
+
+			printf("Portua sartu: ");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
+
 			if (SDLNet_Init() == -1) {
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
-			IPaddress ip;
-			SDLNet_ResolveHost(&ip, IPserver, port);
-			TCPsocket client = SDLNet_TCP_Open(&ip);
-			char recojedor[64];
-			SDLNet_TCP_Recv(client, recojedor, 64);
-			
-			printf("%s\n", recojedor);
-			SDLNet_TCP_Close(client);
 
+			IPaddress ip;
+
+			SDLNet_ResolveHost(&ip, IPserver, port);
+			client = SDLNet_TCP_Open(&ip);
+
+			char Agurra[64];
+
+			SDLNet_TCP_Recv(client, Agurra, 128);
+
+			char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
+
+			SDLNet_TCP_Send(client, Erantzuna, 128);
+			printf("%s\n", Agurra);
 			Ordenagailua = BEZEROA;
 
 		}
