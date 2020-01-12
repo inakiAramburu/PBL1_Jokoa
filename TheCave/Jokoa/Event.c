@@ -22,6 +22,8 @@ BOOLEANOA s = FALSE;
 BOOLEANOA gora = FALSE;
 BOOLEANOA behera = FALSE;
 
+ROL Ordenagailua;
+
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
 {
 	static char sekuentzia[16] = "";

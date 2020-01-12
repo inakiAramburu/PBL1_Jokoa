@@ -1,5 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Basic.h"
 #include "Image.h"
+#include "Event.h"
+#include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -8,6 +11,7 @@ extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
 
 extern PONG easteregg;
+extern ROL Ordenagailua;
 
 IMGPERTSONAIA spriteak[7];
 
@@ -88,20 +92,75 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		easteregg.piztuta = TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
-		srand(SDL_GetTicks());
-		do
+		char str[128];
+		int x;
+		printf("Mete el pitxe numero");
+		fgets(str, 128, stdin);
+		sscanf(str, "%d", &x);
+		if (x == 1)
 		{
-			easteregg.angelua = (rand() % 90) - 45;
-		} while (easteregg.angelua < 15 && easteregg.angelua > -15);
-		if (rand() % 2 == 0)
-		{
-			easteregg.abiadurax = -5;
+			int port;
+			printf("Mete el pintxe puerto");
+			fgets(str, 128, stdin);
+			sscanf(str, "%d", &port);
+			if (SDLNet_Init() == -1) {
+				printf("SDLNet_Init: %s\n", SDLNet_GetError());
+			}
+			IPaddress ip;
+			SDLNet_ResolveHost(&ip, NULL, port);
+			TCPsocket server = SDLNet_TCP_Open(&ip);
+			TCPsocket client;
+			while (1)
+			{
+				client = SDLNet_TCP_Accept(server);
+				if (client)
+				{
+					char puto[45] = "PUTOOOO";
+					SDLNet_TCP_Send(client, puto, 45);
+					SDLNet_TCP_Close(client);
+					break;
+				}
+			}
+			SDLNet_TCP_Close(server);
+			srand(SDL_GetTicks());
+			do
+			{
+				easteregg.angelua = (rand() % 90) - 45;
+			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+			if (rand() % 2 == 0)
+			{
+				easteregg.abiadurax = -5;
+			}
+			else
+			{
+				easteregg.abiadurax = 5;
+			}
+			easteregg.abiaduray = 5;
+			Ordenagailua = SERBITZARI;
 		}
-		else
+		else if (x == 2)
 		{
-			easteregg.abiadurax = 5;
+			char IPserver[15];
+			printf("Mete el pitxe ip");
+			fgets(IPserver, 128, stdin);
+			int port;
+			printf("Mete el pintxe puerto");
+			fgets(str, 128, stdin);
+			sscanf(str, "%d", &port);
+			if (SDLNet_Init() == -1) {
+				printf("SDLNet_Init: %s\n", SDLNet_GetError());
+			}
+			IPaddress ip;
+			SDLNet_ResolveHost(&ip, IPserver, port);
+			TCPsocket client = SDLNet_TCP_Open(&ip);
+			char recojedor[45];
+			SDLNet_TCP_Recv(client, recojedor, 45);
+			printf("%s\n", recojedor);
+			SDLNet_TCP_Close(client);
+
+			Ordenagailua = BEZEROA;
+
 		}
-		easteregg.abiaduray = 5;
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
