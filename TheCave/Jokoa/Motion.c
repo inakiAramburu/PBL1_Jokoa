@@ -327,15 +327,20 @@ void PongExekutatu()
 			{
 				easteregg.Player2.y += abiadura;
 			}
+			int DatuakClient2[2] = { 1258, 90 };
+			void* Datosbug = DatuakClient2;
+			SDLNet_TCP_Send(client, Datosbug, 2);
 
-			int DatuakClient2[2] = {easteregg.Player2.x,easteregg.Player2.y};
-			SDLNet_TCP_Send(client, DatuakHost, 2);
-			int DatuakHost2[4];
-			SDLNet_TCP_Recv(client, DatuakHost, 4);
-			easteregg.Player1.x = DatuakHost[0];
-			easteregg.Player1.y = DatuakHost[1];
-			easteregg.pilota.x = DatuakHost[2];
-			easteregg.pilota.y = DatuakHost[3];
+			int DatuakHost2[2];
+			void* Datosmuybug = DatuakHost2;
+			SDLNet_TCP_Recv(client, Datosmuybug, 2);
+			printf("%d %d", DatuakHost2[0], DatuakHost2[1]);
+		/*	printf("%d", DatuakHost2[1]);
+			printf("%d", DatuakHost2[2]);
+			printf("%d", DatuakHost2[3]);
+			easteregg.Player1.y = DatuakHost2[1];
+			easteregg.pilota.x = DatuakHost2[2];
+			easteregg.pilota.y = DatuakHost2[3];*/
 			break;
 	}
 	

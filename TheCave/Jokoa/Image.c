@@ -129,7 +129,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 					char Konfirmazioa[128];
 
-					SDLNet_TCP_Recv(server, Konfirmazioa, 128);
+					SDLNet_TCP_Recv(client, Konfirmazioa, 128);
 					printf("Cliente: %s", Konfirmazioa);
 					break;
 				}
