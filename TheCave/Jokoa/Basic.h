@@ -37,7 +37,7 @@ typedef struct S_PONG
 //P1x,P1y,peloX,pelotay
 
 
-//DatuakBezeroa[2]={easteregg.Player1.x,easteregg.Player1.y}
+//DatuakBezeroa[2]={easteregg.Player2.x,easteregg.Player2.y}
 //p2x,p2y 
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 

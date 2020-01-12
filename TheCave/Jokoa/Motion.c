@@ -309,14 +309,16 @@ void PongExekutatu()
 			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180);
 			easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
 
-			int DatuakHost[4]={easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y};
-			SDLNet_TCP_Send(client, DatuakHost, 4);
+			int DatuakHost[4] = { easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y };
+			void* DatuakHostbidali = DatuakHost;
+			SDLNet_TCP_Send(client, DatuakHostbidali, 100);
 
 			int DatuakClient[2];
-			SDLNet_TCP_Recv(client, DatuakClient, 2);
+			void* DatuakClientbidali = DatuakClient;
+			SDLNet_TCP_Recv(client, DatuakClientbidali, 100);
+
 			easteregg.Player2.x = DatuakClient[0];
 			easteregg.Player2.y = DatuakClient[1];
-
 			break;
 		case BEZEROA:
 			if (gora && easteregg.Player2.y > 0)
@@ -327,20 +329,18 @@ void PongExekutatu()
 			{
 				easteregg.Player2.y += abiadura;
 			}
-			int DatuakClient2[2] = { 1258, 90 };
-			void* Datosbug = DatuakClient2;
-			SDLNet_TCP_Send(client, Datosbug, 2);
+			int DatuakClient2[2] = { easteregg.Player2.x,easteregg.Player2.y};
 
-			int DatuakHost2[2];
+			void* Datosbug = DatuakClient2;
+			SDLNet_TCP_Send(client, Datosbug, 100);
+
+			int DatuakHost2[4];
 			void* Datosmuybug = DatuakHost2;
-			SDLNet_TCP_Recv(client, Datosmuybug, 2);
-			printf("%d %d", DatuakHost2[0], DatuakHost2[1]);
-		/*	printf("%d", DatuakHost2[1]);
-			printf("%d", DatuakHost2[2]);
-			printf("%d", DatuakHost2[3]);
+			SDLNet_TCP_Recv(client, Datosmuybug, 100);
+			easteregg.Player1.x = DatuakHost2[0];
 			easteregg.Player1.y = DatuakHost2[1];
 			easteregg.pilota.x = DatuakHost2[2];
-			easteregg.pilota.y = DatuakHost2[3];*/
+			easteregg.pilota.y = DatuakHost2[3];
 			break;
 	}
 	

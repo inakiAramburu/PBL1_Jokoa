@@ -28,7 +28,7 @@ int LeihoaEtaRenderHasi()
 		SDL_WINDOWPOS_CENTERED,           // Leihoa erdian jarri
 		PANTAILA_ZABALERA,                // Sortzeko lehioaren zabalera
 		PANTAILA_ALTUERA,                 // Sortzeko leihoaren altuera
-		SDL_WINDOW_OPENGL                 // Erabilitako teknologia grafikoa
+		SDL_WINDOW_OPENGL                // Erabilitako teknologia grafikoa
 	);
 
 	if (leihoa == NULL) { 		// Leihoa sortu dela konprobatzen du

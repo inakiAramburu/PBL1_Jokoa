@@ -174,9 +174,9 @@ int main(int argc, char* argv[]) {
 			}
 			if (SDL_TICKS_PASSED(SDL_GetTicks(), refreshrate))
 			{
-				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-				refreshrate = SDL_GetTicks() + 50;
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);	
 				Irudikatu();
+				refreshrate = SDL_GetTicks() + 50;
 			}
 			SDL_Delay(10);
 		}
