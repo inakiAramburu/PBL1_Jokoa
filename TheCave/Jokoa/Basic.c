@@ -143,4 +143,7 @@ void BerrizJaurti()
 	{
 		easteregg.angelua = (rand() % 90) - 45;
 	} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+	easteregg.abiadurax = 5;
+	easteregg.abiaduray = 5;
+
 }

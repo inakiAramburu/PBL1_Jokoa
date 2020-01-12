@@ -321,11 +321,11 @@ void PongExekutatu()
 			easteregg.Player2.y = DatuakClient[1];
 			break;
 		case BEZEROA:
-			if (gora && easteregg.Player2.y > 0)
+			if (w && easteregg.Player2.y > 0)
 			{
 				easteregg.Player2.y -= abiadura;
 			}
-			else if (behera && easteregg.Player2.y < 720 - easteregg.Player2.h)
+			else if (s && easteregg.Player2.y < 720 - easteregg.Player2.h)
 			{
 				easteregg.Player2.y += abiadura;
 			}
