@@ -129,8 +129,10 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				behera = FALSE;
 				break;
 			case SDL_SCANCODE_P:
-				strcpy(sekuentzia, "P");
-				
+				if (*Pantaila != MENUA)
+				{
+					strcpy(sekuentzia, "P");
+				}
 				break;
 			case SDL_SCANCODE_O:
 				strcat(sekuentzia, "O");
@@ -334,6 +336,11 @@ void PongKolisioa()
 	else if( easteregg.pilota.x <=0)
 	{
 		easteregg.P2puntuazioa++;
+	}
+	if ((easteregg.pilota.x + easteregg.pilota.w >= easteregg.Player2.x) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player2.y && easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player2.y + easteregg.Player2.h) || (easteregg.pilota.y + 8 <= easteregg.Player2.y + easteregg.Player2.h && easteregg.pilota.y >= easteregg.Player2.y)))
+	{
+		easteregg.abiadurax *= -1;
+		easteregg.pilota.x = easteregg.Player2.x - (1 + easteregg.pilota.w);
 	}
 	//elseif((easteregg.pilota.x < easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 > easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h < easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 < easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y > easteregg.Player1.y)))
 
