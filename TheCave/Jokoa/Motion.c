@@ -5,6 +5,8 @@
 #include "Sound.h"
 #include <stdio.h>
 #include <math.h>
+#include <SDL_net.h>
+
 
 extern HITBOX hitbox;
 
@@ -21,6 +23,7 @@ extern ETSAIA etsaia[ETSAI_KOPURUA];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
+extern TCPsocket server, client;
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp)
 {
@@ -305,6 +308,15 @@ void PongExekutatu()
 			}
 			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180);
 			easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
+
+			int DatuakHost[4]={easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y};
+			SDLNet_TCP_Send(client, DatuakHost, 4);
+
+			int DatuakClient[2];
+			SDLNet_TCP_Recv(client, DatuakClient, 2);
+			easteregg.Player2.x = DatuakClient[0];
+			easteregg.Player2.y = DatuakClient[1];
+
 			break;
 		case BEZEROA:
 			if (gora && easteregg.Player2.y > 0)
@@ -315,6 +327,15 @@ void PongExekutatu()
 			{
 				easteregg.Player2.y += abiadura;
 			}
+
+			int DatuakClient2[2] = {easteregg.Player2.x,easteregg.Player2.y};
+			SDLNet_TCP_Send(client, DatuakHost, 2);
+			int DatuakHost2[4];
+			SDLNet_TCP_Recv(client, DatuakHost, 4);
+			easteregg.Player1.x = DatuakHost[0];
+			easteregg.Player1.y = DatuakHost[1];
+			easteregg.pilota.x = DatuakHost[2];
+			easteregg.pilota.y = DatuakHost[3];
 			break;
 	}
 	

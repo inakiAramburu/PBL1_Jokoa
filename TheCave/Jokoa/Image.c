@@ -18,8 +18,7 @@ IMGPERTSONAIA spriteak[7];
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 int IrudiZnbk;
 
-TCPsocket server;
-TCPsocket client;
+TCPsocket server, client;
 
 
 int IrudiakKendu(int ZnbtUtzi)
@@ -131,7 +130,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 					char Konfirmazioa[128];
 
 					SDLNet_TCP_Recv(server, Konfirmazioa, 128);
-					printf("hola: %s", Konfirmazioa);
+					printf("Cliente: %s", Konfirmazioa);
 					break;
 				}
 			}
@@ -173,14 +172,14 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			SDLNet_ResolveHost(&ip, IPserver, port);
 			client = SDLNet_TCP_Open(&ip);
 
-			char Agurra[64];
+			char Agurra[128];
 
 			SDLNet_TCP_Recv(client, Agurra, 128);
 
 			char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
 
 			SDLNet_TCP_Send(client, Erantzuna, 128);
-			printf("%s\n", Agurra);
+			printf("Server: %s\n", Agurra);
 			Ordenagailua = BEZEROA;
 
 		}

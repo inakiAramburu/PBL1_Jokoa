@@ -34,7 +34,6 @@ typedef struct S_PONG
 	int angelua, abiadurax, abiaduray, P1puntuazioa, P2puntuazioa;
 }PONG;
 
-//DatuakHost[4]={easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y};
 //P1x,P1y,peloX,pelotay
 
 
