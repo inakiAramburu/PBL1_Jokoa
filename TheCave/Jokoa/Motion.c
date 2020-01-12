@@ -288,7 +288,7 @@ void PongExekutatu()
 	int abiadura = 9;
 	switch (Ordenagailua)
 	{
-		case SERBITZARI:
+		case ZERBITZARI:
 
 			PongKolisioa();
 			if (w && easteregg.Player1.y > 0)

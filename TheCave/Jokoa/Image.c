@@ -18,6 +18,9 @@ IMGPERTSONAIA spriteak[7];
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 int IrudiZnbk;
 
+TCPsocket server;
+TCPsocket client;
+
 
 int IrudiakKendu(int ZnbtUtzi)
 {
@@ -32,7 +35,9 @@ int IrudiakKendu(int ZnbtUtzi)
 }
 
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
-{
+{	
+	char str[128];
+	int aukera;
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
 	switch (Pantaila)
@@ -87,36 +92,39 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
 	case MINIJOKOA:
+
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
 		easteregg.piztuta = TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
-		char str[128];
-		int x;
-		printf("Mete el pitxe numero");
+		
+		printf("Sartu 0[ZERBITZARIA],1[BEZEROA]");
 		fgets(str, 128, stdin);
-		sscanf(str, "%d", &x);
-		if (x == 1)
+		sscanf(str, "%d", &aukera);
+		if (aukera == ZERBITZARI)
 		{
 			int port;
-			printf("Mete el pintxe puerto");
+
+			printf("Sartu portua:\n");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
+
 			if (SDLNet_Init() == -1) {
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
+
 			IPaddress ip;
 			SDLNet_ResolveHost(&ip, NULL, port);
-			TCPsocket server = SDLNet_TCP_Open(&ip);
-			TCPsocket client;
+			server = SDLNet_TCP_Open(&ip);
+
 			while (1)
 			{
 				client = SDLNet_TCP_Accept(server);
 				if (client)
 				{
-					char puto[45] = "PUTOOOO";
-					SDLNet_TCP_Send(client, puto, 45);
+					char Mezua[64] = "Konexioa eginda";
+					SDLNet_TCP_Send(client, Mezua, 64);
 					SDLNet_TCP_Close(client);
 					break;
 				}
@@ -136,15 +144,15 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 				easteregg.abiadurax = 5;
 			}
 			easteregg.abiaduray = 5;
-			Ordenagailua = SERBITZARI;
+			Ordenagailua = ZERBITZARI;
 		}
-		else if (x == 2)
+		else if (aukera == BEZEROA)
 		{
 			char IPserver[15];
-			printf("Mete el pitxe ip");
+			printf("Serbitzariaren ipa jarri:\n");
 			fgets(IPserver, 128, stdin);
 			int port;
-			printf("Mete el pintxe puerto");
+			printf("portua sartu:\n");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
 			if (SDLNet_Init() == -1) {
@@ -153,8 +161,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			IPaddress ip;
 			SDLNet_ResolveHost(&ip, IPserver, port);
 			TCPsocket client = SDLNet_TCP_Open(&ip);
-			char recojedor[45];
-			SDLNet_TCP_Recv(client, recojedor, 45);
+			char recojedor[64];
+			SDLNet_TCP_Recv(client, recojedor, 64);
+			
 			printf("%s\n", recojedor);
 			SDLNet_TCP_Close(client);
 
@@ -165,7 +174,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
 		break;
-		
 	}
 }
 

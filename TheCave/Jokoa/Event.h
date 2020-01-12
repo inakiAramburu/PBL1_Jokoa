@@ -5,7 +5,7 @@
 
 typedef enum { EZKER, ERDIA, ESKUIN }SAGUA;
 typedef enum { GORRIA = 249, BELTZA = 0, TXURIA = 255, BERDEA = 250, HORIA = 251, MOREA = 253, URDINA = 252 }KOLOREAK;
-typedef enum {SERBITZARI, BEZEROA}ROL;
+typedef enum {ZERBITZARI, BEZEROA}ROL;
 
 typedef struct S_BEHEKOPIXEL
 {
