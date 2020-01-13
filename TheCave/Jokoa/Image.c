@@ -66,7 +66,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.bizirik = TRUE;
 		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-		EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 		break;
@@ -74,22 +73,37 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite,  10,  510,  60,  128);
+		EtsaiaKokatu(0, 690, 205, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(6, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case HIRUGARREN:
 		ImgKargatu(HIRUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 500, 60, 128);
+		EtsaiaKokatu(6, 400, 475, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(0, 847, 389, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(1, 506, 244, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(5, 121, 181, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(3, 360, 113, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(6, 600, 113, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(4, 810, 82, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case LAUGARREN:
 		ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 500, 60, 128);
+		EtsaiaKokatu(4, 806, 162, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(0, 137,336, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(1, 613, 422, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case BOSTGARREN:
 		ImgKargatu(BOSTGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
+
 	case MINIJOKOA:
 
 		pertsonaia.bizirik = FALSE;
