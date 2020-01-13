@@ -10,6 +10,7 @@ int aukera;
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern BOSS boss;
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -387,6 +388,29 @@ void EtsaiaKargatu(char Irudia[], int i)
 	}
 	SDL_FreeSurface(surface);
 	etsaia[i].textura = texture;
+}
+
+void BOSSKargatu(char Irudia[], int i)
+{
+	SDL_Surface* surface;
+	SDL_Texture* texture;
+
+	surface = SDL_LoadBMP(Irudia);
+
+	if (!surface)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da argazkitik azalera sortu: %s\n", SDL_GetError());
+		return;
+	}
+
+	texture = SDL_CreateTextureFromSurface(render, surface);
+	if (!texture)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
+		return;
+	}
+	SDL_FreeSurface(surface);
+	boss.textura = texture;
 }
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
