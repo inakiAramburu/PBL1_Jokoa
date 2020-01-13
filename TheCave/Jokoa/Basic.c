@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "Event.h"
 #include "Motion.h"
+#include "SDL_net.h"
 #include <stdio.h>
 
 PERTSONAIA pertsonaia;
@@ -48,19 +49,16 @@ int LeihoaEtaRenderHasi()
 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila)
 {
+	if (*Pantaila == MINIJOKOA )
+	{
+		Konexioaitxi();
+	}
 	extern int aukera;
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
 	*Jokatzen = FALSE;
 	*Pantaila = ATERA;
-	if (aukera == ZERBITZARI)
-	{
-	
-	}
-	else if (aukera == BEZEROA) 
-	}
 
-	}
 }
 void PertsonaiaHasieratu()
 {

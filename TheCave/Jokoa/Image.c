@@ -190,6 +190,20 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	}
 }
+void Konexioaitxi()
+{
+	if (aukera == ZERBITZARI)
+	{
+		SDLNet_TCP_Close(server);
+
+	}
+	else if (aukera == BEZEROA)
+	{
+
+		SDLNet_TCP_Close(client);
+	}
+}
+
 
 void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
