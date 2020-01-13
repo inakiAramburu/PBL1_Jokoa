@@ -27,6 +27,17 @@ typedef struct S_ETSAIA		//Etsaien datuak
 	SDL_Texture* textura;
 }ETSAIA;
 
+/*
+typedef struct S_BOSS	//BOSS datuak
+{
+	SDL_Rect SrcSprite, DestSprite;
+	BOOLEANOA bizirik;
+	int abiadura;
+	SDL_Texture* textura;
+}BOSS;
+*/
+
+
 typedef struct S_PONG
 {
 	BOOLEANOA piztuta;

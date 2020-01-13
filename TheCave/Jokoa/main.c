@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int Karga[9] = {0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	int Karga[10] = {0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -202,7 +202,7 @@ int main(int argc, char* argv[]) {
 			if (!Karga[Pantaila])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
-				KargatuMapa(BOSS_PANTAILA, &pixels, &pitch, &bpp);
+				KargatuMapa(BOSS_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
