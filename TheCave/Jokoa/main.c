@@ -196,7 +196,7 @@ int main(int argc, char* argv[]) {
 			Irudikatu();
 			SDL_Delay(80);
 		}
-		while (Pantaila == BOSS)
+		while (Pantaila == FINAL)
 		{
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])

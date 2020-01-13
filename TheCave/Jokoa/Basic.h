@@ -6,7 +6,7 @@
 #define PANTAILA_ZABALERA 1280
 
 typedef enum { FALSE, TRUE }BOOLEANOA;
-typedef enum { MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, BOSS, MINIJOKOA, ATERA }PANTAILAK;
+typedef enum { MENUA, KREDITUAK, KONTROLAK, LEHEN, BIGARREN, HIRUGARREN, LAUGARREN, BOSTGARREN, FINAL, MINIJOKOA, ATERA }PANTAILAK;
 typedef enum { IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA }SPRITE;
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
@@ -27,7 +27,7 @@ typedef struct S_ETSAIA		//Etsaien datuak
 	SDL_Texture* textura;
 }ETSAIA;
 
-/*
+
 typedef struct S_BOSS	//BOSS datuak
 {
 	SDL_Rect SrcSprite, DestSprite;
@@ -35,7 +35,7 @@ typedef struct S_BOSS	//BOSS datuak
 	int abiadura;
 	SDL_Texture* textura;
 }BOSS;
-*/
+
 
 
 typedef struct S_PONG
