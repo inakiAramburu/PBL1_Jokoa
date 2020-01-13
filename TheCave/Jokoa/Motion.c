@@ -67,7 +67,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	char Kea[128] = ".\\media\\sound\\Kea.wav";
+	/*char Kea[128] = ".\\media\\sound\\Kea.wav";
 	
 		MusikaJarri(Kea);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
@@ -113,7 +113,7 @@ void Animazioa()
 			Irudikatu();
 			SDL_Delay(100);
 		}
-		SDL_Delay(2000);
+		SDL_Delay(2000);*/
 }
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
@@ -139,7 +139,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	{
 		if (pertsonaia.erortzen)
 		{
-			if (a || d)
+			if ((a || d))
 			{
 				pertsonaia.sprite = KORRIKA;
 				*pAnimazioa = 0;
@@ -173,7 +173,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	if (a)
 	{
 		*begira = ATZERA;
-		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO)
+		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
 		{
 			pertsonaia.DestSprite.x -= abiadurax;
 		}
@@ -181,7 +181,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	if (d)
 	{
 		*begira = AURRERA;
-		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO)
+		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
 		{
 			pertsonaia.DestSprite.x += abiadurax;
 		}
@@ -207,7 +207,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;
 	}
-	if (pertsonaia.salto)
+	if (pertsonaia.salto && pertsonaia.sprite != HIL)
 	{
 		pertsonaia.DestSprite.y -= abiaduray;
 		while (pertsonaia.DestSprite.y < 0)

@@ -34,11 +34,6 @@ typedef struct S_PONG
 	int angelua, abiadurax, abiaduray, P1puntuazioa, P2puntuazioa;
 }PONG;
 
-//P1x,P1y,peloX,pelotay
-
-
-//DatuakBezeroa[2]={easteregg.Player2.x,easteregg.Player2.y}
-//p2x,p2y 
 
 int LeihoaEtaRenderHasi();		//Lehia eta rendera hasieratzen du, eta leihoari ikono bat ematen dio, errorerik baldin badaude 1 bueltatuko du 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila);			//Jokoa amaitzen du

@@ -47,7 +47,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			{
 			case SDL_SCANCODE_D:
 				a = FALSE;
-				if (!d && !pertsonaia.erortzen && !pertsonaia.salto)
+				if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
 				{
 					pertsonaia.sprite = KORRIKA;
 					pertsonaia.erasotzen = FALSE;
@@ -57,7 +57,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				break;
 			case SDL_SCANCODE_A:
 				d = FALSE;
-				if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+				if (!a && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
 				{
 					pertsonaia.sprite = KORRIKA;
 					pertsonaia.erasotzen = FALSE;
@@ -192,7 +192,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
 				Animazioa();
-				*Pantaila = LEHEN;
+				*Pantaila = BOSTGARREN;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{
@@ -296,8 +296,12 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 		if (((PertzonaiaEskuinMuga >= etsaiaxEzker && PertzonaiaEskuinMuga <= etsaiaxEskuin) || (PertzonaiaEzkerMuga <= etsaiaxEskuin && PertzonaiaEskuinMuga >= etsaiaxEzker)) && (PertzonaiaYBekoa >= etsaiayGoikoa && PertzonaiaYGoikoa <= etsaiayBehekoa))
 		{
+			if (pertsonaia.sprite != HIL)
+			{
+				*pAnimazioa = 0;
+			}
 			pertsonaia.sprite = HIL;
-			*pAnimazioa = 0;
+			
 		}
 	}
 
