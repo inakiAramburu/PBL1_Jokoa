@@ -60,11 +60,11 @@ int main(int argc, char* argv[]) {
 			if (!Karga[KREDITUAK])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
 				Karga[KREDITUAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
 			SDL_Delay(50);
 		}
 		while (Pantaila == KONTROLAK)
@@ -73,11 +73,11 @@ int main(int argc, char* argv[]) {
 			if (!Karga[KONTROLAK])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
 				Karga[KONTROLAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
-			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
-			Irudikatu();
 			SDL_Delay(50);
 		}
 		while (Pantaila == LEHEN)
