@@ -4,7 +4,7 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
-//Fusion, saltoa eta nivel aldaketa//
+//arreglo de espada//
 
 int main(int argc, char* argv[]) {
 
