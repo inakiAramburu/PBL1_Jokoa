@@ -281,7 +281,9 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		{
 			if (begira == AURRERA)
 			{
-				if (etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33)
+				
+
+				if ((etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33) && ( PertzonaiaYGoikoa + 29 >= etsaiayGoikoa && PertzonaiaYGoikoa + 29  <= etsaiayBehekoa))
 				{
 					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
 					--* BizirikKopurua;
@@ -289,7 +291,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			}
 			else
 			{
-				if (etsaiaxEskuin >= PertzonaiaEzkerMuga - 33 && etsaiaxEskuin <= PertzonaiaEzkerMuga)
+				if ((etsaiaxEskuin >= PertzonaiaEzkerMuga - 33 && etsaiaxEskuin <= PertzonaiaEzkerMuga) && (PertzonaiaYGoikoa + 29 >= etsaiayGoikoa && PertzonaiaYGoikoa + 29 <= etsaiayBehekoa))
 				{
 					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
 					--* BizirikKopurua;
