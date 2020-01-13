@@ -96,7 +96,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 
+
+		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
+
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+
+
+		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case MINIJOKOA:
 
@@ -410,8 +416,7 @@ void BOSSKargatu(char Irudia[], int i)
 		return;
 	}
 	SDL_FreeSurface(surface);
-	boss.textura = texture;
-}
+	boss.textura = texture;}
 
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 {

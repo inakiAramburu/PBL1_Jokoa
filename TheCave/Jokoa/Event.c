@@ -191,6 +191,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 				Irudikatu();
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
+				BOSSHasieratu();
 				Animazioa();
 				*Pantaila = FINAL;
 			}

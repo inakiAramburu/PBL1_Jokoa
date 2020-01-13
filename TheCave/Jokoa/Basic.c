@@ -118,9 +118,9 @@ void EtsaiakHasieratu()
 
 void BOSSHasieratu()
 {
-	int j, tmp = 0, kopurua = 5;
+	
 
-		BOSSKargatu(".\\media\\enemies\\SpriteBoss.bmp", j);
+		BOSSKargatu(".\\media\\enemies\\SpriteBoss.bmp", 1);
 		RectEraikitzailea(&boss.SrcSprite, 0, 0, 44, 33);
 		boss.DestSprite.w = 33;
 		boss.DestSprite.h = 44;

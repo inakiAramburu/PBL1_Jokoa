@@ -2,5 +2,5 @@
 #define SOUND_H
 
 void MusikaJarri(char Fitxategia[]);
-
+void musica();
 #endif

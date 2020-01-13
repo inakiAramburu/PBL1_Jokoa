@@ -21,6 +21,7 @@ Uint32 abiadura[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern BOSS boss;
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -271,19 +272,12 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
 
-	etsaia[znbk_etsaia].DestSprite.x = x;
-	etsaia[znbk_etsaia].DestSprite.y = y;
-	etsaia[znbk_etsaia].bizirik = TRUE;
-	if (znbk_etsaia >= 0 && znbk_etsaia <= 4)
-	{
-		etsaia[znbk_etsaia].abiadura = ABIADURA_MAMUA;
-	}
-	else if (znbk_etsaia >= 5 && znbk_etsaia <= 9)
-	{
-		etsaia[znbk_etsaia].abiadura = ABIADURA_MUKITXUA;
-	}
-	BizirikDaudenEtsaiak[*BizirikKopurua] = znbk_etsaia;
-	*BizirikKopurua += 1;
+	boss.DestSprite.x = x;
+	boss.DestSprite.y = y;
+	boss.bizirik = TRUE;
+
+		boss.abiadura = ABIADURA_MAMUA;
+	
 }
 
 void PongExekutatu()

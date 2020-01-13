@@ -4,7 +4,6 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
-#include "SDL_mixer.h"
 //devarreglo de espada//
 
 
@@ -26,24 +25,14 @@ int main(int argc, char* argv[]) {
 
 
 
+	musica();
 
 
 
 
 
 
-
-	Mix_Chunk* effect1;
-	Mix_Music* music;
-	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
-	music = Mix_LoadMUS(".\\media\\sound\\mus_battle2.wav");
-	effect1 = Mix_LoadWAV(".\\media\\sound\\videoplayback.wav");
-
-	Mix_FreeChunk(effect1);
-	Mix_FreeMusic(music);
-	Mix_CloseAudio;
-
-	Mix_PlayingMusic(music, -1);
+	
 
 
 
@@ -54,8 +43,7 @@ int main(int argc, char* argv[]) {
 
 
 
-	Mix_PlayChannel(-1,music, 0);
-
+				
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -211,6 +199,11 @@ int main(int argc, char* argv[]) {
 			Irudikatu();
 			SDL_Delay(80);
 		}
+
+
+
+
+	
 		while (Pantaila == MINIJOKOA)
 		{
 			if (!Karga[Pantaila])
