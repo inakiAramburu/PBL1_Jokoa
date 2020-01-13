@@ -5,6 +5,7 @@
 #include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
+int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
@@ -36,7 +37,7 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
-	int aukera;
+	
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
 	switch (Pantaila)
