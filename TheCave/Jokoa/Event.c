@@ -40,7 +40,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			break;
 		case SDL_MOUSEBUTTONUP:
 			ZeinKlikatuDa(ebentua.button, &klika);
-			KonprobatuKlika(Pantaila, klika);
+			KonprobatuKlika(Pantaila, klika, Jokatzen);
 			break;
 		case SDL_KEYDOWN:
 			switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
@@ -174,7 +174,7 @@ void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika)
 	}
 }
 
-void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
+void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 {
 	int x, y;
 	switch (*Pantaila)
@@ -192,7 +192,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
 				Animazioa();
-				*Pantaila = BOSTGARREN;
+				*Pantaila = LEHEN;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{
@@ -226,6 +226,19 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 			}
 		}
 		break;
+	case ATERA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 493 && y > 379) && (x < 801 && y < 471))
+			{
+				*Pantaila = LEHEN;
+			}
+			else if ((x > 578 && y > 490) && (x < 722 && y < 538))
+			{
+				*Jokatzen = FALSE;
+			}
+		}
 	}
 }
 

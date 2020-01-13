@@ -233,6 +233,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		if (pertsonaia.sprite == HIL)
 		{
 			PertsonaiaHil();
+			*pantaila = ATERA;
 		}
 		if (pertsonaia.salto)
 		{

@@ -15,7 +15,8 @@ int main(int argc, char* argv[]) {
 	Uint8 bpp;
 	Uint32 refreshrate = 0;
 	Uint32 moverate = 0;
-
+	
+	extern PERTSONAIA pertsonaia;
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{
@@ -24,7 +25,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int Karga[9] = {0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	int Karga[10] = {0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -154,6 +155,19 @@ int main(int argc, char* argv[]) {
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
+		}
+		while (Pantaila == ATERA && Jokatzen)
+		{
+			if (!Karga[Pantaila])
+			{
+				for (int i = ATERA - 1; i > 2; i--)
+				{
+					Karga[i] = 0;
+				}
+				Karga[Pantaila] = 1;
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			SDL_Delay(100);
 		}
 		while (Pantaila == MINIJOKOA)
 		{
