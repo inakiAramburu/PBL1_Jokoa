@@ -141,13 +141,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
 			if (rand() % 2 == 0)
 			{
-				easteregg.abiadurax = -5;
+				easteregg.abiadurax = -7;
 			}
 			else
 			{
-				easteregg.abiadurax = 5;
+				easteregg.abiadurax = 7;
 			}
-			easteregg.abiaduray = 5;
+			easteregg.abiaduray = 7;
 			Ordenagailua = ZERBITZARI;
 		}
 		else if (aukera == BEZEROA)
