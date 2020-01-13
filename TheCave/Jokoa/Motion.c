@@ -11,6 +11,7 @@
 extern HITBOX hitbox;
 
 extern IMGPERTSONAIA spriteak[7];
+extern IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 extern int IrudiZnbk;
 
 Uint32 time = 0;
@@ -53,11 +54,11 @@ void EtsaienAdimena(int znbk_etsaia, void* pixels, int pitch, Uint8 bpp)
 
 void Animazioa()
 {
-	//int i, j;
+	int i, j;
 
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
-	pertsonaia.bizirik = FALSE;
+	pertsonaia.bizirik = TRUE;
 	pertsonaia.sprite = KEA;
 	pertsonaia.DestSprite.x = 10;
 	pertsonaia.DestSprite.y = 555;
@@ -66,14 +67,14 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	/*char Kea[128] = ".\\media\\sound\\Kea.wav";
+	char Kea[128] = ".\\media\\sound\\Kea.wav";
 	
 		MusikaJarri(Kea);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			SDL_Delay(100);
 			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu(AURRERA);
+			RenderPrestatu(AURRERA, NULL, NULL);
 			Irudikatu();
 		}
 		pertsonaia.sprite = IDLE;
@@ -82,7 +83,7 @@ void Animazioa()
 			for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
-				RenderPrestatu(AURRERA);
+				RenderPrestatu(AURRERA, NULL, NULL);
 				Irudikatu();
 				SDL_Delay(150);
 			}
@@ -94,26 +95,25 @@ void Animazioa()
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
 				pertsonaia.DestSprite.x += 9;
-				RenderPrestatu(AURRERA);
+				RenderPrestatu(AURRERA, NULL, NULL);
 				Irudikatu();
 				SDL_Delay(80);
 			}
 		}
 		pertsonaia.sprite = IDLE;
-		RenderPrestatu(AURRERA);
+		RenderPrestatu(AURRERA, NULL, NULL);
 		Irudikatu();
 		SDL_Delay(300);
 		IrudiZnbk = IrudiakKendu(0);
-		pertsonaia.bizirik = FALSE;
 		ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
 		for (i = 0; i < 80; i++)
 		{
 			SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
-			RenderPrestatu(AURRERA);
+			RenderPrestatu(AURRERA,NULL,NULL);
 			Irudikatu();
 			SDL_Delay(100);
 		}
-		SDL_Delay(2000);*/
+		SDL_Delay(2000);
 }
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)

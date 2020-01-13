@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "Event.h"
 #include "Motion.h"
+#include "SDL_net.h"
 #include <stdio.h>
 
 PERTSONAIA pertsonaia;
@@ -48,12 +49,17 @@ int LeihoaEtaRenderHasi()
 
 void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila)
 {
+	if (*Pantaila == MINIJOKOA )
+	{
+		Konexioaitxi();
+	}
+	extern int aukera;
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
 	*Jokatzen = FALSE;
 	*Pantaila = ATERA;
-}
 
+}
 void PertsonaiaHasieratu()
 {
 	JokalariaKargatu(".\\media\\player\\Idle.bmp", 0);
@@ -143,7 +149,6 @@ void BerrizJaurti()
 	{
 		easteregg.angelua = (rand() % 90) - 45;
 	} while (easteregg.angelua < 15 && easteregg.angelua > -15);
-	easteregg.abiadurax = 5;
-	easteregg.abiaduray = 5;
-
+	easteregg.abiadurax = 7;
+	easteregg.abiaduray = 7;
 }

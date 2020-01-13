@@ -5,6 +5,7 @@
 #include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
+int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
@@ -36,7 +37,7 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
-	int aukera;
+	
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
 	switch (Pantaila)
@@ -141,13 +142,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
 			if (rand() % 2 == 0)
 			{
-				easteregg.abiadurax = -5;
+				easteregg.abiadurax = -7;
 			}
 			else
 			{
-				easteregg.abiadurax = 5;
+				easteregg.abiadurax = 7;
 			}
-			easteregg.abiaduray = 5;
+			easteregg.abiaduray = 7;
 			Ordenagailua = ZERBITZARI;
 		}
 		else if (aukera == BEZEROA)
@@ -189,6 +190,20 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	}
 }
+void Konexioaitxi()
+{
+	if (aukera == ZERBITZARI)
+	{
+		SDLNet_TCP_Close(server);
+
+	}
+	else if (aukera == BEZEROA)
+	{
+
+		SDLNet_TCP_Close(client);
+	}
+}
+
 
 void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
