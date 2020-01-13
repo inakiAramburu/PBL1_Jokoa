@@ -67,7 +67,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.bizirik = TRUE;
 		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-		EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 		break;
@@ -75,21 +74,25 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite,  10,  510,  60,  128);
+
 		break;
 	case HIRUGARREN:
 		ImgKargatu(HIRUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+
 		break;
 	case LAUGARREN:
 		ImgKargatu(LAUGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+
 		break;
 	case BOSTGARREN:
 		ImgKargatu(BOSTGARREN_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+
 		break;
 	case MINIJOKOA:
 
