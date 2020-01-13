@@ -535,7 +535,6 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 			*i = 0;
 		}
 		pertsonaia.sprite = IDLE;
-		
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio)
 	{
@@ -563,11 +562,11 @@ void Ekintzak(int* i, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTA
 
 	
 	
-		if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
-		{
-			++* i;
-			time = SDL_GetTicks();
-		}
+	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+	{
+		++* i;
+		time = SDL_GetTicks();
+	}
 	
 	if (*i >= spriteak[pertsonaia.sprite].kop)
 	{
