@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 				Karga[KREDITUAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
-			SDL_Delay(50);
+			SDL_Delay(100);
 		}
 		while (Pantaila == KONTROLAK)
 		{
@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
 				Karga[KONTROLAK] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
-			SDL_Delay(50);
+			SDL_Delay(100);
 		}
 		while (Pantaila == LEHEN)
 		{
