@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <SDL_net.h>
-
+#include "SDL_mixer.h"
 
 extern HITBOX hitbox;
 

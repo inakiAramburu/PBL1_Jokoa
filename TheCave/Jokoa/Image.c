@@ -91,6 +91,11 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.SrcSprite.x = 0;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
+	case BOSS:
+		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
+		pertsonaia.SrcSprite.x = 0;
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		break;
 	case MINIJOKOA:
 
 		pertsonaia.bizirik = FALSE;
