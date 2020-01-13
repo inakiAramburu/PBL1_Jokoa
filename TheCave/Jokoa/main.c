@@ -4,7 +4,7 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
-//arreglo de espada//
+//devarreglo de espada//
 
 int main(int argc, char* argv[]) {
 
