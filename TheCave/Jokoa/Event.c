@@ -238,8 +238,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
 	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
 
-
-
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 	int altuera = 0;
 
