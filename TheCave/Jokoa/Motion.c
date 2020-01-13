@@ -68,7 +68,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	char Kea[128] = ".\\media\\sound\\Kea.wav";
-	
+	/*
 		MusikaJarri(Kea);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
@@ -112,7 +112,7 @@ void Animazioa()
 			RenderPrestatu(AURRERA,NULL,NULL);
 			Irudikatu();
 			SDL_Delay(100);
-		}
+		}*/
 		SDL_Delay(2000);
 }
 

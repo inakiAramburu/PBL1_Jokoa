@@ -266,7 +266,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 		//DETECTAR A QUE LADO MIRA EL PERSONAGE
 
-		etsaiaxEzker = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x + 5;
+		etsaiaxEzker = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x + 9;
 		etsaiaxEskuin = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.x + 29;
 		etsaiayGoikoa = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.y + altuera;
 		etsaiayBehekoa = etsaia[BizirikDaudenEtsaiak[j]].DestSprite.y + 43;
