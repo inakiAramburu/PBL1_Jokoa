@@ -42,10 +42,10 @@ void musica()
 		printf("no se pudo cargar el asusbsistema audio  %s\n", SDL_GetError());
 		exit(1);
 	}
-	////////////////////////////////////////
+	/////////////////https://www.youtube.com/watch?v=yK0INWqpqSc///////////////////////
 
 //cargar archivos
-	sonido1 = Mix_LoadWAV(".\\media\\sound\\mus_battle2.wav");
+	sonido1 = Mix_LoadWAV(".\\media\\sound\\querezeres.wav");
 	if (sonido1 == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
@@ -68,17 +68,17 @@ void musica()
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(1, sonido1, 0);
+	Mix_PlayChannel(1, sonido1, -1);
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen
 	//estaria bien poner unas teclas para subir bajar volumen y poner una variable donde esta el 1
-	Mix_Volume(sonido1, 1);
+	//Mix_Volume(sonido1, 1);
 
 	//para de reproducir la pista 
 	//Mix_Pause(1);
 
 	//reanuda la pausa donde estaba antes
 	//Mix_Resume(1);
-	Mix_PlayChannel(2, sonido2, -1);
+	//Mix_PlayChannel(2, sonido2, 0);
 
 }
