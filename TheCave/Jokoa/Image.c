@@ -9,7 +9,7 @@ int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -104,7 +104,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
-
+	case FINALA:
+		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
+		pertsonaia.SrcSprite.x = 0;
+		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", ETSAI_KOPURUA);
+		etsaia[ETSAI_KOPURUA].bizirik = TRUE;
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		break;
 	case MINIJOKOA:
 
 		pertsonaia.bizirik = FALSE;

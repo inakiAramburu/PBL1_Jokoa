@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int Karga[10] = {0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	int Karga[11] = {0,0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -149,6 +149,21 @@ int main(int argc, char* argv[]) {
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
+				Karga[Pantaila] = 1;
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+			Irudikatu();
+			SDL_Delay(80);
+		}
+		while (Pantaila == FINALA)
+		{
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
+			{
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				KargatuMapa(BOSS_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);

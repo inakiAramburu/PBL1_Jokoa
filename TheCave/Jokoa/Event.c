@@ -9,7 +9,7 @@
 HITBOX hitbox;
 
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 extern PONG easteregg;
 
 BOOLEANOA a = FALSE;

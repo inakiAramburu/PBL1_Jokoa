@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 PERTSONAIA pertsonaia;
-ETSAIA etsaia[ETSAI_KOPURUA];
+ETSAIA etsaia[ETSAI_KOPURUA + 1];		//+1 Bossarako
 
 PONG easteregg;
 

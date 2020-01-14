@@ -20,7 +20,7 @@ Uint32 time3 = 0;
 Uint32 abiadura[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
