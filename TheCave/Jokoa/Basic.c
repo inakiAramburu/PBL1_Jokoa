@@ -4,6 +4,7 @@
 #include "Motion.h"
 #include "SDL_net.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 PERTSONAIA pertsonaia;
 ETSAIA etsaia[ETSAI_KOPURUA + 1];		//+1 Bossarako

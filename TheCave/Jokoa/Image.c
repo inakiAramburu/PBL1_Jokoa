@@ -110,7 +110,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
-		RectEraikitzailea(&BOSS.DestSprite, 1100, 400, 149, 128);
+		RectEraikitzailea(&BOSS.DestSprite, 1000, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
 		break;
 	case MINIJOKOA:
