@@ -151,7 +151,8 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 		}
 		if (strcmp(sekuentzia, "PONG") == 0)
 		{
-			*Pantaila = MINIJOKOA;
+			*Pantaila = AUKERATUMODUA;
+			strcpy(sekuentzia, "");
 		}
 	}
 }
@@ -239,6 +240,39 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 				*Jokatzen = FALSE;
 			}
 		}
+		break;
+	case AUKERATUMODUA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //ONLINE
+			{
+				*Pantaila = AUKERATUZERBITZUA;
+				printf("ONLINE\n");
+			}
+			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //LOCAL
+			{
+				*Pantaila = MINIJOKOA;
+				printf("LOCAL\n");
+			}
+		}
+		break;
+	case AUKERATUZERBITZUA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //CREATE
+			{
+				*Pantaila = AUKERAZERBITZARIA;
+				printf("CREATE\n");
+			}
+			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //JOIN
+			{
+				*Pantaila = AUKERABEZEROA;
+				printf("JOIN\n");
+			}
+		}
+		break;
 	}
 }
 

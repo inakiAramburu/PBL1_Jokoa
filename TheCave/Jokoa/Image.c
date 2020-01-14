@@ -104,6 +104,90 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
+	case AUKERATUMODUA:
+		ImgKargatu(".\\media\\pong\\OnlineLocal.bmp", 0, 0, 0, 0);
+		break;
+	case AUKERATUZERBITZUA:
+		ImgKargatu(".\\media\\pong\\ServidorCliente.bmp", 0, 0, 0, 0);
+		break;
+		
+	case AUKERAZERBITZARIA:
+		int port;
+
+		printf("Sartu portua: ");
+		fgets(str, 128, stdin);
+		sscanf(str, "%d", &port);
+
+		if (SDLNet_Init() == -1) {
+			printf("SDLNet_Init: %s\n", SDLNet_GetError());
+		}
+
+		IPaddress ip;
+
+		SDLNet_ResolveHost(&ip, NULL, port);
+		server = SDLNet_TCP_Open(&ip);
+
+		while (1)
+		{
+			client = SDLNet_TCP_Accept(server);
+			if (client)
+			{
+				char Agurra[128] = "Konexioa eginda";
+
+				SDLNet_TCP_Send(client, Agurra, 128);
+
+				char Konfirmazioa[128];
+
+				SDLNet_TCP_Recv(client, Konfirmazioa, 128);
+				printf("Cliente: %s", Konfirmazioa);
+				break;
+			}
+		}
+		srand(SDL_GetTicks());
+		do
+		{
+			easteregg.angelua = (rand() % 90) - 45;
+		} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+		if (rand() % 2 == 0)
+		{
+			easteregg.abiadurax = -7;
+		}
+		else
+		{
+			easteregg.abiadurax = 7;
+		}
+		easteregg.abiaduray = 7;
+		Ordenagailua = ZERBITZARI;
+	
+		break;
+
+	case AUKERABEZEROA:
+		char IPserver[15];
+
+		printf("Serbitzariaren ipa jarri: ");
+		fgets(IPserver, 15, stdin);
+
+		printf("Portua sartu: ");
+		fgets(str, 128, stdin);
+		sscanf(str, "%d", &port);
+
+		if (SDLNet_Init() == -1) {
+			printf("SDLNet_Init: %s\n", SDLNet_GetError());
+		}
+
+		SDLNet_ResolveHost(&ip, IPserver, port);
+		client = SDLNet_TCP_Open(&ip);
+
+		char Agurra[128];
+
+		SDLNet_TCP_Recv(client, Agurra, 128);
+
+		char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
+
+		SDLNet_TCP_Send(client, Erantzuna, 128);
+		printf("Server: %s\n", Agurra);
+		Ordenagailua = BEZEROA;
+		break;
 
 	case MINIJOKOA:
 
@@ -112,92 +196,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		easteregg.piztuta = TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
-		
-		printf("Sartu 0[ZERBITZARIA],1[BEZEROA]: ");
-		fgets(str, 128, stdin);
-		sscanf(str, "%d", &aukera);
-		if (aukera == ZERBITZARI)
-		{
-			int port;
 
-			printf("Sartu portua: ");
-			fgets(str, 128, stdin);
-			sscanf(str, "%d", &port);
-
-			if (SDLNet_Init() == -1) {
-				printf("SDLNet_Init: %s\n", SDLNet_GetError());
-			}
-
-			IPaddress ip;
-
-			SDLNet_ResolveHost(&ip, NULL, port);
-			server = SDLNet_TCP_Open(&ip);
-
-			while (1)
-			{
-				client = SDLNet_TCP_Accept(server);
-				if (client)
-				{
-					char Agurra[128] = "Konexioa eginda";
-
-					SDLNet_TCP_Send(client, Agurra, 128);
-
-					char Konfirmazioa[128];
-
-					SDLNet_TCP_Recv(client, Konfirmazioa, 128);
-					printf("Cliente: %s", Konfirmazioa);
-					break;
-				}
-			}
-			srand(SDL_GetTicks());
-			do
-			{
-				easteregg.angelua = (rand() % 90) - 45;
-			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
-			if (rand() % 2 == 0)
-			{
-				easteregg.abiadurax = -7;
-			}
-			else
-			{
-				easteregg.abiadurax = 7;
-			}
-			easteregg.abiaduray = 7;
-			Ordenagailua = ZERBITZARI;
-		}
-		else if (aukera == BEZEROA)
-		{
-			char IPserver[15];
-
-			printf("Serbitzariaren ipa jarri: ");
-			fgets(IPserver, 15, stdin);
-
-			int port;
-
-			printf("Portua sartu: ");
-			fgets(str, 128, stdin);
-			sscanf(str, "%d", &port);
-
-			if (SDLNet_Init() == -1) {
-				printf("SDLNet_Init: %s\n", SDLNet_GetError());
-			}
-
-			IPaddress ip;
-
-			SDLNet_ResolveHost(&ip, IPserver, port);
-			client = SDLNet_TCP_Open(&ip);
-
-			char Agurra[128];
-
-			SDLNet_TCP_Recv(client, Agurra, 128);
-
-			char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
-
-			SDLNet_TCP_Send(client, Erantzuna, 128);
-			printf("Server: %s\n", Agurra);
-			Ordenagailua = BEZEROA;
-
-		}
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);

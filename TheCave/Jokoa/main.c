@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int Karga[10] = {0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	int Karga[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -165,6 +165,65 @@ int main(int argc, char* argv[]) {
 					Karga[i] = 0;
 				}
 				Karga[Pantaila] = 1;
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			SDL_Delay(100);
+		}
+		while (Pantaila == AUKERATUMODUA) 
+		{
+			if (!Karga[Pantaila])
+			{
+				for (int i = 0; i < 8; i++)
+				{
+					Karga[i] = 0;
+				}
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
+				Karga[Pantaila] = 1;
+				printf("Online/Local pantaila kargatuta\n");
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			SDL_Delay(100);
+		}
+		while (Pantaila == AUKERATUZERBITZUA) //PUTA MIERDA
+		{
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
+			{
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
+				Karga[Pantaila] = 1;
+			}
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			SDL_Delay(100);
+		}
+		while (Pantaila == AUKERAZERBITZARIA)
+		{
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
+			{
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
+				Karga[Pantaila] = 1;
+				printf("Zerbitzari pantaila kargatuta\n");
+			}
+			KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			SDL_Delay(100);
+		}
+		while (Pantaila == AUKERABEZEROA)
+		{
+			Karga[Pantaila - 1] = 0;
+			if (!Karga[Pantaila])
+			{
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
+				Karga[Pantaila] = 1;
+				printf("Join pantaila kargatuta\n");
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			SDL_Delay(100);
