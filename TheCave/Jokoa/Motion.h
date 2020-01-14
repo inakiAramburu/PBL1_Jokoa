@@ -7,6 +7,7 @@
 #define ABIADURA_MAMUA 4
 #define ETSAIA_SPRITE_KOPURUA 4
 
+#define BOSS etsaia[ETSAI_KOPURUA]
 
 typedef enum {ATZERA, AURRERA}ZENTZUA;
 
@@ -17,5 +18,6 @@ void Animazioa();		//Jokatu sakatzen denean aniamzio labur bat egiten du
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua);
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua);		//Etsaia nibel hasieran kokatu, etsaiaren zenbakia, x eta y posizioa emanez
 void PongExekutatu();
+void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila);
 
 #endif

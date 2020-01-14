@@ -74,7 +74,7 @@ void Animazioa()
 		{
 			SDL_Delay(100);
 			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu(AURRERA, NULL, NULL);
+			RenderPrestatu(AURRERA, 0, 0);
 			Irudikatu();
 		}
 		pertsonaia.sprite = IDLE;
@@ -83,7 +83,7 @@ void Animazioa()
 			for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
-				RenderPrestatu(AURRERA, NULL, NULL);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				SDL_Delay(150);
 			}
@@ -95,7 +95,7 @@ void Animazioa()
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
 				pertsonaia.DestSprite.x += 9;
-				RenderPrestatu(AURRERA, NULL, NULL);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				SDL_Delay(80);
 			}
@@ -109,7 +109,7 @@ void Animazioa()
 		for (i = 0; i < 80; i++)
 		{
 			SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
-			RenderPrestatu(AURRERA,NULL,NULL);
+			RenderPrestatu(AURRERA,0,0);
 			Irudikatu();
 			SDL_Delay(100);
 		}
@@ -118,7 +118,8 @@ void Animazioa()
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-	static int eAnimazioa;
+	static int eAnimazioa = 0;
+	static int bAnimazioa = 0;
 
 	//	Debbug de pies
 	if (f3)
@@ -132,8 +133,13 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
+	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
+	if (pertsonaia.erortzen)
+	{
+		pertsonaia.DestSprite.y += GRABITATEA;
+		AltueraZuzendu(pixels, pitch, bpp);
+	}
 
-	
 	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
 	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
@@ -158,10 +164,8 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		{
 			pertsonaia.erasotzen = FALSE;
 			k = FALSE;
-
 		}
 		*pAnimazioa = 0;
-
 	}
 	for (int j = 0; j < *BizirikKopurua; j++)
 	{
@@ -181,6 +185,12 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	{
 		eAnimazioa = 0;
 	}
+	if (BOSS.bizirik)
+	{
+		BOSS.SrcSprite.x = 128 * bAnimazioa;
+		bAnimazioa++;
+	}
+
 }
 
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
@@ -260,7 +270,7 @@ void PongExekutatu()
 	}
 }
 
-void PertsonaiaMugitu()
+void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 {
 	int abiadurax = 12;
 	int abiaduray = 12;
@@ -344,10 +354,5 @@ void PertsonaiaMugitu()
 		{
 			pertsonaia.DestSprite.y++;
 		}
-	}
-	if (pertsonaia.erortzen)
-	{
-		pertsonaia.DestSprite.y += GRABITATEA;
-		AltueraZuzendu(pixels, pitch, bpp);
 	}
 }

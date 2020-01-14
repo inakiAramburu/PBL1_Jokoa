@@ -108,10 +108,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
-		etsaia[ETSAI_KOPURUA].bizirik = TRUE;
+		BOSS.bizirik = TRUE;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
-		RectEraikitzailea(&etsaia[ETSAI_KOPURUA].DestSprite, 10, 100, 149, 128);
-		RectEraikitzailea(&etsaia[ETSAI_KOPURUA].SrcSprite, 0, 0, 149, 128);
+		RectEraikitzailea(&BOSS.DestSprite, 1100, 400, 149, 128);
+		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
 		break;
 	case MINIJOKOA:
 
@@ -293,9 +293,9 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 			}
 		}
 	}
-	if (etsaia[ETSAI_KOPURUA].bizirik)
+	if (BOSS.bizirik)
 	{
-		SDL_RenderCopy(render, etsaia[ETSAI_KOPURUA].textura, &etsaia[ETSAI_KOPURUA].SrcSprite, &etsaia[ETSAI_KOPURUA].DestSprite);
+		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
 	}
 	if (pertsonaia.bizirik)
 	{
