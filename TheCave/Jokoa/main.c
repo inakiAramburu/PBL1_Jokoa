@@ -186,7 +186,7 @@ int main(int argc, char* argv[]) {
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			SDL_Delay(100);
 		}
-		while (Pantaila == AUKERATUZERBITZUA) //PUTA MIERDA
+		while (Pantaila == AUKERATUZERBITZUA)
 		{
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
