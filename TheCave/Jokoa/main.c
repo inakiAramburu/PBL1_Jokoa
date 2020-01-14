@@ -83,6 +83,7 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
+			Karga[9] = 0;
 			Karga[MENUA] = 0;
 			if (!Karga[LEHEN])
 			{
