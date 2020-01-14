@@ -53,6 +53,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
 		pertsonaia.bizirik = FALSE;
+
+
 		break;
 	case KREDITUAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
@@ -99,11 +101,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			BOSSHasieratu();
 		}
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-
-		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
-
-
-		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);
+		boss.bizirik = TRUE;
+		tiroak();
+		
 		break;
 	case MINIJOKOA:
 
@@ -154,6 +154,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			{
 				easteregg.angelua = (rand() % 90) - 45;
 			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+
 			if (rand() % 2 == 0)
 			{
 				easteregg.abiadurax = -7;
@@ -301,6 +302,8 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	if (boss.bizirik)
 	{
 		SDL_RenderCopy(render, boss.textura, &boss.SrcSprite, &boss.DestSprite);
+		SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+		SDL_RenderFillRect(render, &boss.tiroa[0]);
 	}
 	if (easteregg.piztuta)
 	{
@@ -310,6 +313,27 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 		SDL_RenderFillRect(render, &easteregg.Player2);
 	}
 }
+
+void tiroak()
+{
+	static int i=0;
+
+	i+=8;
+
+		RectEraikitzailea(&boss.tiroa[0], 628, i, 10, 10);
+
+
+
+
+	//RectEraikitzailea(&boss.tiroa[0], 200, 600, 10, 10);
+
+	pertsonaia.DestSprite.x;
+	pertsonaia.DestSprite.y;
+
+
+}
+
+
 
 void RenderMenu()
 {

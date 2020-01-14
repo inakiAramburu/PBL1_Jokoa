@@ -190,7 +190,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
 				Animazioa();
-				*Pantaila = LEHEN;
+				*Pantaila = FINAL;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{
@@ -328,6 +328,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		pertsonaia.salto = FALSE;
 	}
 }
+
 
 void PongKolisioa()
 {

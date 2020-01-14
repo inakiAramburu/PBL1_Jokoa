@@ -175,6 +175,7 @@ int main(int argc, char* argv[]) {
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+			tiroak();
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
 			SDL_Delay(80);
@@ -196,6 +197,7 @@ int main(int argc, char* argv[]) {
 				Karga[Pantaila] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+
 			if (SDL_TICKS_PASSED(SDL_GetTicks(), moverate))
 			{
 				PongExekutatu();

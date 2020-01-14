@@ -199,6 +199,12 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 	*BizirikKopurua += 1;
 }
 
+void bossasieratutiroa()
+{
+
+
+}
+
 void PongExekutatu()
 {
 	int abiadura = 9;

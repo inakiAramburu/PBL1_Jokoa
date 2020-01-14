@@ -11,7 +11,7 @@ typedef enum { IDLE, KORRIKA, SALTO, ERORI, ERASO, HIL, KEA }SPRITE;
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak
 {
-	SDL_Rect SrcSprite, DestSprite;
+	SDL_Rect SrcSprite, DestSprite,tiroa;
 	SPRITE sprite;
 	BOOLEANOA bizirik;
 	BOOLEANOA salto;
@@ -30,7 +30,7 @@ typedef struct S_ETSAIA		//Etsaien datuak
 
 typedef struct S_BOSS	//BOSS datuak
 {
-	SDL_Rect SrcSprite, DestSprite;
+	SDL_Rect SrcSprite, DestSprite,tiroa[150];
 	BOOLEANOA bizirik;
 	int abiadura;
 	SDL_Texture* textura;
