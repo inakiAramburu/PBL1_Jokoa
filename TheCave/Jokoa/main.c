@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
 	Uint32 refreshrate = 0;
 	Uint32 moverate = 0;
 
-	musica();
+	//musica();
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
 	{

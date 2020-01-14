@@ -17,5 +17,7 @@ void Animazioa();		//Jokatu sakatzen denean aniamzio labur bat egiten du
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua);
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua);		//Etsaia nibel hasieran kokatu, etsaiaren zenbakia, x eta y posizioa emanez
 void PongExekutatu();
+void PertsonaiaMugitu(ZENTZUA* begira, int* pAnimazioa, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila);
+
 
 #endif

@@ -119,7 +119,7 @@ void EtsaiakHasieratu()
 void BOSSHasieratu()
 {
 	BOSSKargatu(".\\media\\enemies\\SpriteBoss.bmp");
-	RectEraikitzailea(&boss.SrcSprite, 128*25, 0, 150, 128);
+	RectEraikitzailea(&boss.SrcSprite, 0, 0, 150, 128);
 	boss.DestSprite.w = 128;
 	boss.DestSprite.h = 150;
 }

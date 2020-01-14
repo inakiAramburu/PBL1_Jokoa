@@ -185,15 +185,12 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika)
 			SDL_GetMouseState(&x, &y);
 			if ((x > 515 && y > 175) && (x < 765 && y < 275))
 			{
-				int relleno[1];
-				int rellenodim = 0;
-				RenderPrestatu(AURRERA, relleno, rellenodim);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
-				BOSSHasieratu();
 				Animazioa();
-				*Pantaila = FINAL;
+				*Pantaila = LEHEN;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{
