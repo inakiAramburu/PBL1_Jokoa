@@ -27,7 +27,8 @@ ROL Ordenagailua;
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
 {
 	static char sekuentzia[16] = "";
-
+	char str[128];
+	int x;
 	SAGUA klika;
 	SDL_Event ebentua;
 	while (SDL_PollEvent(&ebentua))
@@ -146,6 +147,14 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_G:
 				strcat(sekuentzia, "G");
 				break;
+			case SDL_SCANCODE_0:
+				do
+				{
+					fgets(str, 128, stdin);
+					sscanf(str, "%d", &x);
+					SDL_Delay(100);
+				} while (x != 0);
+				break;
 			}
 			break;
 		}
@@ -192,7 +201,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
 				Animazioa();
-				*Pantaila = LEHEN;
+				*Pantaila = FINALA;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{
@@ -247,25 +256,17 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
 	int PertzonaiaEskuinMuga = pertsonaia.DestSprite.x + 82;
-
 	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
 	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
-
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 	int altuera = 0;
-
 	int etsaiaxEzker;
 	int etsaiaxEskuin;
-
 	int	etsaiayGoikoa;
 	int	etsaiayBehekoa;
 
-
-
 	for (int j = 0; j < *BizirikKopurua; j++)
 	{
-
-
 		//detecta el tipo de enemigo
 		if (BizirikDaudenEtsaiak[j] >= 0 && BizirikDaudenEtsaiak[j] <= 4)
 		{

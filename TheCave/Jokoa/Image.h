@@ -14,7 +14,7 @@
 #define LAUGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel4M.bmp"
 #define BOSTGARREN_PANTAILA ".\\media\\levels\\Nivel5.bmp"
 #define BOSTGARREN_MASKARA ".\\media\\levels\\maskarak\\Nivel5M.bmp"
-#define BOSS_PANTAILA ".\\media\\levels\\maskarak\\NivelBoss.bmp"
+#define BOSS_PANTAILA ".\\media\\levels\\NivelBoss.bmp"
 #define BOSS_MASKARA ".\\media\\levels\\maskarak\\NivelBossM.bmp"
 
 typedef struct S_IMG		//Argazkiak eta pantailan irudikatzeko behar dutren datu guztiak

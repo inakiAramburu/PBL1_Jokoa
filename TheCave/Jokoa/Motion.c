@@ -118,8 +118,6 @@ void Animazioa()
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-	int abiadurax = 12;
-	int abiaduray = 12;
 	static int eAnimazioa;
 
 	//	Debbug de pies
@@ -135,91 +133,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
 
-	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
-	{
-		if (pertsonaia.erortzen)
-		{
-			if ((a || d))
-			{
-				pertsonaia.sprite = KORRIKA;
-				*pAnimazioa = 0;
-			}
-			else
-			{
-				pertsonaia.sprite = IDLE;
-				*pAnimazioa = 0;
-			}
-		}
-		pertsonaia.erortzen = FALSE;
-	}
-	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
-	{
-		if (!pertsonaia.salto)
-		{
-			pertsonaia.erortzen = TRUE;
-			pertsonaia.sprite = ERORI;
-			*pAnimazioa = 0;
-		}
-	}
-	if (w)
-	{
-		if (hitbox.ezker.goikoa == HORIA)
-		{
-			*pantaila += 1;
-			GuztiakHil();
-			return;
-		}
-	}
-	if (a)
-	{
-		*begira = ATZERA;
-		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
-		{
-			pertsonaia.DestSprite.x -= abiadurax;
-		}
-	}
-	if (d)
-	{
-		*begira = AURRERA;
-		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
-		{
-			pertsonaia.DestSprite.x += abiadurax;
-		}
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
-	{
-		if (pertsonaia.sprite != IDLE)
-		{
-			*pAnimazioa = 0;
-		}
-		pertsonaia.sprite = IDLE;
-
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
-	{
-		pertsonaia.salto = TRUE;
-		pertsonaia.sprite = SALTO;
-		*pAnimazioa = 0;
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
-	{
-		pertsonaia.erasotzen = TRUE;
-		pertsonaia.sprite = ERASO;
-		*pAnimazioa = 0;
-	}
-	if (pertsonaia.salto && pertsonaia.sprite != HIL)
-	{
-		pertsonaia.DestSprite.y -= abiaduray;
-		while (pertsonaia.DestSprite.y < 0)
-		{
-			pertsonaia.DestSprite.y++;
-		}
-	}
-	if (pertsonaia.erortzen)
-	{
-		pertsonaia.DestSprite.y += GRABITATEA;
-		AltueraZuzendu(pixels, pitch, bpp);
-	}
+	
 	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
 	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
@@ -344,5 +258,96 @@ void PongExekutatu()
 			easteregg.pilota.y = DatuakHost2[3];
 			break;
 	}
-	
+}
+
+void PertsonaiaMugitu()
+{
+	int abiadurax = 12;
+	int abiaduray = 12;
+
+	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
+	{
+		if (pertsonaia.erortzen)
+		{
+			if ((a || d))
+			{
+				pertsonaia.sprite = KORRIKA;
+				*pAnimazioa = 0;
+			}
+			else
+			{
+				pertsonaia.sprite = IDLE;
+				*pAnimazioa = 0;
+			}
+		}
+		pertsonaia.erortzen = FALSE;
+	}
+	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
+	{
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = TRUE;
+			pertsonaia.sprite = ERORI;
+			*pAnimazioa = 0;
+		}
+	}
+	if (w)
+	{
+		if (hitbox.ezker.goikoa == HORIA)
+		{
+			*pantaila += 1;
+			GuztiakHil();
+			return;
+		}
+	}
+	if (a)
+	{
+		*begira = ATZERA;
+		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
+		{
+			pertsonaia.DestSprite.x -= abiadurax;
+		}
+	}
+	if (d)
+	{
+		*begira = AURRERA;
+		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
+		{
+			pertsonaia.DestSprite.x += abiadurax;
+		}
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
+	{
+		if (pertsonaia.sprite != IDLE)
+		{
+			*pAnimazioa = 0;
+		}
+		pertsonaia.sprite = IDLE;
+
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
+	{
+		pertsonaia.salto = TRUE;
+		pertsonaia.sprite = SALTO;
+		*pAnimazioa = 0;
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
+	{
+		pertsonaia.erasotzen = TRUE;
+		pertsonaia.sprite = ERASO;
+		*pAnimazioa = 0;
+	}
+	if (pertsonaia.salto && pertsonaia.sprite != HIL)
+	{
+		pertsonaia.DestSprite.y -= abiaduray;
+		while (pertsonaia.DestSprite.y < 0)
+		{
+			pertsonaia.DestSprite.y++;
+		}
+	}
+	if (pertsonaia.erortzen)
+	{
+		pertsonaia.DestSprite.y += GRABITATEA;
+		AltueraZuzendu(pixels, pitch, bpp);
+	}
 }
