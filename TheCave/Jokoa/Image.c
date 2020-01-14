@@ -70,7 +70,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(0, 800, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
-
 		break;
 	case BIGARREN:
 		ImgKargatu(BIGARREN_PANTAILA, 0, 0, 0, 0);
@@ -95,8 +94,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 	case FINAL:
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-
-
+		if (boss.textura == NULL)
+		{
+			BOSSHasieratu();
+		}
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
@@ -203,6 +204,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	}
 }
+
 void Konexioaitxi()
 {
 	if (aukera == ZERBITZARI)
@@ -216,7 +218,6 @@ void Konexioaitxi()
 		SDLNet_TCP_Close(client);
 	}
 }
-
 
 void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 {
@@ -296,6 +297,10 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 		{
 			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
 		}
+	}
+	if (boss.bizirik)
+	{
+		SDL_RenderCopy(render, boss.textura, &boss.SrcSprite, &boss.DestSprite);
 	}
 	if (easteregg.piztuta)
 	{
@@ -396,7 +401,7 @@ void EtsaiaKargatu(char Irudia[], int i)
 	etsaia[i].textura = texture;
 }
 
-void BOSSKargatu(char Irudia[], int i)
+void BOSSKargatu(char Irudia[])
 {
 	SDL_Surface* surface;
 	SDL_Texture* texture;

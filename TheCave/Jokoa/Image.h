@@ -40,6 +40,7 @@ void Irudikatu();		//Pantailan renderra erakusten du
 void JokalariaKargatu(char Irudia[], int i);		//Pertsonaiaren spriteak kargatzeko balio du, helbidea eta spritea zenbak irudi dituen hartzu eta gordetzen ditu
 void EtsaiaKargatu(char Irudia[], int i);
 Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y);
+void BOSSKargatu(char Irudia[]);
 
 
 #endif

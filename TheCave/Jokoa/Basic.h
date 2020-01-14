@@ -60,5 +60,6 @@ void PertsonaiaHil();
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua);
 void RectEraikitzailea(SDL_Rect* dest, int x, int y, int h, int w);
 void BerrizJaurti();
+void BOSSHasieratu();
 
 #endif

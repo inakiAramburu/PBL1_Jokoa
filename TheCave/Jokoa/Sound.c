@@ -33,8 +33,7 @@ void MusikaJarri(char Fitxategia[])
 void musica()
 {
 
-	Mix_Chunk* sonido1;
-	Mix_Chunk* sonido2;
+	Mix_Chunk* Sonidos[10];
 
 
 	///iniciar audio
@@ -45,14 +44,14 @@ void musica()
 	/////////////////https://www.youtube.com/watch?v=yK0INWqpqSc///////////////////////
 
 //cargar archivos
-	sonido1 = Mix_LoadWAV(".\\media\\sound\\querezeres.wav");
-	if (sonido1 == NULL) {
+	Sonidos[0] = Mix_LoadWAV(".\\media\\sound\\querezeres.wav");
+	if (Sonidos[0] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
 
-	sonido2 = Mix_LoadWAV(".\\media\\sound\\Kea.wav");
-	if (sonido2 == NULL) {
+	Sonidos[1] = Mix_LoadWAV(".\\media\\sound\\Kea.wav");
+	if (Sonidos[1] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
@@ -68,7 +67,7 @@ void musica()
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(1, sonido1, -1);
+	Mix_PlayChannel(1, Sonidos[0], -1);
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen
 	//estaria bien poner unas teclas para subir bajar volumen y poner una variable donde esta el 1
