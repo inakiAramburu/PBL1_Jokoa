@@ -107,7 +107,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 	case FINALA:
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		EtsaiaKargatu(".\\media\\enemies\\Mamua.bmp", ETSAI_KOPURUA);
+		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		etsaia[ETSAI_KOPURUA].bizirik = TRUE;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		break;
