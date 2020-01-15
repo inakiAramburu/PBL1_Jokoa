@@ -6,7 +6,10 @@
 #include <stdio.h>
 //devarreglo des espada//
 
+
+
 int main(int argc, char* argv[]) {
+	musica_Pong(1);
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
