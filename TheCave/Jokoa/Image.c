@@ -22,6 +22,7 @@ int IrudiZnbk;
 TCPsocket server, client;
 
 
+
 int IrudiakKendu(int ZnbtUtzi)
 {
 	int i = IrudiZnbk - 1;
@@ -37,6 +38,9 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
+	int bigarrenaldia = 0;
+	int port;
+	IPaddress ip;
 	
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
@@ -112,81 +116,96 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 		
 	case AUKERAZERBITZARIA:
-		int port;
 
-		printf("Sartu portua: ");
-		fgets(str, 128, stdin);
-		sscanf(str, "%d", &port);
+		ImgKargatu(".\\media\\pong\\Zerbitzaria.bmp", 0, 0, 0, 0);
 
-		if (SDLNet_Init() == -1) {
-			printf("SDLNet_Init: %s\n", SDLNet_GetError());
-		}
-
-		IPaddress ip;
-
-		SDLNet_ResolveHost(&ip, NULL, port);
-		server = SDLNet_TCP_Open(&ip);
-
-		while (1)
+		
+		if (bigarrenaldia)
 		{
-			client = SDLNet_TCP_Accept(server);
-			if (client)
-			{
-				char Agurra[128] = "Konexioa eginda";
+			printf("Sartu portua: ");
+			fgets(str, 128, stdin);
+			sscanf(str, "%d", &port);
 
-				SDLNet_TCP_Send(client, Agurra, 128);
-
-				char Konfirmazioa[128];
-
-				SDLNet_TCP_Recv(client, Konfirmazioa, 128);
-				printf("Cliente: %s", Konfirmazioa);
-				break;
+			if (SDLNet_Init() == -1) {
+				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
+
+			//IPaddress ip;
+
+			SDLNet_ResolveHost(&ip, NULL, port);
+			server = SDLNet_TCP_Open(&ip);
+
+			while (1)
+			{
+				client = SDLNet_TCP_Accept(server);
+				if (client)
+				{
+					char Agurra[128] = "Konexioa eginda";
+
+					SDLNet_TCP_Send(client, Agurra, 128);
+
+					char Konfirmazioa[128];
+
+					SDLNet_TCP_Recv(client, Konfirmazioa, 128);
+					printf("Cliente: %s", Konfirmazioa);
+					break;
+				}
+			}
+			srand(SDL_GetTicks());
+			do
+			{
+				easteregg.angelua = (rand() % 90) - 45;
+			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+			if (rand() % 2 == 0)
+			{
+				easteregg.abiadurax = -7;
+			}
+			else
+			{
+				easteregg.abiadurax = 7;
+			}
+			easteregg.abiaduray = 7;
+			Ordenagailua = ZERBITZARI;
+			
 		}
-		srand(SDL_GetTicks());
-		do
-		{
-			easteregg.angelua = (rand() % 90) - 45;
-		} while (easteregg.angelua < 15 && easteregg.angelua > -15);
-		if (rand() % 2 == 0)
-		{
-			easteregg.abiadurax = -7;
-		}
-		else
-		{
-			easteregg.abiadurax = 7;
-		}
-		easteregg.abiaduray = 7;
-		Ordenagailua = ZERBITZARI;
+		bigarrenaldia = 1;
 	
 		break;
 
 	case AUKERABEZEROA:
-		char IPserver[15];
+		ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
+		if (bigarrenaldia)
+		{
+			char IPserver[15];
 
-		printf("Serbitzariaren ipa jarri: ");
-		fgets(IPserver, 15, stdin);
+			bigarrenaldia = 0;
 
-		printf("Portua sartu: ");
-		fgets(str, 128, stdin);
-		sscanf(str, "%d", &port);
+			printf("Serbitzariaren ipa jarri: ");
+			fgets(IPserver, 15, stdin);
 
-		if (SDLNet_Init() == -1) {
-			printf("SDLNet_Init: %s\n", SDLNet_GetError());
+			printf("Portua sartu: ");
+			fgets(str, 128, stdin);
+			sscanf(str, "%d", &port);
+
+			if (SDLNet_Init() == -1) {
+				printf("SDLNet_Init: %s\n", SDLNet_GetError());
+			}
+
+			SDLNet_ResolveHost(&ip, IPserver, port);
+			client = SDLNet_TCP_Open(&ip);
+
+			char Agurra[128];
+
+			SDLNet_TCP_Recv(client, Agurra, 128);
+
+			char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
+
+			SDLNet_TCP_Send(client, Erantzuna, 128);
+			printf("Server: %s\n", Agurra);
+			Ordenagailua = BEZEROA;
 		}
+		bigarrenaldia = 1;	
 
-		SDLNet_ResolveHost(&ip, IPserver, port);
-		client = SDLNet_TCP_Open(&ip);
-
-		char Agurra[128];
-
-		SDLNet_TCP_Recv(client, Agurra, 128);
-
-		char Erantzuna[128] = "Mezua jasota, Konexioa eginda";
-
-		SDLNet_TCP_Send(client, Erantzuna, 128);
-		printf("Server: %s\n", Agurra);
-		Ordenagailua = BEZEROA;
 		break;
 
 	case MINIJOKOA:
