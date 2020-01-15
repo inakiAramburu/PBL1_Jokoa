@@ -28,8 +28,9 @@ typedef struct S_ETSAIA		//Etsaien datuak
 }ETSAIA;
 typedef struct S_TIROAK		//Etsaien datuak
 {
-	SDL_Rect tiroa[5];
+	SDL_Rect tiroa;
 	BOOLEANOA pantailan;
+	int angelua;
 }TIROAK;
 
 

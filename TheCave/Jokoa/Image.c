@@ -14,7 +14,7 @@ extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
  
 
-TIROAK jaurtigai[5];
+TIROAK jaurtigai[100];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -304,12 +304,30 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	{
 		srand(SDL_GetTicks());
 		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
+		int abiadura=7;
+		
 
-		int ramdom = (rand() % 90) - 45;
+		for ( i = 0; i < 50; i++)
+		{
+			if (!jaurtigai[i].pantailan)
+			{
+				jaurtigai[i].pantailan = TRUE;
+				jaurtigai[i].angelua = (rand() % 180)-180 ;
+				RectEraikitzailea(&jaurtigai[i].tiroa, 640, 0, 10, 10);
+
+				
+			}
+			jaurtigai[i].tiroa.x += abiadura * cos(jaurtigai[i].angelua * M_PI / 180);
+			jaurtigai[i].tiroa.y -= abiadura * sin(jaurtigai[i].angelua * M_PI / 180);
+			SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+
+			SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
+
+			
+		}
 
 		
-			
-				RectEraikitzailea(&jaurtigai[0].tiroa, 10+ ramdom, 10, 10, 10);
+
 
 				
 
@@ -320,12 +338,8 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	
 
 
-		SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
-		SDL_RenderFillRect(render, &jaurtigai[0].tiroa);
-		SDL_RenderFillRect(render, &jaurtigai[1].tiroa);
-		SDL_RenderFillRect(render, &jaurtigai[2].tiroa);
-		SDL_RenderFillRect(render, &jaurtigai[3].tiroa);
-
+		
+		
 	}
 	if (pertsonaia.bizirik)
 	{
