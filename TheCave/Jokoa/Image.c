@@ -14,6 +14,8 @@ extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 extern PONG easteregg;
 extern ROL Ordenagailua;
 
+extern FASEAK txokolate;
+
 IMGPERTSONAIA spriteak[7];
 
 IMG Irudiak[50];		//Irudiak, dagozkien datuekin
@@ -109,6 +111,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
+		txokolate = SLEEP;
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);

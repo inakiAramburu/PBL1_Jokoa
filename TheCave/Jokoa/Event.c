@@ -11,6 +11,8 @@ HITBOX hitbox;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 extern PONG easteregg;
+extern int IrudiZnbk;
+
 
 BOOLEANOA a = FALSE;
 BOOLEANOA d = FALSE;
@@ -32,139 +34,151 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 	int x;
 	SAGUA klika;
 	SDL_Event ebentua;
-	while ()
-	while (SDL_PollEvent(&ebentua))
+	do
 	{
-		switch (ebentua.type)
+		while (SDL_PollEvent(&ebentua))
 		{
-			*Pantaila += 1;
-		case SDL_QUIT:
-			Amaitu(Jokatzen, Pantaila);
-			break;
-		case SDL_MOUSEBUTTONUP:
-			ZeinKlikatuDa(ebentua.button, &klika);
-			KonprobatuKlika(Pantaila, klika, Jokatzen);
-			break;
-		case SDL_KEYDOWN:
-			switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
+			switch (ebentua.type)
 			{
-			case SDL_SCANCODE_D:
-				a = FALSE;
-				if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
-				{
-					pertsonaia.sprite = KORRIKA;
-					pertsonaia.erasotzen = FALSE;
-					*pAnimazioa = 0;
-				}
-				d = TRUE;
-				break;
-			case SDL_SCANCODE_A:
-				d = FALSE;
-				if (!a && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
-				{
-					pertsonaia.sprite = KORRIKA;
-					pertsonaia.erasotzen = FALSE;
-					*pAnimazioa = 0;
-				}
-				a = TRUE;
-				break;
-			case SDL_SCANCODE_SPACE:
-				espacio = TRUE;
-				break;
-			case SDL_SCANCODE_K:
-				if (!pertsonaia.erortzen && !pertsonaia.salto)
-				{
-					a = FALSE;
-					d = FALSE;
-				}
-
-				if (!pertsonaia.erasotzen)
-				{
-					k = TRUE;
-				}
-				break;
-			case SDL_SCANCODE_ESCAPE:
+				*Pantaila += 1;
+			case SDL_QUIT:
 				Amaitu(Jokatzen, Pantaila);
 				break;
-			case SDL_SCANCODE_W:
-				if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+			case SDL_MOUSEBUTTONUP:
+				ZeinKlikatuDa(ebentua.button, &klika);
+				KonprobatuKlika(Pantaila, klika, Jokatzen);
+				break;
+			case SDL_KEYDOWN:
+				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
 				{
-					pertsonaia.erasotzen = FALSE;
+				case SDL_SCANCODE_D:
+					a = FALSE;
+					if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
+					{
+						pertsonaia.sprite = KORRIKA;
+						pertsonaia.erasotzen = FALSE;
+						*pAnimazioa = 0;
+					}
+					d = TRUE;
+					break;
+				case SDL_SCANCODE_A:
+					d = FALSE;
+					if (!a && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
+					{
+						pertsonaia.sprite = KORRIKA;
+						pertsonaia.erasotzen = FALSE;
+						*pAnimazioa = 0;
+					}
+					a = TRUE;
+					break;
+				case SDL_SCANCODE_SPACE:
+					espacio = TRUE;
+					break;
+				case SDL_SCANCODE_K:
+					if (!pertsonaia.erortzen && !pertsonaia.salto)
+					{
+						a = FALSE;
+						d = FALSE;
+					}
+
+					if (!pertsonaia.erasotzen)
+					{
+						k = TRUE;
+					}
+					break;
+				case SDL_SCANCODE_ESCAPE:
+					Amaitu(Jokatzen, Pantaila);
+					break;
+				case SDL_SCANCODE_W:
+					if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
+					{
+						pertsonaia.erasotzen = FALSE;
+					}
+					w = TRUE;
+					break;
+				case SDL_SCANCODE_F3:
+					f3 = !f3;
+					break;
+				case SDL_SCANCODE_S:
+					s = TRUE;
+					break;
+				case SDL_SCANCODE_UP:
+					gora = TRUE;
+					break;
+				case SDL_SCANCODE_DOWN:
+					behera = TRUE;
+					break;
 				}
-				w = TRUE;
 				break;
-			case SDL_SCANCODE_F3:
-				f3 = !f3;
+			case SDL_KEYUP:
+				switch (ebentua.key.keysym.scancode)
+				{
+				case SDL_SCANCODE_D:
+					d = FALSE;
+					break;
+				case SDL_SCANCODE_A:
+					a = FALSE;
+					break;
+				case SDL_SCANCODE_SPACE:
+					espacio = FALSE;
+					break;
+				case SDL_SCANCODE_K:
+					k = FALSE;
+					break;
+				case SDL_SCANCODE_W:
+					w = FALSE;
+					break;
+				case SDL_SCANCODE_S:
+					s = FALSE;
+					break;
+				case SDL_SCANCODE_UP:
+					gora = FALSE;
+					break;
+				case SDL_SCANCODE_DOWN:
+					behera = FALSE;
+					break;
+				case SDL_SCANCODE_P:
+					if (*Pantaila != MENUA)
+					{
+						strcpy(sekuentzia, "P");
+					}
+					break;
+				case SDL_SCANCODE_O:
+					strcat(sekuentzia, "O");
+					break;
+				case SDL_SCANCODE_N:
+					strcat(sekuentzia, "N");
+					break;
+				case SDL_SCANCODE_G:
+					strcat(sekuentzia, "G");
+					break;
+				case SDL_SCANCODE_RETURN:
+					if (pertsonaia.bizirik)
+					{
+						if (!enter)
+						{
+							ImgKargatu(".\\media\\menu\\Pausa.bmp", 56, 67, 1200, 630);
+							RenderPrestatu(*begira, 0, 0);
+							Irudikatu();
+						}
+						else
+						{
+							IrudiZnbk = IrudiakKendu(IrudiZnbk - 1);
+						}
+						enter = !enter;
+					}
 				break;
-			case SDL_SCANCODE_S:
-				s = TRUE;
-				break;
-			case SDL_SCANCODE_UP:
-				gora = TRUE;
-				break;
-			case SDL_SCANCODE_DOWN:
-				behera = TRUE;
+			
+				
+				}
 				break;
 			}
-			break;
-		case SDL_KEYUP:
-			switch (ebentua.key.keysym.scancode)
+			if (strcmp(sekuentzia, "PONG") == 0)
 			{
-			case SDL_SCANCODE_D:
-				d = FALSE;
-				break;
-			case SDL_SCANCODE_A:
-				a = FALSE;
-				break;
-			case SDL_SCANCODE_SPACE:
-				espacio = FALSE;
-				break;
-			case SDL_SCANCODE_K:
-				k = FALSE;
-				break;
-			case SDL_SCANCODE_W:
-				w = FALSE;
-				break;
-			case SDL_SCANCODE_S:
-				s = FALSE;
-				break;
-			case SDL_SCANCODE_UP:
-				gora = FALSE;
-				break;
-			case SDL_SCANCODE_DOWN:
-				behera = FALSE;
-				break;
-			case SDL_SCANCODE_P:
-				if (*Pantaila != MENUA)
-				{
-					strcpy(sekuentzia, "P");
-				}
-				break;
-			case SDL_SCANCODE_O:
-				strcat(sekuentzia, "O");
-				break;
-			case SDL_SCANCODE_N:
-				strcat(sekuentzia, "N");
-				break;
-			case SDL_SCANCODE_G:
-				strcat(sekuentzia, "G");
-				break;
-			case SDL_SCANCODE_0:
-				do
-				{
-					fgets(str, 128, stdin);
-					sscanf(str, "%d", &x);
-					SDL_Delay(100);
-				} while (x != 0);
-				break;
+				*Pantaila = MINIJOKOA;
 			}
-			break;
 		}
-		if (strcmp(sekuentzia, "PONG") == 0)
-		{
-			*Pantaila = MINIJOKOA;
-		}
-	}
+	}while (enter);
 }
 
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika)
@@ -323,7 +337,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			
 		}
 	}
-	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0)
+	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0 && BOSS.bizirik)
 	{
 		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4)
 		{
@@ -347,7 +361,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			}
 		}
 	}
-	else if ((((PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16 && PertzonaiaEskuinMuga <= BOSS.DestSprite.x + 109) || (PertzonaiaEzkerMuga <= BOSS.DestSprite.x + 109 && PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16)) && (PertzonaiaYBekoa >= BOSS.DestSprite.y && PertzonaiaYGoikoa <= BOSS.DestSprite.y + 149)))
+	else if (BOSS.bizirik && (((PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16 && PertzonaiaEskuinMuga <= BOSS.DestSprite.x + 109) || (PertzonaiaEzkerMuga <= BOSS.DestSprite.x + 109 && PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16)) && (PertzonaiaYBekoa >= BOSS.DestSprite.y && PertzonaiaYGoikoa <= BOSS.DestSprite.y + 149)))
 	{
 		if (pertsonaia.sprite != HIL)
 		{

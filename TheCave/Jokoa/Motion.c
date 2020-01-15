@@ -14,6 +14,8 @@ extern IMGPERTSONAIA spriteak[7];
 extern IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 extern int IrudiZnbk;
 
+FASEAK txokolate;
+
 Uint32 time = 0;
 Uint32 time2 = 0;
 Uint32 time3 = 0;
@@ -121,7 +123,6 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	static int eAnimazioa = 0;
 	static int bAnimazioa = 0;
 	static Uint32 spriterate = 0;
-	static FASEAK txokolate = 0;
 	//	Debbug de pies
 	if (f3)
 	{
