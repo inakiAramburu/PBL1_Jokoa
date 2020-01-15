@@ -1,5 +1,5 @@
 #include "Basic.h"
-//#include "SDL_ttf.h"
+#include "SDL_ttf.h"
 #include "Text.h"
 #include "Image.h"
 #include "Event.h"
@@ -10,9 +10,9 @@
 
 int main(int argc, char* argv[]) {
 	
-	//TTF_Font* font = TTF_OpenFontIndex("C:\\WINDOWS\\Fonts\\Arial.TTF", 16, 0);
+	TTF_Font* font = TTF_OpenFont("Arial.TTF", 16);
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
-	BOOLEANOA Jokatzen = FALSE;
+	BOOLEANOA Jokatzen = FALSE; 
 	void* pixels = NULL;
 	int pitch;
 	Uint8 bpp;
