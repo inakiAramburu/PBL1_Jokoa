@@ -207,7 +207,7 @@ int main(int argc, char* argv[]) {
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
-				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
+				ImgKargatu(".\\media\\pong\\Zerbitzaria.bmp", 0, 0, 0, 0);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
 				Karga[Pantaila] = 1;
@@ -222,6 +222,7 @@ int main(int argc, char* argv[]) {
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
