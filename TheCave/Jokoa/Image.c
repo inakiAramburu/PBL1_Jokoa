@@ -5,11 +5,16 @@
 #include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+
 int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+ 
+
+TIROAK jaurtigai[5];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -112,6 +117,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
+
+		
 		break;
 	case MINIJOKOA:
 
@@ -295,7 +302,30 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	}
 	if (BOSS.bizirik)
 	{
+		srand(SDL_GetTicks());
 		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
+
+		int ramdom = (rand() % 90) - 45;
+
+		
+			
+				RectEraikitzailea(&jaurtigai[0].tiroa, 10+ ramdom, 10, 10, 10);
+
+				
+
+
+
+		
+		
+	
+
+
+		SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+		SDL_RenderFillRect(render, &jaurtigai[0].tiroa);
+		SDL_RenderFillRect(render, &jaurtigai[1].tiroa);
+		SDL_RenderFillRect(render, &jaurtigai[2].tiroa);
+		SDL_RenderFillRect(render, &jaurtigai[3].tiroa);
+
 	}
 	if (pertsonaia.bizirik)
 	{

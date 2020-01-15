@@ -32,7 +32,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 	int x;
 	SAGUA klika;
 	SDL_Event ebentua;
-	while ()
+	
 	while (SDL_PollEvent(&ebentua))
 	{
 		switch (ebentua.type)
