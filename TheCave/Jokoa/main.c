@@ -207,13 +207,12 @@ int main(int argc, char* argv[]) {
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
-				ImgKargatu(".\\media\\pong\\Zerbitzaria.bmp", 0, 0, 0, 0);
+				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
 				Karga[Pantaila] = 1;
 				printf("Zerbitzari pantaila kargatuta\n");
 			}
-			KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			SDL_Delay(100);
 		}
@@ -222,7 +221,6 @@ int main(int argc, char* argv[]) {
 			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
-				ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();

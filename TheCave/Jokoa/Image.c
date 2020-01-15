@@ -38,10 +38,10 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
-	int bigarrenaldia;
 	int port;
 	IPaddress ip;
-	
+	static int aukera;
+
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
 	switch (Pantaila)
@@ -116,6 +116,25 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 		
 	case AUKERAZERBITZARIA:
+		ImgKargatu(".\\media\\pong\\Zerbitzaria.bmp", 0, 0, 0, 0);
+		aukera = ZERBITZARI;
+		break;
+
+	case AUKERABEZEROA:
+		ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
+		aukera = BEZEROA;
+		break;
+
+	case MINIJOKOA:
+
+		pertsonaia.bizirik = FALSE;
+		GuztiakHil();
+		easteregg.piztuta = TRUE;
+		easteregg.P1puntuazioa = 0;
+		easteregg.P2puntuazioa = 0;
+
+		if (aukera == ZERBITZARI)
+		{
 
 			printf("Sartu portua: ");
 			fgets(str, 128, stdin);
@@ -159,14 +178,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			}
 			easteregg.abiaduray = 7;
 			Ordenagailua = ZERBITZARI;
-			
-	
-		break;
-
-	case AUKERABEZEROA:
-
+		}
+		else if (aukera == BEZEROA)
+		{
 			char IPserver[15];
-
 
 			printf("Serbitzariaren ipa jarri: ");
 			fgets(IPserver, 15, stdin);
@@ -192,16 +207,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			printf("Server: %s\n", Agurra);
 			Ordenagailua = BEZEROA;
 
-		break;
-
-	case MINIJOKOA:
-
-		pertsonaia.bizirik = FALSE;
-		GuztiakHil();
-		easteregg.piztuta = TRUE;
-		easteregg.P1puntuazioa = 0;
-		easteregg.P2puntuazioa = 0;
-
+		}
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
