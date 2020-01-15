@@ -1,6 +1,6 @@
 #include "Basic.h"
 #include "SDL_mixer.h"
-
+/*
 void MusikaJarri(char Fitxategia[])
 {
 	//explicacion
@@ -10,7 +10,7 @@ void MusikaJarri(char Fitxategia[])
 	Uint32 wavLength;
 	Uint8* wavBuffer;
 
-	/*  fichategia cargatu */
+	/*  fichategia cargatu 
 	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
 		exit(-1);
@@ -31,7 +31,7 @@ void MusikaJarri(char Fitxategia[])
 
 }
 
-
+/*
 
 void musica()
 {
@@ -86,7 +86,7 @@ void musica()
 }
 
 
-
+/*
 void Musika_abiarazi()
 {
 
@@ -144,5 +144,5 @@ void musica_Pong(int numerodesonido)
 	//reanuda la pausa donde estaba antes
 	//Mix_Resume(1);
 	//Mix_PlayChannel(2, sonido2, 0);
-
-}
+	
+}*/
