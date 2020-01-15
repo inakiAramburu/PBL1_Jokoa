@@ -1,4 +1,6 @@
 #include "Basic.h"
+//#include "SDL_ttf.h"
+#include "Text.h"
 #include "Image.h"
 #include "Event.h"
 #include "Motion.h"
@@ -7,7 +9,8 @@
 //devarreglo des espada//
 
 int main(int argc, char* argv[]) {
-
+	
+	//TTF_Font* font = TTF_OpenFontIndex("C:\\WINDOWS\\Fonts\\Arial.TTF", 16, 0);
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
 	void* pixels = NULL;
@@ -15,7 +18,7 @@ int main(int argc, char* argv[]) {
 	Uint8 bpp;
 	Uint32 refreshrate = 0;
 	Uint32 moverate = 0;
-	
+
 	extern PERTSONAIA pertsonaia;
 
 	if (LeihoaEtaRenderHasi() == 1)		//Lehioa eta renderizatua hasieratzen du
@@ -37,7 +40,7 @@ int main(int argc, char* argv[]) {
 
 	while (Jokatzen)
 	{
-		while (Pantaila == MENUA)
+		while (Pantaila == MENUA || intro == TRUE)
 		{
 			Karga[KONTROLAK] = 0;
 			Karga[KREDITUAK] = 0;
@@ -47,13 +50,16 @@ int main(int argc, char* argv[]) {
 				Karga[MENUA] = 1;
 			}
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+	
 			if (Pantaila != MENUA)
 			{
 				break;
 			}
 			RenderMenu();
 			Irudikatu();
+			//textuaIdatzi(10, 80, "arratoia hexagonoan: amaitu");
 			SDL_Delay(50);
+
 		}
 		while (Pantaila == KREDITUAK)
 		{
@@ -81,6 +87,7 @@ int main(int argc, char* argv[]) {
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			SDL_Delay(100);
 		}
+		
 		while (Pantaila == LEHEN)
 		{
 			Karga[9] = 0;

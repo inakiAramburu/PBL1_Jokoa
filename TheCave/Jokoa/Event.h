@@ -36,6 +36,18 @@ extern BOOLEANOA f3;
 extern BOOLEANOA s;
 extern BOOLEANOA gora;
 extern BOOLEANOA behera;
+extern BOOLEANOA intro;
+extern BOOLEANOA zero;
+extern BOOLEANOA bat;
+extern BOOLEANOA bi;
+extern BOOLEANOA hiru;
+extern BOOLEANOA lau;
+extern BOOLEANOA bost;
+extern BOOLEANOA sei;
+extern BOOLEANOA zazpi;
+extern BOOLEANOA sortzi;
+extern BOOLEANOA bederatzi;
+extern BOOLEANOA koma;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* i, ZENTZUA* begira);		//Gertazten diren ebentu guztiak konprobatu eta behar bada ekintzak hasi
 void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);		//Saguarekin klikatu denean zer botoi erabili den ikusten eta gordetzen du

@@ -92,7 +92,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_net.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,6 +132,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="Motion.c" />
     <ClCompile Include="Sound.c" />
+    <ClCompile Include="text.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Basic.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="Motion.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

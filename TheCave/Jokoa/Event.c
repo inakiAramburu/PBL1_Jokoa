@@ -21,6 +21,20 @@ BOOLEANOA f3 = FALSE;
 BOOLEANOA s = FALSE;
 BOOLEANOA gora = FALSE;
 BOOLEANOA behera = FALSE;
+BOOLEANOA intro = FALSE;
+BOOLEANOA zero = FALSE;
+BOOLEANOA bat = FALSE;
+BOOLEANOA bi = FALSE;
+BOOLEANOA hiru = FALSE;
+BOOLEANOA lau = FALSE;
+BOOLEANOA bost = FALSE;
+BOOLEANOA sei = FALSE;
+BOOLEANOA zazpi = FALSE;
+BOOLEANOA sortzi = FALSE;
+BOOLEANOA bederatzi = FALSE;
+BOOLEANOA koma = FALSE;
+
+
 
 ROL Ordenagailua;
 
@@ -68,6 +82,9 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_SPACE:
 				espacio = TRUE;
 				break;
+			case SDL_SCANCODE_RETURN:
+				intro = TRUE;
+				break;
 			case SDL_SCANCODE_K:
 				if (!pertsonaia.erortzen && !pertsonaia.salto)
 				{
@@ -104,6 +121,37 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				break;
 			}
 			break;
+			case SDL_SCANCODE_0:
+				zero = TRUE;
+				break;
+			case SDL_SCANCODE_1:
+				bat = TRUE;
+				break;
+			case SDL_SCANCODE_2:
+				bi = TRUE;
+				break;
+			case SDL_SCANCODE_3:
+				hiru = TRUE;
+				break;
+			case SDL_SCANCODE_4:
+				lau = TRUE;
+				break;
+			case SDL_SCANCODE_5:
+				bost = TRUE;
+			case SDL_SCANCODE_6:
+				sei = TRUE;
+				break;
+			case SDL_SCANCODE_7:
+				zazpi = TRUE;
+			case SDL_SCANCODE_8:
+				sortzi = TRUE;
+				break;
+			case SDL_SCANCODE_9:
+				bederatzi = TRUE;
+				break;
+			case SDL_SCANCODE_COMMA:
+				koma = TRUE;
+				break;
 		case SDL_KEYUP:
 			switch (ebentua.key.keysym.scancode)
 			{
@@ -131,6 +179,40 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 			case SDL_SCANCODE_DOWN:
 				behera = FALSE;
 				break;
+			case SDL_SCANCODE_RETURN:
+				intro = FALSE;
+				break;
+			case SDL_SCANCODE_0:
+				zero = FALSE;
+				break;
+			case SDL_SCANCODE_1:
+				bat = FALSE;
+				break;
+			case SDL_SCANCODE_2:
+				bi = FALSE;
+				break;
+			case SDL_SCANCODE_3:
+				hiru = FALSE;
+				break;
+			case SDL_SCANCODE_4:
+				lau = FALSE;
+				break;
+			case SDL_SCANCODE_5:
+				bost = FALSE;
+			case SDL_SCANCODE_6:
+				sei = FALSE;
+				break;
+			case SDL_SCANCODE_7:
+				zazpi = FALSE;
+			case SDL_SCANCODE_8:
+				sortzi = FALSE;
+				break;
+			case SDL_SCANCODE_9:
+				bederatzi = FALSE;
+				break;
+			case SDL_SCANCODE_COMMA:
+				koma = FALSE;
+				break;
 			case SDL_SCANCODE_P:
 				if (*Pantaila != MENUA)
 				{
@@ -148,6 +230,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				break;
 			}
 			break;
+
 		}
 		if (strcmp(sekuentzia, "PONG") == 0)
 		{
