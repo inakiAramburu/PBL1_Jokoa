@@ -26,6 +26,13 @@ typedef struct S_ETSAIA		//Etsaien datuak
 	int abiadura;
 	SDL_Texture* textura;
 }ETSAIA;
+typedef struct S_TIROAK		//Etsaien datuak
+{
+	SDL_Rect tiroa;
+	BOOLEANOA pantailan;
+	int angelua;
+}TIROAK;
+
 
 typedef struct S_PONG
 {

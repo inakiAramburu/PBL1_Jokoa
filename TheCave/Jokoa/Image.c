@@ -5,11 +5,16 @@
 #include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+
 int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+ 
+
+TIROAK jaurtigai[100];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -115,6 +120,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
+
+		
 		break;
 	case MINIJOKOA:
 
@@ -298,7 +305,44 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	}
 	if (BOSS.bizirik)
 	{
+		srand(SDL_GetTicks());
 		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
+		int abiadura=7;
+		
+
+		for ( i = 0; i < 50; i++)
+		{
+			if (!jaurtigai[i].pantailan)
+			{
+				jaurtigai[i].pantailan = TRUE;
+				jaurtigai[i].angelua = (rand() % 180)-180 ;
+				RectEraikitzailea(&jaurtigai[i].tiroa, 640, 0, 10, 10);
+
+				
+			}
+			jaurtigai[i].tiroa.x += abiadura * cos(jaurtigai[i].angelua * M_PI / 180);
+			jaurtigai[i].tiroa.y -= abiadura * sin(jaurtigai[i].angelua * M_PI / 180);
+			SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+
+			SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
+
+			
+		}
+
+		
+
+
+				
+
+
+
+		
+		
+	
+
+
+		
+		
 	}
 	if (pertsonaia.bizirik)
 	{
