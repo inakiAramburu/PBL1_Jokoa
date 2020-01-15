@@ -126,7 +126,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case MINIJOKOA:
-
+		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
 		easteregg.piztuta = TRUE;
