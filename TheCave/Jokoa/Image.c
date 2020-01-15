@@ -164,7 +164,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case AUKERABEZEROA:
-		ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
 
 			char IPserver[15];
 
