@@ -25,12 +25,14 @@ BOOLEANOA behera = FALSE;
 ROL Ordenagailua;
 
 void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
-{
+{	
+	BOOLEANOA enter = FALSE;
 	static char sekuentzia[16] = "";
 	char str[128];
 	int x;
 	SAGUA klika;
 	SDL_Event ebentua;
+	while ()
 	while (SDL_PollEvent(&ebentua))
 	{
 		switch (ebentua.type)
@@ -252,7 +254,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 }
 
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa, int *bossmode, int *bAnimazioa)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa, FASEAK *txokolate, int *bAnimazioa)
 {
 
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -331,7 +333,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 
 				if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
 				{
-					*bossmode = 1;
+					*txokolate = TRANSFORM;
 					*bAnimazioa = 0;
 				}
 			}
@@ -339,12 +341,21 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			{
 				if (BOSS.DestSprite.x + 109 >= PertzonaiaEzkerMuga - 33 && BOSS.DestSprite.x + 109 <= PertzonaiaEzkerMuga)
 				{
-					bossmode = 1;
+					*txokolate = TRANSFORM;
 					*bAnimazioa = 0;
 				}
 			}
 		}
 	}
+	else if ((((PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16 && PertzonaiaEskuinMuga <= BOSS.DestSprite.x + 109) || (PertzonaiaEzkerMuga <= BOSS.DestSprite.x + 109 && PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16)) && (PertzonaiaYBekoa >= BOSS.DestSprite.y && PertzonaiaYGoikoa <= BOSS.DestSprite.y + 149)))
+	{
+		if (pertsonaia.sprite != HIL)
+		{
+			*pAnimazioa = 0;
+		}
+		pertsonaia.sprite = HIL;
+	}
+	
 	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea

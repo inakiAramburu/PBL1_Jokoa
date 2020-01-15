@@ -121,7 +121,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	static int eAnimazioa = 0;
 	static int bAnimazioa = 0;
 	static Uint32 spriterate = 0;
-	static bossmode;
+	static FASEAK txokolate = 0;
 	//	Debbug de pies
 	if (f3)
 	{
@@ -133,7 +133,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa, &bossmode, &bAnimazioa);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa, &txokolate, &bAnimazioa);
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
 	if (pertsonaia.erortzen)
 	{
@@ -188,29 +188,39 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	if (BOSS.bizirik)
 	{
-		int SRC[2];
+		int SRC;
 		if (SDL_TICKS_PASSED(SDL_GetTicks(), spriterate))
 		{
-			switch (bossmode)
+			switch (txokolate)
 			{
-			case 1:
+			case TRANSFORM:
 				BOSS.SrcSprite.x = 640 + 128 * bAnimazioa;
-				SRC[0] = 5;
-				SRC[1] = 20;
+				SRC = 15;
+				
+				break;
+			case TIGRERED:
+				BOSS.SrcSprite.x = 3200 + 128 * bAnimazioa;
+				SRC = 5;
 				break;
 			default:
 				BOSS.SrcSprite.x = 128 * bAnimazioa;
-
-				SRC[0] = 0;
-				SRC[1] = 5;
+				SRC = 5;
 				break;
 			}
 			bAnimazioa++;
 			spriterate = SDL_GetTicks() + 240;
-			if (bAnimazioa >= SRC[1])
+			if (bAnimazioa >= SRC)
 			{
-				bAnimazioa = SRC[0];
+				if (txokolate == TRANSFORM)
+				{
+					txokolate = TIGRERED;
+				}
+				bAnimazioa = 0;
 			}
+		}
+		if (txokolate == TRANSFORM)
+		{
+			BOSS.DestSprite.y -= 9;
 		}
 	}
 }

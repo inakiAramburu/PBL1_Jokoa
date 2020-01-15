@@ -85,6 +85,7 @@ int main(int argc, char* argv[]) {
 		{
 			Karga[9] = 0;
 			Karga[MENUA] = 0;
+			Karga[ATERA] = 0;
 			if (!Karga[LEHEN])
 			{
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);

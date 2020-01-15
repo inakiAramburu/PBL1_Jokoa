@@ -10,6 +10,7 @@
 #define BOSS etsaia[ETSAI_KOPURUA]
 
 typedef enum {ATZERA, AURRERA}ZENTZUA;
+typedef enum {SLEEP, TRANSFORM, TIGRERED}FASEAK;
 
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp);

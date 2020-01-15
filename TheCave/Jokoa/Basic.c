@@ -124,6 +124,7 @@ void GuztiakHil()
 void PertsonaiaHil()
 {
 	pertsonaia.bizirik = FALSE;
+	BOSS.bizirik = FALSE;
 	ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
 	GuztiakHil();
 	RenderPrestatu(0, 0, 0);
