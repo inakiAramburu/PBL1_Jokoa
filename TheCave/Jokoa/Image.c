@@ -22,6 +22,7 @@ int IrudiZnbk;
 TCPsocket server, client;
 
 
+
 int IrudiakKendu(int ZnbtUtzi)
 {
 	int i = IrudiZnbk - 1;
@@ -37,7 +38,10 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
-	
+	int port;
+	IPaddress ip;
+	static int aukera;
+
 	IrudiZnbk = IrudiakKendu(0);
 	*BizirikKopurua = 0;
 	switch (Pantaila)
@@ -62,6 +66,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
+		
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		pertsonaia.bizirik = TRUE;
@@ -104,21 +109,33 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
+	case AUKERATUMODUA:
+		ImgKargatu(".\\media\\pong\\OnlineLocal.bmp", 0, 0, 0, 0);
+		break;
+	case AUKERATUZERBITZUA:
+		ImgKargatu(".\\media\\pong\\ServidorCliente.bmp", 0, 0, 0, 0);
+		break;
+		
+	case AUKERAZERBITZARIA:
+		ImgKargatu(".\\media\\pong\\Zerbitzaria.bmp", 0, 0, 0, 0);
+		aukera = ZERBITZARI;
+		break;
+
+	case AUKERABEZEROA:
+		ImgKargatu(".\\media\\pong\\Bezeroa.bmp", 0, 0, 0, 0);
+		aukera = BEZEROA;
+		break;
 
 	case MINIJOKOA:
-
+		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
 		easteregg.piztuta = TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
-		
-		printf("Sartu 0[ZERBITZARIA],1[BEZEROA]: ");
-		fgets(str, 128, stdin);
-		sscanf(str, "%d", &aukera);
+
 		if (aukera == ZERBITZARI)
 		{
-			int port;
 
 			printf("Sartu portua: ");
 			fgets(str, 128, stdin);
@@ -127,8 +144,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			if (SDLNet_Init() == -1) {
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
-
-			IPaddress ip;
 
 			SDLNet_ResolveHost(&ip, NULL, port);
 			server = SDLNet_TCP_Open(&ip);
@@ -172,8 +187,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			printf("Serbitzariaren ipa jarri: ");
 			fgets(IPserver, 15, stdin);
 
-			int port;
-
 			printf("Portua sartu: ");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
@@ -181,8 +194,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			if (SDLNet_Init() == -1) {
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
-
-			IPaddress ip;
 
 			SDLNet_ResolveHost(&ip, IPserver, port);
 			client = SDLNet_TCP_Open(&ip);

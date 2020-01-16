@@ -5,6 +5,7 @@
 #include "Image.h"
 #include <string.h>
 #include <stdio.h>
+#include "Sound.h"
 
 HITBOX hitbox;
 
@@ -151,7 +152,8 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 		}
 		if (strcmp(sekuentzia, "PONG") == 0)
 		{
-			*Pantaila = MINIJOKOA;
+			*Pantaila = AUKERATUMODUA;
+			strcpy(sekuentzia, "");
 		}
 	}
 }
@@ -182,6 +184,8 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 	case MENUA:
 		if (klika == EZKER)
 		{
+			
+
 			SDL_GetMouseState(&x, &y);
 			if ((x > 515 && y > 175) && (x < 765 && y < 275))
 			{
@@ -239,8 +243,64 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 				*Jokatzen = FALSE;
 			}
 		}
+		break;
+	case AUKERATUMODUA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //ONLINE
+			{
+				*Pantaila = AUKERATUZERBITZUA;
+				printf("ONLINE\n");
+			}
+			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //LOCAL
+			{
+				*Pantaila = MINIJOKOA;
+				printf("LOCAL\n");
+			}
+		}
+		break;
+	case AUKERATUZERBITZUA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //CREATE
+			{
+				*Pantaila = AUKERAZERBITZARIA;
+				printf("CREATE\n");
+			}
+			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //JOIN
+			{
+				*Pantaila = AUKERABEZEROA;
+				printf("JOIN\n");
+			}
+		}
+		break;
+	case AUKERAZERBITZARIA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
+			{
+				*Pantaila = MINIJOKOA;
+				printf("JOKATU\n");
+			}
+		}
+		break;
+	case AUKERABEZEROA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
+			{
+				*Pantaila = MINIJOKOA;
+				printf("JOKATU\n");
+			}
+		}
+		break;
 	}
 }
+
 
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa)
 {
@@ -347,9 +407,11 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 }
 
 void PongKolisioa()
-{
+{	//pelota y la primera pala
+
 	if ((easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 <= easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y >= easteregg.Player1.y)))
 	{
+		musica_Pong(1);
 		easteregg.abiadurax -= 1;
 		if (easteregg.abiaduray < 0)
 		{
@@ -362,14 +424,18 @@ void PongKolisioa()
 		easteregg.abiadurax *= -1;
 		easteregg.pilota.x = easteregg.Player1.x + easteregg.Player1.w + 1;
 	}
+	//ganar
 	else if( easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w / 2)
 	{
 		easteregg.P2puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
 	}
+	
+	//pelota y la segunda pala
 	if ((easteregg.pilota.x + easteregg.pilota.w >= easteregg.Player2.x) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player2.y && easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player2.y + easteregg.Player2.h) || (easteregg.pilota.y + 8 <= easteregg.Player2.y + easteregg.Player2.h && easteregg.pilota.y >= easteregg.Player2.y)))
 	{
+		musica_Pong(1);
 		easteregg.abiadurax += 1;
 		if (easteregg.abiaduray < 0)
 		{
@@ -382,11 +448,14 @@ void PongKolisioa()
 		easteregg.abiadurax *= -1;
 		easteregg.pilota.x = easteregg.Player2.x - (1 + easteregg.pilota.w);
 	}
+	//ganar
+
 	else if (easteregg.pilota.x >= easteregg.Player2.x + easteregg.Player2.w/2)
 	{
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
+		musica_Pong(3);
 	}
 
 }
