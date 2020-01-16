@@ -108,7 +108,7 @@ void Musikaabiarazi()
 	}
 	//iniciar canales
 		//declaramos canales podemos usar asta 3 sonidos con esta fuuncion
-	Mix_AllocateChannels(20);
+	Mix_AllocateChannels(20); //4. Musica boos
 }
 
 
@@ -152,6 +152,29 @@ void Efektuak(int zenbakia)
 		exit(1);
 	}
 	Mix_PlayChannel(3, Efectua[zenbakia], 0);
+}
+
+void musikaBOSS()
+{
+
+
+	Mix_Chunk* Efectua;
+
+	Musikaabiarazi();
+
+
+	//cargar archivos
+	Efectua = Mix_LoadWAV(MusikaBOSS);
+	
+
+
+	if (Efectua == NULL)
+	{
+		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
+		exit(1);
+	}
+	Mix_PlayChannel(4, Efectua, -1);
+
 }
 
 

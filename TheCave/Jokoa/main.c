@@ -11,7 +11,7 @@
 int main(int argc, char* argv[]) {
 
 
-	
+	musikaBOSS();
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
 	void* pixels = NULL;
