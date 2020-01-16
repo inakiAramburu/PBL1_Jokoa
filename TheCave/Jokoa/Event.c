@@ -26,7 +26,7 @@ BOOLEANOA behera = FALSE;
 
 ROL Ordenagailua;
 
-void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
+void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {	
 	BOOLEANOA enter = FALSE;
 	static char sekuentzia[16] = "";
@@ -158,7 +158,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 						if (!enter)
 						{
 							ImgKargatu(".\\media\\menu\\Pausa.bmp", 56, 67, 1200, 630);
-							RenderPrestatu(*begira, 0, 0);
+							RenderPrestatu(*begira, BizirikDaudenEtsaiak, BizirikKopurua);
 							Irudikatu();
 						}
 						else

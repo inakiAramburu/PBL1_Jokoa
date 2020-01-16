@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				Karga[MENUA] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			if (Pantaila != MENUA)
 			{
 				break;
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 				Irudikatu();
 				Karga[KREDITUAK] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			SDL_Delay(100);
 		}
 		while (Pantaila == KONTROLAK)
@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
 				Irudikatu();
 				Karga[KONTROLAK] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			SDL_Delay(100);
 		}
 		while (Pantaila == LEHEN)
@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
 				Karga[LEHEN] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -107,7 +107,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -167,7 +167,7 @@ int main(int argc, char* argv[]) {
 				KargatuMapa(BOSS_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Ekintzak(&pAnimazioa, &begira, pixels, pitch, bpp, &Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			Irudikatu();
@@ -183,7 +183,7 @@ int main(int argc, char* argv[]) {
 				}
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			SDL_Delay(100);
 		}
 		while (Pantaila == MINIJOKOA)
@@ -197,7 +197,7 @@ int main(int argc, char* argv[]) {
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			if (SDL_TICKS_PASSED(SDL_GetTicks(), moverate))
 			{
 				PongExekutatu();
