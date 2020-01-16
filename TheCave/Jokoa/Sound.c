@@ -112,7 +112,7 @@ void Musikaabiarazi()
 }
 
 
-void MusikaMenu()
+void MusikaJOKUA()
 {
 
 	Mix_Chunk* menu;

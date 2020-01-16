@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokatzen = TRUE;
 
-	MusikaMenu();
+	//MusikaMenu();
 
 	while (Jokatzen)
 	{
