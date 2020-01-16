@@ -130,6 +130,7 @@ void MusikaJOKUA()
 		exit(1);
 	}
 	Mix_PlayChannel(1, menu, -1);
+
 }
 
 void Efektuak(int zenbakia) 
@@ -229,7 +230,6 @@ void musica_Pong(int numerodesonido)
 	}
 
 	///////////////////////////////////////
-
 
 	
 

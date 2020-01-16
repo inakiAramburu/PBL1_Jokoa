@@ -147,12 +147,12 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				break;
 			case SDL_SCANCODE_N:
 				strcat(sekuentzia, "N");
-				musica_Pong(2);
+				musica_Pong(0);
 
 				break;
 			case SDL_SCANCODE_G:
 				strcat(sekuentzia, "G");
-				musica_Pong(0);
+				musica_Pong(2);
 
 				break;
 			}
