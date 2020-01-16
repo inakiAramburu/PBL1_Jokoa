@@ -178,6 +178,10 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				*Pantaila = MINIJOKOA;
 			}
 		}
+		if (enter)
+		{
+			SDL_Delay(100);
+		}
 	}while (enter);
 }
 

@@ -14,7 +14,7 @@ extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
  
 
-TIROAK jaurtigai[100];
+TIROAK jaurtigai[40];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -120,7 +120,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
-
 		
 		break;
 	case MINIJOKOA:
@@ -213,7 +212,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 			SDLNet_TCP_Send(client, Erantzuna, 128);
 			printf("Server: %s\n", Agurra);
-			Ordenagailua = BEZEROA;
+Ordenagailua = BEZEROA;
 
 		}
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
@@ -307,42 +306,17 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 	{
 		srand(SDL_GetTicks());
 		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
-		int abiadura=7;
-		
+		int abiadura = 7;
 
-		for ( i = 0; i < 50; i++)
+
+		for (i = 0; i < 40; i++)
 		{
-			if (!jaurtigai[i].pantailan)
+			if (jaurtigai[i].pantailan)
 			{
-				jaurtigai[i].pantailan = TRUE;
-				jaurtigai[i].angelua = (rand() % 180)-180 ;
-				RectEraikitzailea(&jaurtigai[i].tiroa, 640, 0, 10, 10);
-
-				
+				SDL_SetRenderDrawColor(render, 88, 42, 31, 255);
+				SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
 			}
-			jaurtigai[i].tiroa.x += abiadura * cos(jaurtigai[i].angelua * M_PI / 180);
-			jaurtigai[i].tiroa.y -= abiadura * sin(jaurtigai[i].angelua * M_PI / 180);
-			SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
-
-			SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
-
-			
-		}
-
-		
-
-
-				
-
-
-
-		
-		
-	
-
-
-		
-		
+		}	
 	}
 	if (pertsonaia.bizirik)
 	{

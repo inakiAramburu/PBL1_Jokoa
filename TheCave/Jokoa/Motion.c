@@ -18,11 +18,12 @@ FASEAK txokolate;
 
 Uint32 time = 0;
 Uint32 time2 = 0;
-Uint32 time3 = 0;
-Uint32 abiadura[8] = {150,60,80,80,10,100,80};
+Uint32 delays[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+extern TIROAK jaurtigai[40];
+
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -123,6 +124,9 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	static int eAnimazioa = 0;
 	static int bAnimazioa = 0;
 	static Uint32 spriterate = 0;
+	static Uint32 attackrate = 0;
+	int abiadura = 9;
+	static BOSSFIGHT etapa = ITXARON;
 	//	Debbug de pies
 	if (f3)
 	{
@@ -144,7 +148,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 
 	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
-	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+	if (SDL_GetTicks() - time > delays[pertsonaia.sprite])
 	{
 		++* pAnimazioa;
 		time = SDL_GetTicks();
@@ -222,6 +226,64 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		if (txokolate == TRANSFORM)
 		{
 			BOSS.DestSprite.y -= 9;
+		}
+		if (etapa == MUGITU)
+		{
+			switch (rand() % 10)
+			{
+			case 0:
+				BOSS.DestSprite.x = 70;
+				BOSS.DestSprite.y = 50;
+ 				break;
+			case 1:
+				BOSS.DestSprite.x = 1100;
+				BOSS.DestSprite.y = 50;
+				break;
+			case 2:
+				BOSS.DestSprite.x = 70;
+				BOSS.DestSprite.y = 450;
+				break;
+			case 3:
+				BOSS.DestSprite.x = 1070;
+				BOSS.DestSprite.y = 450;
+				break;
+			case 4:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 460;
+				break;
+			case 5:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 460;
+				break;
+			case 6:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 50;
+				break;
+			case 7:
+				BOSS.DestSprite.x = 450;
+				BOSS.DestSprite.y = 230;
+				break;
+			case 8:
+				BOSS.DestSprite.x = 705;
+				BOSS.DestSprite.y = 230;
+				break;
+			case 9:
+				BOSS.DestSprite.x = 250;
+				BOSS.DestSprite.y = 360;
+				break;
+			case 10:
+				BOSS.DestSprite.x = 900;
+				BOSS.DestSprite.y = 360;
+				break;
+			}
+			etapa = JAURTI;
+		}
+		BossAtakea(&etapa);
+		etapa = ITXARON;
+		if (SDL_TICKS_PASSED(SDL_GetTicks(), attackrate))
+		{
+			etapa = MUGITU;
+			attackrate = SDL_GetTicks() + 10000;
 		}
 	}
 }
@@ -387,5 +449,25 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 		{
 			pertsonaia.DestSprite.y++;
 		}
+	}
+}
+
+void BossAtakea(BOSSFIGHT *etapa)
+{
+	for (int i = 0; i < 40; i++)
+	{
+		if (*etapa == JAURTI)
+		{
+			jaurtigai[i].pantailan = TRUE;
+			jaurtigai[i].angelua = (rand() % 360);
+			RectEraikitzailea(&jaurtigai[i].tiroa, BOSS.DestSprite.x + 61, BOSS.DestSprite.y + 96, 10, 10);
+		}
+		if (jaurtigai[i].tiroa.x < 0 || jaurtigai[i].tiroa.x + 10 > 1280 || jaurtigai[i].tiroa.y < 0 || jaurtigai[i].tiroa.y + 10 > 720)
+		{
+
+			jaurtigai[i].pantailan = FALSE;
+		}
+		jaurtigai[i].tiroa.x += 12 * cos(jaurtigai[i].angelua * M_PI / 180);
+		jaurtigai[i].tiroa.y -= 12 * sin(jaurtigai[i].angelua * M_PI / 180);
 	}
 }
