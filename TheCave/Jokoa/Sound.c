@@ -2,35 +2,6 @@
 #include "SDL_mixer.h"
 #include "Sound.h"
 
-void MusikaJarri(char Fitxategia[])
-{
-	//explicacion
-	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
-
-	SDL_AudioSpec wavSpec;
-	Uint32 wavLength;
-	Uint8* wavBuffer;
-
-	/*  fichategia cargatu */
-	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
-		exit(-1);
-	}
-	// abrir dependencias de audio
-
-	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
-
-	// iniciar el sonido
-
-	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-	SDL_PauseAudioDevice(deviceId, 0);
-
-	// dena itxi
-	
-	//SDL_CloseAudioDevice(deviceId);
-	//SDL_FreeWAV(wavBuffer);
-
-}
 
 
 
@@ -112,48 +83,31 @@ void Musikaabiarazi()
 }
 
 
-void MusikaJOKUA()
+void MusikaJOKUA(int abeztia )
 {
 
-	Mix_Chunk* menu;
-
-	Musikaabiarazi();
-
-	//cargar archivos
-	menu = Mix_LoadWAV(MUSIKA_MENU);
-	
-
-
-	if (menu == NULL)
+	if (Soinuak[abeztia]== NULL)
 	{
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(1, menu, -1);
+	Mix_PlayChannel(1, Soinuak[abeztia], -1);
 
 }
 
 void Efektuak(int zenbakia) 
 {
-
-
-	Mix_Chunk* Efectua[3];
-
-	Musikaabiarazi();
-	
+		
 
 	//cargar archivos
-	Efectua[0] = Mix_LoadWAV(KEA_EFEKTUA);
-	Efectua[1] = Mix_LoadWAV(EZPADA_EFEKTUA);
-	Efectua[2] = Mix_LoadWAV(TIROA_EFEKTUA);
+	
 
-
-	if (Efectua[zenbakia] == NULL)
+	if (Soinuak[zenbakia] == NULL)
 	{
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(3, Efectua[zenbakia], 0);
+	Mix_PlayChannel(3, Soinuak[zenbakia], 0);
 }
 
 void musikaBOSS()
@@ -182,23 +136,21 @@ void musikaBOSS()
 
 void IrabaziGaldu(int zenbakia)
 {
-	Mix_Chunk* Efectua[2];
+	
 
-	Musikaabiarazi();
 
 	
 
 	//cargar archivos
-	Efectua[0] = Mix_LoadWAV(IRABAZI_EFEKTUA);
-	Efectua[1] = Mix_LoadWAV(GALDU_GALDU);
+	
 
 
-	if (Efectua[zenbakia] == NULL)
+	if (Soinuak[zenbakia] == NULL)
 	{
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(2, Efectua[zenbakia], 0);
+	Mix_PlayChannel(2, Soinuak[zenbakia], 0);
 	
 
 

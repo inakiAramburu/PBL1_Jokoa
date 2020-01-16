@@ -124,7 +124,7 @@ void GuztiakHil()
 void PertsonaiaHil()
 {
 	pertsonaia.bizirik = FALSE;
-	IrabaziGaldu(1);
+	IrabaziGaldu(GALDU_EFEKTUA);
 	ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
 	GuztiakHil();
 	

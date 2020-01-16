@@ -69,7 +69,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.y = 0;
 	
 	
-		Efektuak(0);
+		Efektuak(KEA_EFEKTUA);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			SDL_Delay(100);
@@ -204,7 +204,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
 	{
 		pertsonaia.erasotzen = TRUE;
-		Efektuak(1);
+		Efektuak(EZPATA_EFEKTUA);
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;
 	}
@@ -272,7 +272,6 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-
 	etsaia[znbk_etsaia].DestSprite.x = x;
 	etsaia[znbk_etsaia].DestSprite.y = y;
 	etsaia[znbk_etsaia].bizirik = TRUE;
