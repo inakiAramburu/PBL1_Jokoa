@@ -63,6 +63,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	case KONTROLAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Kontrolak2.bmp" , 950, 600, 208, 15);
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
@@ -126,10 +127,21 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case MINIJOKOA:
-		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
+		/*/
+		ImgKargatu(".\\media\\pong\\Kontagailua\\9.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\8.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\7.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\6.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\5.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\4.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\3.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\2.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\1.bmp", 0, 0, 0, 0);
+		ImgKargatu(".\\media\\pong\\Kontagailua\\0.bmp", 0, 0, 0, 0);*/
+
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
-		easteregg.piztuta = TRUE;
+		easteregg.piztuta = TRUE;	
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 

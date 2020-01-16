@@ -238,6 +238,9 @@ int main(int argc, char* argv[]) {
 				{
 					Karga[i] = 0;
 				}
+				ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
+				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
+				Irudikatu();
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				Karga[Pantaila] = 1;
 			}

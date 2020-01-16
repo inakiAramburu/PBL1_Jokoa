@@ -12,6 +12,8 @@ HITBOX hitbox;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA];
 extern PONG easteregg;
+extern int IrudiZnbk;
+
 
 BOOLEANOA a = FALSE;
 BOOLEANOA d = FALSE;
@@ -225,6 +227,14 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 			if ((x > 1063 && y > 99) && (x < 1109 && y < 142))
 			{
 				*Pantaila = MENUA;
+				printf("MENUA\n");
+			}
+			else if ((x > 957 && y > 517) && (x < 1007 && y < 571))
+			{
+				printf("ENTRA\n");
+				IrudiZnbk = IrudiakKendu(IrudiZnbk - 1);
+				RenderPrestatu(AURRERA, 0, 0);
+				Irudikatu();
 			}
 		}
 		break;
@@ -423,10 +433,12 @@ void PongKolisioa()
 		easteregg.pilota.x = easteregg.Player1.x + easteregg.Player1.w + 1;
 	}
 	//ganar
-	else if( easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w / 2)
+	else if( easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w / 2) //P2 gana
 	{
 		easteregg.P2puntuazioa++;
+
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
+
 		BerrizJaurti();
 	}
 	
@@ -448,12 +460,16 @@ void PongKolisioa()
 	}
 	//ganar
 
-	else if (easteregg.pilota.x >= easteregg.Player2.x + easteregg.Player2.w/2)
+	else if (easteregg.pilota.x >= easteregg.Player2.x + easteregg.Player2.w/2) //P1 gana
 	{
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
 		//musica_Pong(3);
 	}
+
+}
+
+void Kontagailua(char src[], int P1, int P2) {
 
 }
