@@ -9,8 +9,8 @@
 
 
 int main(int argc, char* argv[]) {
-	musica_Pong(1);
 
+	
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
 	void* pixels = NULL;
@@ -37,11 +37,13 @@ int main(int argc, char* argv[]) {
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
 	Jokatzen = TRUE;
 
+	MusikaMenu();
 
 	while (Jokatzen)
 	{
 		while (Pantaila == MENUA)
 		{
+			
 			Karga[KONTROLAK] = 0;
 			Karga[KREDITUAK] = 0;
 			if (!Karga[MENUA])
@@ -86,6 +88,8 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
+		
+
 			Karga[MENUA] = 0;
 			if (!Karga[LEHEN])
 			{

@@ -67,9 +67,9 @@ void Animazioa()
 	pertsonaia.SrcSprite.h = 60;
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
-	/*char Kea[128] = ".\\media\\sound\\Kea.wav";
 	
-		MusikaJarri(Kea);
+	
+		Efektuak(0);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			SDL_Delay(100);
@@ -113,7 +113,7 @@ void Animazioa()
 			Irudikatu();
 			SDL_Delay(100);
 		}
-		SDL_Delay(2000);*/
+		SDL_Delay(2000);
 }
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
@@ -204,6 +204,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
 	{
 		pertsonaia.erasotzen = TRUE;
+		Efektuak(1);
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;
 	}

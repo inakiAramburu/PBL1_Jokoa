@@ -184,6 +184,8 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 	case MENUA:
 		if (klika == EZKER)
 		{
+			
+
 			SDL_GetMouseState(&x, &y);
 			if ((x > 515 && y > 175) && (x < 765 && y < 275))
 			{
