@@ -118,7 +118,17 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
 		txokolate = SLEEP;
-		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
+		EtsaiaKokatu(0, 241, 434, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(2, 442, 501, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(6, 442, 214, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(4, 262, 137, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(5, 883, 139, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(3, 698, 216, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(7, 884, 292, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(1, 698, 503, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(9, 889, 437, BizirikDaudenEtsaiak, BizirikKopurua);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 548, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
 		

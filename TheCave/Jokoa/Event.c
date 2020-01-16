@@ -292,7 +292,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int j;
 	if(BOSS.bizirik==TRUE)
 	{ 
-		for (j = 0; j < 50; j++)
+		for (j = 0; j < 40; j++)
 		{
 			if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga &&  jaurtigai[j].tiroa.x+10 >= PertzonaiaEzkerMuga)&& (jaurtigai[j].tiroa.y+10>= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
 			{
@@ -359,9 +359,9 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	}
 	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0 && BOSS.bizirik)
 	{
-		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4)
+		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4 && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
 		{
-			if (begira == AURRERA && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
+			if (begira == AURRERA)
 			{
 				if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
 				{
@@ -455,5 +455,4 @@ void PongKolisioa()
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
 	}
-
 }
