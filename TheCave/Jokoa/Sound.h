@@ -3,9 +3,10 @@
 
 #define MUSIKA_MENU ".\\media\\sound\\MusikaGeneral\\MusikaMenua.wav"
 
-
 #define KEA_EFEKTUA  ".\\media\\sound\\effect\\Pertsonaia\\Kea.wav"
 #define EZPADA_EFEKTUA ".\\media\\sound\\effect\\Pertsonaia\\Ezpata.wav"
+#define TIROA_EFEKTUA ".\\media\\sound\\effect\\boss\\Tiroak.wav"
+
 
 #define MusikaBOSS ".\\media\\sound\\boss\\MusikaBoss.wav"
 

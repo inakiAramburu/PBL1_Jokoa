@@ -136,7 +136,7 @@ void Efektuak(int zenbakia)
 {
 
 
-	Mix_Chunk* Efectua[2];
+	Mix_Chunk* Efectua[3];
 
 	Musikaabiarazi();
 	
@@ -144,6 +144,7 @@ void Efektuak(int zenbakia)
 	//cargar archivos
 	Efectua[0] = Mix_LoadWAV(KEA_EFEKTUA);
 	Efectua[1] = Mix_LoadWAV(EZPADA_EFEKTUA);
+	Efectua[2] = Mix_LoadWAV(TIROA_EFEKTUA);
 
 
 	if (Efectua[zenbakia] == NULL)
