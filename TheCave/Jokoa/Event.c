@@ -11,6 +11,10 @@ HITBOX hitbox;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 extern PONG easteregg;
+extern TIROAK jaurtigai[100];
+
+
+
 extern int IrudiZnbk;
 
 
@@ -26,7 +30,7 @@ BOOLEANOA behera = FALSE;
 
 ROL Ordenagailua;
 
-void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira)
+void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {	
 	BOOLEANOA enter = FALSE;
 	static char sekuentzia[16] = "";
@@ -158,7 +162,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 						if (!enter)
 						{
 							ImgKargatu(".\\media\\menu\\Pausa.bmp", 56, 67, 1200, 630);
-							RenderPrestatu(*begira, 0, 0);
+							RenderPrestatu(*begira, BizirikDaudenEtsaiak, BizirikKopurua);
 							Irudikatu();
 						}
 						else
@@ -285,8 +289,30 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int etsaiaxEskuin;
 	int	etsaiayGoikoa;
 	int	etsaiayBehekoa;
+	int j;
+	if(BOSS.bizirik==TRUE)
+	{ 
+		for (j = 0; j < 50; j++)
+		{
+			if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga &&  jaurtigai[j].tiroa.x+10 >= PertzonaiaEzkerMuga)&& (jaurtigai[j].tiroa.y+10>= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
+			{
+		
+				PertsonaiaHil();
+			}	
 
-	for (int j = 0; j < *BizirikKopurua; j++)
+
+
+
+			//jaurtigai[j].tiroa.y
+
+		}
+
+
+
+
+	}
+
+	for (j = 0; j < *BizirikKopurua; j++)
 	{
 		//detecta el tipo de enemigo
 		if (BizirikDaudenEtsaiak[j] >= 0 && BizirikDaudenEtsaiak[j] <= 4)
