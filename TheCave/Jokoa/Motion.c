@@ -348,3 +348,7 @@ void PongExekutatu()
 	}
 	
 }
+
+void IrabaziAnimazioa() {
+
+}

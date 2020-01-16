@@ -469,7 +469,3 @@ void PongKolisioa()
 	}
 
 }
-
-void Kontagailua(char src[], int P1, int P2) {
-
-}

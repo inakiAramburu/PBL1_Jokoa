@@ -127,17 +127,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case MINIJOKOA:
-		/*/
-		ImgKargatu(".\\media\\pong\\Kontagailua\\9.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\8.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\7.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\6.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\5.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\4.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\3.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\2.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\1.bmp", 0, 0, 0, 0);
-		ImgKargatu(".\\media\\pong\\Kontagailua\\0.bmp", 0, 0, 0, 0);*/
 
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
