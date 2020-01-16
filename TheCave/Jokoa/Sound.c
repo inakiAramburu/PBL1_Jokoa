@@ -108,7 +108,7 @@ void Musikaabiarazi()
 	}
 	//iniciar canales
 		//declaramos canales podemos usar asta 3 sonidos con esta fuuncion
-	Mix_AllocateChannels(20); //4. Musica boos
+	Mix_AllocateChannels(20); //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos //5.Pong
 }
 
 
@@ -174,7 +174,7 @@ void musikaBOSS()
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(4, Efectua, -1);
+	Mix_PlayChannel(1, Efectua, -1);
 
 }
 
@@ -197,7 +197,7 @@ void IrabaziGaldu(int zenbakia)
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(3, Efectua[zenbakia], 0);
+	Mix_PlayChannel(2, Efectua[zenbakia], 0);
 	
 
 
@@ -223,7 +223,7 @@ void musica_Pong(int numerodesonido)
 		exit(1);
 	}
 	Sonidos[2] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
-	if (Sonidos[1] == NULL) {
+	if (Sonidos[2] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
@@ -237,7 +237,7 @@ void musica_Pong(int numerodesonido)
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(1, Sonidos[numerodesonido], -1);
+	Mix_PlayChannel(5, Sonidos[numerodesonido],0);
 
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen

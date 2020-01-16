@@ -136,16 +136,24 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				if (*Pantaila != MENUA)
 				{
 					strcpy(sekuentzia, "P");
+					musica_Pong(0);
+
 				}
 				break;
 			case SDL_SCANCODE_O:
 				strcat(sekuentzia, "O");
+				musica_Pong(1);
+
 				break;
 			case SDL_SCANCODE_N:
 				strcat(sekuentzia, "N");
+				musica_Pong(2);
+
 				break;
 			case SDL_SCANCODE_G:
 				strcat(sekuentzia, "G");
+				musica_Pong(0);
+
 				break;
 			}
 			break;
@@ -455,7 +463,7 @@ void PongKolisioa()
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
-		musica_Pong(3);
+		musica_Pong(2);
 	}
 
 }
