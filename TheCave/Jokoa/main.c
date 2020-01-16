@@ -4,7 +4,7 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
-//devarreglo des espada//
+//boss//
 
 int main(int argc, char* argv[]) {
 
