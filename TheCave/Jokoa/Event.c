@@ -419,7 +419,7 @@ void PongKolisioa()
 
 	if ((easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 <= easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y >= easteregg.Player1.y)))
 	{
-		musica_Pong(1);
+		musica_Pong(0);
 		easteregg.abiadurax -= 1;
 		if (easteregg.abiaduray < 0)
 		{
@@ -443,7 +443,7 @@ void PongKolisioa()
 	//pelota y la segunda pala
 	if ((easteregg.pilota.x + easteregg.pilota.w >= easteregg.Player2.x) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player2.y && easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player2.y + easteregg.Player2.h) || (easteregg.pilota.y + 8 <= easteregg.Player2.y + easteregg.Player2.h && easteregg.pilota.y >= easteregg.Player2.y)))
 	{
-		musica_Pong(1);
+		musica_Pong(0);
 		easteregg.abiadurax += 1;
 		if (easteregg.abiaduray < 0)
 		{

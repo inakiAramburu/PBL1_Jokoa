@@ -111,6 +111,10 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case AUKERATUMODUA:
+		Mix_Pause(1);
+		Mix_Pause(2);
+		Mix_Pause(3);
+		Mix_Pause(4);
 		ImgKargatu(".\\media\\pong\\OnlineLocal.bmp", 0, 0, 0, 0);
 		break;
 	case AUKERATUZERBITZUA:
@@ -128,6 +132,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case MINIJOKOA:
+		
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
 		pertsonaia.bizirik = FALSE;
 		GuztiakHil();
