@@ -10,6 +10,7 @@
 
 int main(int argc, char* argv[]) {
 
+
 	
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
@@ -217,7 +218,6 @@ int main(int argc, char* argv[]) {
 				Karga[Pantaila] = 1;
 				printf("Zerbitzari pantaila kargatuta\n");
 			}
-			KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
 			SDL_Delay(100);
 		}

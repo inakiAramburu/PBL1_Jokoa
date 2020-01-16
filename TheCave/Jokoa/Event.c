@@ -276,8 +276,31 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 			}
 		}
 		break;
+	case AUKERAZERBITZARIA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
+			{
+				*Pantaila = MINIJOKOA;
+				printf("JOKATU\n");
+			}
+		}
+		break;
+	case AUKERABEZEROA:
+		if (klika == EZKER)
+		{
+			SDL_GetMouseState(&x, &y);
+			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
+			{
+				*Pantaila = MINIJOKOA;
+				printf("JOKATU\n");
+			}
+		}
+		break;
 	}
 }
+
 
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa)
 {
