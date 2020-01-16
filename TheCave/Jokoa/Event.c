@@ -296,20 +296,13 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		{
 			if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga &&  jaurtigai[j].tiroa.x+10 >= PertzonaiaEzkerMuga)&& (jaurtigai[j].tiroa.y+10>= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
 			{
-		
-				PertsonaiaHil();
+				if (pertsonaia.sprite != HIL)
+				{
+					*pAnimazioa = 0;
+				}
+				pertsonaia.sprite = HIL;
 			}	
-
-
-
-
-			//jaurtigai[j].tiroa.y
-
 		}
-
-
-
-
 	}
 
 	for (j = 0; j < *BizirikKopurua; j++)
@@ -340,8 +333,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		{
 			if (begira == AURRERA && (PertzonaiaYGoikoa + 29 >= etsaiayGoikoa && PertzonaiaYGoikoa + 29 <= etsaiayBehekoa))
 			{
-				
-
 				if (etsaiaxEzker >= PertzonaiaEskuinMuga && etsaiaxEzker <= PertzonaiaEskuinMuga + 33)
 				{
 					EtsaiaKendu(j, BizirikDaudenEtsaiak, *BizirikKopurua);
@@ -363,8 +354,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			{
 				*pAnimazioa = 0;
 			}
-			pertsonaia.sprite = HIL;
-			
+			pertsonaia.sprite = HIL;	
 		}
 	}
 	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0 && BOSS.bizirik)
@@ -373,8 +363,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		{
 			if (begira == AURRERA && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
 			{
-
-
 				if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
 				{
 					*txokolate = TRANSFORM;
@@ -399,7 +387,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 		}
 		pertsonaia.sprite = HIL;
 	}
-	
 	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
