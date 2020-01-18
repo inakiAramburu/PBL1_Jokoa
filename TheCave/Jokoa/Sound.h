@@ -2,11 +2,11 @@
 #define SOUND_H
 #include "SDL_mixer.h"
 
+
+
+
+
 Mix_Chunk* Soinuak[10];
-
-
-
-
 
 
 

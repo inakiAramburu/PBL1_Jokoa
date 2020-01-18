@@ -76,6 +76,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
+		Mix_HaltChannel(2);
 		MusikaJOKUA(MUSIKA_JOKUA);
 
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);

@@ -17,14 +17,14 @@ int main(int argc, char* argv[]) {
 	Soinuak[IRABAZI_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\Irabazi.wav");
 	Soinuak[GALDU_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\GameOver.wav");
 
-
 	Soinuak[TIROA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\boss\\Tiroak.wav");
 	Soinuak[MusikaBOSS] = Mix_LoadWAV(".\\media\\sound\\boss\\MusikaBoss.wav");
-
+	
 	Soinuak[PONG_PALA] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
 	Soinuak[PONG_PARETA] = Mix_LoadWAV(".\\media\\sound\\pong\\pareta.wav");
 	Soinuak[PONG_IRABAZI] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
-	//MusikaJOKUA();
+
+	
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	BOOLEANOA Jokatzen = FALSE;
 	void* pixels = NULL;

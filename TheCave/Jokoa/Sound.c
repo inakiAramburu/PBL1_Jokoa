@@ -61,14 +61,7 @@ void musica()
 
 
 
-void Musika_jarri()
-{
 
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) > 0) {
-		printf("no se pudo cargar el asusbsistema audio  %s\n", SDL_GetError());
-		exit(1);
-	}
-}
 
 void Musikaabiarazi()
 {
@@ -79,7 +72,7 @@ void Musikaabiarazi()
 	}
 	//iniciar canales
 		//declaramos canales podemos usar asta 3 sonidos con esta fuuncion
-	Mix_AllocateChannels(5); //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos //5.Pong
+	Mix_AllocateChannels(5);//0.Pong //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos 
 }
 
 
@@ -158,8 +151,7 @@ void musica_Pong(int numerodesonido)
 	
 
 //cargar archivos
-	Soinuak[PONG_PALA] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
-	if (Soinuak[PONG_PALA] == NULL) {
+	if (Soinuak[numerodesonido] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
@@ -173,7 +165,7 @@ void musica_Pong(int numerodesonido)
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(5, Soinuak[10], 1);
+	Mix_PlayChannel(0, Soinuak[numerodesonido], 0);
 
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen
