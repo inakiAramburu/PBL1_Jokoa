@@ -53,24 +53,14 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		jokalaria puntu horretara heltzen ez bada*/
 
 	case MENUA:
-		Musikaabiarazi();
+		
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
 		pertsonaia.bizirik = FALSE;
-
-		Soinuak[MUSIKA_JOKUA] = Mix_LoadWAV(".\\media\\sound\\MusikaGeneral\\MusikaJolasa.wav");
-		Soinuak[KEA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\Pertsonaia\\Kea.wav");
-		Soinuak[EZPATA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\Pertsonaia\\Ezpata.wav");
-		Soinuak[IRABAZI_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\Irabazi.wav");
-		Soinuak[GALDU_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\GameOver.wav");
-
-
-		Soinuak[TIROA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\boss\\Tiroak.wav");
-		Soinuak[MusikaBOSS] = Mix_LoadWAV(".\\media\\sound\\boss\\MusikaBoss.wav");
-
+		
 
 
 
@@ -153,9 +143,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 	case MINIJOKOA:
 
-		Soinuak[PONG_PALA] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
-		Soinuak[PONG_PARETA] = Mix_LoadWAV(".\\media\\sound\\pong\\pareta.wav");
-		Soinuak[PONG_IRABAZI] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
 		
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
 		pertsonaia.bizirik = FALSE;

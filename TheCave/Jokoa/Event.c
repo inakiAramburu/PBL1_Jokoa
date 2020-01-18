@@ -136,23 +136,23 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				if (*Pantaila != MENUA)
 				{
 					strcpy(sekuentzia, "P");
-					musica_Pong(0);
+					musica_Pong(PONG_PALA);
 
 				}
 				break;
 			case SDL_SCANCODE_O:
 				strcat(sekuentzia, "O");
-				musica_Pong(1);
+				musica_Pong(PONG_PARETA);
 
 				break;
 			case SDL_SCANCODE_N:
 				strcat(sekuentzia, "N");
-				musica_Pong(0);
+				musica_Pong(PONG_PALA);
 
 				break;
 			case SDL_SCANCODE_G:
 				strcat(sekuentzia, "G");
-				musica_Pong(2);
+				musica_Pong(PONG_IRABAZI);
 
 				break;
 			}
@@ -419,7 +419,7 @@ void PongKolisioa()
 
 	if ((easteregg.pilota.x <= easteregg.Player1.x + easteregg.Player1.w) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player1.y&& easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player1.y + easteregg.Player1.h)|| (easteregg.pilota.y + 8 <= easteregg.Player1.y + easteregg.Player1.h && easteregg.pilota.y >= easteregg.Player1.y)))
 	{
-		musica_Pong(0);
+		musica_Pong(PONG_PALA);
 		easteregg.abiadurax -= 1;
 		if (easteregg.abiaduray < 0)
 		{
@@ -443,7 +443,7 @@ void PongKolisioa()
 	//pelota y la segunda pala
 	if ((easteregg.pilota.x + easteregg.pilota.w >= easteregg.Player2.x) && ((easteregg.pilota.y + easteregg.pilota.h - 8 >= easteregg.Player2.y && easteregg.pilota.y + easteregg.pilota.h <= easteregg.Player2.y + easteregg.Player2.h) || (easteregg.pilota.y + 8 <= easteregg.Player2.y + easteregg.Player2.h && easteregg.pilota.y >= easteregg.Player2.y)))
 	{
-		musica_Pong(0);
+		musica_Pong(PONG_PALA);
 		easteregg.abiadurax += 1;
 		if (easteregg.abiaduray < 0)
 		{
@@ -463,7 +463,7 @@ void PongKolisioa()
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
-		musica_Pong(2);
+		musica_Pong(PONG_PALA);
 	}
 
 }

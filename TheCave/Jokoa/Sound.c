@@ -79,7 +79,7 @@ void Musikaabiarazi()
 	}
 	//iniciar canales
 		//declaramos canales podemos usar asta 3 sonidos con esta fuuncion
-	Mix_AllocateChannels(20); //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos //5.Pong
+	Mix_AllocateChannels(5); //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos //5.Pong
 }
 
 
@@ -92,6 +92,18 @@ void MusikaJOKUA(int abeztia )
 		exit(1);
 	}
 	Mix_PlayChannel(1, Soinuak[abeztia], -1);
+
+}
+
+void IrabaziGaldu(int zenbakia)
+{
+
+	if (Soinuak[zenbakia] == NULL)
+	{
+		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
+		exit(1);
+	}
+	Mix_PlayChannel(2, Soinuak[zenbakia], 0);
 
 }
 
@@ -109,6 +121,8 @@ void Efektuak(int zenbakia)
 	}
 	Mix_PlayChannel(3, Soinuak[zenbakia], 0);
 }
+
+
 
 void musikaBOSS()
 {
@@ -134,52 +148,22 @@ void musikaBOSS()
 }
 
 
-void IrabaziGaldu(int zenbakia)
-{
-	
 
-
-	
-
-	//cargar archivos
-	
-
-
-	if (Soinuak[zenbakia] == NULL)
-	{
-		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
-		exit(1);
-	}
-	Mix_PlayChannel(2, Soinuak[zenbakia], 0);
-	
-
-
-}
 
 void musica_Pong(int numerodesonido)
 {
 
-	Mix_Chunk* Sonidos[3];/// 1.pala 2.pareta 3.irabazi
+	
 
-	Musikaabiarazi();
+	
 
 //cargar archivos
-	Sonidos[0] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
-	if (Sonidos[0] == NULL) {
+	Soinuak[PONG_PALA] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
+	if (Soinuak[PONG_PALA] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
 
-	Sonidos[1] = Mix_LoadWAV(".\\media\\sound\\pong\\pareta.wav");
-	if (Sonidos[1] == NULL) {
-		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
-		exit(1);
-	}
-	Sonidos[2] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
-	if (Sonidos[2] == NULL) {
-		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
-		exit(1);
-	}
 
 	///////////////////////////////////////
 
@@ -189,7 +173,7 @@ void musica_Pong(int numerodesonido)
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(5, Sonidos[numerodesonido],0);
+	Mix_PlayChannel(5, Soinuak[10], 1);
 
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen
