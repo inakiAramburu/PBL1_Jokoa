@@ -288,7 +288,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 				{
 					if (!etsaia[i].bizirik)
 					{
-						EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite., BizirikDaudenEtsaiak, BizirikKopurua);
+						EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite.y, BizirikDaudenEtsaiak, BizirikKopurua);
 					}
 				}
 			}
