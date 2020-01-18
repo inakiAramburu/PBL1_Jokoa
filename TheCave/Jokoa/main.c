@@ -191,6 +191,8 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == AUKERATUMODUA) 
 		{
+			pertsonaia.bizirik = FALSE;
+
 			if (!Karga[Pantaila])
 			{
 				for (int i = 0; i < 8; i++)

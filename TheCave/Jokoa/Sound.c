@@ -117,28 +117,7 @@ void Efektuak(int zenbakia)
 
 
 
-void musikaBOSS()
-{
 
-
-	Mix_Chunk* Efectua;
-
-	Musikaabiarazi();
-
-
-	//cargar archivos
-	Efectua = Mix_LoadWAV(MusikaBOSS);
-	
-
-
-	if (Efectua == NULL)
-	{
-		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
-		exit(1);
-	}
-	Mix_PlayChannel(1, Efectua, -1);
-
-}
 
 
 
