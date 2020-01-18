@@ -14,12 +14,12 @@ extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
  
 
-TIROAK jaurtigai[40];
+TIROAK jaurtigai[20];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
 
-extern FASEAK txokolate;
+extern BOSSFIGHT faseak;
 
 IMGPERTSONAIA spriteak[7];
 
@@ -117,7 +117,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
-		txokolate = SLEEP;
+		faseak = SLEEP;
 		EtsaiaKokatu(0, 241, 434, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(2, 442, 501, BizirikDaudenEtsaiak, BizirikKopurua);
@@ -320,7 +320,7 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 		int abiadura = 7;
 
 
-		for (i = 0; i < 40; i++)
+		for (i = 0; i < 20; i++)
 		{
 			if (jaurtigai[i].pantailan)
 			{

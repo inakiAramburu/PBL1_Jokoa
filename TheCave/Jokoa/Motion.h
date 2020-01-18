@@ -10,8 +10,7 @@
 #define BOSS etsaia[ETSAI_KOPURUA]
 
 typedef enum {ATZERA, AURRERA}ZENTZUA;
-typedef enum {SLEEP, TRANSFORM, TIGRERED}FASEAK;
-typedef enum {JAURTI, MUGITU, ITXARON}BOSSFIGHT;
+typedef enum {SLEEP, TRANSFORM, TIGRERED, JAURTI, MUGITU, ITXARON}BOSSFIGHT;
 
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp);
@@ -21,7 +20,8 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua);		//Etsaia nibel hasieran kokatu, etsaiaren zenbakia, x eta y posizioa emanez
 void PongExekutatu();
 void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila);
-void BossAtakea(BOSSFIGHT etapa);
+void BossAtakea();
+void BossMugitu(int* bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua);
 
 
 #endif

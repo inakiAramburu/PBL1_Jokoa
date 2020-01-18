@@ -15,6 +15,7 @@ extern IMGPERTSONAIA spriteak[7];
 
 SDL_Window* leihoa;
 extern SDL_Renderer* render;
+extern TIROAK jaurtigai[40];
 
 int LeihoaEtaRenderHasi()
 {
@@ -124,7 +125,14 @@ void GuztiakHil()
 void PertsonaiaHil()
 {
 	pertsonaia.bizirik = FALSE;
-	BOSS.bizirik = FALSE;
+	if (BOSS.bizirik)
+	{
+		BOSS.bizirik = FALSE;
+		for (int i = 0; i < 40; i++)
+		{
+			jaurtigai[i].pantailan = FALSE;
+		}
+	}
 	ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
 	GuztiakHil();
 	RenderPrestatu(0, 0, 0);
