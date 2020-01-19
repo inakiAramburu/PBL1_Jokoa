@@ -307,7 +307,7 @@ void PongExekutatu()
 			if (easteregg.pilota.y <= 0 || easteregg.pilota.y + 25 >= 720)
 			{
 				easteregg.abiaduray *= -1;
-				musica_Pong(1);
+				musica_Pong(PONG_PARETA);
 			}
 			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180);
 			easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
