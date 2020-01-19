@@ -138,7 +138,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
 	if (BOSS.bizirik)
 	{
-		KolisioakBoss(*begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
+		KolisioakBoss(pantaila, *begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
 		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
 	}
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
@@ -348,7 +348,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 		pertsonaia.sprite = SALTO;
 		*pAnimazioa = 0;
 	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
+	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
 		pertsonaia.erasotzen = TRUE;
 		pertsonaia.sprite = ERASO;
@@ -429,32 +429,33 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 	{
 		if (faseak == MUGITU)
 		{
-			do
+			/*do
 			{
 				tmp = rand() % 10;
 			} while (aurrekoa == tmp);
-			aurrekoa = tmp;
+			aurrekoa = tmp;*/
+			tmp = 3;
 			switch (tmp)
 			{
 			case 0:
-				BOSS.DestSprite.x = 70;
-				BOSS.DestSprite.y = 50;
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 140;
 				break;
 			case 1:
-				BOSS.DestSprite.x = 1100;
-				BOSS.DestSprite.y = 50;
-				break;
-			case 2:
-				BOSS.DestSprite.x = 70;
-				BOSS.DestSprite.y = 450;
-				break;
-			case 3:
-				BOSS.DestSprite.x = 1070;
-				BOSS.DestSprite.y = 450;
-				break;
-			case 4:
 				BOSS.DestSprite.x = 580;
 				BOSS.DestSprite.y = 460;
+				break;
+			case 2:
+				BOSS.DestSprite.x = 115;
+				BOSS.DestSprite.y = 385;
+				break;
+			case 3:
+				BOSS.DestSprite.x = 1030;
+				BOSS.DestSprite.y = 385;
+				break;
+		/*	case 4:
+				BOSS.DestSprite.x = 1060;
+				BOSS.DestSprite.y = 385;
 				break;
 			case 5:
 				BOSS.DestSprite.x = 580;
@@ -479,7 +480,7 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 			case 10:
 				BOSS.DestSprite.x = 900;
 				BOSS.DestSprite.y = 360;
-				break;
+				break;*/
 			}
 			faseak = JAURTI;
 		}

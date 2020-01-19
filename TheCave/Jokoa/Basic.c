@@ -16,6 +16,8 @@ extern IMGPERTSONAIA spriteak[7];
 SDL_Window* leihoa;
 extern SDL_Renderer* render;
 extern TIROAK jaurtigai[40];
+extern int kont;
+
 
 int LeihoaEtaRenderHasi()
 {
@@ -133,7 +135,14 @@ void PertsonaiaHil()
 			jaurtigai[i].pantailan = FALSE;
 		}
 	}
-	ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	if (kont == 1)
+	{
+		ImgKargatu(".\\media\\menu\\IrabaziDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	}
+	else
+	{
+		ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	}
 	GuztiakHil();
 	RenderPrestatu(0, 0, 0);
 	Irudikatu();

@@ -18,6 +18,7 @@ extern BOSSFIGHT faseak;
 
 extern int IrudiZnbk;
 
+int kont;
 
 BOOLEANOA a = FALSE;
 BOOLEANOA d = FALSE;
@@ -415,9 +416,8 @@ void PongKolisioa()
 	}
 }
 
-void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
+void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-	static int kont = 0;
 	static Uint32 spawnrate = 0;
 	static SDL_bool spawn = SDL_FALSE;
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -448,8 +448,9 @@ void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int Bizirik
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
 				}
-				else if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate))
+				else if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate) && faseak != TRANSFORM)
 				{
+					faseak = MUGITU;
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;
@@ -465,8 +466,9 @@ void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int Bizirik
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
 				}
-				if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate))
+				else if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate) && faseak != TRANSFORM)
 				{
+					faseak = MUGITU;
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;
@@ -493,5 +495,10 @@ void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int Bizirik
 			}
 		}
 		spawn = SDL_FALSE;
+	}
+	if (kont == 1)
+	{
+		PertsonaiaHil(kont);
+		*Pantaila = ATERA;
 	}
 }

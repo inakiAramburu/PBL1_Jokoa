@@ -20,6 +20,7 @@ extern PONG easteregg;
 extern ROL Ordenagailua;
 
 extern BOSSFIGHT faseak;
+extern int kont;
 
 
 IMGPERTSONAIA spriteak[7];
@@ -118,6 +119,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
+		kont = 0;
 		faseak = SLEEP;
 		EtsaiaKokatu(0, 241, 434, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
