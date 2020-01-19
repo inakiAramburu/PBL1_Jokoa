@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "Sound.h"
 #include "SDL_mixer.h"
+#include <SDL_ttf.h>
 
 int aukera;
 
@@ -371,6 +372,28 @@ void RenderMenu()
 	SDL_RenderCopy(render, Irudiak[2].textura, NULL, &Irudiak[2].Dimentsioak);
 	SDL_RenderCopy(render, Irudiak[3].textura, NULL, &Irudiak[3].Dimentsioak);
 	SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
+
+
+
+
+
+
+
+	TTF_Init();
+	TTF_Font* fuente;
+	fuente = TTF_OpenFont(".\\media\\pong\\Provicali.otf", 20);
+	SDL_Color color;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+
+	SDL_Surface* texto;
+	SDL_Texture* prueba;
+
+	texto = TTF_RenderText_Blended(fuente, "¿que tal mundo?", color);
+	
+	prueba = SDL_CreateTextureFromSurface(render,texto);
+	SDL_RenderCopy(render, prueba, NULL, NULL);
 }
 
 void Irudikatu()

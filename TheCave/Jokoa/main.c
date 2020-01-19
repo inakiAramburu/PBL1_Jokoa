@@ -4,11 +4,13 @@
 #include "Motion.h"
 #include "Sound.h"
 #include <stdio.h>
+
 //pong interfaz//
 
 
 
 int main(int argc, char* argv[]) {
+
 
 	Musikaabiarazi();
 	Soinuak[MUSIKA_JOKUA] = Mix_LoadWAV(".\\media\\sound\\MusikaGeneral\\MusikaJolasa.wav");
@@ -57,7 +59,7 @@ int main(int argc, char* argv[]) {
 	{
 		while (Pantaila == MENUA)
 		{
-
+			SDL_Surface* hola;
 			Karga[KONTROLAK] = 0;
 			Karga[KREDITUAK] = 0;
 			if (!Karga[MENUA])
@@ -72,6 +74,8 @@ int main(int argc, char* argv[]) {
 			}
 			RenderMenu();
 			Irudikatu();
+			SDL_FillRect;
+
 			SDL_Delay(50);
 		}
 		while (Pantaila == KREDITUAK)

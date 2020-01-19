@@ -1,21 +1,25 @@
 
-                         Simple DirectMedia Layer
+This library is a wrapper around the excellent FreeType 2.0 library,
+available at:
+	http://www.freetype.org/
 
-                                  (SDL)
+This library allows you to use TrueType fonts to render text in SDL
+applications.
 
-                                Version 2.0
+To make the library, first install the FreeType library, then type
+'./configure' then 'make' to build the SDL truetype library and the
+showfont and glfont example applications.
 
----
-https://www.libsdl.org/
+Be careful when including fonts with your application, as many of them
+are copyrighted.  The Microsoft fonts, for example, are not freely 
+redistributable and even the free "web" fonts they provide are only 
+redistributable in their special executable installer form (May 1998).
+There are plenty of freeware and shareware fonts available on the Internet
+though, and may suit your purposes.
 
-Simple DirectMedia Layer is a cross-platform development library designed
-to provide low level access to audio, keyboard, mouse, joystick, and graphics
-hardware via OpenGL and Direct3D. It is used by video playback software,
-emulators, and popular games including Valve's award winning catalog
-and many Humble Bundle games.
+This library is under the zlib license, see the file "COPYING.txt" for details.
 
-More extensive documentation is available in the docs directory, starting
-with README.md
+Portions of this software are copyright © 2013 The FreeType Project (www.freetype.org).  All rights reserved.
 
 Enjoy!
-	Sam Lantinga				(slouken@libsdl.org)
+	-Sam Lantinga <slouken@libsdl.org>		(6/20/2001)
