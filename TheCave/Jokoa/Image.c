@@ -48,6 +48,7 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
+	char IPserver[15];
 	int port;
 	IPaddress ip;
 	static int aukera;
@@ -167,7 +168,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 	case MINIJOKOA:
 
-		
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
 		pertsonaia.bizirik = SDL_FALSE;
 		GuztiakHil();
@@ -175,9 +175,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 
-		if (aukera == ZERBITZARI)
+		switch (aukera)
 		{
-
+		case ZERBITZARI:
 			printf("Sartu portua: ");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
@@ -220,10 +220,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			}
 			easteregg.abiaduray = 7;
 			Ordenagailua = ZERBITZARI;
-		}
-		else if (aukera == BEZEROA)
-		{
-			char IPserver[15];
+			break;
+		case BEZEROA:
 
 			printf("Serbitzariaren ipa jarri: ");
 			fgets(IPserver, 15, stdin);
@@ -232,7 +230,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
 
-			if (SDLNet_Init() == -1) {
+			if (SDLNet_Init() == -1)
+			{
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
 
@@ -247,9 +246,26 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 			SDLNet_TCP_Send(client, Erantzuna, 128);
 			printf("Server: %s\n", Agurra);
-Ordenagailua = BEZEROA;
-
+			Ordenagailua = BEZEROA;
+			break;
+		default:
+			srand(SDL_GetTicks());
+			do
+			{
+				easteregg.angelua = (rand() % 90) - 45;
+			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+			if (rand() % 2 == 0)
+			{
+				easteregg.abiadurax = -7;
+			}
+			else
+			{
+				easteregg.abiadurax = 7;
+			}
+			easteregg.abiaduray = 7;
+			break;
 		}
+
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);

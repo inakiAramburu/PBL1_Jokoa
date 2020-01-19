@@ -278,6 +278,33 @@ void PongExekutatu()
 			easteregg.pilota.x = DatuakHost2[2];
 			easteregg.pilota.y = DatuakHost2[3];
 			break;
+		default:
+			PongKolisioa();
+			if (w && easteregg.Player1.y > 0)
+			{
+				easteregg.Player1.y -= abiadura;
+			}
+			else if (s && easteregg.Player1.y < 720 - easteregg.Player1.h)
+			{
+				easteregg.Player1.y += abiadura;
+			}
+			//pareta
+			if (easteregg.pilota.y <= 0 || easteregg.pilota.y + 25 >= 720)
+			{
+				easteregg.abiaduray *= -1;
+				musica_Pong(PONG_PARETA);
+			}
+			if (gora && easteregg.Player2.y > 0)
+			{
+				easteregg.Player2.y -= abiadura;
+			}
+			else if (behera && easteregg.Player2.y < 720 - easteregg.Player2.h)
+			{
+				easteregg.Player2.y += abiadura;
+			}
+			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180);
+			easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
+			break;
 	}
 }
 
@@ -354,6 +381,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
+		Efektuak(EZPATA_EFEKTUA);
 		pertsonaia.erasotzen = SDL_TRUE;
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;

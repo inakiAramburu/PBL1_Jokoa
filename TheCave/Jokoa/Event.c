@@ -81,7 +81,6 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 					espacio = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_K:
-					Efektuak(EZPATA_EFEKTUA);
 					if (!pertsonaia.erortzen && !pertsonaia.salto)
 					{
 						a = SDL_FALSE;
@@ -186,7 +185,8 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 			}
 			if (strcmp(sekuentzia, "PONG") == 0)
 			{
-				*Pantaila = MINIJOKOA;
+				*Pantaila = AUKERATUMODUA;
+				strcpy(sekuentzia, "");
 			}
 		}
 		if (enter)
@@ -225,9 +225,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			SDL_GetMouseState(&x, &y);
 			if ((x > 515 && y > 175) && (x < 765 && y < 275))
 			{
-				int relleno[1];
-				int rellenodim = 0;
-				RenderPrestatu(AURRERA, relleno, rellenodim);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();

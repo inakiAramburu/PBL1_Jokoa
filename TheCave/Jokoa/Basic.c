@@ -49,6 +49,21 @@ int LeihoaEtaRenderHasi()
 
 	render = SDL_CreateRenderer(leihoa, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);		//Renderizatua hasi
 
+	Musikaabiarazi();
+	Soinuak[MUSIKA_JOKUA] = Mix_LoadWAV(".\\media\\sound\\MusikaGeneral\\MusikaJolasa.wav");
+	Soinuak[KEA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\Pertsonaia\\Kea.wav");
+	Soinuak[EZPATA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\Pertsonaia\\Ezpata.wav");
+	Soinuak[IRABAZI_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\Irabazi.wav");
+	Soinuak[GALDU_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\IrabaziGaldu\\GameOver.wav");
+
+	Soinuak[TIROA_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\effect\\boss\\Tiroak.wav");
+	Soinuak[MusikaBOSS] = Mix_LoadWAV(".\\media\\sound\\boss\\MusikaBoss.wav");
+	Soinuak[BOOS_KOLPE_EFEKTUA] = Mix_LoadWAV(".\\media\\sound\\boss\\hit.wav");
+
+	Soinuak[PONG_PALA] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
+	Soinuak[PONG_PARETA] = Mix_LoadWAV(".\\media\\sound\\pong\\pareta.wav");
+	Soinuak[PONG_IRABAZI] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
+
 	return 0;
 }
 
