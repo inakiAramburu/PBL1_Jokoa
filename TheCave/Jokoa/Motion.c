@@ -62,7 +62,7 @@ void Animazioa()
 
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
-	pertsonaia.bizirik = TRUE;
+	pertsonaia.bizirik = SDL_TRUE;
 	pertsonaia.sprite = KEA;
 	pertsonaia.DestSprite.x = 10;
 	pertsonaia.DestSprite.y = 555;
@@ -166,13 +166,13 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		}
 		if (pertsonaia.salto)
 		{
-			pertsonaia.salto = FALSE;
-			pertsonaia.erortzen = TRUE;
+			pertsonaia.salto = SDL_FALSE;
+			pertsonaia.erortzen = SDL_TRUE;
 		}
 		if (pertsonaia.erasotzen)
 		{
-			pertsonaia.erasotzen = FALSE;
-			k = FALSE;
+			pertsonaia.erasotzen = SDL_FALSE;
+			k = SDL_FALSE;
 		}
 		*pAnimazioa = 0;
 	}
@@ -200,7 +200,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 {
 	etsaia[znbk_etsaia].DestSprite.x = x;
 	etsaia[znbk_etsaia].DestSprite.y = y;
-	etsaia[znbk_etsaia].bizirik = TRUE;
+	etsaia[znbk_etsaia].bizirik = SDL_TRUE;
 	if (znbk_etsaia >= 0 && znbk_etsaia <= 4)
 	{
 		etsaia[znbk_etsaia].abiadura = ABIADURA_MAMUA;
@@ -301,13 +301,13 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 				*pAnimazioa = 0;
 			}
 		}
-		pertsonaia.erortzen = FALSE;
+		pertsonaia.erortzen = SDL_FALSE;
 	}
 	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
 	{
 		if (!pertsonaia.salto)
 		{
-			pertsonaia.erortzen = TRUE;
+			pertsonaia.erortzen = SDL_TRUE;
 			pertsonaia.sprite = ERORI;
 			*pAnimazioa = 0;
 		}
@@ -348,13 +348,13 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
 	{
-		pertsonaia.salto = TRUE;
+		pertsonaia.salto = SDL_TRUE;
 		pertsonaia.sprite = SALTO;
 		*pAnimazioa = 0;
 	}
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
-		pertsonaia.erasotzen = TRUE;
+		pertsonaia.erasotzen = SDL_TRUE;
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;
 	}
@@ -374,14 +374,14 @@ void BossAtakea(BOSSFIGHT faseak)
 	{
 		if (faseak == JAURTI)
 		{
-			jaurtigai[i].pantailan = TRUE;
+			jaurtigai[i].pantailan = SDL_TRUE;
 			jaurtigai[i].angelua = (rand() % 360);
 			RectEraikitzailea(&jaurtigai[i].tiroa, BOSS.DestSprite.x + 61, BOSS.DestSprite.y + 96, 10, 10);
 		}
 		if (jaurtigai[i].tiroa.x < 0 || jaurtigai[i].tiroa.x + 10 > 1280 || jaurtigai[i].tiroa.y < 0 || jaurtigai[i].tiroa.y + 10 > 720)
 		{
 
-			jaurtigai[i].pantailan = FALSE;
+			jaurtigai[i].pantailan = SDL_FALSE;
 		}
 		jaurtigai[i].tiroa.x += 12 * cos(jaurtigai[i].angelua * M_PI / 180);
 		jaurtigai[i].tiroa.y -= 12 * sin(jaurtigai[i].angelua * M_PI / 180);

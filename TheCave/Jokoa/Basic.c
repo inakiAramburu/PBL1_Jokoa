@@ -52,7 +52,7 @@ int LeihoaEtaRenderHasi()
 	return 0;
 }
 
-void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila)
+void Amaitu(SDL_bool* Jokatzen, PANTAILAK* Pantaila)
 {
 	if (*Pantaila == MINIJOKOA )
 	{
@@ -61,7 +61,7 @@ void Amaitu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila)
 	extern int aukera;
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
-	*Jokatzen = FALSE;
+	*Jokatzen = SDL_FALSE;
 	*Pantaila = ATERA;
 
 }
@@ -114,19 +114,19 @@ void GuztiakHil()
 {
 	for (int i = 0; i < ETSAI_KOPURUA; i++)
 	{
-		etsaia[i].bizirik = FALSE;
+		etsaia[i].bizirik = SDL_FALSE;
 	}
 }
 
 void PertsonaiaHil()
 {
-	pertsonaia.bizirik = FALSE;
+	pertsonaia.bizirik = SDL_FALSE;
 	if (BOSS.bizirik)
 	{
-		BOSS.bizirik = FALSE;
+		BOSS.bizirik = SDL_FALSE;
 		for (int i = 0; i < 40; i++)
 		{
-			jaurtigai[i].pantailan = FALSE;
+			jaurtigai[i].pantailan = SDL_FALSE;
 		}
 	}
 	if (kont == 3)
@@ -147,7 +147,7 @@ void PertsonaiaHil()
 
 void EtsaiaKendu(int pos, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {
-	etsaia[BizirikDaudenEtsaiak[pos]].bizirik = FALSE;
+	etsaia[BizirikDaudenEtsaiak[pos]].bizirik = SDL_FALSE;
 	for (int j = pos; j < BizirikKopurua - 1; j++)
 	{
 		BizirikDaudenEtsaiak[j] = BizirikDaudenEtsaiak[j + 1];

@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 	
 
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
-	BOOLEANOA Jokatzen = FALSE;
+	SDL_bool Jokatzen = SDL_FALSE;
 	void* pixels = NULL;
 	int pitch;
 	Uint8 bpp;
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 	int BizirikKopurua;
 
 	Pantaila = MENUA;		//Hasieran Menu pantailan dago jokalaria
-	Jokatzen = TRUE;
+	Jokatzen = SDL_TRUE;
 
 	//MusikaMenu();
 

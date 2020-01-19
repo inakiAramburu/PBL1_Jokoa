@@ -21,21 +21,21 @@ extern int IrudiZnbk;
 
 int kont;
 
-BOOLEANOA a = FALSE;
-BOOLEANOA d = FALSE;
-BOOLEANOA espacio = FALSE;
-BOOLEANOA k = FALSE;
-BOOLEANOA w = FALSE;
-BOOLEANOA f3 = FALSE;
-BOOLEANOA s = FALSE;
-BOOLEANOA gora = FALSE;
-BOOLEANOA behera = FALSE;
+SDL_bool a = SDL_FALSE;
+SDL_bool d = SDL_FALSE;
+SDL_bool espacio = SDL_FALSE;
+SDL_bool k = SDL_FALSE;
+SDL_bool w = SDL_FALSE;
+SDL_bool f3 = SDL_FALSE;
+SDL_bool s = SDL_FALSE;
+SDL_bool gora = SDL_FALSE;
+SDL_bool behera = SDL_FALSE;
 
 ROL Ordenagailua;
 
-void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
+void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {	
-	BOOLEANOA enter = FALSE;
+	SDL_bool enter = SDL_FALSE;
 	static char sekuentzia[16] = "";
 
 	SAGUA klika;
@@ -58,39 +58,39 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				switch (ebentua.key.keysym.scancode)		// SWITCH PARA LAS PULSACIONES DE TECLAS
 				{
 				case SDL_SCANCODE_D:
-					a = FALSE;
+					a = SDL_FALSE;
 					if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
 					{
 						pertsonaia.sprite = KORRIKA;
-						pertsonaia.erasotzen = FALSE;
+						pertsonaia.erasotzen = SDL_FALSE;
 						*pAnimazioa = 0;
 					}
-					d = TRUE;
+					d = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_A:
-					d = FALSE;
+					d = SDL_FALSE;
 					if (!a && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
 					{
 						pertsonaia.sprite = KORRIKA;
-						pertsonaia.erasotzen = FALSE;
+						pertsonaia.erasotzen = SDL_FALSE;
 						*pAnimazioa = 0;
 					}
-					a = TRUE;
+					a = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_SPACE:
-					espacio = TRUE;
+					espacio = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_K:
 					Efektuak(EZPATA_EFEKTUA);
 					if (!pertsonaia.erortzen && !pertsonaia.salto)
 					{
-						a = FALSE;
-						d = FALSE;
+						a = SDL_FALSE;
+						d = SDL_FALSE;
 					}
 
 					if (!pertsonaia.erasotzen)
 					{
-						k = TRUE;
+						k = SDL_TRUE;
 					}
 					break;
 				case SDL_SCANCODE_ESCAPE:
@@ -99,21 +99,21 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				case SDL_SCANCODE_W:
 					if (!a && !pertsonaia.erortzen && !pertsonaia.salto)
 					{
-						pertsonaia.erasotzen = FALSE;
+						pertsonaia.erasotzen = SDL_FALSE;
 					}
-					w = TRUE;
+					w = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_F3:
 					f3 = !f3;
 					break;
 				case SDL_SCANCODE_S:
-					s = TRUE;
+					s = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_UP:
-					gora = TRUE;
+					gora = SDL_TRUE;
 					break;
 				case SDL_SCANCODE_DOWN:
-					behera = TRUE;
+					behera = SDL_TRUE;
 					break;
 				}
 				break;
@@ -121,28 +121,28 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 				switch (ebentua.key.keysym.scancode)
 				{
 				case SDL_SCANCODE_D:
-					d = FALSE;
+					d = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_A:
-					a = FALSE;
+					a = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_SPACE:
-					espacio = FALSE;
+					espacio = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_K:
-					k = FALSE;
+					k = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_W:
-					w = FALSE;
+					w = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_S:
-					s = FALSE;
+					s = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_UP:
-					gora = FALSE;
+					gora = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_DOWN:
-					behera = FALSE;
+					behera = SDL_FALSE;
 					break;
 				case SDL_SCANCODE_P:
 					if (*Pantaila != MENUA)
@@ -214,7 +214,7 @@ void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika)
 	}
 }
 
-void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
+void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 {
 	int x, y;
 	switch (*Pantaila)
@@ -276,7 +276,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 			}
 			else if ((x > 578 && y > 490) && (x < 722 && y < 538))
 			{
-				*Jokatzen = FALSE;
+				*Jokatzen = SDL_FALSE;
 			}
 		}
 		break;
@@ -431,8 +431,8 @@ if (hitbox.behekoa.eskuin == GORRIA || hitbox.behekoa.ezker == GORRIA || hitbox.
 		*pAnimazioa = 0;
 	}
 	pertsonaia.sprite = HIL;
-	pertsonaia.erortzen = FALSE;
-	pertsonaia.salto = FALSE;
+	pertsonaia.erortzen = SDL_FALSE;
+	pertsonaia.salto = SDL_FALSE;
 }
 }
 

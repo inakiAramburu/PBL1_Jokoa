@@ -66,7 +66,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
-		pertsonaia.bizirik = FALSE;
+		pertsonaia.bizirik = SDL_FALSE;
 		break;
 	case KREDITUAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
@@ -82,7 +82,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.bizirik = TRUE;
+		pertsonaia.bizirik = SDL_TRUE;
 		BizirikDaudenEtsaiak;
 		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
@@ -128,7 +128,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
-		BOSS.bizirik = TRUE;
+		BOSS.bizirik = SDL_TRUE;
 		kont = 0;
 		faseak = SLEEP;
 		EtsaiaKokatu(0, 251, 435, BizirikDaudenEtsaiak, BizirikKopurua);
@@ -169,9 +169,9 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 		
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
-		pertsonaia.bizirik = FALSE;
+		pertsonaia.bizirik = SDL_FALSE;
 		GuztiakHil();
-		easteregg.piztuta = TRUE;
+		easteregg.piztuta = SDL_TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 
