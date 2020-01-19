@@ -325,6 +325,12 @@ void PongExekutatu()
 			break;
 		case BEZEROA:
 			PongKolisioa();
+
+			if (easteregg.pilota.y <= 0 || easteregg.pilota.y + 25 >= 720)
+			{
+					musica_Pong(PONG_PARETA);
+			}
+
 			if (w && easteregg.Player2.y > 0)
 			{
 				easteregg.Player2.y -= abiadura;
