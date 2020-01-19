@@ -107,13 +107,6 @@ void EtsaiakHasieratu()
 		etsaia[j].DestSprite.h = 44;
 	}
 	tmp = j;
-	/*
-	for (j = tmp; j < tmp + kopurua; j++)
-	{
-		EtsaiaKargatu(".\\media\\enemies\\MOKOS.bmp", j);
-		etsaia[j].kop = 4;
-	}
-	ARAÑA*/
 }
 
 void GuztiakHil()
