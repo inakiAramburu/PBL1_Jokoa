@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <SDL_net.h>
-
+#include <stdlib.h>
 
 extern HITBOX hitbox;
 
@@ -73,7 +73,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.y = 0;
 	
 	
-	/*	Efektuak(KEA_EFEKTUA);
+		Efektuak(KEA_EFEKTUA);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			SDL_Delay(100);
@@ -105,7 +105,7 @@ void Animazioa()
 			}
 		}
 		pertsonaia.sprite = IDLE;
-		RenderPrestatu(AURRERA, NULL, NULL);
+		RenderPrestatu(AURRERA, 0, 0);
 		Irudikatu();
 		SDL_Delay(300);
 		IrudiZnbk = IrudiakKendu(0);
@@ -117,7 +117,7 @@ void Animazioa()
 			Irudikatu();
 			SDL_Delay(100);
 		}
-		SDL_Delay(2000);*/
+		SDL_Delay(2000);
 }
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)

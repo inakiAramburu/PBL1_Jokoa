@@ -6,7 +6,7 @@
 
 
 
-Mix_Chunk* Soinuak[10];
+Mix_Chunk* Soinuak[11];
 
 
 

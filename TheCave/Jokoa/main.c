@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
 	}
 	ZENTZUA begira = AURRERA;
 
-	int Karga[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
+	SDL_bool Karga[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Argazkiak bakarrik behin kargatzeko pantaila bakoitzean
 	int pAnimazioa;
 
 	int BizirikDaudenEtsaiak[ETSAI_KOPURUA];
@@ -59,11 +59,10 @@ int main(int argc, char* argv[]) {
 	{
 		while (Pantaila == MENUA)
 		{
-
-			Karga[KONTROLAK] = 0;
-			Karga[KREDITUAK] = 0;
 			if (!Karga[MENUA])
 			{
+				Karga[KONTROLAK] = 0;
+				Karga[KREDITUAK] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				Karga[MENUA] = 1;
 			}
@@ -77,10 +76,10 @@ int main(int argc, char* argv[]) {
 			SDL_Delay(50);
 		}
 		while (Pantaila == KREDITUAK)
-		{
-			Karga[MENUA] = 0;
+		{		
 			if (!Karga[KREDITUAK])
 			{
+				Karga[MENUA] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
@@ -90,10 +89,10 @@ int main(int argc, char* argv[]) {
 			SDL_Delay(100);
 		}
 		while (Pantaila == KONTROLAK)
-		{
-			Karga[MENUA] = 0;
+		{	
 			if (!Karga[KONTROLAK])
 			{
+				Karga[MENUA] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
@@ -104,11 +103,10 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LEHEN)
 		{
-			Karga[ATERA] = 0;
-			Karga[MENUA] = 0;
-			Karga[ATERA] = 0;
 			if (!Karga[LEHEN])
 			{
+				Karga[ATERA] = 0;
+				Karga[MENUA] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LEHENENGO_MASKARA, &pixels, &pitch, &bpp);
 				Karga[LEHEN] = 1;
@@ -121,9 +119,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == BIGARREN)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BIGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
@@ -135,10 +133,10 @@ int main(int argc, char* argv[]) {
 			SDL_Delay(80);
 		}
 		while (Pantaila == HIRUGARREN)
-		{
-			Karga[Pantaila - 1] = 0;
+		{	
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(HIRUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
@@ -151,9 +149,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == LAUGARREN)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(LAUGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
@@ -166,9 +164,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == BOSTGARREN)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BOSTGARREN_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
@@ -181,9 +179,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == FINALA)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				KargatuMapa(BOSS_MASKARA, &pixels, &pitch, &bpp);
 				Karga[Pantaila] = 1;
@@ -211,7 +209,7 @@ int main(int argc, char* argv[]) {
 		{
 			if (!Karga[Pantaila])
 			{
-				for (int i = 0; i < 8; i++)
+				for (int i = ATERA; i > 0; i--)
 				{
 					Karga[i] = 0;
 				}
@@ -226,9 +224,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == AUKERATUZERBITZUA)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
@@ -239,9 +237,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == AUKERAZERBITZARIA)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
@@ -253,9 +251,9 @@ int main(int argc, char* argv[]) {
 		}
 		while (Pantaila == AUKERABEZEROA)
 		{
-			Karga[Pantaila - 1] = 0;
 			if (!Karga[Pantaila])
 			{
+				Karga[Pantaila - 1] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);
 				RenderPrestatu(begira, BizirikDaudenEtsaiak, BizirikKopurua);
 				Irudikatu();
@@ -269,7 +267,7 @@ int main(int argc, char* argv[]) {
 		{
 			if (!Karga[Pantaila])
 			{
-				for (int i = 0; i < 8; i++)
+				for (int i = Pantaila - 1; i > Pantaila - 5; i--)
 				{
 					Karga[i] = 0;
 				}
