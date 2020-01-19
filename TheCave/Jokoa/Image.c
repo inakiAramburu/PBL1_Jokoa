@@ -12,10 +12,17 @@ int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+ 
+
+TIROAK jaurtigai[40];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
+
+extern BOSSFIGHT faseak;
+extern int kont;
+
 
 IMGPERTSONAIA spriteak[7];
 
@@ -60,12 +67,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
 		pertsonaia.bizirik = FALSE;
-		
-
-
-
-
-
 		break;
 	case KREDITUAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
@@ -82,6 +83,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		pertsonaia.bizirik = TRUE;
+		BizirikDaudenEtsaiak;
 		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
@@ -120,6 +122,28 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		RectEraikitzailea(&pertsonaia.DestSprite, 10, 100, 60, 128);
 		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
+		break;
+	case FINALA:
+		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
+		pertsonaia.SrcSprite.x = 0;
+		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
+		BOSS.bizirik = TRUE;
+		kont = 0;
+		faseak = SLEEP;
+		EtsaiaKokatu(0, 241, 434, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(2, 442, 501, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(6, 442, 214, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(4, 262, 137, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(5, 883, 139, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(3, 698, 216, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(7, 884, 292, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(1, 698, 503, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(9, 889, 437, BizirikDaudenEtsaiak, BizirikKopurua);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 548, 60, 128);
+		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
+		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
+		
 		break;
 	case AUKERATUMODUA:
 		Mix_Pause(-1);
@@ -222,7 +246,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 
 			SDLNet_TCP_Send(client, Erantzuna, 128);
 			printf("Server: %s\n", Agurra);
-			Ordenagailua = BEZEROA;
+Ordenagailua = BEZEROA;
 
 		}
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
@@ -311,6 +335,22 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 				SDL_RenderCopy(render, etsaia[BizirikDaudenEtsaiak[i]].textura, &etsaia[BizirikDaudenEtsaiak[i]].SrcSprite, &etsaia[BizirikDaudenEtsaiak[i]].DestSprite);
 			}
 		}
+	}
+	if (BOSS.bizirik)
+	{
+		srand(SDL_GetTicks());
+		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
+		int abiadura = 7;
+
+
+		for (i = 0; i < 40; i++)
+		{
+			if (jaurtigai[i].pantailan)
+			{
+				SDL_SetRenderDrawColor(render, 88, 42, 31, 255);
+				SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
+			}
+		}	
 	}
 	if (pertsonaia.bizirik)
 	{

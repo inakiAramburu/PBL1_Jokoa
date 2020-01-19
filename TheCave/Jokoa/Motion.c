@@ -14,13 +14,17 @@ extern IMGPERTSONAIA spriteak[7];
 extern IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 extern int IrudiZnbk;
 
+BOSSFIGHT faseak;
+
+
 Uint32 time = 0;
 Uint32 time2 = 0;
-Uint32 time3 = 0;
-Uint32 abiadura[8] = {150,60,80,80,10,100,80};
+Uint32 delays[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+extern TIROAK jaurtigai[40];
+
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -74,7 +78,7 @@ void Animazioa()
 		{
 			SDL_Delay(100);
 			pertsonaia.SrcSprite.x = 128 * i;
-			RenderPrestatu(AURRERA, NULL, NULL);
+			RenderPrestatu(AURRERA, 0, 0);
 			Irudikatu();
 		}
 		pertsonaia.sprite = IDLE;
@@ -83,7 +87,7 @@ void Animazioa()
 			for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
-				RenderPrestatu(AURRERA, NULL, NULL);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				SDL_Delay(150);
 			}
@@ -95,7 +99,7 @@ void Animazioa()
 			{
 				pertsonaia.SrcSprite.x = 128 * i;
 				pertsonaia.DestSprite.x += 9;
-				RenderPrestatu(AURRERA, NULL, NULL);
+				RenderPrestatu(AURRERA, 0, 0);
 				Irudikatu();
 				SDL_Delay(80);
 			}
@@ -109,7 +113,7 @@ void Animazioa()
 		for (i = 0; i < 80; i++)
 		{
 			SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
-			RenderPrestatu(AURRERA,NULL,NULL);
+			RenderPrestatu(AURRERA,0,0);
 			Irudikatu();
 			SDL_Delay(100);
 		}
@@ -118,10 +122,8 @@ void Animazioa()
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-	int abiadurax = 12;
-	int abiaduray = 12;
-	static int eAnimazioa;
-
+	static int eAnimazioa = 0, bAnimazioa = 0;
+	int abiadura = 9;
 	//	Debbug de pies
 	if (f3)
 	{
@@ -134,96 +136,22 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
+	if (BOSS.bizirik)
+	{
+		KolisioakBoss(pantaila, *begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
+		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
+	}
+	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
 
-	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
-	{
-		if (pertsonaia.erortzen)
-		{
-			if ((a || d))
-			{
-				pertsonaia.sprite = KORRIKA;
-				*pAnimazioa = 0;
-			}
-			else
-			{
-				pertsonaia.sprite = IDLE;
-				*pAnimazioa = 0;
-			}
-		}
-		pertsonaia.erortzen = FALSE;
-	}
-	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
-	{
-		if (!pertsonaia.salto)
-		{
-			pertsonaia.erortzen = TRUE;
-			pertsonaia.sprite = ERORI;
-			*pAnimazioa = 0;
-		}
-	}
-	if (w)
-	{
-		if (hitbox.ezker.goikoa == HORIA)
-		{
-			*pantaila += 1;
-			GuztiakHil();
-			return;
-		}
-	}
-	if (a)
-	{
-		*begira = ATZERA;
-		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
-		{
-			pertsonaia.DestSprite.x -= abiadurax;
-		}
-	}
-	if (d)
-	{
-		*begira = AURRERA;
-		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
-		{
-			pertsonaia.DestSprite.x += abiadurax;
-		}
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
-	{
-		if (pertsonaia.sprite != IDLE)
-		{
-			*pAnimazioa = 0;
-		}
-		pertsonaia.sprite = IDLE;
-
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
-	{
-		pertsonaia.salto = TRUE;
-		pertsonaia.sprite = SALTO;
-		*pAnimazioa = 0;
-	}
-	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a)
-	{
-		pertsonaia.erasotzen = TRUE;
-		Efektuak(EZPATA_EFEKTUA);
-		pertsonaia.sprite = ERASO;
-		*pAnimazioa = 0;
-	}
-	if (pertsonaia.salto && pertsonaia.sprite != HIL)
-	{
-		pertsonaia.DestSprite.y -= abiaduray;
-		while (pertsonaia.DestSprite.y < 0)
-		{
-			pertsonaia.DestSprite.y++;
-		}
-	}
 	if (pertsonaia.erortzen)
 	{
 		pertsonaia.DestSprite.y += GRABITATEA;
 		AltueraZuzendu(pixels, pitch, bpp);
 	}
+
 	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
 
-	if (SDL_GetTicks() - time > abiadura[pertsonaia.sprite])
+	if (SDL_GetTicks() - time > delays[pertsonaia.sprite])
 	{
 		++* pAnimazioa;
 		time = SDL_GetTicks();
@@ -245,10 +173,8 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		{
 			pertsonaia.erasotzen = FALSE;
 			k = FALSE;
-
 		}
 		*pAnimazioa = 0;
-
 	}
 	for (int j = 0; j < *BizirikKopurua; j++)
 	{
@@ -353,5 +279,200 @@ void PongExekutatu()
 			easteregg.pilota.y = DatuakHost2[3];
 			break;
 	}
-	
+}
+
+void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
+{
+	int abiadurax = 12;
+	int abiaduray = 12;
+
+	if (hitbox.behekoa.eskuin == BELTZA || hitbox.behekoa.ezker == BELTZA)
+	{
+		if (pertsonaia.erortzen)
+		{
+			if ((a || d))
+			{
+				pertsonaia.sprite = KORRIKA;
+				*pAnimazioa = 0;
+			}
+			else
+			{
+				pertsonaia.sprite = IDLE;
+				*pAnimazioa = 0;
+			}
+		}
+		pertsonaia.erortzen = FALSE;
+	}
+	else if (hitbox.behekoa.eskuin == TXURIA && hitbox.behekoa.ezker == TXURIA)
+	{
+		if (!pertsonaia.salto)
+		{
+			pertsonaia.erortzen = TRUE;
+			pertsonaia.sprite = ERORI;
+			*pAnimazioa = 0;
+		}
+	}
+	if (w)
+	{
+		if (hitbox.ezker.goikoa == HORIA)
+		{
+			*pantaila += 1;
+			GuztiakHil();
+			return;
+		}
+	}
+	if (a)
+	{
+		*begira = ATZERA;
+		if ((hitbox.ezker.behekoa != BERDEA && hitbox.ezker.erdikoa != BERDEA && hitbox.ezker.goikoa != BERDEA) && pertsonaia.DestSprite.x > -39 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
+		{
+			pertsonaia.DestSprite.x -= abiadurax;
+		}
+	}
+	if (d)
+	{
+		*begira = AURRERA;
+		if ((hitbox.eskuin.behekoa != BERDEA && hitbox.eskuin.erdikoa != BERDEA && hitbox.eskuin.goikoa != BERDEA) && pertsonaia.DestSprite.x < 1190 && pertsonaia.sprite != ERASO && pertsonaia.sprite != HIL)
+		{
+			pertsonaia.DestSprite.x += abiadurax;
+		}
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
+	{
+		if (pertsonaia.sprite != IDLE)
+		{
+			*pAnimazioa = 0;
+		}
+		pertsonaia.sprite = IDLE;
+
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
+	{
+		pertsonaia.salto = TRUE;
+		pertsonaia.sprite = SALTO;
+		*pAnimazioa = 0;
+	}
+	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
+	{
+		pertsonaia.erasotzen = TRUE;
+		pertsonaia.sprite = ERASO;
+		*pAnimazioa = 0;
+	}
+	if (pertsonaia.salto && pertsonaia.sprite != HIL)
+	{
+		pertsonaia.DestSprite.y -= abiaduray;
+		while (pertsonaia.DestSprite.y < 0)
+		{
+			pertsonaia.DestSprite.y++;
+		}
+	}
+}
+
+void BossAtakea(BOSSFIGHT faseak)
+{
+	for (int i = 0; i < 40; i++)
+	{
+		if (faseak == JAURTI)
+		{
+			jaurtigai[i].pantailan = TRUE;
+			jaurtigai[i].angelua = (rand() % 360);
+			RectEraikitzailea(&jaurtigai[i].tiroa, BOSS.DestSprite.x + 61, BOSS.DestSprite.y + 96, 10, 10);
+		}
+		if (jaurtigai[i].tiroa.x < 0 || jaurtigai[i].tiroa.x + 10 > 1280 || jaurtigai[i].tiroa.y < 0 || jaurtigai[i].tiroa.y + 10 > 720)
+		{
+
+			jaurtigai[i].pantailan = FALSE;
+		}
+		jaurtigai[i].tiroa.x += 12 * cos(jaurtigai[i].angelua * M_PI / 180);
+		jaurtigai[i].tiroa.y -= 12 * sin(jaurtigai[i].angelua * M_PI / 180);
+	}
+}
+
+void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
+{
+	static Uint32 spriterate = 0, attackrate = 0;
+	static int aurrekoa;
+
+	int SRC, tmp;
+
+	if (SDL_TICKS_PASSED(SDL_GetTicks(), spriterate))
+	{
+		switch (faseak)
+		{
+		case TRANSFORM:
+			BOSS.SrcSprite.x = 640 + 128 * *bAnimazioa;
+			SRC = 15;
+
+			break;
+		case SLEEP:
+			BOSS.SrcSprite.x = 128 * *bAnimazioa;
+			SRC = 5;
+			break;
+		default:
+			BOSS.SrcSprite.x = 3200 + 128 * *bAnimazioa;
+			SRC = 5;
+			break;
+		}
+		++*bAnimazioa;
+		spriterate = SDL_GetTicks() + 240;
+		if (*bAnimazioa >= SRC)
+		{
+			if (faseak == TRANSFORM)
+			{
+				faseak = TRIGGERED;
+				attackrate = SDL_GetTicks() + 4000;
+			}
+			*bAnimazioa = 0;
+		}
+	}
+	if (faseak == TRANSFORM)
+	{
+		BOSS.DestSprite.y -= 9;
+	}
+	if (faseak != SLEEP && faseak != TRANSFORM)
+	{
+		if (faseak == MUGITU)
+		{
+			do
+			{
+				tmp = rand() % 6;
+			} while (aurrekoa == tmp);
+			aurrekoa = tmp;
+			switch (tmp)
+			{
+			case 0:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 140;
+				break;
+			case 1:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 460;
+				break;
+			case 2:
+				BOSS.DestSprite.x = 115;
+				BOSS.DestSprite.y = 385;
+				break;
+			case 3:
+				BOSS.DestSprite.x = 1030;
+				BOSS.DestSprite.y = 385;
+				break;
+			case 4:
+				BOSS.DestSprite.x = 1100;
+				BOSS.DestSprite.y = 60;
+				break;
+			case 5:
+				BOSS.DestSprite.x = 20;
+				BOSS.DestSprite.y = 60;
+				break;
+			}
+			faseak = JAURTI;
+		}
+		BossAtakea(faseak);
+		faseak = ITXARON;
+		if (SDL_TICKS_PASSED(SDL_GetTicks(), attackrate))
+		{
+			faseak = MUGITU;
+			attackrate = SDL_GetTicks() + (rand() % 5000) + 5000;
+		}
+	}
 }

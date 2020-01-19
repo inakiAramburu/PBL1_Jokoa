@@ -5,9 +5,10 @@
 #include "SDL_net.h"
 #include <stdio.h>
 #include "Sound.h"
+#include <stdlib.h>
 
 PERTSONAIA pertsonaia;
-ETSAIA etsaia[ETSAI_KOPURUA];
+ETSAIA etsaia[ETSAI_KOPURUA + 1];		//+1 Bossarako
 
 PONG easteregg;
 
@@ -15,6 +16,9 @@ extern IMGPERTSONAIA spriteak[7];
 
 SDL_Window* leihoa;
 extern SDL_Renderer* render;
+extern TIROAK jaurtigai[40];
+extern int kont;
+
 
 int LeihoaEtaRenderHasi()
 {
@@ -104,13 +108,6 @@ void EtsaiakHasieratu()
 		etsaia[j].DestSprite.h = 44;
 	}
 	tmp = j;
-	/*
-	for (j = tmp; j < tmp + kopurua; j++)
-	{
-		EtsaiaKargatu(".\\media\\enemies\\MOKOS.bmp", j);
-		etsaia[j].kop = 4;
-	}
-	ARAÑA*/
 }
 
 void GuztiakHil()
@@ -124,8 +121,22 @@ void GuztiakHil()
 void PertsonaiaHil()
 {
 	pertsonaia.bizirik = FALSE;
-	IrabaziGaldu(GALDU_EFEKTUA);
-	ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	if (BOSS.bizirik)
+	{
+		BOSS.bizirik = FALSE;
+		for (int i = 0; i < 40; i++)
+		{
+			jaurtigai[i].pantailan = FALSE;
+		}
+	}
+	if (kont == 3)
+	{
+		ImgKargatu(".\\media\\menu\\IrabaziDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	}
+	else
+	{
+		ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+	}
 	GuztiakHil();
 	
 	RenderPrestatu(0, 0, 0);
