@@ -425,7 +425,7 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 	{
 		BOSS.DestSprite.y -= 9;
 	}
-	if (faseak == TRIGGERED)
+	if (faseak != SLEEP && faseak != TRANSFORM)
 	{
 		if (faseak == MUGITU)
 		{
@@ -482,13 +482,6 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 				break;
 			}
 			faseak = JAURTI;
-			for (int i = 0; i < 10; i++)
-			{
-				if (!etsaia[i].bizirik)
-				{
-					EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite.y, BizirikDaudenEtsaiak, BizirikKopurua);
-				}
-			}
 		}
 		BossAtakea(faseak);
 		faseak = ITXARON;

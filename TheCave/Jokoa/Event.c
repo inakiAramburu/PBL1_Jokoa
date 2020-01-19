@@ -444,6 +444,13 @@ void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa)
 				{
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
+					for (int i = 0; i < 10; i++)
+					{
+						if (!etsaia[i].bizirik)
+						{
+							EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite.y, BizirikDaudenEtsaiak, BizirikKopurua);
+						}
+					}
 				}
 			}
 			else
@@ -452,6 +459,13 @@ void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa)
 				{
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
+					for (int i = 0; i < 10; i++)
+					{
+						if (!etsaia[i].bizirik)
+						{
+							EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite.y, BizirikDaudenEtsaiak, BizirikKopurua);
+						}
+					}
 				}
 			}
 		}
