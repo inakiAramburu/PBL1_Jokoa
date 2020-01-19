@@ -138,7 +138,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
 	if (BOSS.bizirik)
 	{
-		KolisioakBoss(*begira, pAnimazioa, &bAnimazioa);
+		KolisioakBoss(*begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
 		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
 	}
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
