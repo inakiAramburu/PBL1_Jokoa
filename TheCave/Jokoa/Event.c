@@ -438,6 +438,8 @@ void PongKolisioa()
 		easteregg.P2puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
+		musica_Pong(PONG_IRABAZI);
+
 	}
 	
 	//pelota y la segunda pala
