@@ -34,7 +34,7 @@ typedef struct S_TIROAK		//Etsaien datuak
 {
 	SDL_Rect tiroa;
 	BOOLEANOA pantailan;
-	int angelua;
+	float angelua;
 }TIROAK;
 
 
