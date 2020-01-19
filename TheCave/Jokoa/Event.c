@@ -463,7 +463,7 @@ void PongKolisioa()
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
-		musica_Pong(PONG_PALA);
+		musica_Pong(PONG_IRABAZI);
 	}
 
 }
