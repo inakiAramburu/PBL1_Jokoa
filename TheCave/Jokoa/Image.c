@@ -381,19 +381,25 @@ void RenderMenu()
 
 	TTF_Init();
 	TTF_Font* fuente;
-	fuente = TTF_OpenFont(".\\media\\pong\\Provicali.otf", 20);
+	fuente = TTF_OpenFont(".\\media\\pong\\Provicali.otf", 1000);
 	SDL_Color color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
 
 	SDL_Surface* texto;
 	SDL_Texture* prueba;
 
-	texto = TTF_RenderText_Blended(fuente, "¿que tal mundo?", color);
+	texto = TTF_RenderText_Blended(fuente, "192.168.100.100", color);
 	
 	prueba = SDL_CreateTextureFromSurface(render,texto);
-	SDL_RenderCopy(render, prueba, NULL, NULL);
+	SDL_Rect testuTamaina;
+
+	testuTamaina.x = 589;
+	testuTamaina.y = 213;
+	testuTamaina.h = 94;
+	testuTamaina.w = 474;
+	SDL_RenderCopy(render, prueba, NULL, &testuTamaina);
 }
 
 void Irudikatu()
