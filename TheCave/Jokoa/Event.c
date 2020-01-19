@@ -496,7 +496,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 		}
 		spawn = SDL_FALSE;
 	}
-	if (kont == 1)
+	if (kont == 3)
 	{
 		PertsonaiaHil(kont);
 		*Pantaila = ATERA;

@@ -429,12 +429,11 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 	{
 		if (faseak == MUGITU)
 		{
-			/*do
+			do
 			{
-				tmp = rand() % 10;
+				tmp = rand() % 6;
 			} while (aurrekoa == tmp);
-			aurrekoa = tmp;*/
-			tmp = 3;
+			aurrekoa = tmp;
 			switch (tmp)
 			{
 			case 0:
@@ -453,34 +452,14 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 				BOSS.DestSprite.x = 1030;
 				BOSS.DestSprite.y = 385;
 				break;
-		/*	case 4:
-				BOSS.DestSprite.x = 1060;
-				BOSS.DestSprite.y = 385;
+			case 4:
+				BOSS.DestSprite.x = 1100;
+				BOSS.DestSprite.y = 60;
 				break;
 			case 5:
-				BOSS.DestSprite.x = 580;
-				BOSS.DestSprite.y = 460;
+				BOSS.DestSprite.x = 20;
+				BOSS.DestSprite.y = 60;
 				break;
-			case 6:
-				BOSS.DestSprite.x = 580;
-				BOSS.DestSprite.y = 50;
-				break;
-			case 7:
-				BOSS.DestSprite.x = 450;
-				BOSS.DestSprite.y = 230;
-				break;
-			case 8:
-				BOSS.DestSprite.x = 705;
-				BOSS.DestSprite.y = 230;
-				break;
-			case 9:
-				BOSS.DestSprite.x = 250;
-				BOSS.DestSprite.y = 360;
-				break;
-			case 10:
-				BOSS.DestSprite.x = 900;
-				BOSS.DestSprite.y = 360;
-				break;*/
 			}
 			faseak = JAURTI;
 		}

@@ -135,7 +135,7 @@ void PertsonaiaHil()
 			jaurtigai[i].pantailan = FALSE;
 		}
 	}
-	if (kont == 1)
+	if (kont == 3)
 	{
 		ImgKargatu(".\\media\\menu\\IrabaziDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
 	}
