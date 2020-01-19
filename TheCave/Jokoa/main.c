@@ -219,7 +219,7 @@ int main(int argc, char* argv[]) {
 				Karga[Pantaila] = 1;
 				printf("Online/Local pantaila kargatuta\n");
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			SDL_Delay(100);
 		}
 		while (Pantaila == AUKERATUZERBITZUA)
@@ -232,7 +232,7 @@ int main(int argc, char* argv[]) {
 				Irudikatu();
 				Karga[Pantaila] = 1;
 			}
-			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira);
+			EbentuakKonprobatu(&Jokatzen, &Pantaila, &pAnimazioa, &begira, BizirikDaudenEtsaiak, BizirikKopurua);
 			SDL_Delay(100);
 		}
 		while (Pantaila == AUKERAZERBITZARIA)
