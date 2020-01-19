@@ -81,6 +81,7 @@ void EbentuakKonprobatu(BOOLEANOA* Jokatzen, PANTAILAK* Pantaila, int* pAnimazio
 					espacio = TRUE;
 					break;
 				case SDL_SCANCODE_K:
+					Efektuak(EZPATA_EFEKTUA);
 					if (!pertsonaia.erortzen && !pertsonaia.salto)
 					{
 						a = FALSE;
@@ -517,8 +518,11 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 		{
 			if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
 			{
+
 				if (faseak == SLEEP)
 				{
+					MusikaJOKUA(MusikaBOSS);
+
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
 				}
@@ -528,6 +532,8 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;
+					Efektuak(BOOS_KOLPE_EFEKTUA);
+
 				}
 			}
 		}
@@ -537,6 +543,8 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 			{
 				if (faseak == SLEEP)
 				{
+					MusikaJOKUA(MusikaBOSS);
+
 					faseak = TRANSFORM;
 					*bAnimazioa = 0;
 				}
@@ -546,6 +554,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;
+					Efektuak(BOOS_KOLPE_EFEKTUA);
 				}
 				
 			}

@@ -77,7 +77,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
-		Mix_HaltChannel(2);
+		Mix_HaltChannel(-1);
 		MusikaJOKUA(MUSIKA_JOKUA);
 
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
@@ -124,6 +124,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
 	case FINALA:
+		Mix_HaltChannel(-1);
 		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
