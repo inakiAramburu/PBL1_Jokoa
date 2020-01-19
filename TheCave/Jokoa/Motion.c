@@ -324,6 +324,7 @@ void PongExekutatu()
 			easteregg.Player2.y = DatuakClient[1];
 			break;
 		case BEZEROA:
+			PongKolisioa();
 			if (w && easteregg.Player2.y > 0)
 			{
 				easteregg.Player2.y -= abiadura;
@@ -333,7 +334,7 @@ void PongExekutatu()
 				easteregg.Player2.y += abiadura;
 			}
 			int DatuakClient2[2] = { easteregg.Player2.x,easteregg.Player2.y};
-
+			
 			void* Datosbug = DatuakClient2;
 			SDLNet_TCP_Send(client, Datosbug, 100);
 
