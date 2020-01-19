@@ -14,6 +14,7 @@ extern PONG easteregg;
 extern TIROAK jaurtigai[100];
 
 
+extern BOSSFIGHT faseak;
 
 extern int IrudiZnbk;
 
@@ -276,7 +277,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, BOOLEANOA *Jokatzen)
 }
 
 
-void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa, FASEAK *txokolate, int *bAnimazioa)
+void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa)
 {
 
 	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
@@ -290,20 +291,6 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 	int	etsaiayGoikoa;
 	int	etsaiayBehekoa;
 	int j;
-	if(BOSS.bizirik==TRUE)
-	{ 
-		for (j = 0; j < 40; j++)
-		{
-			if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga &&  jaurtigai[j].tiroa.x+10 >= PertzonaiaEzkerMuga)&& (jaurtigai[j].tiroa.y+10>= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
-			{
-				if (pertsonaia.sprite != HIL)
-				{
-					*pAnimazioa = 0;
-				}
-				pertsonaia.sprite = HIL;
-			}	
-		}
-	}
 
 	for (j = 0; j < *BizirikKopurua; j++)
 	{
@@ -357,36 +344,7 @@ void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEt
 			pertsonaia.sprite = HIL;	
 		}
 	}
-	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0 && BOSS.bizirik)
-	{
-		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4 && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
-		{
-			if (begira == AURRERA)
-			{
-				if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
-				{
-					*txokolate = TRANSFORM;
-					*bAnimazioa = 0;
-				}
-			}
-			else
-			{
-				if (BOSS.DestSprite.x + 109 >= PertzonaiaEzkerMuga - 33 && BOSS.DestSprite.x + 109 <= PertzonaiaEzkerMuga)
-				{
-					*txokolate = TRANSFORM;
-					*bAnimazioa = 0;
-				}
-			}
-		}
-	}
-	else if (BOSS.bizirik && (((PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16 && PertzonaiaEskuinMuga <= BOSS.DestSprite.x + 109) || (PertzonaiaEzkerMuga <= BOSS.DestSprite.x + 109 && PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16)) && (PertzonaiaYBekoa >= BOSS.DestSprite.y && PertzonaiaYGoikoa <= BOSS.DestSprite.y + 149)))
-	{
-		if (pertsonaia.sprite != HIL)
-		{
-			*pAnimazioa = 0;
-		}
-		pertsonaia.sprite = HIL;
-	}
+	
 	//////////////////////////////tetectar el color//////////////////////////////
 	hitbox.goikoa = getpixel(pixels, pitch, bpp, pertsonaia.DestSprite.x + 66, pertsonaia.DestSprite.y + 0);		//Burua
 	//Ezkerreko aldea
@@ -454,5 +412,56 @@ void PongKolisioa()
 		easteregg.P1puntuazioa++;
 		printf("\n P1: %d	P2: %d", easteregg.P1puntuazioa, easteregg.P2puntuazioa);
 		BerrizJaurti();
+	}
+}
+
+void KolisioakBoss(ZENTZUA begira, int* pAnimazioa, int* bAnimazioa)
+{
+	int PertzonaiaEzkerMuga = pertsonaia.DestSprite.x + 46;
+	int PertzonaiaEskuinMuga = pertsonaia.DestSprite.x + 82;
+	int PertzonaiaYGoikoa = pertsonaia.DestSprite.y;
+	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
+	int YBekoa = pertsonaia.DestSprite.y + 52;
+
+	for (int j = 0; j < 40; j++)
+	{
+		if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga && jaurtigai[j].tiroa.x + 10 >= PertzonaiaEzkerMuga) && (jaurtigai[j].tiroa.y + 10 >= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
+		{
+			if (pertsonaia.sprite != HIL)
+			{
+				*pAnimazioa = 0;
+			}
+			pertsonaia.sprite = HIL;
+		}
+	}
+	if (BOSS.SrcSprite.x < 640 && BOSS.SrcSprite.x >= 0 && BOSS.bizirik)
+	{
+		if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4 && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
+		{
+			if (begira == AURRERA)
+			{
+				if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
+				{
+					faseak = TRANSFORM;
+					*bAnimazioa = 0;
+				}
+			}
+			else
+			{
+				if (BOSS.DestSprite.x + 109 >= PertzonaiaEzkerMuga - 33 && BOSS.DestSprite.x + 109 <= PertzonaiaEzkerMuga)
+				{
+					faseak = TRANSFORM;
+					*bAnimazioa = 0;
+				}
+			}
+		}
+	}
+	else if (BOSS.bizirik && (((PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16 && PertzonaiaEskuinMuga <= BOSS.DestSprite.x + 109) || (PertzonaiaEzkerMuga <= BOSS.DestSprite.x + 109 && PertzonaiaEskuinMuga >= BOSS.DestSprite.x + 16)) && (PertzonaiaYBekoa >= BOSS.DestSprite.y && PertzonaiaYGoikoa <= BOSS.DestSprite.y + 149)))
+	{
+		if (pertsonaia.sprite != HIL)
+		{
+			*pAnimazioa = 0;
+		}
+		pertsonaia.sprite = HIL;
 	}
 }

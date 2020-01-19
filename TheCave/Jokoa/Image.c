@@ -19,7 +19,8 @@ TIROAK jaurtigai[40];
 extern PONG easteregg;
 extern ROL Ordenagailua;
 
-extern FASEAK txokolate;
+extern BOSSFIGHT faseak;
+
 
 IMGPERTSONAIA spriteak[7];
 
@@ -117,7 +118,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		pertsonaia.SrcSprite.x = 0;
 		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
 		BOSS.bizirik = TRUE;
-		txokolate = SLEEP;
+		faseak = SLEEP;
 		EtsaiaKokatu(0, 241, 434, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(2, 442, 501, BizirikDaudenEtsaiak, BizirikKopurua);

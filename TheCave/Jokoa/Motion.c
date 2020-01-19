@@ -14,7 +14,8 @@ extern IMGPERTSONAIA spriteak[7];
 extern IMG Irudiak[50];		//Irudiak, dagozkien datuekin
 extern int IrudiZnbk;
 
-FASEAK txokolate;
+BOSSFIGHT faseak;
+
 
 Uint32 time = 0;
 Uint32 time2 = 0;
@@ -121,11 +122,8 @@ void Animazioa()
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {
-	static int eAnimazioa = 0, bAnimazioa = 0, tmp = 0;
-	static Uint32 spriterate = 0;
-	static Uint32 attackrate = 0;
-	int abiadura = 9, tmp2;
-	static BOSSFIGHT etapa = ITXARON;
+	static int eAnimazioa = 0, bAnimazioa = 0;
+	int abiadura = 9;
 	//	Debbug de pies
 	if (f3)
 	{
@@ -137,8 +135,14 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 		printf("Derecha x: %d  ", pertsonaia.DestSprite.x + 75);
 		printf("y: %d \n\n", pertsonaia.DestSprite.y);
 	}
-	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa, &txokolate, &bAnimazioa);
+	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
+	if (BOSS.bizirik)
+	{
+		KolisioakBoss(*begira, pAnimazioa, &bAnimazioa);
+		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
+	}
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
+
 	if (pertsonaia.erortzen)
 	{
 		pertsonaia.DestSprite.y += GRABITATEA;
@@ -192,114 +196,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	if (BOSS.bizirik)
 	{
-		int SRC;
-		if (SDL_TICKS_PASSED(SDL_GetTicks(), spriterate))
-		{
-			switch (txokolate)
-			{
-			case TRANSFORM:
-				BOSS.SrcSprite.x = 640 + 128 * bAnimazioa;
-				SRC = 15;
-				
-				break;
-			case TIGRERED:
-				BOSS.SrcSprite.x = 3200 + 128 * bAnimazioa;
-				SRC = 5;
-				break;
-			default:
-				BOSS.SrcSprite.x = 128 * bAnimazioa;
-				SRC = 5;
-				break;
-			}
-			bAnimazioa++;
-			spriterate = SDL_GetTicks() + 240;
-			if (bAnimazioa >= SRC)
-			{
-				if (txokolate == TRANSFORM)
-				{
-					txokolate = TIGRERED;
-					attackrate = SDL_GetTicks() + 4000;
-				}
-				bAnimazioa = 0;
-			}
-		}
-		if (txokolate == TRANSFORM)
-		{
-			BOSS.DestSprite.y -= 9;
-		}
-		if (txokolate == TIGRERED)
-		{
-			if (etapa == MUGITU)
-			{
-				do
-				{
-					tmp2 = rand() % 10;
-				} while (tmp2 == tmp);
-
-				switch (tmp2)
-				{
-				case 0:
-					BOSS.DestSprite.x = 70;
-					BOSS.DestSprite.y = 50;
-					break;
-				case 1:
-					BOSS.DestSprite.x = 1100;
-					BOSS.DestSprite.y = 50;
-					break;
-				case 2:
-					BOSS.DestSprite.x = 70;
-					BOSS.DestSprite.y = 450;
-					break;
-				case 3:
-					BOSS.DestSprite.x = 1070;
-					BOSS.DestSprite.y = 450;
-					break;
-				case 4:
-					BOSS.DestSprite.x = 580;
-					BOSS.DestSprite.y = 460;
-					break;
-				case 5:
-					BOSS.DestSprite.x = 580;
-					BOSS.DestSprite.y = 460;
-					break;
-				case 6:
-					BOSS.DestSprite.x = 580;
-					BOSS.DestSprite.y = 50;
-					break;
-				case 7:
-					BOSS.DestSprite.x = 450;
-					BOSS.DestSprite.y = 230;
-					break;
-				case 8:
-					BOSS.DestSprite.x = 705;
-					BOSS.DestSprite.y = 230;
-					break;
-				case 9:
-					BOSS.DestSprite.x = 250;
-					BOSS.DestSprite.y = 360;
-					break;
-				case 10:
-					BOSS.DestSprite.x = 900;
-					BOSS.DestSprite.y = 360;
-					break;
-				}
-				etapa = JAURTI;
-				for (int i = 0; i < 10; i++)
-				{
-					if (!etsaia[i].bizirik)
-					{
-						EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite., BizirikDaudenEtsaiak, BizirikKopurua);
-					}
-				}
-			}
-			BossAtakea(etapa);
-			etapa = ITXARON;
-			if (SDL_TICKS_PASSED(SDL_GetTicks(), attackrate))
-			{
-				etapa = MUGITU;
-				attackrate = SDL_GetTicks() + (rand()% 5000)+5000;
-			}
-		}
+		
 	}
 }
 
@@ -467,11 +364,11 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 	}
 }
 
-void BossAtakea(BOSSFIGHT etapa)
+void BossAtakea(BOSSFIGHT faseak)
 {
 	for (int i = 0; i < 40; i++)
 	{
-		if (etapa == JAURTI)
+		if (faseak == JAURTI)
 		{
 			jaurtigai[i].pantailan = TRUE;
 			jaurtigai[i].angelua = (rand() % 360);
@@ -484,5 +381,121 @@ void BossAtakea(BOSSFIGHT etapa)
 		}
 		jaurtigai[i].tiroa.x += 12 * cos(jaurtigai[i].angelua * M_PI / 180);
 		jaurtigai[i].tiroa.y -= 12 * sin(jaurtigai[i].angelua * M_PI / 180);
+	}
+}
+
+void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
+{
+	static Uint32 spriterate = 0, attackrate = 0;
+	static int aurrekoa;
+
+	int SRC, tmp;
+
+	if (SDL_TICKS_PASSED(SDL_GetTicks(), spriterate))
+	{
+		switch (faseak)
+		{
+		case TRANSFORM:
+			BOSS.SrcSprite.x = 640 + 128 * *bAnimazioa;
+			SRC = 15;
+
+			break;
+		case SLEEP:
+			BOSS.SrcSprite.x = 128 * *bAnimazioa;
+			SRC = 5;
+			break;
+		default:
+			BOSS.SrcSprite.x = 3200 + 128 * *bAnimazioa;
+			SRC = 5;
+			break;
+		}
+		++*bAnimazioa;
+		spriterate = SDL_GetTicks() + 240;
+		if (*bAnimazioa >= SRC)
+		{
+			if (faseak == TRANSFORM)
+			{
+				faseak = TRIGGERED;
+				attackrate = SDL_GetTicks() + 4000;
+			}
+			*bAnimazioa = 0;
+		}
+	}
+	if (faseak == TRANSFORM)
+	{
+		BOSS.DestSprite.y -= 9;
+	}
+	if (faseak == TRIGGERED)
+	{
+		if (faseak == MUGITU)
+		{
+			do
+			{
+				tmp = rand() % 10;
+			} while (aurrekoa == tmp);
+			aurrekoa = tmp;
+			switch (tmp)
+			{
+			case 0:
+				BOSS.DestSprite.x = 70;
+				BOSS.DestSprite.y = 50;
+				break;
+			case 1:
+				BOSS.DestSprite.x = 1100;
+				BOSS.DestSprite.y = 50;
+				break;
+			case 2:
+				BOSS.DestSprite.x = 70;
+				BOSS.DestSprite.y = 450;
+				break;
+			case 3:
+				BOSS.DestSprite.x = 1070;
+				BOSS.DestSprite.y = 450;
+				break;
+			case 4:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 460;
+				break;
+			case 5:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 460;
+				break;
+			case 6:
+				BOSS.DestSprite.x = 580;
+				BOSS.DestSprite.y = 50;
+				break;
+			case 7:
+				BOSS.DestSprite.x = 450;
+				BOSS.DestSprite.y = 230;
+				break;
+			case 8:
+				BOSS.DestSprite.x = 705;
+				BOSS.DestSprite.y = 230;
+				break;
+			case 9:
+				BOSS.DestSprite.x = 250;
+				BOSS.DestSprite.y = 360;
+				break;
+			case 10:
+				BOSS.DestSprite.x = 900;
+				BOSS.DestSprite.y = 360;
+				break;
+			}
+			faseak = JAURTI;
+			for (int i = 0; i < 10; i++)
+			{
+				if (!etsaia[i].bizirik)
+				{
+					EtsaiaKokatu(i, etsaia[i].DestSprite.x, etsaia[i].DestSprite.y, BizirikDaudenEtsaiak, BizirikKopurua);
+				}
+			}
+		}
+		BossAtakea(faseak);
+		faseak = ITXARON;
+		if (SDL_TICKS_PASSED(SDL_GetTicks(), attackrate))
+		{
+			faseak = MUGITU;
+			attackrate = SDL_GetTicks() + (rand() % 5000) + 5000;
+		}
 	}
 }
