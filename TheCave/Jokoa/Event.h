@@ -42,7 +42,8 @@ void ZeinKlikatuDa(SDL_MouseButtonEvent ebentua, SAGUA* klika);		//Saguarekin kl
 void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool* Jokatzen);		//Klika non egin den eta botoiaren arabera ekintzak hasten dira
 void KolisioakKonprobatu(void* pixels, int pitch, Uint8 bpp, int BizirikDaudenEtsaiak[], int* BizirikKopurua, ZENTZUA begira, int* pAnimazioa);
 void PongKolisioa();
-void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua);
+void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua, Uint32* attackrate);
+
 
 
 #endif

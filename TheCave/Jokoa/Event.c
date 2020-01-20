@@ -12,7 +12,7 @@ HITBOX hitbox;
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
 extern PONG easteregg;
-extern TIROAK jaurtigai[100];
+extern TIROAK jaurtigai[30];
 
 
 extern BOSSFIGHT faseak;
@@ -489,7 +489,7 @@ void PongKolisioa()
 	}
 }
 
-void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
+void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua, Uint32 *attackrate)
 {
 	static Uint32 spawnrate = 0;
 	static SDL_bool spawn = SDL_FALSE;
@@ -499,7 +499,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 	int PertzonaiaYBekoa = pertsonaia.DestSprite.y + 59;
 	int YBekoa = pertsonaia.DestSprite.y + 52;
 
-	for (int j = 0; j < 40; j++)
+	for (int j = 0; j < 30; j++)
 	{
 		if ((jaurtigai[j].tiroa.x <= PertzonaiaEskuinMuga && jaurtigai[j].tiroa.x + 10 >= PertzonaiaEzkerMuga) && (jaurtigai[j].tiroa.y + 10 >= PertzonaiaYGoikoa && jaurtigai[j].tiroa.y <= PertzonaiaYBekoa))
 		{
@@ -527,6 +527,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 				else if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate) && faseak != TRANSFORM)
 				{
 					faseak = MUGITU;
+					*attackrate = SDL_GetTicks() + 4000;
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;
@@ -549,6 +550,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 				else if (SDL_TICKS_PASSED(SDL_GetTicks(), spawnrate) && faseak != TRANSFORM)
 				{
 					faseak = MUGITU;
+					*attackrate = SDL_GetTicks() + 4000;
 					kont++;
 					spawn = SDL_TRUE;
 					spawnrate = SDL_GetTicks() + 2000;

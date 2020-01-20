@@ -23,7 +23,7 @@ Uint32 delays[8] = {150,60,80,80,10,100,80};
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
-extern TIROAK jaurtigai[40];
+extern TIROAK jaurtigai[30];
 
 
 extern PONG easteregg;
@@ -124,6 +124,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 {
 	static int eAnimazioa = 0, bAnimazioa = 0;
 	int abiadura = 9;
+	static Uint32 attackrate = 0;
 	//	Debbug de pies
 	if (f3)
 	{
@@ -138,8 +139,8 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	KolisioakKonprobatu(pixels, pitch, bpp, BizirikDaudenEtsaiak, BizirikKopurua, *begira, pAnimazioa);
 	if (BOSS.bizirik)
 	{
-		KolisioakBoss(pantaila, *begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
-		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua);
+		KolisioakBoss(pantaila, *begira, pAnimazioa, &bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua, &attackrate);
+		BossMugitu(&bAnimazioa, BizirikDaudenEtsaiak, BizirikKopurua, &attackrate);
 	}
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
 
@@ -215,7 +216,7 @@ void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int
 
 void PongExekutatu()
 {
-	int abiadura = 9;
+	int abiadura = 10;
 	switch (Ordenagailua)
 	{
 		case ZERBITZARI:
@@ -398,7 +399,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 
 void BossAtakea(BOSSFIGHT faseak)
 {
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 30; i++)
 	{
 		if (faseak == JAURTI)
 		{
@@ -416,9 +417,9 @@ void BossAtakea(BOSSFIGHT faseak)
 	}
 }
 
-void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua)
+void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua, Uint32 *attackrate)
 {
-	static Uint32 spriterate = 0, attackrate = 0;
+	static Uint32 spriterate = 0;
 	static int aurrekoa;
 
 	int SRC, tmp;
@@ -448,7 +449,7 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 			if (faseak == TRANSFORM)
 			{
 				faseak = TRIGGERED;
-				attackrate = SDL_GetTicks() + 4000;
+				*attackrate = SDL_GetTicks() + 4000;
 			}
 			*bAnimazioa = 0;
 		}
@@ -497,10 +498,10 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 		}
 		BossAtakea(faseak);
 		faseak = ITXARON;
-		if (SDL_TICKS_PASSED(SDL_GetTicks(), attackrate))
+		if (SDL_TICKS_PASSED(SDL_GetTicks(), *attackrate))
 		{
 			faseak = MUGITU;
-			attackrate = SDL_GetTicks() + (rand() % 5000) + 5000;
+			*attackrate = SDL_GetTicks() + (rand() % 5000) + 5000;
 		}
 	}
 }

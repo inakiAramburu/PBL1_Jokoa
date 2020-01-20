@@ -15,7 +15,7 @@ extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
  
 
-TIROAK jaurtigai[40];
+TIROAK jaurtigai[30];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
@@ -268,8 +268,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		}
 
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
-		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
-		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
+		RectEraikitzailea(&easteregg.Player1, 50, 360, 70, 20);
+		RectEraikitzailea(&easteregg.Player2, 1210, 360, 70, 20);
 		break;
 	}
 }
@@ -361,7 +361,7 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 		int abiadura = 7;
 
 
-		for (i = 0; i < 40; i++)
+		for (i = 0; i < 30; i++)
 		{
 			if (jaurtigai[i].pantailan)
 			{

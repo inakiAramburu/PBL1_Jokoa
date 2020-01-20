@@ -20,8 +20,7 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 void EtsaiaKokatu(int znbk_etsaia, int x, int y, int BizirikDaudenEtsaiak[], int* BizirikKopurua);		//Etsaia nibel hasieran kokatu, etsaiaren zenbakia, x eta y posizioa emanez
 void PongExekutatu();
 void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila);
-void BossAtakea(BOSSFIGHT faseak);
-void BossMugitu(int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua);
+void BossMugitu(int* bAnimazioa, int BizirikDaudenEtsaiak[], int* BizirikKopurua, Uint32* attackrate);
 
 
 #endif
