@@ -147,12 +147,12 @@ void PertsonaiaHil()
 	if (kont == 3)
 	{
 		IrabaziGaldu(IRABAZI_EFEKTUA);
-		ImgKargatu(".\\media\\menu\\IrabaziDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\IrabaziDuzu.bmp", 845, 560, 208, 76);		//Zabalera, altuera, x, y
 	}
 	else
 	{
 		IrabaziGaldu(GALDU_EFEKTUA);
-		ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 846, 569, 208, 76);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\GalduDuzu.bmp", 840, 562, 208, 76);		//Zabalera, altuera, x, y
 	}
 	GuztiakHil();
 	
