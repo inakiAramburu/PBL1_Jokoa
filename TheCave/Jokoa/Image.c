@@ -75,6 +75,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 	case KONTROLAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
+		ImgKargatu(".\\media\\menu\\Kontrolak2.bmp", 950, 600, 208, 15);
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
