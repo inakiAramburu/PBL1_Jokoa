@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "Sound.h"
-
+//bug
 HITBOX hitbox;
 
 extern PERTSONAIA pertsonaia;
