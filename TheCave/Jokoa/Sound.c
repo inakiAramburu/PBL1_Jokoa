@@ -2,35 +2,6 @@
 #include "SDL_mixer.h"
 #include "Sound.h"
 
-void MusikaJarri(char Fitxategia[])
-{
-	//explicacion
-	//https://gigi.nullneuron.net/gigilabs/playing-a-wav-file-using-sdl2/
-
-	SDL_AudioSpec wavSpec;
-	Uint32 wavLength;
-	Uint8* wavBuffer;
-
-	/*  fichategia cargatu */
-	if (SDL_LoadWAV(Fitxategia, &wavSpec, &wavBuffer, &wavLength) == NULL) {
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "no encuentra test.wav: %s\n", SDL_GetError());
-		exit(-1);
-	}
-	// abrir dependencias de audio
-
-	SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
-
-	// iniciar el sonido
-
-	int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-	SDL_PauseAudioDevice(deviceId, 0);
-
-	// dena itxi
-	
-	//SDL_CloseAudioDevice(deviceId);
-	//SDL_FreeWAV(wavBuffer);
-
-}
 
 
 
@@ -90,14 +61,7 @@ void musica()
 
 
 
-void Musika_jarri()
-{
 
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) > 0) {
-		printf("no se pudo cargar el asusbsistema audio  %s\n", SDL_GetError());
-		exit(1);
-	}
-}
 
 void Musikaabiarazi()
 {
@@ -108,126 +72,69 @@ void Musikaabiarazi()
 	}
 	//iniciar canales
 		//declaramos canales podemos usar asta 3 sonidos con esta fuuncion
-	Mix_AllocateChannels(20); //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos //5.Pong
+	Mix_AllocateChannels(5);//0.Pong //1.Juego,MusikaBoss //2.IrabaziGaldu //3.Efectuak //4. Musica boos 
 }
 
 
-void MusikaJOKUA()
+void MusikaJOKUA(int abeztia )
 {
 
-	Mix_Chunk* menu;
-
-	Musikaabiarazi();
-
-	//cargar archivos
-	menu = Mix_LoadWAV(MUSIKA_MENU);
-	
-
-
-	if (menu == NULL)
+	if (Soinuak[abeztia]== NULL)
 	{
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(1, menu, -1);
+	Mix_PlayChannel(1, Soinuak[abeztia], -1);
+
+}
+
+void IrabaziGaldu(int zenbakia)
+{
+
+	if (Soinuak[zenbakia] == NULL)
+	{
+		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
+		exit(1);
+	}
+	Mix_PlayChannel(2, Soinuak[zenbakia], 0);
 
 }
 
 void Efektuak(int zenbakia) 
 {
-
-
-	Mix_Chunk* Efectua[3];
-
-	Musikaabiarazi();
-	
+		
 
 	//cargar archivos
-	Efectua[0] = Mix_LoadWAV(KEA_EFEKTUA);
-	Efectua[1] = Mix_LoadWAV(EZPADA_EFEKTUA);
-	Efectua[2] = Mix_LoadWAV(TIROA_EFEKTUA);
+	
 
-
-	if (Efectua[zenbakia] == NULL)
+	if (Soinuak[zenbakia] == NULL)
 	{
 		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
 		exit(1);
 	}
-	Mix_PlayChannel(3, Efectua[zenbakia], 0);
-}
-
-void musikaBOSS()
-{
-
-
-	Mix_Chunk* Efectua;
-
-	Musikaabiarazi();
-
-
-	//cargar archivos
-	Efectua = Mix_LoadWAV(MusikaBOSS);
-	
-
-
-	if (Efectua == NULL)
-	{
-		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
-		exit(1);
-	}
-	Mix_PlayChannel(1, Efectua, -1);
-
+	Mix_PlayChannel(3, Soinuak[zenbakia], 0);
 }
 
 
-void IrabaziGaldu(int zenbakia)
-{
-	Mix_Chunk* Efectua[2];
-
-	Musikaabiarazi();
-
-	
-
-	//cargar archivos
-	Efectua[0] = Mix_LoadWAV(IRABAZI_EFEKTUA);
-	Efectua[1] = Mix_LoadWAV(GALDU_GALDU);
 
 
-	if (Efectua[zenbakia] == NULL)
-	{
-		printf("no se pudo cargar el sonido %s\n", SDL_GetError());
-		exit(1);
-	}
-	Mix_PlayChannel(2, Efectua[zenbakia], 0);
-	
 
 
-}
+
 
 void musica_Pong(int numerodesonido)
 {
 
-	Mix_Chunk* Sonidos[3];/// 1.pala 2.pareta 3.irabazi
+	
 
-	Musikaabiarazi();
+	
 
 //cargar archivos
-	Sonidos[0] = Mix_LoadWAV(".\\media\\sound\\pong\\pala.wav");
-	if (Sonidos[0] == NULL) {
+	if (Soinuak[numerodesonido] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
 
-	Sonidos[1] = Mix_LoadWAV(".\\media\\sound\\pong\\pareta.wav");
-	if (Sonidos[1] == NULL) {
-		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
-		exit(1);
-	}
-	Sonidos[2] = Mix_LoadWAV(".\\media\\sound\\pong\\puntua.wav");
-	if (Sonidos[2] == NULL) {
-		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
-		exit(1);
-	}
 
 	///////////////////////////////////////
 
@@ -237,7 +144,7 @@ void musica_Pong(int numerodesonido)
 /////////////////	
 
 //reproducir audio
-	Mix_PlayChannel(5, Sonidos[numerodesonido],0);
+	Mix_PlayChannel(0, Soinuak[numerodesonido], 0);
 
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen

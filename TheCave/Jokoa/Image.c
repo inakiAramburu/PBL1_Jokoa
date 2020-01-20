@@ -5,14 +5,24 @@
 #include <SDL_net.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "Sound.h"
+#include "SDL_mixer.h"
+
 int aukera;
 
 SDL_Renderer* render;
 extern PERTSONAIA pertsonaia;
-extern ETSAIA etsaia[ETSAI_KOPURUA];
+extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
+ 
+
+TIROAK jaurtigai[40];
 
 extern PONG easteregg;
 extern ROL Ordenagailua;
+
+extern BOSSFIGHT faseak;
+extern int kont;
+
 
 IMGPERTSONAIA spriteak[7];
 
@@ -38,6 +48,7 @@ int IrudiakKendu(int ZnbtUtzi)
 void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)
 {	
 	char str[128];
+	char IPserver[15];
 	int port;
 	IPaddress ip;
 	static int aukera;
@@ -50,12 +61,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		jokalaria puntu horretara heltzen ez bada*/
 
 	case MENUA:
+		
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\pergamino.bmp", 395, 560, 442, 80);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Jolastu.bmp", 250, 100, 515, 175);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kontrolak.bmp", 250, 100, 510, 300);		//Zabalera, altuera, x, y
 		ImgKargatu(".\\media\\menu\\Kredituak.bmp", 250, 100, 512, 425);		//Zabalera, altuera, x, y
-		pertsonaia.bizirik = FALSE;
+		pertsonaia.bizirik = SDL_FALSE;
 		break;
 	case KREDITUAK:
 		ImgKargatu(MENU_PANTAILA, 0, 0, 0, 0);		//Zabalera, altuera, x, y
@@ -66,11 +78,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		ImgKargatu(".\\media\\menu\\KontrolakP.bmp", 950, 600, 208, 15);		//Zabalera, altuera, x, y
 		break;
 	case LEHEN:
-		MusikaJOKUA();
+		Mix_HaltChannel(-1);
+		MusikaJOKUA(MUSIKA_JOKUA);
 
 		ImgKargatu(LEHENENGO_PANTAILA, 0, 0, 0, 0);
 		pertsonaia.SrcSprite.x = 0;
-		pertsonaia.bizirik = TRUE;
+		pertsonaia.bizirik = SDL_TRUE;
+		BizirikDaudenEtsaiak;
 		RectEraikitzailea(&pertsonaia.DestSprite, 0, 300, 60, 128);
 		EtsaiaKokatu(1, 400, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
 		EtsaiaKokatu(5, 900, 469, BizirikDaudenEtsaiak, BizirikKopurua);		//REVISAR
@@ -110,11 +124,32 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(4, 179, 166, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(0, 760, 384, BizirikDaudenEtsaiak, BizirikKopurua);
 		break;
+	case FINALA:
+		Mix_HaltChannel(-1);
+		ImgKargatu(BOSS_PANTAILA, 0, 0, 0, 0);
+		pertsonaia.SrcSprite.x = 0;
+		EtsaiaKargatu(".\\media\\enemies\\daBoss.bmp", ETSAI_KOPURUA);
+		BOSS.bizirik = SDL_TRUE;
+		kont = 0;
+		faseak = SLEEP;
+		EtsaiaKokatu(0, 251, 435, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(8, 272, 291, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(2, 445, 502, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(6, 462, 215, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(4, 262, 137, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(5, 883, 138, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(3, 726, 216, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(7, 940, 291, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(1, 757, 503, BizirikDaudenEtsaiak, BizirikKopurua);
+		EtsaiaKokatu(9, 889, 437, BizirikDaudenEtsaiak, BizirikKopurua);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 548, 60, 128);
+		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
+		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
+		
+		break;
 	case AUKERATUMODUA:
-		Mix_Pause(1);
-		Mix_Pause(2);
-		Mix_Pause(3);
-		Mix_Pause(4);
+		Mix_Pause(-1);
+	
 		ImgKargatu(".\\media\\pong\\OnlineLocal.bmp", 0, 0, 0, 0);
 		break;
 	case AUKERATUZERBITZUA:
@@ -132,17 +167,17 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		break;
 
 	case MINIJOKOA:
-		
+
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
-		pertsonaia.bizirik = FALSE;
+		pertsonaia.bizirik = SDL_FALSE;
 		GuztiakHil();
-		easteregg.piztuta = TRUE;
+		easteregg.piztuta = SDL_TRUE;
 		easteregg.P1puntuazioa = 0;
 		easteregg.P2puntuazioa = 0;
 
-		if (aukera == ZERBITZARI)
+		switch (aukera)
 		{
-
+		case ZERBITZARI:
 			printf("Sartu portua: ");
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
@@ -185,10 +220,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			}
 			easteregg.abiaduray = 7;
 			Ordenagailua = ZERBITZARI;
-		}
-		else if (aukera == BEZEROA)
-		{
-			char IPserver[15];
+			break;
+		case BEZEROA:
 
 			printf("Serbitzariaren ipa jarri: ");
 			fgets(IPserver, 15, stdin);
@@ -197,7 +230,8 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			fgets(str, 128, stdin);
 			sscanf(str, "%d", &port);
 
-			if (SDLNet_Init() == -1) {
+			if (SDLNet_Init() == -1)
+			{
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
 
@@ -213,8 +247,25 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			SDLNet_TCP_Send(client, Erantzuna, 128);
 			printf("Server: %s\n", Agurra);
 			Ordenagailua = BEZEROA;
-
+			break;
+		default:
+			srand(SDL_GetTicks());
+			do
+			{
+				easteregg.angelua = (rand() % 90) - 45;
+			} while (easteregg.angelua < 15 && easteregg.angelua > -15);
+			if (rand() % 2 == 0)
+			{
+				easteregg.abiadurax = -7;
+			}
+			else
+			{
+				easteregg.abiadurax = 7;
+			}
+			easteregg.abiaduray = 7;
+			break;
 		}
+
 		RectEraikitzailea(&easteregg.pilota, 628, 348, 25, 25);
 		RectEraikitzailea(&easteregg.Player1, 50, 360, 150, 20);
 		RectEraikitzailea(&easteregg.Player2, 1210, 360, 150, 20);
@@ -301,6 +352,22 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 				SDL_RenderCopy(render, etsaia[BizirikDaudenEtsaiak[i]].textura, &etsaia[BizirikDaudenEtsaiak[i]].SrcSprite, &etsaia[BizirikDaudenEtsaiak[i]].DestSprite);
 			}
 		}
+	}
+	if (BOSS.bizirik)
+	{
+		srand(SDL_GetTicks());
+		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
+		int abiadura = 7;
+
+
+		for (i = 0; i < 40; i++)
+		{
+			if (jaurtigai[i].pantailan)
+			{
+				SDL_SetRenderDrawColor(render, 88, 42, 31, 255);
+				SDL_RenderFillRect(render, &jaurtigai[i].tiroa);
+			}
+		}	
 	}
 	if (pertsonaia.bizirik)
 	{
