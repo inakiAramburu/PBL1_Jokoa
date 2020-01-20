@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include "Sound.h"
 
-HITBOX hitbox;
+HITBOX hitbox;//
 
 extern PERTSONAIA pertsonaia;
 extern ETSAIA etsaia[ETSAI_KOPURUA + 1];
