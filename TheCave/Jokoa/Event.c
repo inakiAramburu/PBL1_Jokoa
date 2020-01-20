@@ -268,11 +268,11 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 		if (klika == EZKER)
 		{
 			SDL_GetMouseState(&x, &y);
-			if ((x > 493 && y > 379) && (x < 801 && y < 471))
+			if ((x > 494 && y > 443) && (x < 800 && y < 533))
 			{
 				*Pantaila = LEHEN;
 			}
-			else if ((x > 578 && y > 490) && (x < 722 && y < 538))
+			else if ((x > 587 && y > 547) && (x < 705 && y < 582))
 			{
 				*Jokatzen = SDL_FALSE;
 			}
@@ -285,12 +285,10 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //ONLINE
 			{
 				*Pantaila = AUKERATUZERBITZUA;
-				printf("ONLINE\n");
 			}
 			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //LOCAL
 			{
 				*Pantaila = MINIJOKOA;
-				printf("LOCAL\n");
 			}
 		}
 		break;
@@ -301,12 +299,10 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			if ((x > 381 && y > 454) && (x < 578 && y < 578)) //CREATE
 			{
 				*Pantaila = AUKERAZERBITZARIA;
-				printf("CREATE\n");
 			}
 			if ((x > 705 && y > 454) && (x < 895 && y < 578)) //JOIN
 			{
 				*Pantaila = AUKERABEZEROA;
-				printf("JOIN\n");
 			}
 		}
 		break;
@@ -317,7 +313,6 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
 			{
 				*Pantaila = MINIJOKOA;
-				printf("JOKATU\n");
 			}
 		}
 		break;
@@ -328,7 +323,6 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			if ((x > 1159 && y > 639) && (x < 1236 && y < 677))
 			{
 				*Pantaila = MINIJOKOA;
-				printf("JOKATU\n");
 			}
 		}
 		break;
