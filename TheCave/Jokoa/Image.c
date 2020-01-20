@@ -381,11 +381,11 @@ void RenderMenu()
 
 	TTF_Init();
 	TTF_Font* fuente;
-	fuente = TTF_OpenFont(".\\media\\pong\\Provicali.otf", 1000);
+	fuente = TTF_OpenFont(".\\media\\pong\\edunline.ttf", 1000);
 	SDL_Color color;
-	color.r = 0;
-	color.g = 0;
-	color.b = 0;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
 
 	SDL_Surface* texto;
 	SDL_Texture* prueba;
