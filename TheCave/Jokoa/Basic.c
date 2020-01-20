@@ -139,7 +139,7 @@ void PertsonaiaHil()
 	if (BOSS.bizirik)
 	{
 		BOSS.bizirik = SDL_FALSE;
-		for (int i = 0; i < 40; i++)
+		for (int i = 0; i < 30; i++)
 		{
 			jaurtigai[i].pantailan = SDL_FALSE;
 		}
