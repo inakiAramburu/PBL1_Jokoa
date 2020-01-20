@@ -142,12 +142,14 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 		EtsaiaKokatu(7, 940, 291, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(1, 757, 503, BizirikDaudenEtsaiak, BizirikKopurua);
 		EtsaiaKokatu(9, 889, 437, BizirikDaudenEtsaiak, BizirikKopurua);
-		RectEraikitzailea(&pertsonaia.DestSprite, 10, 548, 60, 128);
+		RectEraikitzailea(&pertsonaia.DestSprite, 10, 546, 60, 128);
 		RectEraikitzailea(&BOSS.DestSprite, 580, 400, 149, 128);
 		RectEraikitzailea(&BOSS.SrcSprite, 0, 0, 149, 128);
 		
 		break;
 	case AUKERATUMODUA:
+		pertsonaia.bizirik = SDL_FALSE;
+		BOSS.bizirik = SDL_FALSE;
 		Mix_Pause(-1);
 	
 		ImgKargatu(".\\media\\pong\\OnlineLocal.bmp", 0, 0, 0, 0);
@@ -169,7 +171,6 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 	case MINIJOKOA:
 
 		ImgKargatu(".\\media\\pong\\FondoPong.bmp", 0, 0, 0, 0);
-		pertsonaia.bizirik = SDL_FALSE;
 		GuztiakHil();
 		easteregg.piztuta = SDL_TRUE;
 		easteregg.P1puntuazioa = 0;
