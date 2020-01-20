@@ -72,7 +72,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.w = 128;
 	pertsonaia.SrcSprite.y = 0;
 	
-	/*
+	
 		Efektuak(KEA_EFEKTUA);
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
@@ -117,7 +117,7 @@ void Animazioa()
 			Irudikatu();
 			SDL_Delay(100);
 		}
-		SDL_Delay(2000);*/
+		SDL_Delay(2000);
 }
 
 void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 bpp, PANTAILAK* pantaila, int BizirikDaudenEtsaiak[], int* BizirikKopurua)

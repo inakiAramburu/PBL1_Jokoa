@@ -230,7 +230,7 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 				PertsonaiaHasieratu();
 				EtsaiakHasieratu();
 				Animazioa();
-				*Pantaila = FINALA;
+				*Pantaila = LEHEN;
 			}
 			else if ((x > 510 && y > 300) && (x < 760 && y < 400))
 			{

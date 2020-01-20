@@ -102,10 +102,7 @@ void IrabaziGaldu(int zenbakia)
 
 void Efektuak(int zenbakia) 
 {
-		
-
-	//cargar archivos
-	
+	//cargar archivos	
 
 	if (Soinuak[zenbakia] == NULL)
 	{
@@ -124,28 +121,19 @@ void Efektuak(int zenbakia)
 
 void musica_Pong(int numerodesonido)
 {
-
-	
-
-	
-
 //cargar archivos
 	if (Soinuak[numerodesonido] == NULL) {
 		printf("no se pudo cargar el sonido  %s\n", SDL_GetError());
 		exit(1);
 	}
 
-
 	///////////////////////////////////////
-
-	
 
 	//esto es para iniciar audios el 1. numero es para elejir el canal. el 2. el sonido que quieres reproducir. 3. Las veces que quieres que se reproduzca. con -1 infinito y con 0 una vez
 /////////////////	
 
 //reproducir audio
 	Mix_PlayChannel(0, Soinuak[numerodesonido], 0);
-
 
 	//esto se supone que es para cambiar el volumen del chunck 1. es la pista 2 el volumen
 	//estaria bien poner unas teclas para subir bajar volumen y poner una variable donde esta el 1
