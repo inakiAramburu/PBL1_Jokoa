@@ -16,7 +16,7 @@ extern IMGPERTSONAIA spriteak[7];
 
 SDL_Window* leihoa;
 extern SDL_Renderer* render;
-extern TIROAK jaurtigai[40];
+extern TIROAK jaurtigai[30];
 extern int kont;
 
 
