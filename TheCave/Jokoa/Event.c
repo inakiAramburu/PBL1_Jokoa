@@ -261,6 +261,14 @@ void KonprobatuKlika(PANTAILAK* Pantaila, SAGUA klika, SDL_bool *Jokatzen)
 			if ((x > 1063 && y > 99) && (x < 1109 && y < 142))
 			{
 				*Pantaila = MENUA;
+				printf("MENUA\n");
+			}
+			else if ((x > 957 && y > 517) && (x < 1007 && y < 571))
+			{
+				printf("ENTRA\n");
+				IrudiZnbk = IrudiakKendu(IrudiZnbk - 1);
+				RenderPrestatu(AURRERA, 0, 0);
+				Irudikatu();
 			}
 		}
 		break;
