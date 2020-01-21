@@ -73,7 +73,6 @@ void Amaitu(SDL_bool* Jokatzen, PANTAILAK* Pantaila)
 	{
 		Konexioaitxi();
 	}
-	extern int aukera;
 	SDL_DestroyWindow(leihoa);
 	SDL_DestroyRenderer(render);
 	*Jokatzen = SDL_FALSE;
@@ -122,7 +121,6 @@ void EtsaiakHasieratu()
 		etsaia[j].DestSprite.w = 33;
 		etsaia[j].DestSprite.h = 44;
 	}
-	tmp = j;
 }
 
 void GuztiakHil()

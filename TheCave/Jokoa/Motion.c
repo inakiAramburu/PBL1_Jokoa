@@ -251,7 +251,7 @@ void PongExekutatu()
 			easteregg.Player2.y = DatuakClient[1];
 			break;
 		case BEZEROA:
-			PongKolisioa();
+			//PongKolisioa();
 
 			if (easteregg.pilota.y <= 0 || easteregg.pilota.y + 25 >= 720)
 			{

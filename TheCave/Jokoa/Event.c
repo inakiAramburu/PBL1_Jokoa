@@ -46,7 +46,6 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 		{
 			switch (ebentua.type)
 			{
-				*Pantaila += 1;
 			case SDL_QUIT:
 				Amaitu(Jokatzen, Pantaila);
 				break;
