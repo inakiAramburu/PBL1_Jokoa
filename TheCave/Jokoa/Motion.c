@@ -236,11 +236,11 @@ void PongExekutatu()
 				easteregg.abiaduray *= -1;
 				musica_Pong(PONG_PARETA);
 			}
-			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180);
+			easteregg.pilota.x += easteregg.abiadurax * cos(easteregg.angelua * M_PI / 180); //Posizioa
 			easteregg.pilota.y -= easteregg.abiaduray * sin(easteregg.angelua * M_PI / 180);
 
 			int DatuakHost[4] = { easteregg.Player1.x,easteregg.Player1.y,easteregg.pilota.x,easteregg.pilota.y };
-			void* DatuakHostbidali = DatuakHost;
+			void* DatuakHostbidali = DatuakHost; //Direccion de memoria de datuakhost
 			SDLNet_TCP_Send(client, DatuakHostbidali, 100);
 
 			int DatuakClient[2];
