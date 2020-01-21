@@ -27,6 +27,7 @@ typedef struct S_HITBOX
 
 }HITBOX;
 
+//lo cojer de event.c y asi los puedes usar donde quieras 
 extern SDL_bool a;
 extern SDL_bool d;
 extern SDL_bool espacio;

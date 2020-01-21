@@ -32,6 +32,7 @@ extern TCPsocket server, client;
 
 void AltueraZuzendu(void* pixels, int pitch, Uint8 bpp)
 {
+	//pertsonaia marraren gainean ondo jartzeko 
 	int i = 1;
 	KOLOREAK tmp, tmp2;
 	do
@@ -60,6 +61,7 @@ void Animazioa()
 {
 	int i, j;
 
+	//coloicamos al personaje
 	SDL_Delay(500);
 	IrudiZnbk = IrudiakKendu(1);
 	pertsonaia.bizirik = SDL_TRUE;
@@ -73,7 +75,7 @@ void Animazioa()
 	pertsonaia.SrcSprite.y = 0;
 	
 	
-		Efektuak(KEA_EFEKTUA);
+		Efektuak(KEA_EFEKTUA);//efecto kea +animacion
 		for (i = 0; i < spriteak[pertsonaia.sprite].kop; i++)
 		{
 			SDL_Delay(100);
@@ -110,7 +112,7 @@ void Animazioa()
 		SDL_Delay(300);
 		IrudiZnbk = IrudiakKendu(0);
 		ImgKargatu(".\\media\\menu\\TheCaveW.bmp", 1000, 400, 140, 160);
-		for (i = 0; i < 80; i++)
+		for (i = 0; i < 80; i++)//difuminado
 		{
 			SDL_SetTextureAlphaMod(Irudiak[0].textura, 2 * i);
 			RenderPrestatu(AURRERA,0,0);
@@ -144,39 +146,41 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 	}
 	PertsonaiaMugitu(pAnimazioa, begira, pantaila);
 
-	if (pertsonaia.erortzen)
+	if (pertsonaia.erortzen)//si se esta cayendo suma la grabedad
 	{
 		pertsonaia.DestSprite.y += GRABITATEA;
 		AltueraZuzendu(pixels, pitch, bpp);
 	}
 
-	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);
+	pertsonaia.SrcSprite.x = 128 * (*pAnimazioa);//pasa los sprites
 
+	//depende de que animacion este va ha una velocidad
 	if (SDL_GetTicks() - time > delays[pertsonaia.sprite])
 	{
 		++* pAnimazioa;
 		time = SDL_GetTicks();
 	}
 
-	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)
+	if (*pAnimazioa >= spriteak[pertsonaia.sprite].kop)//si se le acaban los fotogramas se vuelve a empezar
 	{
-		if (pertsonaia.sprite == HIL)
+		if (pertsonaia.sprite == HIL)//se murio y va a la pantalla de muerte
 		{
 			PertsonaiaHil();
 			*pantaila = ATERA;
 		}
-		if (pertsonaia.salto)
+		if (pertsonaia.salto)//cuando acaba el salto se cae
 		{
 			pertsonaia.salto = SDL_FALSE;
 			pertsonaia.erortzen = SDL_TRUE;
 		}
-		if (pertsonaia.erasotzen)
+		if (pertsonaia.erasotzen)//si acaba de atacar deja de atacar
 		{
 			pertsonaia.erasotzen = SDL_FALSE;
 			k = SDL_FALSE;
 		}
 		*pAnimazioa = 0;
 	}
+	//bizirik dauden etsaien mugimendua
 	for (int j = 0; j < *BizirikKopurua; j++)
 	{
 		if (etsaia[BizirikDaudenEtsaiak[j]].bizirik)
@@ -186,12 +190,13 @@ void Ekintzak(int* pAnimazioa, ZENTZUA* begira, void* pixels, int pitch, Uint8 b
 			etsaia[BizirikDaudenEtsaiak[j]].SrcSprite.x = 32 * eAnimazioa;
 		}
 	}
-	if (SDL_GetTicks() - time2 > 180)
+	//etsaien animazioa moteltzeko
+	if (SDL_GetTicks() - time2 > 180)//180  milesimas cada 3 ciclos
 	{
 		eAnimazioa++;
 		time2 = SDL_GetTicks();
 	}
-	if (eAnimazioa >= ETSAIA_SPRITE_KOPURUA)
+	if (eAnimazioa >= ETSAIA_SPRITE_KOPURUA)//si se acaban los sprites de los enemigos vuelven a empezar
 	{
 		eAnimazioa = 0;
 	}
@@ -318,12 +323,12 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 	{
 		if (pertsonaia.erortzen)
 		{
-			if ((a || d))
+			if ((a || d))//si te caes y estas pulsando a o d se pone a correr
 			{
 				pertsonaia.sprite = KORRIKA;
 				*pAnimazioa = 0;
 			}
-			else
+			else // si te caes y no estas pulsando ni a o d se pone en idle
 			{
 				pertsonaia.sprite = IDLE;
 				*pAnimazioa = 0;
@@ -365,6 +370,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 			pertsonaia.DestSprite.x += abiadurax;
 		}
 	}
+	//Jugador parado
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && !espacio && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
 		if (pertsonaia.sprite != IDLE)
@@ -374,12 +380,14 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 		pertsonaia.sprite = IDLE;
 
 	}
+	//activo que esta saltando
 	if (!pertsonaia.erortzen && !pertsonaia.salto && !k && espacio && pertsonaia.sprite != HIL)
 	{
 		pertsonaia.salto = SDL_TRUE;
 		pertsonaia.sprite = SALTO;
 		*pAnimazioa = 0;
 	}
+	//erasoa
 	if (!pertsonaia.erortzen && !pertsonaia.salto && k && !pertsonaia.erasotzen && !d && !a && pertsonaia.sprite != HIL)
 	{
 		Efektuak(EZPATA_EFEKTUA);
@@ -387,6 +395,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 		pertsonaia.sprite = ERASO;
 		*pAnimazioa = 0;
 	}
+	//si salta y no se muere se muebe hacia arriba (salto)
 	if (pertsonaia.salto && pertsonaia.sprite != HIL)
 	{
 		pertsonaia.DestSprite.y -= abiaduray;
@@ -400,18 +409,21 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 void BossAtakea(BOSSFIGHT faseak)
 {
 	for (int i = 0; i < 30; i++)
-	{
+	{//jaurti fasasean badago tiroak pizten ditu eta angelu bat ematen die
 		if (faseak == JAURTI)
 		{
 			jaurtigai[i].pantailan = SDL_TRUE;
 			jaurtigai[i].angelua = (rand() % 360);
-			RectEraikitzailea(&jaurtigai[i].tiroa, BOSS.DestSprite.x + 61, BOSS.DestSprite.y + 96, 10, 10);
+			RectEraikitzailea(&jaurtigai[i].tiroa, BOSS.DestSprite.x + 61, BOSS.DestSprite.y + 96, 10, 10);//los pone en la boca del boss
 		}
+		
+		
 		if (jaurtigai[i].tiroa.x < 0 || jaurtigai[i].tiroa.x + 10 > 1280 || jaurtigai[i].tiroa.y < 0 || jaurtigai[i].tiroa.y + 10 > 720)
 		{
-
+			//si tocan la paredes y el suelos desaparecen
 			jaurtigai[i].pantailan = SDL_FALSE;
 		}
+		//pilata mugitzen du
 		jaurtigai[i].tiroa.x += 12 * cos(jaurtigai[i].angelua * M_PI / 180);
 		jaurtigai[i].tiroa.y -= 12 * sin(jaurtigai[i].angelua * M_PI / 180);
 	}
@@ -422,30 +434,30 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 	static Uint32 spriterate = 0;
 	static int aurrekoa;
 
-	int SRC, tmp;
-
+	int SRC, tmp; //1. la cantidad de fotogramas que tiene la animacion que esta haciend. 2.Para las posiciones aleatorias 
+	
 	if (SDL_TICKS_PASSED(SDL_GetTicks(), spriterate))
 	{
 		switch (faseak)
 		{
-		case TRANSFORM:
+		case TRANSFORM:  //640 EL PIXEL DONDE EMPIEZA EL SPRITE
 			BOSS.SrcSprite.x = 640 + 128 * *bAnimazioa;
 			SRC = 15;
 
 			break;
-		case SLEEP:
+		case SLEEP: //0 EL PIXEL DONDE EMPIEZA EL SPRITE
 			BOSS.SrcSprite.x = 128 * *bAnimazioa;
 			SRC = 5;
 			break;
-		default:
+		default: //3200 EL PIXEL DONDE EMPIEZA EL SPRITE
 			BOSS.SrcSprite.x = 3200 + 128 * *bAnimazioa;
 			SRC = 5;
 			break;
 		}
 		++*bAnimazioa;
-		spriterate = SDL_GetTicks() + 240;
+		spriterate = SDL_GetTicks() + 240;//ACTUALIZA LA TASA DE REFRESCO CADA 240 TICK
 		if (*bAnimazioa >= SRC)
-		{
+		{//Si se le acaban los fotogramas se reinician y si se estaba trasnformando se efada (triggered)
 			if (faseak == TRANSFORM)
 			{
 				faseak = TRIGGERED;
@@ -454,13 +466,14 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 			*bAnimazioa = 0;
 		}
 	}
-	if (faseak == TRANSFORM)
+	if (faseak == TRANSFORM) //si se esta trasformando se sube para arriba  //COMO ESPAÑA
 	{
 		BOSS.DestSprite.y -= 9;
 	}
 	if (faseak != SLEEP && faseak != TRANSFORM)
+		//Si NO esta ni dormido ni trasformandose entra 
 	{
-		if (faseak == MUGITU)
+		if (faseak == MUGITU) //si esta en la fase de mugitu se mueve ah las 6 posiciones aleatorias
 		{
 			do
 			{
@@ -496,7 +509,9 @@ void BossMugitu(int *bAnimazioa, int BizirikDaudenEtsaiak[], int *BizirikKopurua
 			}
 			faseak = JAURTI;
 		}
+		//despues de mover pasa a atacar
 		BossAtakea(faseak);
+		//despues de atacar se quyeda esperando de 5 a 10 segundos 
 		faseak = ITXARON;
 		if (SDL_TICKS_PASSED(SDL_GetTicks(), *attackrate))
 		{

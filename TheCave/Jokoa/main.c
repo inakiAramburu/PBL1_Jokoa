@@ -12,11 +12,11 @@ int main(int argc, char* argv[]) {
 	
 	PANTAILAK Pantaila;		//Zein pantailan dagoen jokalaria
 	SDL_bool Jokatzen = SDL_FALSE;
-	void* pixels = NULL;
-	int pitch;
-	Uint8 bpp;
-	Uint32 refreshrate = 0;
-	Uint32 moverate = 0;
+	void* pixels = NULL; //La longitud de una fila de píxeles en bytes (solo lectura)
+	int pitch; //el puntero a los datos de los pìxel actual
+	Uint8 bpp; //bytes por pixel
+	Uint32 refreshrate = 0; //erlojua
+	Uint32 moverate = 0;// erlojua
 	
 	extern PERTSONAIA pertsonaia;
 
@@ -40,10 +40,12 @@ int main(int argc, char* argv[]) {
 
 	while (Jokatzen)
 	{
+		//MENUA KARGATU
 		while (Pantaila == MENUA)
 		{
 			if (!Karga[MENUA])
 			{
+				//dena itzali de doonde puede haber venido
 				Karga[KONTROLAK] = 0;
 				Karga[KREDITUAK] = 0;
 				KargatuIrudiak(Pantaila, BizirikDaudenEtsaiak, &BizirikKopurua);

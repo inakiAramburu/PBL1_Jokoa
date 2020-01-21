@@ -36,7 +36,7 @@ ROL Ordenagailua;
 void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa, ZENTZUA* begira, int BizirikDaudenEtsaiak[], int BizirikKopurua)
 {	
 	SDL_bool enter = SDL_FALSE;
-	static char sekuentzia[16] = "";
+	static char sekuentzia[16] = ""; //pong en sekuentzia gordetzen du.
 
 	SAGUA klika;
 	SDL_Event ebentua;
@@ -46,7 +46,7 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 		{
 			switch (ebentua.type)
 			{
-				*Pantaila += 1;
+				//*Pantaila += 1;//esto no sirve de nada
 			case SDL_QUIT:
 				Amaitu(Jokatzen, Pantaila);
 				break;
@@ -59,7 +59,7 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 				{
 				case SDL_SCANCODE_D:
 					a = SDL_FALSE;
-					if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)
+					if (!d && !pertsonaia.erortzen && !pertsonaia.salto && pertsonaia.sprite != HIL)//si no se esta callendo o esta en el aire se puede hacer
 					{
 						pertsonaia.sprite = KORRIKA;
 						pertsonaia.erasotzen = SDL_FALSE;
@@ -173,7 +173,7 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 						}
 						else
 						{
-							IrudiZnbk = IrudiakKendu(IrudiZnbk - 1);
+							IrudiZnbk = IrudiakKendu(IrudiZnbk - 1);//esto borra la ultima imagen (el pause de arriba)
 						}
 						enter = !enter;
 					}
@@ -191,7 +191,7 @@ void EbentuakKonprobatu(SDL_bool* Jokatzen, PANTAILAK* Pantaila, int* pAnimazioa
 		}
 		if (enter)
 		{
-			SDL_Delay(100);
+			SDL_Delay(100); //cuando el juego se pausa se queda en un bucle infinito y los eventos se comprueban cada 100 milisegundos
 		}
 	}while (enter);
 }
@@ -428,7 +428,7 @@ if (hitbox.behekoa.eskuin == GORRIA || hitbox.behekoa.ezker == GORRIA || hitbox.
 {
 	if (pertsonaia.sprite != HIL)
 	{
-		*pAnimazioa = 0;
+		*pAnimazioa = 0;//se pone esto porque la animacion se repite sino
 	}
 	pertsonaia.sprite = HIL;
 	pertsonaia.erortzen = SDL_FALSE;
@@ -510,12 +510,15 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 				*pAnimazioa = 0;
 			}
 			pertsonaia.sprite = HIL;
+			break;//(añadido despues) si te toca una bala nio merece la pena que los demas se comprueben
 		}
 	}
 	if (pertsonaia.sprite == ERASO && pertsonaia.erasotzen && *pAnimazioa > 4 && (PertzonaiaYGoikoa + 29 >= BOSS.DestSprite.y && PertzonaiaYGoikoa + 29 <= BOSS.DestSprite.y + 149))
 	{
+		
 		if (begira == AURRERA)
 		{
+			//cuando mira a la derecha
 			if (BOSS.DestSprite.x + 16 >= PertzonaiaEskuinMuga && BOSS.DestSprite.x + 16 <= PertzonaiaEskuinMuga + 33)
 			{
 
@@ -539,6 +542,7 @@ void KolisioakBoss(PANTAILAK* Pantaila, ZENTZUA begira, int* pAnimazioa, int* bA
 			}
 		}
 		else
+			//cuando mira a la izquierda
 		{
 			if (BOSS.DestSprite.x + 109 >= PertzonaiaEzkerMuga - 33 && BOSS.DestSprite.x + 109 <= PertzonaiaEzkerMuga)
 			{

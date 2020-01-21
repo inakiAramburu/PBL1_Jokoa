@@ -305,15 +305,16 @@ void ImgKargatu(char src[], int zabalera, int altuera, int x, int y)
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Ezin da azaleratik textura sortu: %s\n", SDL_GetError());
 		return;
 	}
-
+	// como ya he hecho la textura el surface no me hace falta y lo borro
 	SDL_FreeSurface(surface);
-	Irudiak[IrudiZnbk].textura = texture;
-	RectEraikitzailea(&Irudiak[IrudiZnbk].Dimentsioak, x, y, altuera, zabalera);
+	Irudiak[IrudiZnbk].textura = texture; //lo mete en un array de irudis
+	RectEraikitzailea(&Irudiak[IrudiZnbk].Dimentsioak, x, y, altuera, zabalera); //sdl_rect estrukturari balioak emateko
 	IrudiZnbk++;
 }
 
 void KargatuMapa(char mapa[], void** pixels, int* pitch, Uint8* bpp)
 {
+	//aqui conseguimos en pitch,bpp y el pixels
 	SDL_Surface* surface = SDL_LoadBMP(mapa);
 	*pixels = surface->pixels;
 
@@ -325,21 +326,21 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 {
 	int i;
 
-	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
-	SDL_RenderClear(render);
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);//pone el color con el que dibuja
+	SDL_RenderClear(render);// limpia la pantalla con el color que se pone arriba
 
-	for (i = 0; i < IrudiZnbk; i++)
+	for (i = 0; i < IrudiZnbk; i++)//dibuja lo del array IrudiZnbk
 	{
-		if (Irudiak[i].Dimentsioak.h == 0)
+		if (Irudiak[i].Dimentsioak.h == 0) //si le pasass 0 en la h te pone toda la pantalla
 		{
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, NULL);
 		}
-		else
+		else //te lo pone en las dimensiones expecificadas previamente
 		{
 			SDL_RenderCopy(render, Irudiak[i].textura, NULL, &Irudiak[i].Dimentsioak);
 		}
 	}
-	for (i = 0; i < BizirikKopurua; i++)
+	for (i = 0; i < BizirikKopurua; i++)//dibuja los enemigos que estan vivos
 	{
 		if (etsaia[BizirikDaudenEtsaiak[i]].bizirik)
 		{
@@ -355,14 +356,14 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 			}
 		}
 	}
-	if (BOSS.bizirik)
+	if (BOSS.bizirik) //si el boss esta bizirik lom dibuja
 	{
 		srand(SDL_GetTicks());
 		SDL_RenderCopy(render, BOSS.textura, &BOSS.SrcSprite, &BOSS.DestSprite);
 		int abiadura = 7;
 
 
-		for (i = 0; i < 30; i++)
+		for (i = 0; i < 30; i++)//dibuja los disparos que estan en pantalla
 		{
 			if (jaurtigai[i].pantailan)
 			{
@@ -371,20 +372,20 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 			}
 		}	
 	}
-	if (pertsonaia.bizirik)
+	if (pertsonaia.bizirik)//pertzonaia marrasten du bizirik badago
 	{
-		if (begira == ATZERA)
+		if (begira == ATZERA)//mira a la izquierda
 		{
 			SDL_RendererFlip flip = SDL_FLIP_VERTICAL;
 
 			SDL_RenderCopyEx(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite, 180, NULL, flip);
 		}
-		else
+		else//mira a la derecha
 		{
 			SDL_RenderCopy(render, spriteak[pertsonaia.sprite].textura, &pertsonaia.SrcSprite, &pertsonaia.DestSprite);
 		}
 	}
-	if (easteregg.piztuta)
+	if (easteregg.piztuta) //pong marraztu
 	{
 		SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
 		SDL_RenderFillRect(render, &easteregg.pilota);
@@ -394,6 +395,7 @@ void RenderPrestatu(ZENTZUA begira, int BizirikDaudenEtsaiak[], int BizirikKopur
 }
 
 void RenderMenu()
+//MENUA pantailarako animazioak egiteko renderizatzen ditu testuaren argazkiak, eta saguaren arabera dimentzioak aldatzen ditu
 {
 	int i = 0, x, y;
 
@@ -432,13 +434,14 @@ void RenderMenu()
 	SDL_RenderCopy(render, Irudiak[4].textura, NULL, &Irudiak[4].Dimentsioak);
 }
 
-void Irudikatu()
+void Irudikatu()//dena marrasten du
 {
 	SDL_RenderPresent(render);
 }
 
 void JokalariaKargatu(char Irudia[], int i)
 {
+	//se llama desde pertsonaiaHasieratu(Donde estan los sprites) y es como imgkargatu
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
@@ -462,6 +465,7 @@ void JokalariaKargatu(char Irudia[], int i)
 
 void EtsaiaKargatu(char Irudia[], int i)
 {
+	//se llama desde estsaiaHasieratu y es como imgkargatu
 	SDL_Surface* surface;
 	SDL_Texture* texture;
 
@@ -498,7 +502,7 @@ Uint32 getpixel(void* pixels, int pitch, Uint8 bpp, int x, int y)
 		return *(Uint16*)p;
 		break;
 
-	case 3:
+	case 3://operador binario
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 			return p[0] << 16 | p[1] << 8 | p[2];
 		else

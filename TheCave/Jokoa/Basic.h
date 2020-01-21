@@ -12,7 +12,7 @@ typedef enum { MUSIKA_JOKUA, KEA_EFEKTUA, EZPATA_EFEKTUA, TIROA_EFEKTUA, MusikaB
 
 typedef struct S_PERTSONAIA		//Pertsonaiaren datuak////
 {
-	SDL_Rect SrcSprite, DestSprite;
+	SDL_Rect SrcSprite, DestSprite;//1.de donde lo pillas 2. donde lo pones
 	SPRITE sprite;
 	SDL_bool bizirik;
 	SDL_bool salto;
@@ -22,7 +22,7 @@ typedef struct S_PERTSONAIA		//Pertsonaiaren datuak////
 
 typedef struct S_ETSAIA		//Etsaien datuak
 {
-	SDL_Rect SrcSprite, DestSprite;
+	SDL_Rect SrcSprite, DestSprite; //1.de donde lo pillas 2. donde lo pones
 	SDL_bool bizirik;
 	int abiadura;
 	SDL_Texture* textura;
