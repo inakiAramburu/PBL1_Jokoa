@@ -188,13 +188,13 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 				printf("SDLNet_Init: %s\n", SDLNet_GetError());
 			}
 
-			SDLNet_ResolveHost(&ip, NULL, port);
-			server = SDLNet_TCP_Open(&ip);
+			SDLNet_ResolveHost(&ip, NULL, port); //Zure ip-a jasotzen du
+			server = SDLNet_TCP_Open(&ip); //inicia protocolo tcp
 
 			while (1)
 			{
 				client = SDLNet_TCP_Accept(server);
-				if (client)
+				if (client) //si el cliente se conecta
 				{
 					char Agurra[128] = "Konexioa eginda";
 
@@ -207,7 +207,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 					break;
 				}
 			}
-			srand(SDL_GetTicks());
+			srand(SDL_GetTicks()); //random con una semilla aleatoria (semilla == ticks)
 			do
 			{
 				easteregg.angelua = (rand() % 90) - 45;
@@ -225,7 +225,7 @@ void KargatuIrudiak(PANTAILAK Pantaila, int BizirikDaudenEtsaiak[], int* Bizirik
 			break;
 		case BEZEROA:
 
-			printf("Serbitzariaren ipa jarri: ");
+			printf("Zerbitzariaren ipa jarri: ");
 			fgets(IPserver, 15, stdin);
 
 			printf("Portua sartu: ");
