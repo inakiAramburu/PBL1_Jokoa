@@ -342,7 +342,7 @@ void PertsonaiaMugitu(int* pAnimazioa, ZENTZUA* begira, PANTAILAK* pantaila)
 	}
 	if (w)
 	{
-		if (hitbox.ezker.goikoa == HORIA)
+		if (hitbox.goikoa == HORIA)
 		{
 			*pantaila += 1;
 			GuztiakHil();
